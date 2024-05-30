@@ -34,7 +34,10 @@ dependencies {
             "org.aeonbits.owner:owner:1.0.12",
             "org.assertj:assertj-core:3.23.1",
             "com.github.javafaker:javafaker:$javaFakerVersion",
-            "org.junit.jupiter:junit-jupiter-api:$junitVersion")
+            "org.junit.jupiter:junit-jupiter-api:$junitVersion",
+            "org.postgresql:postgresql:42.2.5",
+            "org.xerial:sqlite-jdbc:3.46.0.0"
+    )
     testRuntimeOnly(
             'org.slf4j:slf4j-simple:2.0.5',
             "org.junit.jupiter:junit-jupiter-engine:$junitVersion")
