@@ -34,4 +34,16 @@ public class ApiMethodsSearchPlace extends UrlBase {
                 .andReturn();
 
     }
+
+    @Step("Удаление места поиска")
+    public static Response deleteSearchPlace(String id){
+        SpecificationsServer.setBaseUrl(URL_DEAL);
+
+        return given()
+                .param("id", id)
+                .when()
+                .delete("/SearchPlace")
+                .andReturn();
+
+    }
 }

@@ -79,4 +79,27 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         assertThat(responseBodySearchPlaceUpdate.name).isEqualTo(requestBodySearchPlaceUpdate.name);
     }
 
+    @Test
+    @Feature("Место поиска")
+    @Story("Удаление места поиска")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Удаление места поиска")
+    @Description("Тест проверяет возможность удаления места поиска")
+    public void testDeleteSerachPlace(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+
+        AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
+                .name(faker.letterify("???????????????????"))
+                .categoryType("FileShare")
+                .type("SMB")
+                .parameters(null)
+                .excludes(null)
+                .build();
+        Response responseSearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation);
+        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = responseSearchPlaceCreation.as(CommonSearchPlaceResponseModel.class);
+
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
+        ApiMethodsSearchPlace.deleteSearchPlace(responseBodySearchPlaceCreation.id);
+
+    }
 }
