@@ -3,8 +3,6 @@ package eDiscovery.data;
 import com.github.javafaker.Faker;
 import eDiscovery.models.deal.searchPlace.AddSearchPlaceRequestModel;
 
-import java.util.ArrayList;
-
 public class DataGeneratorDealService {
 
     public static Faker faker = new Faker();
@@ -15,7 +13,7 @@ public class DataGeneratorDealService {
                 .categoryType("ARM")
                 .type("LOCAL")
                 .parameters(null)
-                .excludes(new ArrayList<String>())
+                .excludes(null)
                 .build();
     }
 }

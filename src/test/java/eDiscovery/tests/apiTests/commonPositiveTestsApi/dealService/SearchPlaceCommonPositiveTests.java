@@ -5,6 +5,7 @@ import eDiscovery.apiMethods.deal.ApiMethodsSearchPlace;
 import eDiscovery.data.DataGeneratorDealService;
 import eDiscovery.models.deal.searchPlace.AddSearchPlaceRequestModel;
 import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
+import eDiscovery.models.deal.searchPlace.UpdateSearchPlaceRequestModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
@@ -13,9 +14,12 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SearchPlaceCommonPositiveTests extends TestBase {
+
     @Test
     @Feature("Место поиска")
     @Story("Создание места поиска")
@@ -34,8 +38,45 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         assertThat(responseBody.categoryType).isEqualTo(requestBody.categoryType);
         assertThat(responseBody.type).isEqualTo(requestBody.type);
         assertThat(responseBody.parameters).isEqualTo(requestBody.parameters);
-        assertThat(responseBody.excludes).isEqualTo(requestBody.excludes);
+        assertThat(responseBody.excludes).isEmpty();
+        assertThat(responseBody.excludes).isInstanceOf(ArrayList.class);
         assertThat(responseBody.id).isNotBlank();
         assertThat(responseBody.name).isEqualTo(requestBody.name);
     }
+
+    @Test
+    @Feature("Место поиска")
+    @Story("Изменение места поиска")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Изменение места поиска")
+    @Description("Тест проверяет возможность изменения места поиска")
+    public void testUpdateSearchPlace(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        AddSearchPlaceRequestModel requestBodySearchPlaceCreation = DataGeneratorDealService.getBasicSearchPlaceModel();
+        Response response = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation);
+        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = response.as(CommonSearchPlaceResponseModel.class);
+
+        UpdateSearchPlaceRequestModel requestBodySearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
+                .categoryType(responseBodySearchPlaceCreation.categoryType)
+                .type(responseBodySearchPlaceCreation.type)
+                .parameters(null)
+                .excludes(null)
+                .id(responseBodySearchPlaceCreation.id)
+                .name(faker.letterify("???????????????????"))
+                .build();
+
+        Response responseSearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestBodySearchPlaceUpdate);
+        UpdateSearchPlaceRequestModel responseBodySearchPlaceUpdate = responseSearchPlaceUpdate.as(UpdateSearchPlaceRequestModel.class);
+
+        assertThat(responseBodySearchPlaceUpdate.categoryType).isEqualTo(requestBodySearchPlaceUpdate.categoryType);
+        assertThat(responseBodySearchPlaceUpdate.type).isEqualTo(requestBodySearchPlaceUpdate.type);
+        assertThat(responseBodySearchPlaceUpdate.parameters).isEqualTo(requestBodySearchPlaceUpdate.parameters);
+        assertThat(responseBodySearchPlaceUpdate.excludes).isEmpty();
+        assertThat(responseBodySearchPlaceUpdate.excludes).isInstanceOf(ArrayList.class);
+        assertThat(responseBodySearchPlaceUpdate.id).isNotBlank();
+        assertThat(responseBodySearchPlaceUpdate.name).isEqualTo(requestBodySearchPlaceUpdate.name);
+    }
+
 }
