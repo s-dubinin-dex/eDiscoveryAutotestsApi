@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -14,5 +16,5 @@ public class AddSearchPlaceRequestModel {
     public String categoryType;
     public String type;
     public SearchPlaceParametersModel parameters;
-    public String excludes;
+    public List<String> excludes;
 }
