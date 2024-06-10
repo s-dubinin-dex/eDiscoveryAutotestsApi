@@ -46,4 +46,26 @@ public class ApiMethodsSearchPlace extends UrlBase {
                 .andReturn();
 
     }
+
+    @Step("Получение списка мест поиска")
+    public static Response getSearchPlaceList(){
+        SpecificationsServer.setBaseUrl(URL_DEAL);
+
+        return given()
+                .when()
+                .get("/SearchPlace/SearchPlace")
+                .andReturn();
+
+    }
+
+    @Step("Получение списка мест поиска по протоколу oData")
+    public static Response getSearchPlaceListOData(){
+        SpecificationsServer.setBaseUrl(URL_DEAL);
+
+        return given()
+                .when()
+                .get("/odata/SearchPlace")
+                .andReturn();
+
+    }
 }

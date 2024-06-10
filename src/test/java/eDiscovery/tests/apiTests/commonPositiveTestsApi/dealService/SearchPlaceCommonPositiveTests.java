@@ -15,6 +15,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -85,7 +86,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Удаление места поиска")
     @Description("Тест проверяет возможность удаления места поиска")
-    public void testDeleteSerachPlace(){
+    public void testDeleteSearchPlace(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
@@ -102,4 +103,43 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         ApiMethodsSearchPlace.deleteSearchPlace(responseBodySearchPlaceCreation.id);
 
     }
+
+    @Test
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка мест поиска")
+    @Description("Тест проверяет возможность получения списка мест поиска")
+    public void testGetSearchPlaceList(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        ApiMethodsSearchPlace.addSearchPlace(DataGeneratorDealService.getBasicSearchPlaceModel());
+        Response response = ApiMethodsSearchPlace.getSearchPlaceList();
+
+        List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("");
+        assertThat(responseBody).isNotEmpty();
+
+    }
+
+    @Test
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка мест поиска по протоколу oData")
+    @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData")
+    public void testGetSearchPlaceListOData(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        ApiMethodsSearchPlace.addSearchPlace(DataGeneratorDealService.getBasicSearchPlaceModel());
+        Response response = ApiMethodsSearchPlace.getSearchPlaceListOData();
+
+        ArrayList<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().get("value");
+        assertThat(responseBody).isNotEmpty();
+
+    }
+
+
+
 }
