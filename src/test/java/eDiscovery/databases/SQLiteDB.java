@@ -1,16 +1,22 @@
 package eDiscovery.databases;
 
+import eDiscovery.agents.AgentType;
+
 import java.sql.*;
 
 public class SQLiteDB {
-    private String urlConnection;
+    private final String urlConnection;
 
     private Connection connection = null;
     private Statement statement = null;
     private ResultSet resultSet = null;
 
-    public SQLiteDB(SQLiteDBType type){
-        this.urlConnection = type.urlConnection;
+    public SQLiteDB(AgentType agentType){
+        this.urlConnection = getDBUrlConnection(agentType);
+    }
+
+    private String getDBUrlConnection(AgentType agentType){
+        return "jdbc:sqlite:" + agentType.getUrlConnection() + "\\test.db";
     }
 
     private void connectToDataBase(){

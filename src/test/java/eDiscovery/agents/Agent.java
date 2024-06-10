@@ -6,12 +6,12 @@ import java.io.IOException;
 
 public class Agent {
 
-    private String urlConnection;
-    private String agentName;
+    private final String urlConnection;
+    private final String agentName;
 
     public Agent(AgentType agentType){
         this.urlConnection = agentType.urlConnection;
-        this.agentName = agentType.getAgentName();
+        this.agentName = agentType.agentFileName;
     }
 
     public void startAgent(){
