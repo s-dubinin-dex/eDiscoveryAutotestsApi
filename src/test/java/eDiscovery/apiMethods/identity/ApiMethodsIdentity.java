@@ -1,18 +1,15 @@
 package eDiscovery.apiMethods.identity;
 
-import eDiscovery.spec.RequestSpecifications;
+import eDiscovery.UrlBase;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
-import static eDiscovery.UrlBase.URL_IDENTITY;
 import static io.restassured.RestAssured.given;
 
-public class ApiMethodsIdentity {
+public class ApiMethodsIdentity extends UrlBase {
     @Step("Авторизация и получение токена")
     public static Response connectToken(){
-
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecification());
 
         SpecificationsServer.setBaseUrl(URL_IDENTITY);
 

@@ -20,6 +20,8 @@ public class SpecificationsServer {
 
     public static void setBaseUrl(String url) {
         RestAssured.baseURI = url;
-        RestAssured.requestSpecification.baseUri(url);
+        if (RestAssured.requestSpecification != null){
+            RestAssured.requestSpecification.baseUri(url);
+        }
     }
 }

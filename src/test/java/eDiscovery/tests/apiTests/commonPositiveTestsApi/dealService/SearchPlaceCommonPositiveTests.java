@@ -101,7 +101,6 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
         ApiMethodsSearchPlace.deleteSearchPlace(responseBodySearchPlaceCreation.id);
-
     }
 
     @Test
@@ -119,7 +118,6 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
 
         List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("");
         assertThat(responseBody).isNotEmpty();
-
     }
 
     @Test
@@ -137,9 +135,6 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
 
         ArrayList<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().get("value");
         assertThat(responseBody).isNotEmpty();
-
     }
-
-
 
 }
