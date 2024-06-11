@@ -3,8 +3,8 @@ package eDiscovery;
 import com.github.javafaker.Faker;
 import eDiscovery.helpers.Authorization;
 import io.restassured.RestAssured;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 
 public class TestBase extends UrlBase {
 
@@ -15,8 +15,9 @@ public class TestBase extends UrlBase {
         TOKEN = Authorization.getToken();
     }
 
-    @BeforeEach
-    void setUp() {
+    @AfterEach
+    void tearDown() {
+        RestAssured.responseSpecification = null;
         RestAssured.requestSpecification = null;
     }
 }
