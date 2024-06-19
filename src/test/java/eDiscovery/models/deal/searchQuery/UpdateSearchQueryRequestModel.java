@@ -1,5 +1,6 @@
 package eDiscovery.models.deal.searchQuery;
 
+import eDiscovery.helpers.enums.SearchQueryType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UpdateSearchQueryRequestModel {
     public String name;
-    public String type;
+    public SearchQueryType type;
     public String value;
     public String id;
 }

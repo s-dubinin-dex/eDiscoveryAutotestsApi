@@ -9,6 +9,7 @@ import eDiscovery.models.deal.searchQuery.UpdateSearchQueryRequestModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
+import eDiscovery.helpers.enums.SearchQueryType;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
@@ -58,7 +59,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
 
         UpdateSearchQueryRequestModel requestModelSearchQueryCreation = UpdateSearchQueryRequestModel.builder()
                 .name(faker.letterify("???????????????????"))
-                .type("Regex")
+                .type(SearchQueryType.Regex)
                 .value("\\d{11}")
                 .id(responseBodySearchQueryCreation.id)
                 .build();

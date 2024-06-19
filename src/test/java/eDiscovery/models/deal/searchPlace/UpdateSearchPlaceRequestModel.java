@@ -1,5 +1,7 @@
 package eDiscovery.models.deal.searchPlace;
 
+import eDiscovery.helpers.enums.SearchPlaceCategoryType;
+import eDiscovery.helpers.enums.SearchPlaceType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,8 +16,8 @@ import java.util.List;
 
 public class UpdateSearchPlaceRequestModel {
     public String name;
-    public String categoryType;
-    public String type;
+    public SearchPlaceCategoryType categoryType;
+    public SearchPlaceType type;
     public SearchPlaceParametersModel parameters;
     public List<String> excludes;
     public String id;

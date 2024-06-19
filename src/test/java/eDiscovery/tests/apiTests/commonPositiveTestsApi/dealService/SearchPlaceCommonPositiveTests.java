@@ -9,6 +9,8 @@ import eDiscovery.models.deal.searchPlace.UpdateSearchPlaceRequestModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
+import eDiscovery.helpers.enums.SearchPlaceCategoryType;
+import eDiscovery.helpers.enums.SearchPlaceType;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
@@ -31,7 +33,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchPlaceRequestModel requestBody = DataGeneratorDealService.getBasicSearchPlaceModel();
+        AddSearchPlaceRequestModel requestBody = DataGeneratorDealService.getBasicSearchPlaceModelArmLocal();
 
         Response response = ApiMethodsSearchPlace.addSearchPlace(requestBody);
         CommonSearchPlaceResponseModel responseBody = response.as(CommonSearchPlaceResponseModel.class);
@@ -55,7 +57,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchPlaceRequestModel requestBodySearchPlaceCreation = DataGeneratorDealService.getBasicSearchPlaceModel();
+        AddSearchPlaceRequestModel requestBodySearchPlaceCreation = DataGeneratorDealService.getBasicSearchPlaceModelFileShareSMB();
         Response response = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation);
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = response.as(CommonSearchPlaceResponseModel.class);
 
@@ -91,8 +93,8 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(faker.letterify("???????????????????"))
-                .categoryType("FileShare")
-                .type("SMB")
+                .categoryType(SearchPlaceCategoryType.FileShare)
+                .type(SearchPlaceType.SMB)
                 .parameters(null)
                 .excludes(null)
                 .build();
@@ -113,7 +115,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        ApiMethodsSearchPlace.addSearchPlace(DataGeneratorDealService.getBasicSearchPlaceModel());
+        ApiMethodsSearchPlace.addSearchPlace(DataGeneratorDealService.getBasicSearchPlaceModelArmLocal());
         Response response = ApiMethodsSearchPlace.getSearchPlaceList();
 
         List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("");
@@ -130,7 +132,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        ApiMethodsSearchPlace.addSearchPlace(DataGeneratorDealService.getBasicSearchPlaceModel());
+        ApiMethodsSearchPlace.addSearchPlace(DataGeneratorDealService.getBasicSearchPlaceModelArmLocal());
         Response response = ApiMethodsSearchPlace.getSearchPlaceListOData();
 
         ArrayList<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().get("value");
