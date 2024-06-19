@@ -24,6 +24,16 @@ public class ResponseSpecifications {
         return new ResponseSpecBuilder()
                 .log(LogDetail.STATUS)
                 .expectBody(equalTo(""))
+                .expectStatusCode(HttpStatus.SC_OK)
+                .expectResponseTime(lessThanOrEqualTo(1L), SECONDS)
+                .build();
+    }
+
+    public static ResponseSpecification responseSpec404NotFound(){
+        return new ResponseSpecBuilder()
+                .log(LogDetail.STATUS)
+                .expectContentType(ContentType.JSON)
+                .expectStatusCode(HttpStatus.SC_NOT_FOUND)
                 .expectResponseTime(lessThanOrEqualTo(1L), SECONDS)
                 .build();
     }

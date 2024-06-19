@@ -1,15 +1,21 @@
 package eDiscovery.data;
 
 import com.github.javafaker.Faker;
+import eDiscovery.helpers.enums.DealStatus;
+import eDiscovery.models.deal.dealManipulation.AddDealManipulationRequestModel;
 import eDiscovery.models.deal.searchPlace.AddSearchPlaceRequestModel;
 import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModel;
 import eDiscovery.helpers.enums.SearchPlaceCategoryType;
 import eDiscovery.helpers.enums.SearchPlaceType;
 import eDiscovery.helpers.enums.SearchQueryType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DataGeneratorDealService {
 
     public static Faker faker = new Faker();
+
 
     public static AddSearchPlaceRequestModel getBasicSearchPlaceModel(SearchPlaceCategoryType categoryType, SearchPlaceType type){
         return AddSearchPlaceRequestModel.builder()
@@ -36,4 +42,19 @@ public class DataGeneratorDealService {
                 .value("\\d{10}")
                 .build();
     }
+
+    public static AddDealManipulationRequestModel getBasicDealManipulationModel(List<String> searchPlaceIDs, List<String> searchQueryIDs){
+        return AddDealManipulationRequestModel.builder()
+                .name(faker.letterify("???????????????????"))
+                .searchPlaces(searchPlaceIDs)
+                .schedule(null)
+                .useSchedule(false)
+                .excludes(new ArrayList<>())
+                .searchQueueries(searchQueryIDs)
+                .dealStatus(DealStatus.Waiting)
+                .quarantine(false)
+                .findedDocumentsCount(0)
+                .build();
+    }
+
 }

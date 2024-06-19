@@ -1,4 +1,4 @@
-package eDiscovery.models.deal.deal;
+package eDiscovery.models.deal.dealManipulation;
 
 import eDiscovery.helpers.enums.DealStatus;
 import lombok.AllArgsConstructor;
@@ -12,14 +12,15 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddDealRequestModel {
+public class UpdateDealManipulationRequestModel {
+    public String id;
     public String name;
     public List<String> searchPlaces;
     public String schedule;
-    public String useSchedule;
+    public boolean useSchedule;
     public List<String> excludes;
     public List<String> searchQueueries;
     public DealStatus dealStatus;
     public boolean quarantine;
-
+    int findedDocumentsCount;
 }

@@ -1,9 +1,9 @@
 package eDiscovery.helpers.enums;
 
 public enum DealStatus {
-    UNDEFINED,
-    WAITING,
-    RUNNING,
-    STOPPED,
-    CLOSED
+    Undefined,
+    Waiting,
+    Running,
+    Stopped,
+    Closed
 }
