@@ -12,9 +12,9 @@ public enum AgentType {
             "CloudAgent.exe"
     );
     @Getter
-    final String urlConnection;
+    private final String urlConnection;
     @Getter
-    final String agentFileName;
+    private final String agentFileName;
 
     AgentType(String urlConnection, String agentFileName){
         this.urlConnection = urlConnection;

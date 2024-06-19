@@ -10,8 +10,8 @@ public class Agent {
     private final String agentName;
 
     public Agent(AgentType agentType){
-        this.urlConnection = agentType.urlConnection;
-        this.agentName = agentType.agentFileName;
+        this.urlConnection = agentType.getUrlConnection();
+        this.agentName = agentType.getAgentFileName();
     }
 
     public void startAgent(){
