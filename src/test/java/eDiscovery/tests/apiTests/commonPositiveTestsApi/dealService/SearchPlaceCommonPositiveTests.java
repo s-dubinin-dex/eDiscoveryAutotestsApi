@@ -26,7 +26,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     @Test
     @Feature("Место поиска")
     @Story("Создание места поиска")
-    @Severity(SeverityLevel.BLOCKER)
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Создание места поиска")
     @Description("Тест проверяет возможность создания места поиска")
     public void testAddSearchPlace(){
@@ -115,11 +115,12 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        ApiMethodsSearchPlace.addSearchPlace(DataGeneratorDealService.getBasicSearchPlaceModelArmLocal());
+        DataGeneratorDealService.createBasicSearchPlace();
         Response response = ApiMethodsSearchPlace.getSearchPlaceList();
 
-        List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("");
+        List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("", CommonSearchPlaceResponseModel.class);
         assertThat(responseBody).isNotEmpty();
+        assertThat(responseBody.get(0)).isNotNull();
     }
 
     @Test
@@ -132,11 +133,12 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        ApiMethodsSearchPlace.addSearchPlace(DataGeneratorDealService.getBasicSearchPlaceModelArmLocal());
+        DataGeneratorDealService.createBasicSearchPlace();
         Response response = ApiMethodsSearchPlace.getSearchPlaceListOData();
 
-        ArrayList<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().get("value");
+        List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
         assertThat(responseBody).isNotEmpty();
+        assertThat(responseBody.get(0)).isNotNull();
     }
 
 }

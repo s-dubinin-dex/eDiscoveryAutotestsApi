@@ -100,11 +100,12 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        ApiMethodsSearchQuery.addSearchQuery(DataGeneratorDealService.getBasicSearchQueryModel());
+        DataGeneratorDealService.createBasicSearchQuery();
         Response response = ApiMethodsSearchQuery.getSearchQueryList();
 
-        List<CommonSearchQueryResponseModel> responseBody = response.jsonPath().getList("");
+        List<CommonSearchQueryResponseModel> responseBody = response.jsonPath().getList("", CommonSearchQueryResponseModel.class);
         assertThat(responseBody).isNotEmpty();
+        assertThat(responseBody.get(0)).isNotNull();
     }
 
     @Test
@@ -117,11 +118,12 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        ApiMethodsSearchQuery.addSearchQuery(DataGeneratorDealService.getBasicSearchQueryModel());
+        DataGeneratorDealService.createBasicSearchQuery();
         Response response = ApiMethodsSearchQuery.getSearchQueryListOData();
 
-        ArrayList<CommonSearchQueryResponseModel> responseBody = response.jsonPath().get("value");
+        List<CommonSearchQueryResponseModel> responseBody = response.jsonPath().getList("value", CommonSearchQueryResponseModel.class);
         assertThat(responseBody).isNotEmpty();
+        assertThat(responseBody.get(0)).isNotNull();
     }
 
 }
