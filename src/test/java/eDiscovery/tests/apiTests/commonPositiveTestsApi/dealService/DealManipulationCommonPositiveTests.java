@@ -124,19 +124,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     public void testDeleteDeal(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
-        AddSearchPlaceRequestModel searchPlaceRequestBody = DataGeneratorDealService.getBasicSearchPlaceModelArmLocal();
-        CommonSearchPlaceResponseModel searchPlaceResponseBody = ApiMethodsSearchPlace.addSearchPlace(searchPlaceRequestBody).as(CommonSearchPlaceResponseModel.class);
-
-        AddSearchQueryRequestModel searchQueryRequestBody = DataGeneratorDealService.getBasicSearchQueryModel();
-        CommonSearchQueryResponseModel searchQueryResponseBody = ApiMethodsSearchQuery.addSearchQuery(searchQueryRequestBody).as(CommonSearchQueryResponseModel.class);
-
-        AddDealManipulationRequestModel requestBodyDealCreation = DataGeneratorDealService.getBasicDealManipulationModel(
-                Collections.singletonList(searchPlaceResponseBody.id),
-                Collections.singletonList(searchQueryResponseBody.id)
-        );
-
-        Response responseDealCreation = ApiMethodsDealManipulation.addDeal(requestBodyDealCreation);
-        CommonDealManipulationResponseModel responseBodyDealCreation = responseDealCreation.as(CommonDealManipulationResponseModel.class);
+        CommonDealManipulationResponseModel responseBodyDealCreation = DataGeneratorDealService.createBasicDealManipulation();
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
         ApiMethodsDealManipulation.deleteDeal(responseBodyDealCreation.id);
@@ -191,19 +179,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     public void testRestoreDeal(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
-        AddSearchPlaceRequestModel searchPlaceRequestBody = DataGeneratorDealService.getBasicSearchPlaceModelArmLocal();
-        CommonSearchPlaceResponseModel searchPlaceResponseBody = ApiMethodsSearchPlace.addSearchPlace(searchPlaceRequestBody).as(CommonSearchPlaceResponseModel.class);
-
-        AddSearchQueryRequestModel searchQueryRequestBody = DataGeneratorDealService.getBasicSearchQueryModel();
-        CommonSearchQueryResponseModel searchQueryResponseBody = ApiMethodsSearchQuery.addSearchQuery(searchQueryRequestBody).as(CommonSearchQueryResponseModel.class);
-
-        AddDealManipulationRequestModel requestDealCreationBody = DataGeneratorDealService.getBasicDealManipulationModel(
-                Collections.singletonList(searchPlaceResponseBody.id),
-                Collections.singletonList(searchQueryResponseBody.id)
-        );
-
-        Response responseDealCreation = ApiMethodsDealManipulation.addDeal(requestDealCreationBody);
-        CommonDealManipulationResponseModel responseDealCreationBody = responseDealCreation.as(CommonDealManipulationResponseModel.class);
+        CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealService.createBasicDealManipulation();
 
         ApiMethodsDealManipulation.deleteDeal(responseDealCreationBody.id);
 
@@ -225,19 +201,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     public void testCloseDeal(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
-        AddSearchPlaceRequestModel searchPlaceRequestBody = DataGeneratorDealService.getBasicSearchPlaceModelArmLocal();
-        CommonSearchPlaceResponseModel searchPlaceResponseBody = ApiMethodsSearchPlace.addSearchPlace(searchPlaceRequestBody).as(CommonSearchPlaceResponseModel.class);
-
-        AddSearchQueryRequestModel searchQueryRequestBody = DataGeneratorDealService.getBasicSearchQueryModel();
-        CommonSearchQueryResponseModel searchQueryResponseBody = ApiMethodsSearchQuery.addSearchQuery(searchQueryRequestBody).as(CommonSearchQueryResponseModel.class);
-
-        AddDealManipulationRequestModel requestDealCreationBody = DataGeneratorDealService.getBasicDealManipulationModel(
-                Collections.singletonList(searchPlaceResponseBody.id),
-                Collections.singletonList(searchQueryResponseBody.id)
-        );
-
-        Response responseDealCreation = ApiMethodsDealManipulation.addDeal(requestDealCreationBody);
-        CommonDealManipulationResponseModel responseDealCreationBody = responseDealCreation.as(CommonDealManipulationResponseModel.class);
+        CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealService.createBasicDealManipulation();
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
         Response responseCloseDeal = ApiMethodsDealManipulation.closeDeal(responseDealCreationBody.id);
@@ -260,19 +224,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     public void testUncloseDeal(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
-        AddSearchPlaceRequestModel searchPlaceRequestBody = DataGeneratorDealService.getBasicSearchPlaceModelArmLocal();
-        CommonSearchPlaceResponseModel searchPlaceResponseBody = ApiMethodsSearchPlace.addSearchPlace(searchPlaceRequestBody).as(CommonSearchPlaceResponseModel.class);
-
-        AddSearchQueryRequestModel searchQueryRequestBody = DataGeneratorDealService.getBasicSearchQueryModel();
-        CommonSearchQueryResponseModel searchQueryResponseBody = ApiMethodsSearchQuery.addSearchQuery(searchQueryRequestBody).as(CommonSearchQueryResponseModel.class);
-
-        AddDealManipulationRequestModel requestDealCreationBody = DataGeneratorDealService.getBasicDealManipulationModel(
-                Collections.singletonList(searchPlaceResponseBody.id),
-                Collections.singletonList(searchQueryResponseBody.id)
-        );
-
-        Response responseDealCreation = ApiMethodsDealManipulation.addDeal(requestDealCreationBody);
-        CommonDealManipulationResponseModel responseDealCreationBody = responseDealCreation.as(CommonDealManipulationResponseModel.class);
+        CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealService.createBasicDealManipulation();
 
         ApiMethodsDealManipulation.closeDeal(responseDealCreationBody.id);
 
@@ -297,19 +249,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     public void testStopDeal(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
-        AddSearchPlaceRequestModel searchPlaceRequestBody = DataGeneratorDealService.getBasicSearchPlaceModelArmLocal();
-        CommonSearchPlaceResponseModel searchPlaceResponseBody = ApiMethodsSearchPlace.addSearchPlace(searchPlaceRequestBody).as(CommonSearchPlaceResponseModel.class);
-
-        AddSearchQueryRequestModel searchQueryRequestBody = DataGeneratorDealService.getBasicSearchQueryModel();
-        CommonSearchQueryResponseModel searchQueryResponseBody = ApiMethodsSearchQuery.addSearchQuery(searchQueryRequestBody).as(CommonSearchQueryResponseModel.class);
-
-        AddDealManipulationRequestModel requestDealCreationBody = DataGeneratorDealService.getBasicDealManipulationModel(
-                Collections.singletonList(searchPlaceResponseBody.id),
-                Collections.singletonList(searchQueryResponseBody.id)
-        );
-
-        Response responseDealCreation = ApiMethodsDealManipulation.addDeal(requestDealCreationBody);
-        CommonDealManipulationResponseModel responseDealCreationBody = responseDealCreation.as(CommonDealManipulationResponseModel.class);
+        CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealService.createBasicDealManipulation();
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
