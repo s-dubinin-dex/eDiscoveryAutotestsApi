@@ -29,8 +29,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DealManipulationCommonPositiveTests extends TestBase {
 
     @Test
-    @Story("Дело")
-    @Feature("Создание дела")
+    @Feature("Дело")
+    @Story("Создание дела")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Создание дела")
     @Description("Тест проверяет возможность создания дела")
@@ -64,8 +64,8 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     }
 
     @Test
-    @Story("Дело")
-    @Feature("Изменение дела")
+    @Feature("Дело")
+    @Story("Изменение дела")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Изменение дела")
     @Description("Тест проверяет возможность изменения дела")
@@ -116,8 +116,8 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     }
 
     @Test
-    @Story("Дело")
-    @Feature("Удаление дела")
+    @Feature("Дело")
+    @Story("Удаление дела")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Удаление дела")
     @Description("Тест проверяет возможность удаления дела")
@@ -144,8 +144,8 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     }
 
     @Test
-    @Story("Дело")
-    @Feature("Просмотр информации по делу")
+    @Feature("Дело")
+    @Story("Просмотр информации по делу")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Просмотр информации по делу")
     @Description("Тест проверяет возможность просмотреть информацию по делу")
@@ -183,8 +183,8 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     }
 
     @Test
-    @Story("Дело")
-    @Feature("Восстановление удалённого дела")
+    @Feature("Дело")
+    @Story("Восстановление удалённого дела")
     @Severity(SeverityLevel.TRIVIAL)
     @DisplayName("Восстановление удалённого дела (Служебный метод)")
     @Description("Тест проверяет возможность восстановить удалённое дело (Служебный метод, должен быть удалён)")
@@ -217,8 +217,8 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     }
 
     @Test
-    @Story("Дело")
-    @Feature("Закрытие дела")
+    @Feature("Дело")
+    @Story("Закрытие дела")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Закрытие дела")
     @Description("Тест проверяет возможность закрыть (Архивировать) дело")
@@ -252,8 +252,8 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     }
 
     @Test
-    @Story("Дело")
-    @Feature("Открытие закрытого дела")
+    @Feature("Дело")
+    @Story("Открытие закрытого дела")
     @Severity(SeverityLevel.TRIVIAL)
     @DisplayName("Открытие закрытого дела (Служебный метод)")
     @Description("Тест проверяет возможность открыть закрытое дело (Служебный метод, должен быть удалён)")
@@ -289,8 +289,8 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     }
 
     @Test
-    @Story("Дело")
-    @Feature("Остановка дела")
+    @Feature("Дело")
+    @Story("Остановка дела")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Остановка дела")
     @Description("Тест проверяет возможность остановить дело")
@@ -322,7 +322,6 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Stopped);
 
     }
-
 
 
 }
