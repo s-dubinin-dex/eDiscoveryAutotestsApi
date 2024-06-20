@@ -23,6 +23,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -263,5 +264,63 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
     }
 
+    @Test
+    @Feature("Дело")
+    @Story("Запуск дела")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Запуск дела")
+    @Description("Тест проверяет возможность запустить дело")
+    public void testStartDeal(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+
+        CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealService.createBasicDealManipulation();
+
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+        CommonDealManipulationResponseModel responseStopDealBody = ApiMethodsDealManipulation.startDeal(responseDealCreationBody.id).as(CommonDealManipulationResponseModel.class);
+
+        assertThat(responseStopDealBody.dealStatus).isEqualTo(DealStatus.Running);
+
+        Response responseDealCard = ApiMethodsDealManipulation.getDealCard(responseDealCreationBody.id);
+        DealCardModel responseDealCardBody = responseDealCard.as(DealCardModel.class);
+        assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Running);
+
+    }
+
+
+    @Test
+    @Feature("Дело")
+    @Story("Получение списка дел")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка дел")
+    @Description("Тест проверяет возможность получения списка дел")
+    public void testGetDealList(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        DataGeneratorDealService.createBasicDealManipulation();
+        Response response = ApiMethodsDealManipulation.getDealManipulationList();
+
+        List<CommonDealManipulationResponseModel> responseBody = response.jsonPath().getList("", CommonDealManipulationResponseModel.class);
+        assertThat(responseBody).isNotEmpty();
+        assertThat(responseBody.get(0)).isNotNull();
+    }
+
+    @Test
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка мест поиска по протоколу oData")
+    @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData")
+    public void testGetDealListOData(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        DataGeneratorDealService.createBasicDealManipulation();
+        Response response = ApiMethodsDealManipulation.getDealManipulationListOData();
+
+        List<CommonDealManipulationResponseModel> responseBody = response.jsonPath().getList("value", CommonDealManipulationResponseModel.class);
+        assertThat(responseBody).isNotEmpty();
+        assertThat(responseBody.get(0)).isNotNull();
+    }
 
 }

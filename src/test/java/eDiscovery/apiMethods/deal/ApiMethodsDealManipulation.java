@@ -1,8 +1,7 @@
 package eDiscovery.apiMethods.deal;
 
 import eDiscovery.UrlBase;
-import eDiscovery.models.deal.dealManipulation.AddDealManipulationRequestModel;
-import eDiscovery.models.deal.dealManipulation.UpdateDealManipulationRequestModel;
+import eDiscovery.models.deal.dealManipulation.*;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -97,6 +96,94 @@ public class ApiMethodsDealManipulation extends UrlBase {
                 .when()
                 .put("/DealManipulation/stop")
                 .andReturn();
+    }
+
+    @Step("Запуск дела")
+    public static Response startDeal(String dealId){
+        SpecificationsServer.setBaseUrl(URL_DEAL);
+
+        return given()
+                .param("id", dealId)
+                .when()
+                .put("/DealManipulation/start")
+                .andReturn();
+    }
+
+    @Step("Помещение файла в карантин")
+    public static Response toQuarantine(ToOutQuarantineRequestModel toOutQuarantineRequestModel){
+        SpecificationsServer.setBaseUrl(URL_DEAL);
+
+        return given()
+                .body(toOutQuarantineRequestModel)
+                .when()
+                .put("/DealManipulation/toQuarantine")
+                .andReturn();
+    }
+
+    @Step("Изъятие файла из карантина")
+    public static Response outQuarantine(ToOutQuarantineRequestModel toOutQuarantineRequestModel){
+        SpecificationsServer.setBaseUrl(URL_DEAL);
+
+        return given()
+                .body(toOutQuarantineRequestModel)
+                .when()
+                .put("/DealManipulation/outQuarantine")
+                .andReturn();
+    }
+
+    @Step("Экспорт файла")
+    public static Response toExport(ToExportRequestModel toExportRequestModel){
+        SpecificationsServer.setBaseUrl(URL_DEAL);
+
+        return given()
+                .body(toExportRequestModel)
+                .when()
+                .put("/DealManipulation/toExport")
+                .andReturn();
+    }
+
+    @Step("Получение списка активных задач по агенту")
+    public static Response activeTasks(ActiveTasksRequestsModel activeTasksRequestsModel){
+        SpecificationsServer.setBaseUrl(URL_DEAL);
+
+        return given()
+                .body(activeTasksRequestsModel)
+                .when()
+                .get("/DealManipulation/activeTasks")
+                .andReturn();
+    }
+
+    @Step("Изменение статуса задачи (СЛУЖЕБНЫЙ МЕТОД)")
+    public static Response changeTaskStatus(ToExportRequestModel toExportRequestModel){
+        SpecificationsServer.setBaseUrl(URL_DEAL);
+
+        return given()
+                .body(toExportRequestModel)
+                .when()
+                .put("/DealManipulation/toExport")
+                .andReturn();
+    }
+
+    @Step("Получение списка дел")
+    public static Response getDealManipulationList(){
+        SpecificationsServer.setBaseUrl(URL_DEAL);
+
+        return given()
+                .when()
+                .get("/DealManipulation/DealManipulation")
+                .andReturn();
+
+    }
+
+    @Step("Получение списка дел по протоколу oData")
+    public static Response getDealManipulationListOData(){
+        SpecificationsServer.setBaseUrl(URL_DEAL);
+
+        return given()
+                .when()
+                .get("/odata/DealManipulation")
+                .andReturn();
+
     }
 
 }
