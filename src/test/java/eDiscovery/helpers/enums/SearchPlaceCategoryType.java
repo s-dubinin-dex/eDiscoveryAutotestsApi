@@ -1,7 +1,7 @@
 package eDiscovery.helpers.enums;
 
 public enum SearchPlaceCategoryType {
-    UNDEFINED,
+    Undefined,
     ARM,
     FileShare
 }

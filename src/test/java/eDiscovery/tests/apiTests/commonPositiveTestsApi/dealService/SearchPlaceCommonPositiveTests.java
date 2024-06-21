@@ -33,14 +33,14 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchPlaceRequestModel requestBody = DataGeneratorDealService.getBasicSearchPlaceModelArmLocal();
+        AddSearchPlaceRequestModel requestBody = DataGeneratorDealService.getSearchPlaceModelWithOnlyRequiredParameters();
 
         Response response = ApiMethodsSearchPlace.addSearchPlace(requestBody);
         CommonSearchPlaceResponseModel responseBody = response.as(CommonSearchPlaceResponseModel.class);
 
-        assertThat(responseBody.categoryType).isEqualTo(requestBody.categoryType);
-        assertThat(responseBody.type).isEqualTo(requestBody.type);
-        assertThat(responseBody.parameters).isEqualTo(requestBody.parameters);
+        assertThat(responseBody.categoryType).isEqualTo(SearchPlaceCategoryType.Undefined);
+        assertThat(responseBody.type).isEqualTo(SearchPlaceType.Undefined);
+        assertThat(responseBody.parameters).isEqualTo(null);
         assertThat(responseBody.excludes).isEmpty();
         assertThat(responseBody.excludes).isInstanceOf(ArrayList.class);
         assertThat(responseBody.id).isNotBlank();
@@ -62,10 +62,6 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = response.as(CommonSearchPlaceResponseModel.class);
 
         UpdateSearchPlaceRequestModel requestBodySearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
-                .categoryType(responseBodySearchPlaceCreation.categoryType)
-                .type(responseBodySearchPlaceCreation.type)
-                .parameters(null)
-                .excludes(null)
                 .id(responseBodySearchPlaceCreation.id)
                 .name(faker.letterify("???????????????????"))
                 .build();
@@ -73,9 +69,9 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         Response responseSearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestBodySearchPlaceUpdate);
         UpdateSearchPlaceRequestModel responseBodySearchPlaceUpdate = responseSearchPlaceUpdate.as(UpdateSearchPlaceRequestModel.class);
 
-        assertThat(responseBodySearchPlaceUpdate.categoryType).isEqualTo(requestBodySearchPlaceUpdate.categoryType);
-        assertThat(responseBodySearchPlaceUpdate.type).isEqualTo(requestBodySearchPlaceUpdate.type);
-        assertThat(responseBodySearchPlaceUpdate.parameters).isEqualTo(requestBodySearchPlaceUpdate.parameters);
+        assertThat(responseBodySearchPlaceUpdate.categoryType).isEqualTo(SearchPlaceCategoryType.Undefined);
+        assertThat(responseBodySearchPlaceUpdate.type).isEqualTo(SearchPlaceType.Undefined);
+        assertThat(responseBodySearchPlaceUpdate.parameters).isEqualTo(null);
         assertThat(responseBodySearchPlaceUpdate.excludes).isEmpty();
         assertThat(responseBodySearchPlaceUpdate.excludes).isInstanceOf(ArrayList.class);
         assertThat(responseBodySearchPlaceUpdate.id).isNotBlank();
@@ -91,15 +87,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     public void testDeleteSearchPlace(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
-        AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
-                .name(faker.letterify("???????????????????"))
-                .categoryType(SearchPlaceCategoryType.FileShare)
-                .type(SearchPlaceType.SMB)
-                .parameters(null)
-                .excludes(null)
-                .build();
-        Response responseSearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation);
-        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = responseSearchPlaceCreation.as(CommonSearchPlaceResponseModel.class);
+        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
         ApiMethodsSearchPlace.deleteSearchPlace(responseBodySearchPlaceCreation.id);
@@ -115,7 +103,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createBasicSearchPlace();
+        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
         Response response = ApiMethodsSearchPlace.getSearchPlaceList();
 
         List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("", CommonSearchPlaceResponseModel.class);
@@ -133,7 +121,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createBasicSearchPlace();
+        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
         Response response = ApiMethodsSearchPlace.getSearchPlaceListOData();
 
         List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("value", CommonSearchPlaceResponseModel.class);

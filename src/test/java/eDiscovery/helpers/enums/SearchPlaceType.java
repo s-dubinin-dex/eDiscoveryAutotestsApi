@@ -1,7 +1,7 @@
 package eDiscovery.helpers.enums;
 
 public enum SearchPlaceType {
-    UNDEFINED,
+    Undefined,
     SMB,
     FTP,
     NFS,

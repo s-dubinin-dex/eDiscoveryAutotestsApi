@@ -27,6 +27,16 @@ public class DataGeneratorDealService {
     * Search Place
     * */
 
+    public static AddSearchPlaceRequestModel getSearchPlaceModelWithOnlyRequiredParameters(){
+        return AddSearchPlaceRequestModel.builder()
+                .name(faker.letterify("???????????????????"))
+                .build();
+    }
+
+    public static CommonSearchPlaceResponseModel createSearchPlaceWithOnlyRequiredParameters(){
+        return ApiMethodsSearchPlace.addSearchPlace(getSearchPlaceModelWithOnlyRequiredParameters()).as(CommonSearchPlaceResponseModel.class);
+    }
+
     public static AddSearchPlaceRequestModel getBasicSearchPlaceModel(SearchPlaceCategoryType categoryType, SearchPlaceType type){
         return AddSearchPlaceRequestModel.builder()
                 .name(faker.letterify("???????????????????"))
