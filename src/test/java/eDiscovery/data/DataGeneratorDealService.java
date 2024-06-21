@@ -90,17 +90,32 @@ public class DataGeneratorDealService {
     * Deal manipulation
     * */
 
+    public static AddDealManipulationRequestModel getDealManipulationModelWithOnlyRequiredParameters(List<String> searchPlaceIDs, List<String> searchQueryIDs){
+        return AddDealManipulationRequestModel.builder()
+                .name(faker.letterify("???????????????????"))
+                .searchPlaces(searchPlaceIDs)
+                .searchQueueries(searchQueryIDs)
+                .build();
+
+    }
+
+    public static CommonDealManipulationResponseModel createDealManipulationWithOnlyRequiredParameters(){
+        AddDealManipulationRequestModel requestDealCreationBody = getDealManipulationModelWithOnlyRequiredParameters(
+                Collections.singletonList(createSearchPlaceWithOnlyRequiredParameters().id),
+                Collections.singletonList(createSearchQueryWithOnlyRequiredParameters().id)
+        );
+
+        return ApiMethodsDealManipulation.addDeal(requestDealCreationBody).as(CommonDealManipulationResponseModel.class);
+    }
+
     public static AddDealManipulationRequestModel getBasicDealManipulationModel(List<String> searchPlaceIDs, List<String> searchQueryIDs){
         return AddDealManipulationRequestModel.builder()
                 .name(faker.letterify("???????????????????"))
                 .searchPlaces(searchPlaceIDs)
-                .schedule(null)
-                .useSchedule(false)
                 .excludes(new ArrayList<>())
                 .searchQueueries(searchQueryIDs)
                 .dealStatus(DealStatus.Waiting)
                 .quarantine(false)
-                .findedDocumentsCount(0)
                 .build();
     }
 
