@@ -32,13 +32,13 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchQueryRequestModel requestBody = DataGeneratorDealService.getBasicSearchQueryModel();
+        AddSearchQueryRequestModel requestBody = DataGeneratorDealService.getSearchQueryModelWithOnlyRequiredParameters();
         Response response = ApiMethodsSearchQuery.addSearchQuery(requestBody);
 
         CommonSearchQueryResponseModel responseBody = response.as(CommonSearchQueryResponseModel.class);
 
         assertThat(responseBody.name).isEqualTo(requestBody.name);
-        assertThat(responseBody.type).isEqualTo(requestBody.type);
+        assertThat(responseBody.type).isEqualTo(SearchQueryType.Undefined);
         assertThat(responseBody.id).isNotBlank();
     }
 
@@ -52,14 +52,10 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchQueryRequestModel requestBodySearchQueryCreation = DataGeneratorDealService.getBasicSearchQueryModel();
-        Response responseSearchQueryCreation = ApiMethodsSearchQuery.addSearchQuery(requestBodySearchQueryCreation);
-
-        CommonSearchQueryResponseModel responseBodySearchQueryCreation = responseSearchQueryCreation.as(CommonSearchQueryResponseModel.class);
+        CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
 
         UpdateSearchQueryRequestModel requestModelSearchQueryCreation = UpdateSearchQueryRequestModel.builder()
                 .name(faker.letterify("???????????????????"))
-                .type(SearchQueryType.Regex)
                 .value("\\d{11}")
                 .id(responseBodySearchQueryCreation.id)
                 .build();
@@ -69,7 +65,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         CommonSearchQueryResponseModel responseBodySearchQueryUpdate = responseSearchQueryUpdate.as(CommonSearchQueryResponseModel.class);
 
         assertThat(responseBodySearchQueryUpdate.name).isEqualTo(requestModelSearchQueryCreation.name);
-        assertThat(responseBodySearchQueryUpdate.type).isEqualTo(requestModelSearchQueryCreation.type);
+        assertThat(responseBodySearchQueryUpdate.type).isEqualTo(SearchQueryType.Undefined);
         assertThat(responseBodySearchQueryUpdate.id).isNotBlank();
     }
 
@@ -82,9 +78,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
     public void testDeleteSearchQuery(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
-        AddSearchQueryRequestModel requestBodySearchQueryCreation = DataGeneratorDealService.getBasicSearchQueryModel();
-        Response responseSearchQueryCreation = ApiMethodsSearchQuery.addSearchQuery(requestBodySearchQueryCreation);
-        CommonSearchQueryResponseModel responseBodySearchQueryCreation = responseSearchQueryCreation.as(CommonSearchQueryResponseModel.class);
+        CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
         ApiMethodsSearchQuery.deleteSearchQuery(responseBodySearchQueryCreation.id);
@@ -100,7 +94,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createBasicSearchQuery();
+        DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
         Response response = ApiMethodsSearchQuery.getSearchQueryList();
 
         List<CommonSearchQueryResponseModel> responseBody = response.jsonPath().getList("", CommonSearchQueryResponseModel.class);
@@ -114,11 +108,11 @@ public class SearchQueryCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка поисковых запросов по протоколу oData")
     @Description("Тест проверяет возможность получения списка поисковых запросов по протоколу oData")
-    public void testGetSearchPlaceListOData(){
+    public void testGetSearchQueryListOData(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createBasicSearchQuery();
+        DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
         Response response = ApiMethodsSearchQuery.getSearchQueryListOData();
 
         List<CommonSearchQueryResponseModel> responseBody = response.jsonPath().getList("value", CommonSearchQueryResponseModel.class);

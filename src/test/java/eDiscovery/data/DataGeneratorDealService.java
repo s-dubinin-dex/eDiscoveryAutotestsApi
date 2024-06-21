@@ -63,6 +63,17 @@ public class DataGeneratorDealService {
     * Search Query
     * */
 
+    public static AddSearchQueryRequestModel getSearchQueryModelWithOnlyRequiredParameters(){
+        return AddSearchQueryRequestModel.builder()
+                .name(faker.letterify("???????????????????"))
+                .value("\\d{10}")
+                .build();
+    }
+
+    public static CommonSearchQueryResponseModel createSearchQueryWithOnlyRequiredParameters(){
+        return ApiMethodsSearchQuery.addSearchQuery(getSearchQueryModelWithOnlyRequiredParameters()).as(CommonSearchQueryResponseModel.class);
+    }
+
     public static AddSearchQueryRequestModel getBasicSearchQueryModel(){
         return AddSearchQueryRequestModel.builder()
                 .name(faker.letterify("???????????????????"))
