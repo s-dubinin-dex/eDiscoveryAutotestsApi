@@ -59,6 +59,10 @@ public class DataGeneratorDealService {
         return ApiMethodsSearchPlace.addSearchPlace(getBasicSearchPlaceModelArmLocal()).as(CommonSearchPlaceResponseModel.class);
     }
 
+    public static String[] getValidSearchPlaceNames(){
+        return getValidNames();
+    }
+
     /*
     * Search Query
     * */
@@ -126,6 +130,39 @@ public class DataGeneratorDealService {
         );
 
         return ApiMethodsDealManipulation.addDeal(requestDealCreationBody).as(CommonDealManipulationResponseModel.class);
+    }
+
+    /*
+    * Basic generators
+    * */
+
+    public static String[] getValidNames(){
+        return new String[]{
+                faker.regexify("[a-z]{1}"),             // Строка из 1 символа
+                faker.regexify("[a-z]{256}"),           // Строка из 256 символов
+                faker.regexify("[а-я]{25}"),            // Строка из русских символов в нижней раскладке
+                faker.regexify("[А-Я]{25}"),            // Строка из русских символов в верхней раскладке
+                faker.regexify("[А-Яа-я]{25}"),         // Строка из русских символов в смешанной раскладке
+                faker.regexify("[a-z]{25}"),            // Строка из английских символов в нижней раскладке
+                faker.regexify("[A-Z]{25}"),            // Строка из английских символов в верхней раскладке
+                faker.regexify("[A-Za-z]{25}"),         // Строка из английских символов в смешанной раскладке
+                faker.regexify("[A-Za-zА-Яа-я]{25}"),   // Строка из английских и русских символов в смешанной раскладке
+                faker.regexify("[0-9]{25}"),            // Строка из цифр
+                faker.regexify("[A-Za-z0-9]{25}"),      // Строка из английских символов вперемешку с цифрами
+                faker.regexify("[А-Яа-я0-9]{25}"),      // Строка из русских символов вперемешку с цифрами
+                faker.letterify("?????? ??????? ??????"),   // Строка, состоящая из нескольких слов, разделённых пробелами
+                faker.letterify("??????     ??????"),       // Строка с несколькими пробелами подряд
+                faker.letterify(" ??????"),                 // Строка, начинающаяся с пробела
+                faker.letterify("?????? "),                 // Строка, оканчивающаяяся пробелом
+                "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",   // Строка из спецсимволов
+                "ё"};                                   // Буква "ё"
+    }
+
+    public static String[] getInvalidNames(){
+        return new String[]{
+                "",
+                " "
+        };
     }
 
 }
