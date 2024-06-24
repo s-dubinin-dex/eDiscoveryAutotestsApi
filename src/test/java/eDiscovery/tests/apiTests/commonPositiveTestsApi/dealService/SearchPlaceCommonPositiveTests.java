@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static eDiscovery.data.DataGeneratorDealService.getRandomName;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SearchPlaceCommonPositiveTests extends TestBase {
@@ -65,7 +66,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
 
         UpdateSearchPlaceRequestModel requestBodySearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
                 .id(responseBodySearchPlaceCreation.id)
-                .name(faker.letterify("???????????????????"))
+                .name(getRandomName())
                 .build();
 
         Response responseSearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestBodySearchPlaceUpdate);

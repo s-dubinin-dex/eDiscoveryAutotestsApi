@@ -29,7 +29,7 @@ public class DataGeneratorDealService {
 
     public static AddSearchPlaceRequestModel getSearchPlaceModelWithOnlyRequiredParameters(){
         return AddSearchPlaceRequestModel.builder()
-                .name(faker.letterify("???????????????????"))
+                .name(getRandomName())
                 .build();
     }
 
@@ -39,7 +39,7 @@ public class DataGeneratorDealService {
 
     public static AddSearchPlaceRequestModel getBasicSearchPlaceModel(SearchPlaceCategoryType categoryType, SearchPlaceType type){
         return AddSearchPlaceRequestModel.builder()
-                .name(faker.letterify("???????????????????"))
+                .name(getRandomName())
                 .categoryType(categoryType)
                 .type(type)
                 .parameters(null)
@@ -69,7 +69,7 @@ public class DataGeneratorDealService {
 
     public static AddSearchQueryRequestModel getSearchQueryModelWithOnlyRequiredParameters(){
         return AddSearchQueryRequestModel.builder()
-                .name(faker.letterify("???????????????????"))
+                .name(getRandomName())
                 .value("\\d{10}")
                 .build();
     }
@@ -80,7 +80,7 @@ public class DataGeneratorDealService {
 
     public static AddSearchQueryRequestModel getBasicSearchQueryModel(){
         return AddSearchQueryRequestModel.builder()
-                .name(faker.letterify("???????????????????"))
+                .name(getRandomName())
                 .type(SearchQueryType.Regex)
                 .value("\\d{10}")
                 .build();
@@ -96,7 +96,7 @@ public class DataGeneratorDealService {
 
     public static AddDealManipulationRequestModel getDealManipulationModelWithOnlyRequiredParameters(List<String> searchPlaceIDs, List<String> searchQueryIDs){
         return AddDealManipulationRequestModel.builder()
-                .name(faker.letterify("???????????????????"))
+                .name(getRandomName())
                 .searchPlaces(searchPlaceIDs)
                 .searchQueueries(searchQueryIDs)
                 .build();
@@ -114,7 +114,7 @@ public class DataGeneratorDealService {
 
     public static AddDealManipulationRequestModel getBasicDealManipulationModel(List<String> searchPlaceIDs, List<String> searchQueryIDs){
         return AddDealManipulationRequestModel.builder()
-                .name(faker.letterify("???????????????????"))
+                .name(getRandomName())
                 .searchPlaces(searchPlaceIDs)
                 .excludes(new ArrayList<>())
                 .searchQueueries(searchQueryIDs)
@@ -163,6 +163,10 @@ public class DataGeneratorDealService {
                 "",
                 " "
         };
+    }
+
+    public static String getRandomName(){
+        return faker.regexify("[a-zA-Z]{30}");
     }
 
 }

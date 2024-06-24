@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Collections;
 import java.util.List;
 
+import static eDiscovery.data.DataGeneratorDealService.getRandomName;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DealManipulationCommonPositiveTests extends TestBase {
@@ -91,7 +92,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         UpdateDealManipulationRequestModel requestBodyDealUpdate = UpdateDealManipulationRequestModel.builder()
                 .id(responseBodyDealCreation.id)
-                .name(faker.letterify("???????????????????"))
+                .name(getRandomName())
                 .searchPlaces(requestBodyDealCreation.searchPlaces)
                 .searchQueueries(requestBodyDealCreation.searchQueueries)
                 .build();

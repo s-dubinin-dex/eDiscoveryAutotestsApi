@@ -15,9 +15,9 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import static eDiscovery.data.DataGeneratorDealService.getRandomName;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SearchQueryCommonPositiveTests extends TestBase {
@@ -57,7 +57,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
 
         UpdateSearchQueryRequestModel requestModelSearchQueryCreation = UpdateSearchQueryRequestModel.builder()
-                .name(faker.letterify("???????????????????"))
+                .name(getRandomName())
                 .value("\\d{11}")
                 .id(responseBodySearchQueryCreation.id)
                 .build();
