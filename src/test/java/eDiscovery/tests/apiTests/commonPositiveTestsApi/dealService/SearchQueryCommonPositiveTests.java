@@ -23,6 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SearchQueryCommonPositiveTests extends TestBase {
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Поисковый запрос")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.CRITICAL)
@@ -43,6 +44,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
     }
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Поисковый запрос")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.NORMAL)
@@ -70,6 +72,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
     }
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Поисковый запрос")
     @Story("Удаление поискового запроса")
     @Severity(SeverityLevel.NORMAL)
@@ -85,6 +88,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
     }
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Поисковый запрос")
     @Story("Получение списка поисковых запросов")
     @Severity(SeverityLevel.NORMAL)
@@ -103,6 +107,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
     }
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Поисковый запрос")
     @Story("Получение списка поисковых запросов")
     @Severity(SeverityLevel.NORMAL)

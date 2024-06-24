@@ -24,6 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SearchPlaceCommonPositiveTests extends TestBase {
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Место поиска")
     @Story("Создание места поиска")
     @Severity(SeverityLevel.CRITICAL)
@@ -48,6 +49,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     }
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Место поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.CRITICAL)
@@ -79,6 +81,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     }
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Место поиска")
     @Story("Удаление места поиска")
     @Severity(SeverityLevel.MINOR)
@@ -94,6 +97,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     }
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Место поиска")
     @Story("Получение списка мест поиска")
     @Severity(SeverityLevel.NORMAL)
@@ -112,6 +116,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     }
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Место поиска")
     @Story("Получение списка мест поиска")
     @Severity(SeverityLevel.NORMAL)

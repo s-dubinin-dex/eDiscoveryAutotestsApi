@@ -30,6 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class DealManipulationCommonPositiveTests extends TestBase {
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Дело")
     @Story("Создание дела")
     @Severity(SeverityLevel.CRITICAL)
@@ -65,6 +66,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     }
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Дело")
     @Story("Изменение дела")
     @Severity(SeverityLevel.NORMAL)
@@ -111,6 +113,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     }
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Дело")
     @Story("Удаление дела")
     @Severity(SeverityLevel.NORMAL)
@@ -127,6 +130,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     }
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Дело")
     @Story("Просмотр информации по делу")
     @Severity(SeverityLevel.NORMAL)
@@ -166,6 +170,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     }
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Дело")
     @Story("Восстановление удалённого дела")
     @Severity(SeverityLevel.TRIVIAL)
@@ -188,6 +193,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     }
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Дело")
     @Story("Закрытие дела")
     @Severity(SeverityLevel.NORMAL)
@@ -211,6 +217,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     }
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Дело")
     @Story("Открытие закрытого дела")
     @Severity(SeverityLevel.TRIVIAL)
@@ -236,6 +243,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     }
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Дело")
     @Story("Остановка дела")
     @Severity(SeverityLevel.NORMAL)
@@ -259,6 +267,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     }
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Дело")
     @Story("Запуск дела")
     @Severity(SeverityLevel.NORMAL)
@@ -282,6 +291,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Дело")
     @Story("Получение списка дел")
     @Severity(SeverityLevel.NORMAL)
@@ -300,6 +310,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     }
 
     @Test
+    @Epic("Сервис Deal")
     @Feature("Место поиска")
     @Story("Получение списка мест поиска")
     @Severity(SeverityLevel.NORMAL)
