@@ -14,6 +14,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.List;
+
 import static eDiscovery.data.DataGeneratorDealService.getRandomName;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -167,5 +169,52 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         assertThat(responseBody.parameters).isEqualTo(parameters);
     }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Создание места поиска")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Создание места поиска c различными исключениями директорий из поиска")
+    @Description("Тест проверяет возможность создания места поиска c различными исключениями директорий из поиска")
+    @ParameterizedTest
+    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceExclusions")
+    public void testAddSearchPlaceWithDifferentExcludes(String exclusion){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        List<String> excludes = List.of(exclusion);
+
+        AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
+                .name(getRandomName())
+                .excludes(excludes)
+                .build();
+
+        CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBody.excludes).isEqualTo(excludes);
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Создание места поиска")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Создание места поиска c различным количеством исключений директорий из поиска")
+    @Description("Тест проверяет возможность создания места поиска c различным количеством исключений директорий из поиска")
+    @ParameterizedTest
+    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceExclusionsWithDifferentCount")
+    public void testAddSearchPlaceWithDifferentCountOfExcludes(List<String> excludes){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
+                .name(getRandomName())
+                .excludes(excludes)
+                .build();
+
+        CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBody.excludes).isEqualTo(excludes);
+    }
+
 
 }

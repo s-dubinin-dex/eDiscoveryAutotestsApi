@@ -18,6 +18,7 @@ import eDiscovery.models.deal.searchQuery.CommonSearchQueryResponseModel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class DataGeneratorDealService {
 
@@ -91,8 +92,8 @@ public class DataGeneratorDealService {
                 "\\server\\share\\subdir",
                 "\\\\server\\share\\subdir",
 
-                faker.regexify("[a-z]{1}"),
-                faker.regexify("[a-z]{500}")
+                faker.regexify("[a-z]{1}"),             // Строка длиной 1 символ
+                faker.regexify("[a-z]{500}")            // Строка длиной 500 символов
         };
     }
 
@@ -115,8 +116,17 @@ public class DataGeneratorDealService {
                 faker.regexify("[A-Za-z0-9]{25}"),      // Строка из английских символов вперемешку с цифрами
                 faker.regexify("[А-Яа-я0-9]{25}"),      // Строка из русских символов вперемешку с цифрами
                 "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",   // Строка из спецсимволов
-                "ё"};                                   // Буква "ё"
+                "ё"                                     // Буква "ё"
         };
+    };
+
+    public static String[] getValidSearchPlaceExclusions(){
+        return getValidFolderExclusions();
+    }
+
+    public static Stream<List<String>>  getValidSearchPlaceExclusionsWithDifferentCount(){
+        return getValidFolderExclusionsWithDifferentCount();
+    }
 
     /*
     * Search Query
@@ -210,7 +220,8 @@ public class DataGeneratorDealService {
                 faker.letterify(" ??????"),                 // Строка, начинающаяся с пробела
                 faker.letterify("?????? "),                 // Строка, оканчивающаяяся пробелом
                 "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",   // Строка из спецсимволов
-                "ё"};                                   // Буква "ё"
+                "ё"                                     // Буква "ё"
+        };
     }
 
     public static String[] getInvalidNames(){
@@ -218,6 +229,68 @@ public class DataGeneratorDealService {
                 "",
                 " "
         };
+    }
+
+    public static String[] getValidFolderExclusions(){
+        return new String[]{
+                "C:\\",                                 // Windows-style
+                "C:\\Program files\\",                  // Windows-style
+                "C:\\Program files\\Документ Microsoft Word.docx",          // Windows-style с путём к файлу
+
+
+                "/proc",                                // Unix-style
+                "/home/admin/",                         // Unix-style
+                "/home/admin/Документ Microsoft Word.docx",                 // Unix-style с путём к файлу
+
+                "smb://server/share",                   // SMB-style
+                "\\server\\share",
+                "\\\\server\\share",
+                "\\\\server\\share\\Документ Microsoft Word.docx",            // SMB-style с путём к файлу
+
+                "smb://user@server/share",
+                "\\user@server\\share",
+                "\\\\user@server\\share",
+
+                "smb://192.168.1.1/share",
+                "\\192.168.1.1\\share",
+                "\\\\192.168.1.1\\share",
+
+                "smb://server/share/subdir",
+
+                "\\server\\share\\subdir",
+                "\\\\server\\share\\subdir",
+
+                "",                                     // Пустая строка
+                faker.regexify("[a-z]{1}"),             // Строка из 1 символа
+                faker.regexify("[a-z]{500}"),           // Строка из 500 символов
+                faker.regexify("[а-я]{25}"),            // Строка из русских символов в нижней раскладке
+                faker.regexify("[А-Я]{25}"),            // Строка из русских символов в верхней раскладке
+                faker.regexify("[А-Яа-я]{25}"),         // Строка из русских символов в смешанной раскладке
+                faker.regexify("[a-z]{25}"),            // Строка из английских символов в нижней раскладке
+                faker.regexify("[A-Z]{25}"),            // Строка из английских символов в верхней раскладке
+                faker.regexify("[A-Za-z]{25}"),         // Строка из английских символов в смешанной раскладке
+                faker.regexify("[A-Za-zА-Яа-я]{25}"),   // Строка из английских и русских символов в смешанной раскладке
+                faker.regexify("[0-9]{25}"),            // Строка из цифр
+                faker.regexify("[A-Za-z0-9]{25}"),      // Строка из английских символов вперемешку с цифрами
+                faker.regexify("[А-Яа-я0-9]{25}"),      // Строка из русских символов вперемешку с цифрами
+                "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",   // Строка из спецсимволов
+                "ё"                                     // Буква "ё"
+        };
+    }
+
+    public static Stream<List<String>> getValidFolderExclusionsWithDifferentCount(){
+
+        return Stream.of(
+                List.of(),              // Пустой список
+                List.of(
+                        "C:\\"
+                ),                      // Список из 1 пути
+                List.of(
+                        "C:\\",
+                        "smb://server/share"
+                )                       // Список из 2 путей
+        );
+
     }
 
     public static String getRandomName(){
