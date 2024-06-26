@@ -1,4 +1,4 @@
-package eDiscovery.tests.apiTests.extendedPositiveTestsApi.dealService;
+package eDiscovery.tests.apiTests.extendedPositiveTests.dealService;
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsDealManipulation;
 import eDiscovery.apiMethods.deal.ApiMethodsSearchPlace;
@@ -14,11 +14,13 @@ import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Collections;
 import java.util.List;
@@ -768,6 +770,70 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestSearchPlaceUpdate).as(CommonSearchPlaceResponseModel.class);
 
         assertThat(responseBodySearchPlaceUpdate.excludes).isEqualTo(excludesUpdate);
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Удаление места поиска")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Удаление места поиска FileShare - SMB")
+    @Description("Тест проверяет возможность удаления места поиска FileShare - SMB")
+    public void testDeleteSearchPlaceFileShareSMB(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+
+        AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
+                .name(DataGeneratorDealService.getRandomName())
+                .categoryType(SearchPlaceCategoryType.FileShare)
+                .type(SearchPlaceType.SMB)
+                .build();
+
+        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
+
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
+        ApiMethodsSearchPlace.deleteSearchPlace(responseBodySearchPlaceCreation.id);
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Severity(SeverityLevel.MINOR)
+    @Link("http://jira.lan:8080/browse/ED-203")
+    @DisplayName("Получение списка мест поиска с параметром includeDeleted (параметр includeDeleted не влияет на выдачу результата)")
+    @Description("Тест проверяет возможность получения списка мест поиска с параметром includeDeleted (параметр includeDeleted не влияет на выдачу результата)")
+    @ParameterizedTest
+    @ValueSource(booleans = {false, true})
+    public void testGetSearchPlaceListWithIncludeDeletedParameter(Boolean includeDeleted){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
+        Response response = ApiMethodsSearchPlace.getSearchPlaceListWithIncludeDeletedParameter(includeDeleted);
+
+        List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("", CommonSearchPlaceResponseModel.class);
+        assertThat(responseBody).isNotEmpty();
+        assertThat(responseBody.get(0)).isNotNull();
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Severity(SeverityLevel.MINOR)
+    @Link("http://jira.lan:8080/browse/ED-203")
+    @DisplayName("Получение списка мест поиска по протоколу oData с параметром includeDeleted (параметр includeDeleted не влияет на выдачу результата)")
+    @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData с параметром includeDeleted (параметр includeDeleted не влияет на выдачу результата)")
+    @ParameterizedTest
+    @ValueSource(booleans = {false, true})
+    public void testGetSearchPlaceListODataWithIncludeDeletedParameter(Boolean includeDeleted){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
+        Response response = ApiMethodsSearchPlace.getSearchPlaceListODataWithIncludeDeletedParameter(includeDeleted);
+
+        List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+        assertThat(responseBody).isNotEmpty();
+        assertThat(responseBody.get(0)).isNotNull();
     }
 
 }

@@ -1,4 +1,4 @@
-package eDiscovery.tests.apiTests.commonPositiveTestsApi.dealService;
+package eDiscovery.tests.apiTests.commonPositiveTests.dealService;
 
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsSearchQuery;

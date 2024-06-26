@@ -58,11 +58,35 @@ public class ApiMethodsSearchPlace extends UrlBase {
 
     }
 
+    @Step("Получение списка мест поиска")
+    public static Response getSearchPlaceListWithIncludeDeletedParameter(Boolean includeDeleted){
+        SpecificationsServer.setBaseUrl(URL_DEAL);
+
+        return given()
+                .param("includeDeleted", includeDeleted)
+                .when()
+                .get("/SearchPlace/SearchPlace")
+                .andReturn();
+
+    }
+
     @Step("Получение списка мест поиска по протоколу oData")
     public static Response getSearchPlaceListOData(){
         SpecificationsServer.setBaseUrl(URL_DEAL);
 
         return given()
+                .when()
+                .get("/odata/SearchPlace")
+                .andReturn();
+
+    }
+
+    @Step("Получение списка мест поиска по протоколу oData")
+    public static Response getSearchPlaceListODataWithIncludeDeletedParameter(Boolean includeDeleted){
+        SpecificationsServer.setBaseUrl(URL_DEAL);
+
+        return given()
+                .param("includeDeleted", includeDeleted)
                 .when()
                 .get("/odata/SearchPlace")
                 .andReturn();
