@@ -189,7 +189,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        List<String> excludes = List.of(exclusion);
+        List<String> excludes = Collections.singletonList(exclusion);
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
