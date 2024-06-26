@@ -256,8 +256,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Feature("Место поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Изменение наименования места поиска, которое используется в созданном деле")
-    @Description("Тест проверяет возможность изменения наименования места поиска, которое используется в созданном деле")
+    @DisplayName("Изменение наименования места поиска с типом FileShare - SMB, которое используется в созданном деле")
+    @Description("Тест проверяет возможность изменения наименования места поиска с типом FileShare - SMB, которое используется в созданном деле")
     public void testUpdateSearchPlaceNameUsedInCreatedDeal(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -346,8 +346,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Feature("Место поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Изменение uri в параметрах места поиска с типом FileShare - SMB")
-    @Description("Тест проверяет возможность изменения uri в параметрах места поиска с типом FileShare - SMB")
+    @DisplayName("Изменение uri в параметрах места поиска с типом FileShare - SMB, если место поиска не используется в деле")
+    @Description("Тест проверяет возможность изменения uri в параметрах места поиска с типом FileShare - SMB, если место поиска не используется в деле")
     @ParameterizedTest
     @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceURIInParameters")
     public void testUpdateSearchPlaceUriParametersWithDifferentValidValues(String uri){
@@ -362,6 +362,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
+                .categoryType(SearchPlaceCategoryType.FileShare)
+                .type(SearchPlaceType.SMB)
                 .parameters(initialParameters)
                 .build();
 
@@ -392,8 +394,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Feature("Место поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Изменение username в параметрах места поиска с типом FileShare - SMB")
-    @Description("Тест проверяет возможность изменения username в параметрах места поиска с типом FileShare - SMB")
+    @DisplayName("Изменение username в параметрах места поиска с типом FileShare - SMB, если место поиска не используется в деле")
+    @Description("Тест проверяет возможность изменения username в параметрах места поиска с типом FileShare - SMB, если место поиска не используется в деле")
     @ParameterizedTest
     @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceUsernamesInParameters")
     public void testUpdateSearchPlaceUsernameParametersWithDifferentValidValues(String username){
@@ -408,6 +410,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
+                .categoryType(SearchPlaceCategoryType.FileShare)
+                .type(SearchPlaceType.SMB)
                 .parameters(initialParameters)
                 .build();
 
@@ -438,8 +442,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Feature("Место поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Изменение password в параметрах места поиска с типом FileShare - SMB")
-    @Description("Тест проверяет возможность изменения password в параметрах места поиска с типом FileShare - SMB")
+    @DisplayName("Изменение password в параметрах места поиска с типом FileShare - SMB, если место поиска не используется в деле")
+    @Description("Тест проверяет возможность изменения password в параметрах места поиска с типом FileShare - SMB, если место поиска не используется в деле")
     @ParameterizedTest
     @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlacePasswordsInParameters")
     public void testUpdateSearchPlacePasswordParametersWithDifferentValidValues(String password){
@@ -454,6 +458,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
+                .categoryType(SearchPlaceCategoryType.FileShare)
+                .type(SearchPlaceType.SMB)
                 .parameters(initialParameters)
                 .build();
 
@@ -485,8 +491,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Feature("Место поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Изменение параметров места поиска, которое используется в созданном деле")
-    @Description("Тест проверяет возможность изменения параметров места поиска, которое используется в созданном деле")
+    @DisplayName("Изменение параметров места поиска с типом FileShare - SMB, которое используется в созданном деле")
+    @Description("Тест проверяет возможность изменения параметров места поиска с типом FileShare - SMB, которое используется в созданном деле")
     public void testUpdateSearchPlaceParametersUsedInCreatedDeal(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -499,6 +505,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
+                .categoryType(SearchPlaceCategoryType.FileShare)
+                .type(SearchPlaceType.SMB)
                 .parameters(initialParameters)
                 .build();
 
@@ -528,6 +536,238 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestSearchPlaceUpdate).as(CommonSearchPlaceResponseModel.class);
 
         assertThat(responseBodySearchPlaceUpdate.parameters).isEqualTo(parametersForUpdate);
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Изменение места поиска")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Изменение excludes места поиска с типом ARM - Local, если место поиска не используется в деле")
+    @Description("Тест проверяет возможность изменения excludes в месте поиска с типом ARM - Local, если место поиска не используется в деле")
+    @ParameterizedTest
+    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceExclusions")
+    public void testUpdateSearchPlaceExcludesInARMLocalWithDifferentValidValues(String exclusion){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
+                .name(DataGeneratorDealService.getRandomName())
+                .categoryType(SearchPlaceCategoryType.ARM)
+                .type(SearchPlaceType.LOCAL)
+                .excludes(Collections.singletonList("A:\\"))
+                .build();
+
+        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);
+
+        List<String> excludes = Collections.singletonList(exclusion);
+
+        UpdateSearchPlaceRequestModel requestSearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
+                .id(responseBodySearchPlaceCreation.id)
+                .name(responseBodySearchPlaceCreation.name)
+                .categoryType(responseBodySearchPlaceCreation.categoryType)
+                .type(responseBodySearchPlaceCreation.type)
+                .parameters(responseBodySearchPlaceCreation.parameters)
+                .excludes(excludes)
+                .build();
+
+
+        CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestSearchPlaceUpdate).as(CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBodySearchPlaceUpdate.excludes).isEqualTo(excludes);
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Изменение места поиска")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Изменение excludes места поиска с типом ARM - Local на разное количество исключений, если место поиска не используется в деле")
+    @Description("Тест проверяет возможность изменения excludes в месте поиска с типом ARM - Local на разное количество исключений, если место поиска не используется в деле")
+    @ParameterizedTest
+    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceExclusionsWithDifferentCount")
+    public void testUpdateSearchPlaceExcludesInARMLocalWithDifferentCountOfExclusion(List<String> excludes){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
+                .name(DataGeneratorDealService.getRandomName())
+                .categoryType(SearchPlaceCategoryType.ARM)
+                .type(SearchPlaceType.LOCAL)
+                .excludes(Collections.singletonList("A:\\"))
+                .build();
+
+        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);
+
+        UpdateSearchPlaceRequestModel requestSearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
+                .id(responseBodySearchPlaceCreation.id)
+                .name(responseBodySearchPlaceCreation.name)
+                .categoryType(responseBodySearchPlaceCreation.categoryType)
+                .type(responseBodySearchPlaceCreation.type)
+                .parameters(responseBodySearchPlaceCreation.parameters)
+                .excludes(excludes)
+                .build();
+
+
+        CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestSearchPlaceUpdate).as(CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBodySearchPlaceUpdate.excludes).isEqualTo(excludes);
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Изменение места поиска")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Изменение excludes места поиска с типом ARM - Local, которое используется в созданном деле")
+    @Description("Тест проверяет возможность изменения excludes места поиска с типом ARM - Local, которое используется в созданном деле")
+    public void testUpdateSearchPlaceExcludesInARMLocalInCreatedDeal(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        AddSearchPlaceRequestModel requestSearchPlaceCreation = AddSearchPlaceRequestModel.builder()
+                .name(DataGeneratorDealService.getRandomName())
+                .categoryType(SearchPlaceCategoryType.ARM)
+                .type(SearchPlaceType.LOCAL)
+                .excludes(Collections.singletonList("A:\\"))
+                .build();
+
+        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestSearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);
+        CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
+
+        ApiMethodsDealManipulation.addDeal(DataGeneratorDealService.getBasicDealManipulationModel(
+                Collections.singletonList(responseBodySearchPlaceCreation.id),
+                Collections.singletonList(responseBodySearchQueryCreation.id)
+        ));
+
+        List<String> excludesUpdate = Collections.singletonList("B:\\");
+
+        UpdateSearchPlaceRequestModel requestSearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
+                .name(requestSearchPlaceCreation.name)
+                .categoryType(responseBodySearchPlaceCreation.categoryType)
+                .type(responseBodySearchPlaceCreation.type)
+                .parameters(responseBodySearchPlaceCreation.parameters)
+                .excludes(excludesUpdate)
+                .id(responseBodySearchPlaceCreation.id)
+                .build();
+
+        CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestSearchPlaceUpdate).as(CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBodySearchPlaceUpdate.excludes).isEqualTo(excludesUpdate);
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Изменение места поиска")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Изменение excludes места поиска с типом FileShare - SMB, если место поиска не используется в деле")
+    @Description("Тест проверяет возможность изменения excludes в месте поиска с типом FileShare - SMB, если место поиска не используется в деле")
+    @ParameterizedTest
+    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceExclusions")
+    public void testUpdateSearchPlaceExcludesInFileShareSMBWithDifferentValidValues(String exclusion){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
+                .name(DataGeneratorDealService.getRandomName())
+                .categoryType(SearchPlaceCategoryType.FileShare)
+                .type(SearchPlaceType.SMB)
+                .excludes(Collections.singletonList("A:\\"))
+                .build();
+
+        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);
+
+        List<String> excludes = Collections.singletonList(exclusion);
+
+        UpdateSearchPlaceRequestModel requestSearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
+                .id(responseBodySearchPlaceCreation.id)
+                .name(responseBodySearchPlaceCreation.name)
+                .categoryType(responseBodySearchPlaceCreation.categoryType)
+                .type(responseBodySearchPlaceCreation.type)
+                .parameters(responseBodySearchPlaceCreation.parameters)
+                .excludes(excludes)
+                .build();
+
+
+        CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestSearchPlaceUpdate).as(CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBodySearchPlaceUpdate.excludes).isEqualTo(excludes);
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Изменение места поиска")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Изменение excludes места поиска с типом FileShare - SMB на разное количество исключений, если место поиска не используется в деле")
+    @Description("Тест проверяет возможность изменения excludes в месте поиска с типом FileShare - SMB на разное количество исключений, если место поиска не используется в деле")
+    @ParameterizedTest
+    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceExclusionsWithDifferentCount")
+    public void testUpdateSearchPlaceExcludesInFileShareSMBWithDifferentCountOfExclusion(List<String> excludes){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
+                .name(DataGeneratorDealService.getRandomName())
+                .categoryType(SearchPlaceCategoryType.FileShare)
+                .type(SearchPlaceType.SMB)
+                .excludes(Collections.singletonList("A:\\"))
+                .build();
+
+        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);
+
+        UpdateSearchPlaceRequestModel requestSearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
+                .id(responseBodySearchPlaceCreation.id)
+                .name(responseBodySearchPlaceCreation.name)
+                .categoryType(responseBodySearchPlaceCreation.categoryType)
+                .type(responseBodySearchPlaceCreation.type)
+                .parameters(responseBodySearchPlaceCreation.parameters)
+                .excludes(excludes)
+                .build();
+
+
+        CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestSearchPlaceUpdate).as(CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBodySearchPlaceUpdate.excludes).isEqualTo(excludes);
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Изменение места поиска")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Изменение excludes места поиска с типом FileShare - SMB, которое используется в созданном деле")
+    @Description("Тест проверяет возможность изменения excludes места поиска с типом FileShare - SMB, которое используется в созданном деле")
+    public void testUpdateSearchPlaceExcludesInFileShareSMBWithDifferentValidValuesInCreatedDeal(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        AddSearchPlaceRequestModel requestSearchPlaceCreation = AddSearchPlaceRequestModel.builder()
+                .name(DataGeneratorDealService.getRandomName())
+                .categoryType(SearchPlaceCategoryType.FileShare)
+                .type(SearchPlaceType.SMB)
+                .excludes(Collections.singletonList("A:\\"))
+                .build();
+
+        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestSearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);
+        CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
+
+        ApiMethodsDealManipulation.addDeal(DataGeneratorDealService.getBasicDealManipulationModel(
+                Collections.singletonList(responseBodySearchPlaceCreation.id),
+                Collections.singletonList(responseBodySearchQueryCreation.id)
+        ));
+
+        List<String> excludesUpdate = Collections.singletonList("B:\\");
+
+        UpdateSearchPlaceRequestModel requestSearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
+                .name(requestSearchPlaceCreation.name)
+                .categoryType(responseBodySearchPlaceCreation.categoryType)
+                .type(responseBodySearchPlaceCreation.type)
+                .parameters(responseBodySearchPlaceCreation.parameters)
+                .excludes(excludesUpdate)
+                .id(responseBodySearchPlaceCreation.id)
+                .build();
+
+        CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestSearchPlaceUpdate).as(CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBodySearchPlaceUpdate.excludes).isEqualTo(excludesUpdate);
     }
 
 }
