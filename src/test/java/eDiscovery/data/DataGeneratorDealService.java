@@ -25,17 +25,17 @@ public class DataGeneratorDealService {
     public static Faker faker = new Faker();
 
     /*
-    * Search Place
+    * SearchPlace
+    * */
+
+    /*
+    * SearchPlace models
     * */
 
     public static AddSearchPlaceRequestModel getSearchPlaceModelWithOnlyRequiredParameters(){
         return AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
                 .build();
-    }
-
-    public static CommonSearchPlaceResponseModel createSearchPlaceWithOnlyRequiredParameters(){
-        return ApiMethodsSearchPlace.addSearchPlace(getSearchPlaceModelWithOnlyRequiredParameters()).as(CommonSearchPlaceResponseModel.class);
     }
 
     public static AddSearchPlaceRequestModel getBasicSearchPlaceModel(SearchPlaceCategoryType categoryType, SearchPlaceType type){
@@ -56,9 +56,25 @@ public class DataGeneratorDealService {
         return getBasicSearchPlaceModel(SearchPlaceCategoryType.FileShare, SearchPlaceType.SMB);
     }
 
-    public static CommonSearchPlaceResponseModel createBasicSearchPlace(){
+    /*
+    * SearchPlace generators
+    * */
+
+    public static CommonSearchPlaceResponseModel createSearchPlaceWithOnlyRequiredParameters(){
+        return ApiMethodsSearchPlace.addSearchPlace(getSearchPlaceModelWithOnlyRequiredParameters()).as(CommonSearchPlaceResponseModel.class);
+    }
+
+    public static CommonSearchPlaceResponseModel createBasicSearchPlaceArmLocal(){
         return ApiMethodsSearchPlace.addSearchPlace(getBasicSearchPlaceModelArmLocal()).as(CommonSearchPlaceResponseModel.class);
     }
+
+    public static CommonSearchPlaceResponseModel createBasicSearchPlaceFileShareSMB(){
+        return ApiMethodsSearchPlace.addSearchPlace(getBasicSearchPlaceModelFileShareSMB()).as(CommonSearchPlaceResponseModel.class);
+    }
+
+    /*
+     * SearchPlace attributes
+     * */
 
     public static String[] getValidSearchPlaceNames(){
         return getValidNames();
@@ -71,6 +87,10 @@ public class DataGeneratorDealService {
     public static SearchPlaceType[] getValidSearchPlaceTypes(){
         return SearchPlaceType.values();
     }
+
+    /*
+    * SearchPlace Parameters
+    * */
 
     public static String[] getValidSearchPlaceURIInParameters(){
         return new String[]{
@@ -190,7 +210,7 @@ public class DataGeneratorDealService {
 
     public static CommonDealManipulationResponseModel createBasicDealManipulation(){
         AddDealManipulationRequestModel requestDealCreationBody = getBasicDealManipulationModel(
-                Collections.singletonList(createBasicSearchPlace().id),
+                Collections.singletonList(createBasicSearchPlaceArmLocal().id),
                 Collections.singletonList(createBasicSearchQuery().id)
         );
 
@@ -219,8 +239,8 @@ public class DataGeneratorDealService {
                 faker.letterify("??????     ??????"),       // Строка с несколькими пробелами подряд
                 faker.letterify(" ??????"),                 // Строка, начинающаяся с пробела
                 faker.letterify("?????? "),                 // Строка, оканчивающаяяся пробелом
-                "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",   // Строка из спецсимволов
-                "ё"                                     // Буква "ё"
+                "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~" + getRandomName(),     // Строка из спецсимволов
+                "ё" + getRandomName()                                       // Буква "ё"
         };
     }
 
@@ -273,8 +293,8 @@ public class DataGeneratorDealService {
                 faker.regexify("[0-9]{25}"),            // Строка из цифр
                 faker.regexify("[A-Za-z0-9]{25}"),      // Строка из английских символов вперемешку с цифрами
                 faker.regexify("[А-Яа-я0-9]{25}"),      // Строка из русских символов вперемешку с цифрами
-                "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",   // Строка из спецсимволов
-                "ё"                                     // Буква "ё"
+                "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~" + getRandomName(),   // Строка из спецсимволов
+                "ё" + getRandomName()                                     // Буква "ё"
         };
     }
 
