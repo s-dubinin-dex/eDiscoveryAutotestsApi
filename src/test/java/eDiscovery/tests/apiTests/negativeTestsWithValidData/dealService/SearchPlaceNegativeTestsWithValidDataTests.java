@@ -296,4 +296,78 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
     }
 
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Удаление места поиска")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность удалить место поиска с несуществующим ID")
+    @Description("Тест проверяет невозможность удалить место поиска с несуществующим ID")
+    public void testDeleteSearchPlaceWithNotExistsIDIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+
+        String uuid = faker.internet().uuid();
+
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec404NotFound());
+        ErrorModel responseErrorBody = ApiMethodsSearchPlace.deleteSearchPlace(uuid).as(ErrorModel.class);
+
+        assertThat(responseErrorBody.type).isEqualTo(ERRORS_ENTITY_NOT_FOUND_EXCEPTION_SEARCH_PLACE_INFO);
+        assertThat(responseErrorBody.message).isEqualTo(EXCEPTION_ENTITY_NOT_FOUND_SEARCH_PLACE_INFO);
+        assertThat(responseErrorBody.data.key).isEqualTo(uuid);
+        assertThat(responseErrorBody.data.type).isEqualTo(SEARCH_PLACE_INFO);
+
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Удаление места поиска")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность удалить используемое место поиска FileShare - SMB")
+    @Description("Тест проверяет невозможность удалить используемое место поиска FileShare - SMB")
+    public void testDeleteSearchPlaceFileShareSMBUsedInDealIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+
+        CommonSearchPlaceResponseModel responseSearchPlaceCreationBody = DataGeneratorDealService.createBasicSearchPlaceFileShareSMB();
+        CommonSearchQueryResponseModel responseSearchQueryCreationBody = DataGeneratorDealService.createBasicSearchQuery();
+
+        DataGeneratorDealService.createDealManipulationWithOnlyRequiredParameters(
+                Collections.singletonList(responseSearchPlaceCreationBody.id),
+                Collections.singletonList(responseSearchQueryCreationBody.id)
+        );
+
+
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec409Conflict());
+        ErrorModel responseErrorBody = ApiMethodsSearchPlace.deleteSearchPlace(responseSearchPlaceCreationBody.id).as(ErrorModel.class);
+
+        assertThat(responseErrorBody.type).isEqualTo(ERRORS_ENTITY_IN_USE_EXCEPTION_SEARCH_PLACE_INFO);
+        assertThat(responseErrorBody.message).isEqualTo(EXCEPTION_ENTITY_IN_USE_EXCEPTION_SEARCH_PLACE_INFO);
+        assertThat(responseErrorBody.data.key).isEqualTo(responseSearchPlaceCreationBody.id);
+        assertThat(responseErrorBody.data.type).isEqualTo(SEARCH_PLACE_INFO);
+
+    }
+
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Удаление места поиска")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность удалить место поиска ARM - Local")
+    @Description("Тест проверяет невозможность удалить место поиска ARM - Local")
+    public void testDeleteSearchPlaceARMLocalIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+
+        CommonSearchPlaceResponseModel responseSearchPlaceCreationBody = DataGeneratorDealService.createBasicSearchPlaceArmLocal();
+
+
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
+        ErrorModel responseErrorBody = ApiMethodsSearchPlace.deleteSearchPlace(responseSearchPlaceCreationBody.id).as(ErrorModel.class);
+
+        assertThat(responseErrorBody.type).isEqualTo(ERRORS_ARGUMENT_EXCEPTION);
+        assertThat(responseErrorBody.message).isEqualTo(DELETING_SEARCH_PLACES_FOR_LOCAL_AGENT_IS_FORBIDDEN);
+
+    }
+
 }
