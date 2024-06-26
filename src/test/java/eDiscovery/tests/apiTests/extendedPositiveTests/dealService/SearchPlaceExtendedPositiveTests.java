@@ -836,4 +836,39 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         assertThat(responseBody.get(0)).isNotNull();
     }
 
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка мест поиска по протоколу oData с фильтрацией результата")
+    @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData с фильтрацией результата")
+    @Test
+    public void testGetSearchPlaceListODataWithFilter(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
+
+        String searchPlaceNameForFilter = "testSearchPlaceListODataWithFilter" + DataGeneratorDealService.getRandomName();
+
+        AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
+                .name(searchPlaceNameForFilter)
+                .build();
+        ApiMethodsSearchPlace.addSearchPlace(requestBody);
+
+
+        List<CommonSearchPlaceResponseModel> responseBodyWithoutFilter =
+                ApiMethodsSearchPlace.getSearchPlaceListOData().jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBodyWithoutFilter.size()).isGreaterThan(1);
+        assertThat(responseBodyWithoutFilter.get(0)).isNotNull();
+
+        List<CommonSearchPlaceResponseModel> responseBodyWithFilter =
+                ApiMethodsSearchPlace.getSearchPlaceListODataWithOneParameter("$filter", "contains(name, '" + searchPlaceNameForFilter + "')")
+                        .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+        assertThat(responseBodyWithFilter.size()).isEqualTo(1);
+        assertThat(responseBodyWithFilter.get(0)).isNotNull();
+    }
+
+
 }

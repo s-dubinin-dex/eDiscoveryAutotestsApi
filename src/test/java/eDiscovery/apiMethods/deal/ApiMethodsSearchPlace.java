@@ -82,6 +82,18 @@ public class ApiMethodsSearchPlace extends UrlBase {
     }
 
     @Step("Получение списка мест поиска по протоколу oData")
+    public static Response getSearchPlaceListODataWithOneParameter(String parameterName, String parameterValue){
+        SpecificationsServer.setBaseUrl(URL_DEAL);
+
+        return given()
+                .param(parameterName, parameterValue)
+                .when()
+                .get("/odata/SearchPlace")
+                .andReturn();
+
+    }
+
+    @Step("Получение списка мест поиска по протоколу oData")
     public static Response getSearchPlaceListODataWithIncludeDeletedParameter(Boolean includeDeleted){
         SpecificationsServer.setBaseUrl(URL_DEAL);
 
