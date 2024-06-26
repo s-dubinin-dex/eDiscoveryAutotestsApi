@@ -29,11 +29,38 @@ public class ResponseSpecifications {
                 .build();
     }
 
+    public static ResponseSpecification responseSpec400BadRequest(){
+        return new ResponseSpecBuilder()
+                .log(LogDetail.STATUS)
+                .expectContentType(ContentType.JSON)
+                .expectStatusCode(HttpStatus.SC_BAD_REQUEST)
+                .expectResponseTime(lessThanOrEqualTo(1L), SECONDS)
+                .build();
+    }
+
+    public static ResponseSpecification responseSpec403Forbidden(){
+        return new ResponseSpecBuilder()
+                .log(LogDetail.STATUS)
+                .expectContentType(ContentType.JSON)
+                .expectStatusCode(HttpStatus.SC_FORBIDDEN)
+                .expectResponseTime(lessThanOrEqualTo(1L), SECONDS)
+                .build();
+    }
+
     public static ResponseSpecification responseSpec404NotFound(){
         return new ResponseSpecBuilder()
                 .log(LogDetail.STATUS)
                 .expectContentType(ContentType.JSON)
                 .expectStatusCode(HttpStatus.SC_NOT_FOUND)
+                .expectResponseTime(lessThanOrEqualTo(1L), SECONDS)
+                .build();
+    }
+
+    public static ResponseSpecification responseSpec409Conflict(){
+        return new ResponseSpecBuilder()
+                .log(LogDetail.STATUS)
+                .expectContentType(ContentType.JSON)
+                .expectStatusCode(HttpStatus.SC_CONFLICT)
                 .expectResponseTime(lessThanOrEqualTo(1L), SECONDS)
                 .build();
     }

@@ -188,6 +188,15 @@ public class DataGeneratorDealService {
 
     }
 
+    public static CommonDealManipulationResponseModel createDealManipulationWithOnlyRequiredParameters(List<String> searchPlaceIDs, List<String> searchQueryIDs){
+        AddDealManipulationRequestModel requestDealCreationBody = getDealManipulationModelWithOnlyRequiredParameters(
+                searchPlaceIDs,
+                searchQueryIDs
+        );
+
+        return ApiMethodsDealManipulation.addDeal(requestDealCreationBody).as(CommonDealManipulationResponseModel.class);
+    }
+
     public static CommonDealManipulationResponseModel createDealManipulationWithOnlyRequiredParameters(){
         AddDealManipulationRequestModel requestDealCreationBody = getDealManipulationModelWithOnlyRequiredParameters(
                 Collections.singletonList(createSearchPlaceWithOnlyRequiredParameters().id),
