@@ -12,10 +12,13 @@ public class RequestSpecifications extends UrlBase {
                 given().filter(CustomAllureListener.withCustomTemplates());
     }
 
-    public static RequestSpecification basicRequestSpecificationWithAuthorization(){
+    public static RequestSpecification basicRequestSpecificationWithoutAuthorization(){
         return basicRequestSpecification()
-                .contentType(ContentType.JSON)
-                .header("Authorization", "BEARER " + TOKEN);
+                .contentType(ContentType.JSON);
     }
 
+    public static RequestSpecification basicRequestSpecificationWithAuthorization(){
+        return basicRequestSpecificationWithoutAuthorization()
+                .header("Authorization", "BEARER " + TOKEN);
+    }
 }
