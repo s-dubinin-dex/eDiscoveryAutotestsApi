@@ -23,6 +23,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import static eDiscovery.data.DataGeneratorDealService.getRandomName;
@@ -863,11 +864,204 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         assertThat(responseBodyWithoutFilter.size()).isGreaterThan(1);
         assertThat(responseBodyWithoutFilter.get(0)).isNotNull();
 
+        HashMap<String, String> responseParameters = new HashMap<>();
+        responseParameters.put("$filter", "contains(name, '" + searchPlaceNameForFilter + "')");
+
         List<CommonSearchPlaceResponseModel> responseBodyWithFilter =
-                ApiMethodsSearchPlace.getSearchPlaceListODataWithOneParameter("$filter", "contains(name, '" + searchPlaceNameForFilter + "')")
+                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(responseParameters)
                         .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+
         assertThat(responseBodyWithFilter.size()).isEqualTo(1);
         assertThat(responseBodyWithFilter.get(0)).isNotNull();
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка мест поиска по протоколу oData с дефолтной сортировкой результата (по возрастанию)")
+    @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData с дефолтной сортировкой результата (по возрастанию)")
+    @Test
+    public void testGetSearchPlaceListODataWithDefaultAscendingSorting(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        String searchPlaceNameForFilter = "testSearchPlaceListODataWithDefaultAscendingSorting" + DataGeneratorDealService.getRandomName(10);
+
+        for (int i = 0; i < 5; i++){
+            String searchPlaceNameForFilterWithNumber = searchPlaceNameForFilter + i;
+            AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
+                    .name(searchPlaceNameForFilterWithNumber)
+                    .build();
+            ApiMethodsSearchPlace.addSearchPlace(requestBody);
+        }
+
+        HashMap<String, String> requestParameters = new HashMap<>();
+        requestParameters.put("$filter", "contains(name, '" + searchPlaceNameForFilter + "')");
+        requestParameters.put("$orderby", "name");
+
+
+        List<CommonSearchPlaceResponseModel> responseBodyWithFilterSorting =
+                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(requestParameters)
+                        .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBodyWithFilterSorting.size()).isEqualTo(5);
+        assertThat(responseBodyWithFilterSorting.get(1)).isNotNull();
+        assertThat(responseBodyWithFilterSorting.get(1).name).isEqualTo(searchPlaceNameForFilter + 1);
+
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка мест поиска по протоколу oData с явной сортировкой результата (по возрастанию)")
+    @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData с явной сортировкой результата (по возрастанию)")
+    @Test
+    public void testGetSearchPlaceListODataWithExplicitAscendingSorting(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        String searchPlaceNameForFilter = "testSearchPlaceListODataWithExplicitAscendingSorting" + DataGeneratorDealService.getRandomName(10);
+
+        for (int i = 0; i < 5; i++){
+            String searchPlaceNameForFilterWithNumber = searchPlaceNameForFilter + i;
+            AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
+                    .name(searchPlaceNameForFilterWithNumber)
+                    .build();
+            ApiMethodsSearchPlace.addSearchPlace(requestBody);
+        }
+
+        HashMap<String, String> requestParameters = new HashMap<>();
+        requestParameters.put("$filter", "contains(name, '" + searchPlaceNameForFilter + "')");
+        requestParameters.put("$orderby", "name ASC");
+
+
+        List<CommonSearchPlaceResponseModel> responseBodyWithFilterSorting =
+                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(requestParameters)
+                        .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBodyWithFilterSorting.size()).isEqualTo(5);
+        assertThat(responseBodyWithFilterSorting.get(1)).isNotNull();
+        assertThat(responseBodyWithFilterSorting.get(1).name).isEqualTo(searchPlaceNameForFilter + 1);
+
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка мест поиска по протоколу oData с явной сортировкой результата (по убыванию)")
+    @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData с явной сортировкой результата (по убыванию)")
+    @Test
+    public void testGetSearchPlaceListODataWithExplicitDescendingSorting(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        String searchPlaceNameForFilter = "testSearchPlaceListODataWithExplicitDescendingSorting" + DataGeneratorDealService.getRandomName(10);
+
+        for (int i = 0; i < 5; i++){
+            String searchPlaceNameForFilterWithNumber = searchPlaceNameForFilter + i;
+            AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
+                    .name(searchPlaceNameForFilterWithNumber)
+                    .build();
+            ApiMethodsSearchPlace.addSearchPlace(requestBody);
+        }
+
+        HashMap<String, String> requestParameters = new HashMap<>();
+        requestParameters.put("$filter", "contains(name, '" + searchPlaceNameForFilter + "')");
+        requestParameters.put("$orderby", "name DESC");
+
+
+        List<CommonSearchPlaceResponseModel> responseBodyWithFilterSorting =
+                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(requestParameters)
+                        .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBodyWithFilterSorting.size()).isEqualTo(5);
+        assertThat(responseBodyWithFilterSorting.get(1)).isNotNull();
+        assertThat(responseBodyWithFilterSorting.get(1).name).isEqualTo(searchPlaceNameForFilter + 3);
+
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка мест поиска по протоколу oData с пагинацией результата")
+    @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData с пагинацией результата")
+    @Test
+    public void testGetSearchPlaceListODataWithPagination(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        String searchPlaceNameForFilter = "testSearchPlaceListODataWithPagination" + DataGeneratorDealService.getRandomName(10);
+
+        for (int i = 0; i < 10; i++){
+            String searchPlaceNameForFilterWithNumber = searchPlaceNameForFilter + i;
+            AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
+                    .name(searchPlaceNameForFilterWithNumber)
+                    .build();
+            ApiMethodsSearchPlace.addSearchPlace(requestBody);
+        }
+
+        HashMap<String, String> requestParameters = new HashMap<>();
+        requestParameters.put("$filter", "contains(name, '" + searchPlaceNameForFilter + "')");
+        requestParameters.put("$orderby", "name");
+        requestParameters.put("$top", "5");
+        requestParameters.put("$skip", "0");
+
+        List<CommonSearchPlaceResponseModel> responseBodyWithPagination =
+                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(requestParameters)
+                        .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBodyWithPagination.size()).isEqualTo(5);
+        assertThat(responseBodyWithPagination.get(1)).isNotNull();
+        assertThat(responseBodyWithPagination.get(1).name).isEqualTo(searchPlaceNameForFilter + 1);
+
+        requestParameters.put("$skip", "5");
+
+        responseBodyWithPagination =
+                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(requestParameters)
+                        .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBodyWithPagination.size()).isEqualTo(5);
+        assertThat(responseBodyWithPagination.get(1)).isNotNull();
+        assertThat(responseBodyWithPagination.get(1).name).isEqualTo(searchPlaceNameForFilter + 6);
+
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка мест поиска по протоколу oData с лимитированием количества объектов в результате")
+    @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData с лимитированием количества объектов в результате")
+    @Test
+    public void testGetSearchPlaceListODataWithLimit(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        String searchPlaceNameForFilter = "testSearchPlaceListODataWithPagination" + DataGeneratorDealService.getRandomName(10);
+
+        for (int i = 0; i < 3; i++){
+            String searchPlaceNameForFilterWithNumber = searchPlaceNameForFilter + i;
+            AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
+                    .name(searchPlaceNameForFilterWithNumber)
+                    .build();
+            ApiMethodsSearchPlace.addSearchPlace(requestBody);
+        }
+
+        HashMap<String, String> requestParameters = new HashMap<>();
+        requestParameters.put("$filter", "contains(name, '" + searchPlaceNameForFilter + "')");
+        requestParameters.put("$top", "2");
+
+        List<CommonSearchPlaceResponseModel> responseBodyWithLimiting =
+                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(requestParameters)
+                        .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBodyWithLimiting.size()).isEqualTo(2);
+        assertThat(responseBodyWithLimiting.get(1)).isNotNull();
+
     }
 
 

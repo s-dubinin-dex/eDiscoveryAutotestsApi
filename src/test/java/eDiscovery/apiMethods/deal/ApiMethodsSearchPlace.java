@@ -6,6 +6,10 @@ import eDiscovery.models.deal.searchPlace.UpdateSearchPlaceRequestModel;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
+import java.util.HashMap;
+
 import static io.restassured.RestAssured.given;
 
 
@@ -85,11 +89,16 @@ public class ApiMethodsSearchPlace extends UrlBase {
     }
 
     @Step("Получение списка мест поиска по протоколу oData")
-    public static Response getSearchPlaceListODataWithOneParameter(String parameterName, String parameterValue){
+    public static Response getSearchPlaceListODataWithParametersMap(HashMap<String, String> parameters){
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
-        return given()
-                .param(parameterName, parameterValue)
+        RequestSpecification request = given();
+
+        for (String parameterName: parameters.keySet()){
+            request.param(parameterName, parameters.get(parameterName));
+        }
+
+        return request
                 .when()
                 .get(ODATA_SEARCH_PLACE)
                 .andReturn();
