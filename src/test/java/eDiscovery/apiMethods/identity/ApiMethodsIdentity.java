@@ -11,7 +11,7 @@ public class ApiMethodsIdentity extends UrlBase {
     @Step("Авторизация и получение токена")
     public static Response connectToken(){
 
-        SpecificationsServer.setBaseUrl(URL_IDENTITY);
+        SpecificationsServer.setBaseUrl(IDENTITY_URL);
 
         return given()
                 .formParam("client_id", "admin.client")

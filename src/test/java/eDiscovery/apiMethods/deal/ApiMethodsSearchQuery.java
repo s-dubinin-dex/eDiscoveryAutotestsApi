@@ -14,7 +14,7 @@ public class ApiMethodsSearchQuery extends UrlBase {
     @Step("Создание поискового запроса")
     public static Response addSearchQuery(AddSearchQueryRequestModel addSearchQueryRequestModel){
 
-        SpecificationsServer.setBaseUrl(URL_DEAL);
+        SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
                 .body(addSearchQueryRequestModel)
@@ -26,7 +26,7 @@ public class ApiMethodsSearchQuery extends UrlBase {
     @Step("Изменение поискового запроса")
     public static Response updateSearchQuery(UpdateSearchQueryRequestModel updateSearchQueryRequestModel){
 
-        SpecificationsServer.setBaseUrl(URL_DEAL);
+        SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
                 .body(updateSearchQueryRequestModel)
@@ -38,7 +38,7 @@ public class ApiMethodsSearchQuery extends UrlBase {
     @Step("Удаление поискового запроса")
     public static Response deleteSearchQuery(String id){
 
-        SpecificationsServer.setBaseUrl(URL_DEAL);
+        SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
                 .param("id", id)
@@ -49,7 +49,7 @@ public class ApiMethodsSearchQuery extends UrlBase {
 
     @Step("Получение списка поисковых запросов")
     public static Response getSearchQueryList(){
-        SpecificationsServer.setBaseUrl(URL_DEAL);
+        SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
                 .when()
@@ -60,7 +60,7 @@ public class ApiMethodsSearchQuery extends UrlBase {
 
     @Step("Получение списка поисковых запросов по протоколу oData")
     public static Response getSearchQueryListOData(){
-        SpecificationsServer.setBaseUrl(URL_DEAL);
+        SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
                 .when()

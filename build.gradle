@@ -49,6 +49,40 @@ tasks.withType(JavaCompile).configureEach {
     targetCompatibility = JavaVersion.VERSION_16
 }
 
+task testWithEnv(type: Test) {
+    // Параметр Gradle, указывающий стенд (dev, test, prod и т.д.)
+    def environment = project.hasProperty('env') ? project.findProperty('env') : 'test'
+
+    // Установка системных свойств для использования во время выполнения тестов
+    System.setProperty('BASE_URL',      getProperty(environment as String, 'BASE_URL'))
+    System.setProperty('IDENTITY_URL',  getProperty(environment as String, 'IDENTITY_URL'))
+    System.setProperty('ADMIN_URL',     getProperty(environment as String, 'ADMIN_URL'))
+    System.setProperty('DEAL_URL',      getProperty(environment as String, 'DEAL_URL'))
+
+    // Отладочное сообщение для проверки значения системного свойства
+    println "System property 'BASE_URL': ${System.getProperty('BASE_URL')}"
+    println "System property 'IDENTITY_URL': ${System.getProperty('IDENTITY_URL')}"
+    println "System property 'ADMIN_URL': ${System.getProperty('ADMIN_URL')}"
+    println "System property 'DEAL_URL': ${System.getProperty('DEAL_URL')}"
+
+    // Установка JUnit Platform как используемого фреймворка
+    useJUnitPlatform()
+
+    // Запуск тестов
+    dependsOn test
+}
+
+def getProperty(String environment, String propertyName) {
+    def configFile = file("src/test/resources/config/${environment}.properties")
+    def config = new Properties()
+    config.load(new FileInputStream(configFile))
+    println "Loaded properties from ${configFile}: ${config}"
+    def propertyValue = config.getProperty(propertyName)
+    println "Retrieved property ${propertyName}: ${propertyValue}"
+    return propertyValue
+}
+
 tasks.withType(Test).configureEach {
+    systemProperties(System.getProperties())
     useJUnitPlatform()
 }
