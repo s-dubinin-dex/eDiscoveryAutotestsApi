@@ -10,6 +10,10 @@ import static io.restassured.RestAssured.given;
 
 
 public class ApiMethodsSearchPlace extends UrlBase {
+    private static final String SEARCH_PLACE                = "/SearchPlace";
+    private static final String SEARCH_PLACE_SEARCH_PLACE   = "/SearchPlace/SearchPlace";
+    private static final String ODATA_SEARCH_PLACE          = "/oData/SearchPlace";
+
 
     @Step("Создание места поиска")
     public static Response addSearchPlace(AddSearchPlaceRequestModel addSearchPlaceRequestModel){
@@ -17,7 +21,7 @@ public class ApiMethodsSearchPlace extends UrlBase {
         return given()
                 .body(addSearchPlaceRequestModel)
                 .when()
-                .post("/SearchPlace")
+                .post(SEARCH_PLACE)
                 .andReturn();
 
     }
@@ -29,7 +33,7 @@ public class ApiMethodsSearchPlace extends UrlBase {
         return given()
                 .body(updateSearchPlaceRequestModel)
                 .when()
-                .put("/SearchPlace")
+                .put(SEARCH_PLACE)
                 .andReturn();
 
     }
@@ -41,7 +45,7 @@ public class ApiMethodsSearchPlace extends UrlBase {
         return given()
                 .param("id", id)
                 .when()
-                .delete("/SearchPlace")
+                .delete(SEARCH_PLACE)
                 .andReturn();
 
     }
@@ -52,7 +56,7 @@ public class ApiMethodsSearchPlace extends UrlBase {
 
         return given()
                 .when()
-                .get("/SearchPlace/SearchPlace")
+                .get(SEARCH_PLACE_SEARCH_PLACE)
                 .andReturn();
 
     }
@@ -75,7 +79,7 @@ public class ApiMethodsSearchPlace extends UrlBase {
 
         return given()
                 .when()
-                .get("/odata/SearchPlace")
+                .get(ODATA_SEARCH_PLACE)
                 .andReturn();
 
     }
@@ -87,7 +91,7 @@ public class ApiMethodsSearchPlace extends UrlBase {
         return given()
                 .param(parameterName, parameterValue)
                 .when()
-                .get("/odata/SearchPlace")
+                .get(ODATA_SEARCH_PLACE)
                 .andReturn();
 
     }
@@ -99,7 +103,7 @@ public class ApiMethodsSearchPlace extends UrlBase {
         return given()
                 .param("includeDeleted", includeDeleted)
                 .when()
-                .get("/odata/SearchPlace")
+                .get(ODATA_SEARCH_PLACE)
                 .andReturn();
 
     }

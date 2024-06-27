@@ -8,6 +8,8 @@ import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 
 public class ApiMethodsIdentity extends UrlBase {
+    private static final String CONNECT_TOKEN       = "/connect/token";
+
     @Step("Авторизация и получение токена")
     public static Response connectToken(){
 
@@ -21,7 +23,7 @@ public class ApiMethodsIdentity extends UrlBase {
                 .formParam("username", "test@gmail.com")
                 .formParam("password", "005")
                 .when()
-                .post("/connect/token")
+                .post(CONNECT_TOKEN)
                 .andReturn();
     }
 }

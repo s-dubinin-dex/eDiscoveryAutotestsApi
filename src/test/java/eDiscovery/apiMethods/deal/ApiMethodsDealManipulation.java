@@ -9,6 +9,21 @@ import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 
 public class ApiMethodsDealManipulation extends UrlBase {
+    private static final String DEAL_MANIPULATION                       = "/DealManipulation";
+    private static final String DEAL_MANIPULATION_CARD                  = "/DealManipulation/card";
+    private static final String DEAL_MANIPULATION_RESTORE               = "/DealManipulation/restore";
+    private static final String DEAL_MANIPULATION_CLOSE                 = "/DealManipulation/close";
+    private static final String DEAL_MANIPULATION_UNCLOSE               = "/DealManipulation/unclose";
+    private static final String DEAL_MANIPULATION_STOP                  = "/DealManipulation/stop";
+    private static final String DEAL_MANIPULATION_START                 = "/DealManipulation/start";
+    private static final String DEAL_MANIPULATION_TO_QUARANTINE         = "/DealManipulation/toQuarantine";
+    private static final String DEAL_MANIPULATION_OUT_QUARANTINE        = "/DealManipulation/outQuarantine";
+    private static final String DEAL_MANIPULATION_TO_EXPORT             = "/DealManipulation/toExport";
+    private static final String DEAL_MANIPULATION_ACTIVE_TASKS          = "/DealManipulation/activeTasks";
+    private static final String DEAL_MANIPULATION_CHANGE_TASK_STATUS    = "/DealManipulation/changeTaskStatus";
+    private static final String DEAL_MANIPULATION_DEAL_MANIPULATION     = "/DealManipulation/DealManipulation";
+    private static final String ODATA_DEAL_MANIPULATION                 = "/odata/DealManipulation";
+
 
     @Step("Создание дела")
     public static Response addDeal(AddDealManipulationRequestModel addDealManipulationRequestModel){
@@ -17,7 +32,7 @@ public class ApiMethodsDealManipulation extends UrlBase {
         return given()
                 .body(addDealManipulationRequestModel)
                 .when()
-                .post("/DealManipulation")
+                .post(DEAL_MANIPULATION)
                 .andReturn();
     }
 
@@ -28,7 +43,7 @@ public class ApiMethodsDealManipulation extends UrlBase {
         return given()
                 .body(updateDealManipulationRequestModel)
                 .when()
-                .put("/DealManipulation")
+                .put(DEAL_MANIPULATION)
                 .andReturn();
     }
 
@@ -39,7 +54,7 @@ public class ApiMethodsDealManipulation extends UrlBase {
         return given()
                 .param("id", dealId)
                 .when()
-                .delete("/DealManipulation")
+                .delete(DEAL_MANIPULATION)
                 .andReturn();
     }
 
@@ -50,7 +65,7 @@ public class ApiMethodsDealManipulation extends UrlBase {
         return given()
                 .param("id", dealId)
                 .when()
-                .get("/DealManipulation/card")
+                .get(DEAL_MANIPULATION_CARD)
                 .andReturn();
     }
 
@@ -61,7 +76,7 @@ public class ApiMethodsDealManipulation extends UrlBase {
         return given()
                 .param("id", dealId)
                 .when()
-                .put("/DealManipulation/restore")
+                .put(DEAL_MANIPULATION_RESTORE)
                 .andReturn();
     }
 
@@ -72,7 +87,7 @@ public class ApiMethodsDealManipulation extends UrlBase {
         return given()
                 .param("id", dealId)
                 .when()
-                .put("/DealManipulation/close")
+                .put(DEAL_MANIPULATION_CLOSE)
                 .andReturn();
     }
 
@@ -83,7 +98,7 @@ public class ApiMethodsDealManipulation extends UrlBase {
         return given()
                 .param("id", dealId)
                 .when()
-                .put("/DealManipulation/unclose")
+                .put(DEAL_MANIPULATION_UNCLOSE)
                 .andReturn();
     }
 
@@ -94,7 +109,7 @@ public class ApiMethodsDealManipulation extends UrlBase {
         return given()
                 .param("id", dealId)
                 .when()
-                .put("/DealManipulation/stop")
+                .put(DEAL_MANIPULATION_STOP)
                 .andReturn();
     }
 
@@ -105,7 +120,7 @@ public class ApiMethodsDealManipulation extends UrlBase {
         return given()
                 .param("id", dealId)
                 .when()
-                .put("/DealManipulation/start")
+                .put(DEAL_MANIPULATION_START)
                 .andReturn();
     }
 
@@ -116,7 +131,7 @@ public class ApiMethodsDealManipulation extends UrlBase {
         return given()
                 .body(toOutQuarantineRequestModel)
                 .when()
-                .put("/DealManipulation/toQuarantine")
+                .put(DEAL_MANIPULATION_TO_QUARANTINE)
                 .andReturn();
     }
 
@@ -127,7 +142,7 @@ public class ApiMethodsDealManipulation extends UrlBase {
         return given()
                 .body(toOutQuarantineRequestModel)
                 .when()
-                .put("/DealManipulation/outQuarantine")
+                .put(DEAL_MANIPULATION_OUT_QUARANTINE)
                 .andReturn();
     }
 
@@ -138,7 +153,7 @@ public class ApiMethodsDealManipulation extends UrlBase {
         return given()
                 .body(toExportRequestModel)
                 .when()
-                .put("/DealManipulation/toExport")
+                .put(DEAL_MANIPULATION_TO_EXPORT)
                 .andReturn();
     }
 
@@ -149,7 +164,7 @@ public class ApiMethodsDealManipulation extends UrlBase {
         return given()
                 .body(activeTasksRequestsModel)
                 .when()
-                .get("/DealManipulation/activeTasks")
+                .get(DEAL_MANIPULATION_ACTIVE_TASKS)
                 .andReturn();
     }
 
@@ -160,7 +175,7 @@ public class ApiMethodsDealManipulation extends UrlBase {
         return given()
                 .body(toExportRequestModel)
                 .when()
-                .put("/DealManipulation/toExport")
+                .put(DEAL_MANIPULATION_CHANGE_TASK_STATUS)
                 .andReturn();
     }
 
@@ -170,7 +185,7 @@ public class ApiMethodsDealManipulation extends UrlBase {
 
         return given()
                 .when()
-                .get("/DealManipulation/DealManipulation")
+                .get(DEAL_MANIPULATION_DEAL_MANIPULATION)
                 .andReturn();
 
     }
@@ -181,7 +196,7 @@ public class ApiMethodsDealManipulation extends UrlBase {
 
         return given()
                 .when()
-                .get("/odata/DealManipulation")
+                .get(ODATA_DEAL_MANIPULATION)
                 .andReturn();
 
     }

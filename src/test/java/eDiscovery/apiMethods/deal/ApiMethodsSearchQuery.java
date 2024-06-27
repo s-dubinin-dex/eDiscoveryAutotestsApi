@@ -10,6 +10,9 @@ import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 
 public class ApiMethodsSearchQuery extends UrlBase {
+    private static final String SEARCH_QUERY                = "/SearchQuery";
+    private static final String SEARCH_QUERY_SEARCH_QUERY   = "/SearchQuery/SearchQuery";
+    private static final String ODATA_SEARCH_QUERY          = "/odata/SearchQuery";
 
     @Step("Создание поискового запроса")
     public static Response addSearchQuery(AddSearchQueryRequestModel addSearchQueryRequestModel){
@@ -19,7 +22,7 @@ public class ApiMethodsSearchQuery extends UrlBase {
         return given()
                 .body(addSearchQueryRequestModel)
                 .when()
-                .post("/SearchQuery")
+                .post(SEARCH_QUERY)
                 .andReturn();
     }
 
@@ -31,7 +34,7 @@ public class ApiMethodsSearchQuery extends UrlBase {
         return given()
                 .body(updateSearchQueryRequestModel)
                 .when()
-                .put("/SearchQuery")
+                .put(SEARCH_QUERY)
                 .andReturn();
     }
 
@@ -43,7 +46,7 @@ public class ApiMethodsSearchQuery extends UrlBase {
         return given()
                 .param("id", id)
                 .when()
-                .delete("/SearchQuery")
+                .delete(SEARCH_QUERY)
                 .andReturn();
     }
 
@@ -53,7 +56,7 @@ public class ApiMethodsSearchQuery extends UrlBase {
 
         return given()
                 .when()
-                .get("/SearchQuery/SearchQuery")
+                .get(SEARCH_QUERY_SEARCH_QUERY)
                 .andReturn();
 
     }
@@ -64,7 +67,7 @@ public class ApiMethodsSearchQuery extends UrlBase {
 
         return given()
                 .when()
-                .get("/odata/SearchQuery")
+                .get(ODATA_SEARCH_QUERY)
                 .andReturn();
 
     }
