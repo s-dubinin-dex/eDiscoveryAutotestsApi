@@ -323,7 +323,10 @@ public class DataGeneratorDealService {
     }
 
     public static String getRandomName(){
-        return faker.regexify("[a-zA-Z]{30}");
+        return getRandomName(30);
     }
 
+    public static String getRandomName(int length){
+        return faker.regexify("[a-zA-Z]{" + length + "}");
+    }
 }
