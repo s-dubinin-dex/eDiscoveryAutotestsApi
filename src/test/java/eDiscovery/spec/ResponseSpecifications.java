@@ -64,4 +64,13 @@ public class ResponseSpecifications {
                 .expectResponseTime(lessThanOrEqualTo(1L), SECONDS)
                 .build();
     }
+
+    public static ResponseSpecification responseSpec415UnsupportedMediaType(){
+        return new ResponseSpecBuilder()
+                .log(LogDetail.STATUS)
+                .expectContentType(ContentType.JSON)
+                .expectStatusCode(HttpStatus.SC_UNSUPPORTED_MEDIA_TYPE)
+                .expectResponseTime(lessThanOrEqualTo(1L), SECONDS)
+                .build();
+    }
 }
