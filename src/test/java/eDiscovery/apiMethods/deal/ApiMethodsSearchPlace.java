@@ -100,6 +100,17 @@ public class ApiMethodsSearchPlace extends UrlBase {
 
     }
 
+    @Step("Удаление места поиска")
+    public static Response deleteSearchPlace(){
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+
+        return given()
+                .when()
+                .delete(SEARCH_PLACE)
+                .andReturn();
+
+    }
+
     @Step("Получение списка мест поиска")
     public static Response getSearchPlaceList(){
         SpecificationsServer.setBaseUrl(DEAL_URL);

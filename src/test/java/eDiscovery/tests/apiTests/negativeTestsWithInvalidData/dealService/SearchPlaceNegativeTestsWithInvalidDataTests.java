@@ -690,4 +690,44 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     }
 
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Удаление места поиска")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность удаления места поиска без передачи id")
+    @Description("Тест проверяет невозможность удаления места поиска без передачи id")
+    public void testDeleteSearchPlaceWithoutIdIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
+
+        ErrorModel responseErrorBody = ApiMethodsSearchPlace.deleteSearchPlace().as(ErrorModel.class);
+
+        assertThat(responseErrorBody.type).isEqualTo(ERRORS_ARGUMENT_EXCEPTION);
+        assertThat(responseErrorBody.message).isEqualTo(ID_IS_EMPTY_PARAMETER_ID);
+
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Удаление места поиска")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность удаления места поиска с id, не соответствующим маске uuid")
+    @Description("Тест проверяет невозможность удаления места поиска с id, не соответствующим маске uuid")
+    public void testDeleteSearchPlaceWithIdIsNotUUIDIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
+
+        ErrorModel responseErrorBody = ApiMethodsSearchPlace.deleteSearchPlace(
+                DataGeneratorDealService.getRandomName(16)
+        ).as(ErrorModel.class);
+
+        assertThat(responseErrorBody.title).isEqualTo(REQUEST_VALIDATION_ERROR);
+        assertThat(responseErrorBody.status).isEqualTo(400);
+        assertThat(responseErrorBody.detail).isEqualTo(SEE_ERRORS_FOR_DETAILS);
+        assertThat(responseErrorBody.errors.id.get(0).errorCode).matches(VALIDATIONS_THE_VALUE___IS_NOT_VALID);
+
+    }
+
 }
