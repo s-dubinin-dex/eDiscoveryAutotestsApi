@@ -88,8 +88,16 @@ public class DataGeneratorDealService {
         return SearchPlaceType.values();
     }
 
+    public static String[] getValidSearchPlaceExclusions(){
+        return getValidFolderExclusions();
+    }
+
+    public static Stream<List<String>>  getValidSearchPlaceExclusionsWithDifferentCount(){
+        return getValidFolderExclusionsWithDifferentCount();
+    }
+
     /*
-    * SearchPlace Parameters
+    * SearchPlace URI Parameters
     * */
 
     public static String[] getValidSearchPlaceURIInParameters(){
@@ -140,14 +148,6 @@ public class DataGeneratorDealService {
         };
     };
 
-    public static String[] getValidSearchPlaceExclusions(){
-        return getValidFolderExclusions();
-    }
-
-    public static Stream<List<String>>  getValidSearchPlaceExclusionsWithDifferentCount(){
-        return getValidFolderExclusionsWithDifferentCount();
-    }
-
     /*
     * Search Query
     * */
@@ -173,6 +173,22 @@ public class DataGeneratorDealService {
 
     public static CommonSearchQueryResponseModel createBasicSearchQuery(){
         return ApiMethodsSearchQuery.addSearchQuery(getBasicSearchQueryModel()).as(CommonSearchQueryResponseModel.class);
+    }
+
+    /*
+    * Search Query attributes
+    * */
+
+    public static String[] getValidSearchQueryNames(){
+        return getValidNames();
+    }
+
+    public static SearchQueryType[] getValidSearchQueryTypes(){
+        return SearchQueryType.values();
+    }
+
+    public static String[] getValidSearchQueryValues(){
+        return getValidNames();
     }
 
     /*
