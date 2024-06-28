@@ -226,6 +226,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         assertThat(responseBody.excludes).isEqualTo(excludes);
     }
 
+    @Flaky
     @Epic("Сервис Deal")
     @Feature("Место поиска")
     @Story("Изменение места поиска")
