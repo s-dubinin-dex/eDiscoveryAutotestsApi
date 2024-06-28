@@ -4,6 +4,7 @@ import eDiscovery.UrlBase;
 import eDiscovery.models.deal.searchPlace.AddSearchPlaceRequestModel;
 import eDiscovery.models.deal.searchPlace.AddSearchPlaceRequestModelNotNull;
 import eDiscovery.models.deal.searchPlace.UpdateSearchPlaceRequestModel;
+import eDiscovery.models.deal.searchPlace.UpdateSearchPlaceRequestModelNotNull;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -58,6 +59,29 @@ public class ApiMethodsSearchPlace extends UrlBase {
 
         return given()
                 .body(updateSearchPlaceRequestModel)
+                .when()
+                .put(SEARCH_PLACE)
+                .andReturn();
+
+    }
+
+    @Step("Изменение места поиска")
+    public static Response updateSearchPlace(UpdateSearchPlaceRequestModelNotNull updateSearchPlaceRequestModel){
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+
+        return given()
+                .body(updateSearchPlaceRequestModel)
+                .when()
+                .put(SEARCH_PLACE)
+                .andReturn();
+
+    }
+
+    @Step("Изменение места поиска")
+    public static Response updateSearchPlace(){
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+
+        return given()
                 .when()
                 .put(SEARCH_PLACE)
                 .andReturn();

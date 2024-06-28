@@ -56,6 +56,33 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
     @Feature("Место поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность изменить место поиска с несуществующим ID")
+    @Description("Тест проверяет невозможность изменить место поиска с несуществующим ID")
+    public void testUpdateSearchPlaceWithNotExistsIDIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec404NotFound());
+
+        String uuid = faker.internet().uuid();
+
+        ErrorModel responseErrorBody = ApiMethodsSearchPlace.updateSearchPlace(
+                UpdateSearchPlaceRequestModel.builder()
+                        .id(uuid)
+                        .name(DataGeneratorDealService.getRandomName())
+                        .build()
+        ).as(ErrorModel.class);
+
+        assertThat(responseErrorBody.type).isEqualTo(ERRORS_ENTITY_NOT_FOUND_EXCEPTION_SEARCH_PLACE_INFO);
+        assertThat(responseErrorBody.message).isEqualTo(EXCEPTION_ENTITY_NOT_FOUND_SEARCH_PLACE_INFO);
+        assertThat(responseErrorBody.data.key).isEqualTo(uuid);
+        assertThat(responseErrorBody.data.type).isEqualTo(SEARCH_PLACE_INFO);
+
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Изменение места поиска")
+    @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменить name у места поиска с типом ARM")
     @Description("Тест проверяет невозможность изменить name у места поиска с типом ARM")
     public void testUpdateSearchPlaceNameWithARMLocalIsImpossible(){

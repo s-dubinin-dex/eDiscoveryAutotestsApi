@@ -20,11 +20,13 @@ public class ErrorDescription {
     public static final String REQUEST_VALIDATION_ERROR                             = "Request Validation Error";
     public static final String SEE_ERRORS_FOR_DETAILS                               = "See Errors for details";
     public static final String UNSUPPORTED_MEDIA_TYPE                               = "Unsupported Media Type";
-
     public static final String VALIDATIONS_A_NON_EMPTY_REQUEST_BODY_IS_REQUIRED     = "validations.A non-empty request body is required.";
+    public static final String VALIDATIONS_THE_EDIT_ENTITY_FIELD_IS_REQUIRED        = "validations.The editEntity field is required.";
     public static final String VALIDATIONS_THE_NAME_FIELD_IS_REQUIRED               = "validations.The Name field is required.";
     public static final String VALIDATIONS_THE_NEW_ENTITY_FIELD_IS_REQUIRED         = "validations.The newEntity field is required.";
+    public static final String VALIDATIONS_THE_PASSWORD_FIELD_IS_REQUIRED           = "validations.The Password field is required.";
     public static final String VALIDATIONS_THE_URI_FIELD_IS_REQUIRED                = "validations.The Uri field is required.";
     public static final String VALIDATIONS_THE_USERNAME_FIELD_IS_REQUIRED           = "validations.The Username field is required.";
-    public static final String VALIDATIONS_THE_PASSWORD_FIELD_IS_REQUIRED           = "validations.The Password field is required.";
+
+    public static final String VALIDATIONS_THE_JSON_VALUE_NOT_BE_CONVERTED_TO_GUID  = "validations\\.The JSON value could not be converted to System\\.Guid\\. Path: \\$\\.id \\| LineNumber: \\d+ \\| BytePositionInLine: \\d+\\.";
 }
