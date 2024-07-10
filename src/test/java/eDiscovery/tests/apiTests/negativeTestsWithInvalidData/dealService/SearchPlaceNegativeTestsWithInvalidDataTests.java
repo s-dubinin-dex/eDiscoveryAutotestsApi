@@ -23,6 +23,7 @@ import static eDiscovery.helpers.ErrorDescription.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("Negative tests with invalid data - SearchPlace")
 public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test

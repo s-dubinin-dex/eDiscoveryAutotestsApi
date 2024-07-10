@@ -16,13 +16,13 @@ import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("Negative tests with valid data - SearchPlace ")
 public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
     @Test

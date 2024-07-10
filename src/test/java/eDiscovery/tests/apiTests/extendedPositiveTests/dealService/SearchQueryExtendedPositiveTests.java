@@ -21,6 +21,7 @@ import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("Extended positive tests - SearchQuery")
 public class SearchQueryExtendedPositiveTests extends TestBase {
 
     @Epic("Сервис Deal")

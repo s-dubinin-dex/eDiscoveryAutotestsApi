@@ -29,6 +29,7 @@ import java.util.List;
 import static eDiscovery.data.DataGeneratorDealService.getRandomName;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("Extended positive tests - SearchPlace")
 public class SearchPlaceExtendedPositiveTests extends TestBase {
 
     @Epic("Сервис Deal")
