@@ -6,6 +6,9 @@ import eDiscovery.models.deal.searchQuery.UpdateSearchQueryRequestModel;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+
+import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
 
@@ -61,11 +64,52 @@ public class ApiMethodsSearchQuery extends UrlBase {
 
     }
 
+    @Step("Получение списка поисковых запросов")
+    public static Response getSearchQueryListWithIncludeDeletedParameter(boolean includeDeleted){
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+
+        return given()
+                .param("includeDeleted", includeDeleted)
+                .when()
+                .get(SEARCH_QUERY_SEARCH_QUERY)
+                .andReturn();
+
+    }
+
     @Step("Получение списка поисковых запросов по протоколу oData")
     public static Response getSearchQueryListOData(){
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
+                .when()
+                .get(ODATA_SEARCH_QUERY)
+                .andReturn();
+
+    }
+
+    @Step("Получение списка поисковых запросов по протоколу oData")
+    public static Response getSearchQueryListODataWithParametersMap(HashMap<String, String> parameters){
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+
+        RequestSpecification request = given();
+
+        for (String parameterName: parameters.keySet()){
+            request.param(parameterName, parameters.get(parameterName));
+        }
+
+        return request
+                .when()
+                .get(ODATA_SEARCH_QUERY)
+                .andReturn();
+
+    }
+
+    @Step("Получение списка поисковых запросов по протоколу oData")
+    public static Response getSearchQueryListODataWithIncludeDeletedParameter(boolean includeDeleted){
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+
+        return given()
+                .param("includeDeleted", includeDeleted)
                 .when()
                 .get(ODATA_SEARCH_QUERY)
                 .andReturn();
