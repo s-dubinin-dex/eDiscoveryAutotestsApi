@@ -691,7 +691,6 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
                 .excludes(excludes)
                 .build();
 
-
         CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestSearchPlaceUpdate).as(CommonSearchPlaceResponseModel.class);
 
         assertThat(responseBodySearchPlaceUpdate.excludes).isEqualTo(excludes);
@@ -888,6 +887,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
+        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
+
         String searchPlaceNameForFilter = "testSearchPlaceListODataWithDefaultAscendingSorting" + DataGeneratorDealService.getRandomName(10);
 
         for (int i = 0; i < 5; i++){
@@ -909,7 +910,11 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         assertThat(responseBodyWithFilterSorting.size()).isEqualTo(5);
         assertThat(responseBodyWithFilterSorting.get(1)).isNotNull();
+        assertThat(responseBodyWithFilterSorting.get(0).name).isEqualTo(searchPlaceNameForFilter + 0);
         assertThat(responseBodyWithFilterSorting.get(1).name).isEqualTo(searchPlaceNameForFilter + 1);
+        assertThat(responseBodyWithFilterSorting.get(2).name).isEqualTo(searchPlaceNameForFilter + 2);
+        assertThat(responseBodyWithFilterSorting.get(3).name).isEqualTo(searchPlaceNameForFilter + 3);
+        assertThat(responseBodyWithFilterSorting.get(4).name).isEqualTo(searchPlaceNameForFilter + 4);
 
     }
 
@@ -923,6 +928,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     public void testGetSearchPlaceListODataWithExplicitAscendingSorting(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
 
         String searchPlaceNameForFilter = "testSearchPlaceListODataWithExplicitAscendingSorting" + DataGeneratorDealService.getRandomName(10);
 
@@ -945,7 +952,11 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         assertThat(responseBodyWithFilterSorting.size()).isEqualTo(5);
         assertThat(responseBodyWithFilterSorting.get(1)).isNotNull();
+        assertThat(responseBodyWithFilterSorting.get(0).name).isEqualTo(searchPlaceNameForFilter + 0);
         assertThat(responseBodyWithFilterSorting.get(1).name).isEqualTo(searchPlaceNameForFilter + 1);
+        assertThat(responseBodyWithFilterSorting.get(2).name).isEqualTo(searchPlaceNameForFilter + 2);
+        assertThat(responseBodyWithFilterSorting.get(3).name).isEqualTo(searchPlaceNameForFilter + 3);
+        assertThat(responseBodyWithFilterSorting.get(4).name).isEqualTo(searchPlaceNameForFilter + 4);
 
     }
 
@@ -959,6 +970,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     public void testGetSearchPlaceListODataWithExplicitDescendingSorting(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
 
         String searchPlaceNameForFilter = "testSearchPlaceListODataWithExplicitDescendingSorting" + DataGeneratorDealService.getRandomName(10);
 
@@ -981,7 +994,11 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         assertThat(responseBodyWithFilterSorting.size()).isEqualTo(5);
         assertThat(responseBodyWithFilterSorting.get(1)).isNotNull();
+        assertThat(responseBodyWithFilterSorting.get(0).name).isEqualTo(searchPlaceNameForFilter + 4);
         assertThat(responseBodyWithFilterSorting.get(1).name).isEqualTo(searchPlaceNameForFilter + 3);
+        assertThat(responseBodyWithFilterSorting.get(2).name).isEqualTo(searchPlaceNameForFilter + 2);
+        assertThat(responseBodyWithFilterSorting.get(3).name).isEqualTo(searchPlaceNameForFilter + 1);
+        assertThat(responseBodyWithFilterSorting.get(4).name).isEqualTo(searchPlaceNameForFilter + 0);
 
     }
 
@@ -995,6 +1012,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     public void testGetSearchPlaceListODataWithPagination(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
 
         String searchPlaceNameForFilter = "testSearchPlaceListODataWithPagination" + DataGeneratorDealService.getRandomName(10);
 
@@ -1018,7 +1037,11 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         assertThat(responseBodyWithPagination.size()).isEqualTo(5);
         assertThat(responseBodyWithPagination.get(1)).isNotNull();
+        assertThat(responseBodyWithPagination.get(0).name).isEqualTo(searchPlaceNameForFilter + 0);
         assertThat(responseBodyWithPagination.get(1).name).isEqualTo(searchPlaceNameForFilter + 1);
+        assertThat(responseBodyWithPagination.get(2).name).isEqualTo(searchPlaceNameForFilter + 2);
+        assertThat(responseBodyWithPagination.get(3).name).isEqualTo(searchPlaceNameForFilter + 3);
+        assertThat(responseBodyWithPagination.get(4).name).isEqualTo(searchPlaceNameForFilter + 4);
 
         requestParameters.put("$skip", "5");
 
@@ -1028,7 +1051,11 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         assertThat(responseBodyWithPagination.size()).isEqualTo(5);
         assertThat(responseBodyWithPagination.get(1)).isNotNull();
+        assertThat(responseBodyWithPagination.get(0).name).isEqualTo(searchPlaceNameForFilter + 5);
         assertThat(responseBodyWithPagination.get(1).name).isEqualTo(searchPlaceNameForFilter + 6);
+        assertThat(responseBodyWithPagination.get(2).name).isEqualTo(searchPlaceNameForFilter + 7);
+        assertThat(responseBodyWithPagination.get(3).name).isEqualTo(searchPlaceNameForFilter + 8);
+        assertThat(responseBodyWithPagination.get(4).name).isEqualTo(searchPlaceNameForFilter + 9);
 
     }
 
@@ -1042,6 +1069,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     public void testGetSearchPlaceListODataWithLimit(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
 
         String searchPlaceNameForFilter = "testSearchPlaceListODataWithPagination" + DataGeneratorDealService.getRandomName(10);
 
@@ -1065,6 +1094,5 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         assertThat(responseBodyWithLimiting.get(1)).isNotNull();
 
     }
-
 
 }
