@@ -37,7 +37,9 @@ dependencies {
             "com.google.code.gson:gson:$gsonVersion",
             "com.github.javafaker:javafaker:$javaFakerVersion",
             "org.junit.jupiter:junit-jupiter:$junitVersion",
-            "org.junit.jupiter:junit-jupiter-api:$junitVersion")
+            "org.junit.jupiter:junit-jupiter-api:$junitVersion",
+            "org.junit-pioneer:junit-pioneer:2.2.0"
+    )
     testRuntimeOnly(
             'org.slf4j:slf4j-simple:2.0.5',
             "org.junit.jupiter:junit-jupiter-engine:$junitVersion")
@@ -51,7 +53,8 @@ tasks.withType(JavaCompile).configureEach {
 
 task testWithEnv(type: Test) {
     // Параметр Gradle, указывающий стенд (dev, test, prod и т.д.)
-    def environment = project.hasProperty('env') ? project.findProperty('env') : 'test'
+//    def environment = project.hasProperty('env') ? project.findProperty('env') : 'test'
+    def environment = 'test'
 
     // Установка системных свойств для использования во время выполнения тестов
     System.setProperty('BASE_URL',      getProperty(environment as String, 'BASE_URL'))
@@ -65,6 +68,7 @@ task testWithEnv(type: Test) {
     println "System property 'ADMIN_URL': ${System.getProperty('ADMIN_URL')}"
     println "System property 'DEAL_URL': ${System.getProperty('DEAL_URL')}"
 
+    systemProperties(System.getProperties())
     // Установка JUnit Platform как используемого фреймворка
     useJUnitPlatform()
 
@@ -82,7 +86,67 @@ def getProperty(String environment, String propertyName) {
     return propertyValue
 }
 
-tasks.withType(Test).configureEach {
-    systemProperties(System.getProperties())
-    useJUnitPlatform()
-}
+//tasks.withType(Test).configureEach {
+//    systemProperties(System.getProperties())
+//    useJUnitPlatform()
+//}
+
+
+
+
+//tasks.withType(Test).configureEach {
+//    systemProperties(System.getProperties())
+//    useJUnitPlatform()
+//
+//    testLogging {
+//        lifecycle {
+//            events "started", "skipped", "failed", "standard_error", "standard_out"
+//            exceptionFormat "short"
+//        }
+//    }
+//}
+//
+//
+//// Задача для запуска тестов с тегом "smoke"
+//tasks.register('smoke', Test) {
+//    testLogging {
+//        events "passed", "skipped", "failed", "standardOut", "standardError"
+//        exceptionFormat "short"
+//    }
+//    useJUnitPlatform {
+//        includeTags("smoke")
+//    }
+//}
+//
+//// Задача для запуска тестов с тегом "regress"
+//tasks.register('regress', Test) {
+//    testLogging {
+//        events "passed", "skipped", "failed", "standardOut", "standardError"
+//        exceptionFormat "short"
+//    }
+//    useJUnitPlatform {
+//        includeTags("regress")
+//    }
+//
+//}
+//// Задача для запуска тестов с тегом "profile"
+//tasks.register('profile', Test) {
+//    testLogging {
+//        events "passed", "skipped", "failed", "standardOut", "standardError"
+//        exceptionFormat "short"
+//    }
+//    useJUnitPlatform {
+//        include 'ru/dex/api/tests/profile/**'
+//    }
+//}
+//
+//// Задача для запуска тестов с тегом "auth"
+//tasks.register('auth', Test) {
+//    testLogging {
+//        events "passed", "skipped", "failed", "standardOut", "standardError"
+//        exceptionFormat "short"
+//    }
+//    useJUnitPlatform {
+//        include 'ru/dex/api/tests/auth/**'
+//    }
+//}
