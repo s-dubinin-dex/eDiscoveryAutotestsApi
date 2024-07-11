@@ -30,6 +30,7 @@ public class ErrorModel {
         public ArrayList<ErrorModelDetail> id;
         public ArrayList<ErrorModelDetail> name;
         public ArrayList<ErrorModelDetail> newEntity;
+        public ArrayList<ErrorModelDetail> value;
     }
 
     @Data

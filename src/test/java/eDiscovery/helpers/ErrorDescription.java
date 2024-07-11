@@ -34,6 +34,7 @@ public class ErrorDescription {
     public static final String VALIDATIONS_THE_PASSWORD_FIELD_IS_REQUIRED           = "validations.The Password field is required.";
     public static final String VALIDATIONS_THE_URI_FIELD_IS_REQUIRED                = "validations.The Uri field is required.";
     public static final String VALIDATIONS_THE_USERNAME_FIELD_IS_REQUIRED           = "validations.The Username field is required.";
+    public static final String VALIDATIONS_THE_VALUE_FIELD_IS_REQUIRED              = "validations.The Value field is required.";
 
     public static final String VALIDATIONS_THE_JSON_VALUE_NOT_BE_CONVERTED_TO_GUID  = "validations\\.The JSON value could not be converted to System\\.Guid\\. Path: \\$\\.id \\| LineNumber: \\d+ \\| BytePositionInLine: \\d+\\.";
     public static final String VALIDATIONS_THE_VALUE___IS_NOT_VALID                 = "validations\\.The value .+ is not valid\\.";
