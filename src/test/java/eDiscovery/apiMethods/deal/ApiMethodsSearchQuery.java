@@ -2,7 +2,9 @@ package eDiscovery.apiMethods.deal;
 
 import eDiscovery.UrlBase;
 import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModel;
+import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModelNotNull;
 import eDiscovery.models.deal.searchQuery.UpdateSearchQueryRequestModel;
+import eDiscovery.models.deal.searchQuery.UpdateSearchQueryRequestModelNotNull;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -29,6 +31,29 @@ public class ApiMethodsSearchQuery extends UrlBase {
                 .andReturn();
     }
 
+    @Step("Создание поискового запроса")
+    public static Response addSearchQuery(AddSearchQueryRequestModelNotNull addSearchQueryRequestModel){
+
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+
+        return given()
+                .body(addSearchQueryRequestModel)
+                .when()
+                .post(SEARCH_QUERY)
+                .andReturn();
+    }
+
+    @Step("Создание поискового запроса")
+    public static Response addSearchQuery(){
+
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+
+        return given()
+                .when()
+                .post(SEARCH_QUERY)
+                .andReturn();
+    }
+
     @Step("Изменение поискового запроса")
     public static Response updateSearchQuery(UpdateSearchQueryRequestModel updateSearchQueryRequestModel){
 
@@ -41,6 +66,29 @@ public class ApiMethodsSearchQuery extends UrlBase {
                 .andReturn();
     }
 
+    @Step("Изменение поискового запроса")
+    public static Response updateSearchQuery(UpdateSearchQueryRequestModelNotNull updateSearchQueryRequestModel){
+
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+
+        return given()
+                .body(updateSearchQueryRequestModel)
+                .when()
+                .put(SEARCH_QUERY)
+                .andReturn();
+    }
+
+    @Step("Изменение поискового запроса")
+    public static Response updateSearchQuery(){
+
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+
+        return given()
+                .when()
+                .put(SEARCH_QUERY)
+                .andReturn();
+    }
+
     @Step("Удаление поискового запроса")
     public static Response deleteSearchQuery(String id){
 
@@ -48,6 +96,17 @@ public class ApiMethodsSearchQuery extends UrlBase {
 
         return given()
                 .param("id", id)
+                .when()
+                .delete(SEARCH_QUERY)
+                .andReturn();
+    }
+
+    @Step("Удаление поискового запроса")
+    public static Response deleteSearchQuery(){
+
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+
+        return given()
                 .when()
                 .delete(SEARCH_QUERY)
                 .andReturn();
