@@ -244,9 +244,13 @@ public class DataGeneratorDealService {
     * Basic generators
     * */
 
+    /*
+    * Valid Data
+    * */
+
     public static String[] getValidNames(){
         return new String[]{
-                faker.regexify("[a-z]{1}"),             // Строка из 1 символа
+                faker.regexify("[a-zA-Zа-яА-Я]{1}"),             // Строка из 1 символа
                 faker.regexify("[a-z]{256}"),           // Строка из 256 символов
                 faker.regexify("[а-я]{25}"),            // Строка из русских символов в нижней раскладке
                 faker.regexify("[А-Я]{25}"),            // Строка из русских символов в верхней раскладке

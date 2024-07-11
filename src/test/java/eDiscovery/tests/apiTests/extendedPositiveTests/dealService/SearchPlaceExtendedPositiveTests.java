@@ -20,7 +20,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.junitpioneer.jupiter.RetryingTest;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -227,13 +226,13 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         assertThat(responseBody.excludes).isEqualTo(excludes);
     }
 
+    @Flaky
     @Epic("Сервис Deal")
     @Feature("Место поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Изменение наименования места поиска с типом FileShare - SMB")
     @Description("Тест проверяет возможность изменения наименования места поиска с типом FileShare - SMB")
-    @RetryingTest(3)
     @ParameterizedTest
     @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceNames")
     public void testUpdateSearchPlaceNameWithDifferentValidNames(String name){
