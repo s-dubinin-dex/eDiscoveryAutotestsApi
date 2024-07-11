@@ -16,7 +16,6 @@ import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
 import eDiscovery.models.deal.searchQuery.CommonSearchQueryResponseModel;
 
 import java.util.*;
-import java.util.stream.Stream;
 
 public class DataGeneratorDealService {
 
@@ -27,12 +26,18 @@ public class DataGeneratorDealService {
     * */
 
     /*
-    * SearchPlace models
+    * SearchPlace Models
     * */
 
     public static AddSearchPlaceRequestModel getSearchPlaceModelWithOnlyRequiredParameters(){
         return AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
+                .build();
+    }
+
+    public static AddSearchPlaceRequestModel getSearchPlaceModelWithOnlyRequiredParameters(String name){
+        return AddSearchPlaceRequestModel.builder()
+                .name(name)
                 .build();
     }
 
@@ -55,11 +60,15 @@ public class DataGeneratorDealService {
     }
 
     /*
-    * SearchPlace generators
+    * SearchPlace Generators
     * */
 
     public static CommonSearchPlaceResponseModel createSearchPlaceWithOnlyRequiredParameters(){
         return ApiMethodsSearchPlace.addSearchPlace(getSearchPlaceModelWithOnlyRequiredParameters()).as(CommonSearchPlaceResponseModel.class);
+    }
+
+    public static CommonSearchPlaceResponseModel createSearchPlaceWithOnlyRequiredParameters(String name){
+        return ApiMethodsSearchPlace.addSearchPlace(getSearchPlaceModelWithOnlyRequiredParameters(name)).as(CommonSearchPlaceResponseModel.class);
     }
 
     public static CommonSearchPlaceResponseModel createBasicSearchPlaceArmLocal(){
@@ -90,7 +99,7 @@ public class DataGeneratorDealService {
         return getValidFolderExclusions();
     }
 
-    public static Stream<List<String>>  getValidSearchPlaceExclusionsWithDifferentCount(){
+    public static List<List<String>>  getValidSearchPlaceExclusionsWithDifferentCount(){
         return getValidFolderExclusionsWithDifferentCount();
     }
 
@@ -147,7 +156,11 @@ public class DataGeneratorDealService {
     };
 
     /*
-    * Search Query
+    * SearchQuery
+    * */
+
+    /*
+    * SearchQuery Models
     * */
 
     public static AddSearchQueryRequestModel getSearchQueryModelWithOnlyRequiredParameters(){
@@ -155,10 +168,6 @@ public class DataGeneratorDealService {
                 .name(getRandomName())
                 .value("\\d{10}")
                 .build();
-    }
-
-    public static CommonSearchQueryResponseModel createSearchQueryWithOnlyRequiredParameters(){
-        return ApiMethodsSearchQuery.addSearchQuery(getSearchQueryModelWithOnlyRequiredParameters()).as(CommonSearchQueryResponseModel.class);
     }
 
     public static AddSearchQueryRequestModel getBasicSearchQueryModel(){
@@ -169,12 +178,20 @@ public class DataGeneratorDealService {
                 .build();
     }
 
+    /*
+    * SearchQuery Generators
+    * */
+
+    public static CommonSearchQueryResponseModel createSearchQueryWithOnlyRequiredParameters(){
+        return ApiMethodsSearchQuery.addSearchQuery(getSearchQueryModelWithOnlyRequiredParameters()).as(CommonSearchQueryResponseModel.class);
+    }
+
     public static CommonSearchQueryResponseModel createBasicSearchQuery(){
         return ApiMethodsSearchQuery.addSearchQuery(getBasicSearchQueryModel()).as(CommonSearchQueryResponseModel.class);
     }
 
     /*
-    * Search Query attributes
+    * SearchQuery attributes
     * */
 
     public static String[] getValidSearchQueryNames(){
@@ -193,6 +210,10 @@ public class DataGeneratorDealService {
     * Deal manipulation
     * */
 
+    /*
+    * DealManipulation Models
+    * */
+
     public static AddDealManipulationRequestModel getDealManipulationModelWithOnlyRequiredParameters(List<String> searchPlaceIDs, List<String> searchQueryIDs){
         return AddDealManipulationRequestModel.builder()
                 .name(getRandomName())
@@ -201,6 +222,21 @@ public class DataGeneratorDealService {
                 .build();
 
     }
+
+    public static AddDealManipulationRequestModel getBasicDealManipulationModel(List<String> searchPlaceIDs, List<String> searchQueryIDs){
+        return AddDealManipulationRequestModel.builder()
+                .name(getRandomName())
+                .searchPlaces(searchPlaceIDs)
+                .excludes(new ArrayList<>())
+                .searchQueueries(searchQueryIDs)
+                .dealStatus(DealStatus.Waiting.name())
+                .quarantine(false)
+                .build();
+    }
+
+    /*
+    * DealManipulation Generators
+    * */
 
     public static CommonDealManipulationResponseModel createDealManipulationWithOnlyRequiredParameters(List<String> searchPlaceIDs, List<String> searchQueryIDs){
         AddDealManipulationRequestModel requestDealCreationBody = getDealManipulationModelWithOnlyRequiredParameters(
@@ -220,17 +256,6 @@ public class DataGeneratorDealService {
         return ApiMethodsDealManipulation.addDeal(requestDealCreationBody).as(CommonDealManipulationResponseModel.class);
     }
 
-    public static AddDealManipulationRequestModel getBasicDealManipulationModel(List<String> searchPlaceIDs, List<String> searchQueryIDs){
-        return AddDealManipulationRequestModel.builder()
-                .name(getRandomName())
-                .searchPlaces(searchPlaceIDs)
-                .excludes(new ArrayList<>())
-                .searchQueueries(searchQueryIDs)
-                .dealStatus(DealStatus.Waiting.name())
-                .quarantine(false)
-                .build();
-    }
-
     public static CommonDealManipulationResponseModel createBasicDealManipulation(){
         AddDealManipulationRequestModel requestDealCreationBody = getBasicDealManipulationModel(
                 Collections.singletonList(createBasicSearchPlaceArmLocal().id),
@@ -239,6 +264,10 @@ public class DataGeneratorDealService {
 
         return ApiMethodsDealManipulation.addDeal(requestDealCreationBody).as(CommonDealManipulationResponseModel.class);
     }
+
+    /*
+    * DealManipulation attributes
+    * */
 
     /*
     * Basic generators
@@ -268,13 +297,6 @@ public class DataGeneratorDealService {
                 faker.letterify("?????? "),                 // Строка, оканчивающаяяся пробелом
                 "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~" + getRandomName(),     // Строка из спецсимволов
                 "ё" + getRandomName()                                       // Буква "ё"
-        };
-    }
-
-    public static String[] getInvalidNames(){
-        return new String[]{
-                "",
-                " "
         };
     }
 
@@ -325,9 +347,9 @@ public class DataGeneratorDealService {
         };
     }
 
-    public static Stream<List<String>> getValidFolderExclusionsWithDifferentCount(){
+    public static List<List<String>> getValidFolderExclusionsWithDifferentCount(){
 
-        return Stream.of(
+        return List.of(
                 List.of(),              // Пустой список
                 List.of(
                         "C:\\"
@@ -340,6 +362,21 @@ public class DataGeneratorDealService {
 
     }
 
+    /*
+     * Invalid Data
+     * */
+
+    public static String[] getInvalidNames(){
+        return new String[]{
+                "",
+                " "
+        };
+    }
+
+    /*
+    * Service
+    * */
+
     public static String getRandomName(){
         return getRandomName(30);
     }
@@ -347,4 +384,5 @@ public class DataGeneratorDealService {
     public static String getRandomName(int length){
         return faker.regexify("[a-zA-Z]{" + length + "}");
     }
+
 }
