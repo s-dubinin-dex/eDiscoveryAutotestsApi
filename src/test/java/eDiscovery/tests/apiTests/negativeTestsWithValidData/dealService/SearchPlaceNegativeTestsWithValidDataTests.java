@@ -90,8 +90,8 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
-                .categoryType(SearchPlaceCategoryType.ARM)
-                .type(SearchPlaceType.LOCAL)
+                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .type(SearchPlaceType.LOCAL.name())
                 .build();
 
         CommonSearchPlaceResponseModel responseSearchPlaceCreationBody = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);
@@ -151,8 +151,8 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
-                .categoryType(SearchPlaceCategoryType.ARM)
-                .type(SearchPlaceType.LOCAL)
+                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .type(SearchPlaceType.LOCAL.name())
                 .build();
 
         CommonSearchPlaceResponseModel responseSearchPlaceCreationBody = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);
@@ -160,7 +160,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
         UpdateSearchPlaceRequestModel requestSearchPlaceUpdateBody = UpdateSearchPlaceRequestModel.builder()
                 .name(responseSearchPlaceCreationBody.name)
                 .id(responseSearchPlaceCreationBody.id)
-                .categoryType(SearchPlaceCategoryType.FileShare)
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
                 .type(responseSearchPlaceCreationBody.type)
                 .build();
 
@@ -184,8 +184,8 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
-                .categoryType(SearchPlaceCategoryType.FileShare)
-                .type(SearchPlaceType.SMB)
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
                 .build();
 
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);
@@ -199,7 +199,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
         UpdateSearchPlaceRequestModel requestSearchPlaceUpdateBody = UpdateSearchPlaceRequestModel.builder()
                 .name(responseBodySearchPlaceCreation.name)
                 .id(responseBodySearchPlaceCreation.id)
-                .categoryType(SearchPlaceCategoryType.ARM)
+                .categoryType(SearchPlaceCategoryType.ARM.name())
                 .type(responseBodySearchPlaceCreation.type)
                 .build();
 
@@ -223,8 +223,8 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
-                .categoryType(SearchPlaceCategoryType.ARM)
-                .type(SearchPlaceType.LOCAL)
+                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .type(SearchPlaceType.LOCAL.name())
                 .build();
 
         CommonSearchPlaceResponseModel responseSearchPlaceCreationBody = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);
@@ -233,7 +233,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
                 .name(responseSearchPlaceCreationBody.name)
                 .id(responseSearchPlaceCreationBody.id)
                 .categoryType(responseSearchPlaceCreationBody.categoryType)
-                .type(SearchPlaceType.SMB)
+                .type(SearchPlaceType.SMB.name())
                 .build();
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
@@ -256,8 +256,8 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
-                .categoryType(SearchPlaceCategoryType.FileShare)
-                .type(SearchPlaceType.SMB)
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
                 .build();
 
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);
@@ -272,7 +272,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
                 .name(responseBodySearchPlaceCreation.name)
                 .id(responseBodySearchPlaceCreation.id)
                 .categoryType(responseBodySearchPlaceCreation.categoryType)
-                .type(SearchPlaceType.NFS)
+                .type(SearchPlaceType.NFS.name())
                 .build();
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
@@ -295,8 +295,8 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
-                .categoryType(SearchPlaceCategoryType.ARM)
-                .type(SearchPlaceType.LOCAL)
+                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .type(SearchPlaceType.LOCAL.name())
                 .build();
 
         CommonSearchPlaceResponseModel responseSearchPlaceCreationBody = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);

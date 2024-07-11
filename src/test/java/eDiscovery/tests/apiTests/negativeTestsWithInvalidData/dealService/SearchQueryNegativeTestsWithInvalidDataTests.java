@@ -133,7 +133,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
                 AddSearchQueryRequestModelNotNull.builder()
-                        .type(SearchQueryType.Text)
+                        .type(SearchQueryType.Text.name())
                         .build()
         );
         ErrorModel responseErrorBody = response.as(ErrorModel.class);

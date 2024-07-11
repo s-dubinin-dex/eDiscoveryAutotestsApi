@@ -1,8 +1,6 @@
 package eDiscovery.models.deal.searchPlace;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import eDiscovery.helpers.enums.SearchPlaceCategoryType;
-import eDiscovery.helpers.enums.SearchPlaceType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,9 +16,9 @@ public class UpdateSearchPlaceRequestModel {
     @JsonInclude()
     public String name;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public SearchPlaceCategoryType categoryType;
+    public String categoryType;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public SearchPlaceType type;
+    public String type;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public SearchPlaceParametersModel parameters;
     @JsonInclude(JsonInclude.Include.NON_NULL)

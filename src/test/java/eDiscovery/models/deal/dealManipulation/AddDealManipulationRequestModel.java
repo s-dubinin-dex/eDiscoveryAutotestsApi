@@ -1,7 +1,6 @@
 package eDiscovery.models.deal.dealManipulation;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import eDiscovery.helpers.enums.DealStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +22,7 @@ public class AddDealManipulationRequestModel {
     @JsonInclude()
     public List<String> searchQueueries;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public DealStatus dealStatus;
+    public String dealStatus;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public boolean quarantine;
 }

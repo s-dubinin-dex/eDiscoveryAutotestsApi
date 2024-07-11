@@ -1,6 +1,5 @@
 package eDiscovery.models.deal.dealManipulation;
 
-import eDiscovery.helpers.enums.DealTaskStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ChangeTaskStatusRequestModel {
     public String entityId;
-    public DealTaskStatus dealTaskStatus;
+    public String dealTaskStatus;
     public List<SearchTaskErrors> searchTaskErrors;
 }
 

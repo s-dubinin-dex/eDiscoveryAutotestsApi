@@ -1,7 +1,6 @@
 package eDiscovery.models.deal.searchQuery;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import eDiscovery.helpers.enums.SearchQueryType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +14,7 @@ public class UpdateSearchQueryRequestModel {
     @JsonInclude()
     public String name;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public SearchQueryType type;
+    public String type;
     @JsonInclude()
     public String value;
     @JsonInclude()

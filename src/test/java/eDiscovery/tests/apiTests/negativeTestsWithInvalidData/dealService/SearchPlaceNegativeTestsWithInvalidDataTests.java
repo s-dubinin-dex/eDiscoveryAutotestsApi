@@ -86,7 +86,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
         Response response = ApiMethodsSearchPlace.addSearchPlace(
                 AddSearchPlaceRequestModelNotNull.builder()
-                        .categoryType(SearchPlaceCategoryType.ARM)
+                        .categoryType(SearchPlaceCategoryType.ARM.name())
                         .build()
         );
         ErrorModel responseErrorBody = response.as(ErrorModel.class);
@@ -110,7 +110,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
         Response response = ApiMethodsSearchPlace.addSearchPlace(
                 AddSearchPlaceRequestModelNotNull.builder()
-                        .type(SearchPlaceType.SMB)
+                        .type(SearchPlaceType.SMB.name())
                         .build()
         );
         ErrorModel responseErrorBody = response.as(ErrorModel.class);
@@ -452,7 +452,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
         ErrorModel responseErrorBody = ApiMethodsSearchPlace.updateSearchPlace(
                 UpdateSearchPlaceRequestModelNotNull.builder()
-                        .categoryType(SearchPlaceCategoryType.FileShare)
+                        .categoryType(SearchPlaceCategoryType.FileShare.name())
                         .build()
         ).as(ErrorModel.class);
 
@@ -477,7 +477,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
         ErrorModel responseErrorBody = ApiMethodsSearchPlace.updateSearchPlace(
                 UpdateSearchPlaceRequestModelNotNull.builder()
-                        .type(SearchPlaceType.SMB)
+                        .type(SearchPlaceType.SMB.name())
                         .build()
         ).as(ErrorModel.class);
 

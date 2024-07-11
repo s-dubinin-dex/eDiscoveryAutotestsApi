@@ -61,7 +61,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         assertThat(responseBody.quarantine).isEqualTo(false);
         assertThat(responseBody.searchPlaces).isEqualTo(Collections.singletonList(searchPlaceRequestBody.name));
         assertThat(responseBody.searchQueueries).isEqualTo(Collections.singletonList(searchQueryRequestBody.name));
-        assertThat(responseBody.dealStatus).isEqualTo(DealStatus.Undefined);
+        assertThat(responseBody.dealStatus).isEqualTo(DealStatus.Undefined.name());
         assertThat(responseBody.creatorUserId).isNotBlank();
         assertThat(responseBody.creatorUserName).isEqualTo("Администратор");
 
@@ -108,7 +108,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         assertThat(responseBodyDealUpdate.quarantine).isEqualTo(false);
         assertThat(responseBodyDealUpdate.searchPlaces).isEqualTo(Collections.singletonList(searchPlaceRequestBody.name));
         assertThat(responseBodyDealUpdate.searchQueueries).isEqualTo(Collections.singletonList(searchQueryRequestBody.name));
-        assertThat(responseBodyDealUpdate.dealStatus).isEqualTo(DealStatus.Undefined);
+        assertThat(responseBodyDealUpdate.dealStatus).isEqualTo(DealStatus.Undefined.name());
         assertThat(responseBodyDealUpdate.creatorUserId).isNotBlank();
         assertThat(responseBodyDealUpdate.creatorUserName).isEqualTo("Администратор");
 
@@ -165,7 +165,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         assertThat(responseDealCardBody.quarantine).isEqualTo(requestDealCreationBody.quarantine);
         assertThat(responseDealCardBody.searchPlaces).isEqualTo(Collections.singletonList(searchPlaceRequestBody.name));
         assertThat(responseDealCardBody.searchQueueries).isEqualTo(Collections.singletonList(searchQueryRequestBody.name));
-        assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Waiting);
+        assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Waiting.name());
         assertThat(responseDealCardBody.creatorUserId).isEqualTo(responseDealCreationBody.creatorUserId);
         assertThat(responseDealCardBody.creatorUserName).isEqualTo(responseDealCreationBody.creatorUserName);
 
@@ -210,11 +210,11 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         Response responseCloseDeal = ApiMethodsDealManipulation.closeDeal(responseDealCreationBody.id);
 
         CommonDealManipulationResponseModel responseCloseDealBody = responseCloseDeal.as(CommonDealManipulationResponseModel.class);
-        assertThat(responseCloseDealBody.dealStatus).isEqualTo(DealStatus.Closed);
+        assertThat(responseCloseDealBody.dealStatus).isEqualTo(DealStatus.Closed.name());
 
         Response responseDealCard = ApiMethodsDealManipulation.getDealCard(responseDealCreationBody.id);
         DealCardModel responseDealCardBody = responseDealCard.as(DealCardModel.class);
-        assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Closed);
+        assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Closed.name());
 
     }
 
@@ -236,11 +236,11 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         Response responseUncloseDeal = ApiMethodsDealManipulation.uncloseDeal(responseDealCreationBody.id);
         CommonDealManipulationResponseModel responseUncloseDealBody = responseUncloseDeal.as(CommonDealManipulationResponseModel.class);
-        assertThat(responseUncloseDealBody.dealStatus).isEqualTo(DealStatus.Stopped);
+        assertThat(responseUncloseDealBody.dealStatus).isEqualTo(DealStatus.Stopped.name());
 
         Response responseDealCard = ApiMethodsDealManipulation.getDealCard(responseDealCreationBody.id);
         DealCardModel responseDealCardBody = responseDealCard.as(DealCardModel.class);
-        assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Stopped);
+        assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Stopped.name());
 
     }
 
@@ -260,11 +260,11 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         Response responseStopDeal = ApiMethodsDealManipulation.stopDeal(responseDealCreationBody.id);
         CommonDealManipulationResponseModel responseStopDealBody = responseStopDeal.as(CommonDealManipulationResponseModel.class);
-        assertThat(responseStopDealBody.dealStatus).isEqualTo(DealStatus.Stopped);
+        assertThat(responseStopDealBody.dealStatus).isEqualTo(DealStatus.Stopped.name());
 
         Response responseDealCard = ApiMethodsDealManipulation.getDealCard(responseDealCreationBody.id);
         DealCardModel responseDealCardBody = responseDealCard.as(DealCardModel.class);
-        assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Stopped);
+        assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Stopped.name());
 
     }
 
@@ -283,11 +283,11 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
         CommonDealManipulationResponseModel responseStopDealBody = ApiMethodsDealManipulation.startDeal(responseDealCreationBody.id).as(CommonDealManipulationResponseModel.class);
 
-        assertThat(responseStopDealBody.dealStatus).isEqualTo(DealStatus.Running);
+        assertThat(responseStopDealBody.dealStatus).isEqualTo(DealStatus.Running.name());
 
         Response responseDealCard = ApiMethodsDealManipulation.getDealCard(responseDealCreationBody.id);
         DealCardModel responseDealCardBody = responseDealCard.as(DealCardModel.class);
-        assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Running);
+        assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Running.name());
 
     }
 

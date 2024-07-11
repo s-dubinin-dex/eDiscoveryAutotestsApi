@@ -58,7 +58,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность создания поискового запроса c различными type")
     @ParameterizedTest
     @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchQueryTypes")
-    public void testAddSearchQueryWithDifferentValidTypes(SearchQueryType type){
+    public void testAddSearchQueryWithDifferentValidTypes(String type){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -155,7 +155,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность изменения type в поисковом запросе")
     @ParameterizedTest
     @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchQueryTypes")
-    public void testUpdateSearchQueryWithDifferentValidTypes(SearchQueryType type){
+    public void testUpdateSearchQueryWithDifferentValidTypes(String type){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -192,7 +192,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
                 Collections.singletonList(responseSearchQueryCreation.id)
         );
 
-        SearchQueryType typeForUpdating = SearchQueryType.Text;
+        String typeForUpdating = SearchQueryType.Text.name();
 
         UpdateSearchQueryRequestModel requestBody = UpdateSearchQueryRequestModel.builder()
                 .id(responseSearchQueryCreation.id)

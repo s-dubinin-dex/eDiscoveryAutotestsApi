@@ -5,19 +5,17 @@ import eDiscovery.apiMethods.deal.ApiMethodsDealManipulation;
 import eDiscovery.apiMethods.deal.ApiMethodsSearchPlace;
 import eDiscovery.apiMethods.deal.ApiMethodsSearchQuery;
 import eDiscovery.helpers.enums.DealStatus;
-import eDiscovery.models.deal.dealManipulation.AddDealManipulationRequestModel;
-import eDiscovery.models.deal.dealManipulation.CommonDealManipulationResponseModel;
-import eDiscovery.models.deal.searchPlace.AddSearchPlaceRequestModel;
-import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
-import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModel;
 import eDiscovery.helpers.enums.SearchPlaceCategoryType;
 import eDiscovery.helpers.enums.SearchPlaceType;
 import eDiscovery.helpers.enums.SearchQueryType;
+import eDiscovery.models.deal.dealManipulation.AddDealManipulationRequestModel;
+import eDiscovery.models.deal.dealManipulation.CommonDealManipulationResponseModel;
+import eDiscovery.models.deal.searchPlace.AddSearchPlaceRequestModel;
+import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModel;
+import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
 import eDiscovery.models.deal.searchQuery.CommonSearchQueryResponseModel;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class DataGeneratorDealService {
@@ -38,7 +36,7 @@ public class DataGeneratorDealService {
                 .build();
     }
 
-    public static AddSearchPlaceRequestModel getBasicSearchPlaceModel(SearchPlaceCategoryType categoryType, SearchPlaceType type){
+    public static AddSearchPlaceRequestModel getBasicSearchPlaceModel(String categoryType, String type){
         return AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
                 .categoryType(categoryType)
@@ -49,11 +47,11 @@ public class DataGeneratorDealService {
     }
 
     public static AddSearchPlaceRequestModel getBasicSearchPlaceModelArmLocal(){
-        return getBasicSearchPlaceModel(SearchPlaceCategoryType.ARM, SearchPlaceType.LOCAL);
+        return getBasicSearchPlaceModel(SearchPlaceCategoryType.ARM.name(), SearchPlaceType.LOCAL.name());
     }
 
     public static AddSearchPlaceRequestModel getBasicSearchPlaceModelFileShareSMB(){
-        return getBasicSearchPlaceModel(SearchPlaceCategoryType.FileShare, SearchPlaceType.SMB);
+        return getBasicSearchPlaceModel(SearchPlaceCategoryType.FileShare.name(), SearchPlaceType.SMB.name());
     }
 
     /*
@@ -80,12 +78,12 @@ public class DataGeneratorDealService {
         return getValidNames();
     }
 
-    public static SearchPlaceCategoryType[] getValidSearchPlaceCategoryTypes(){
-        return SearchPlaceCategoryType.values();
+    public static String[] getValidSearchPlaceCategoryTypes(){
+        return Arrays.stream(SearchPlaceCategoryType.values()).map(Enum::name).toArray(String[]::new);
     }
 
-    public static SearchPlaceType[] getValidSearchPlaceTypes(){
-        return SearchPlaceType.values();
+    public static String[] getValidSearchPlaceTypes(){
+        return Arrays.stream(SearchPlaceType.values()).map(Enum::name).toArray(String[]::new);
     }
 
     public static String[] getValidSearchPlaceExclusions(){
@@ -166,7 +164,7 @@ public class DataGeneratorDealService {
     public static AddSearchQueryRequestModel getBasicSearchQueryModel(){
         return AddSearchQueryRequestModel.builder()
                 .name(getRandomName())
-                .type(SearchQueryType.Regex)
+                .type(SearchQueryType.Regex.name())
                 .value("\\d{10}")
                 .build();
     }
@@ -183,8 +181,8 @@ public class DataGeneratorDealService {
         return getValidNames();
     }
 
-    public static SearchQueryType[] getValidSearchQueryTypes(){
-        return SearchQueryType.values();
+    public static String[] getValidSearchQueryTypes(){
+        return Arrays.stream(SearchQueryType.values()).map(Enum::name).toArray(String[]::new);
     }
 
     public static String[] getValidSearchQueryValues(){
@@ -228,7 +226,7 @@ public class DataGeneratorDealService {
                 .searchPlaces(searchPlaceIDs)
                 .excludes(new ArrayList<>())
                 .searchQueueries(searchQueryIDs)
-                .dealStatus(DealStatus.Waiting)
+                .dealStatus(DealStatus.Waiting.name())
                 .quarantine(false)
                 .build();
     }

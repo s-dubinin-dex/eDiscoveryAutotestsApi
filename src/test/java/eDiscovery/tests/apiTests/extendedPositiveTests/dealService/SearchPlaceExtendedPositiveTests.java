@@ -18,7 +18,6 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -61,7 +60,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность создания места поиска c различными c различными categoryType")
     @ParameterizedTest
     @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceCategoryTypes")
-    public void testAddSearchPlaceWithDifferentValidCategoryTypes(SearchPlaceCategoryType categoryType){
+    public void testAddSearchPlaceWithDifferentValidCategoryTypes(String categoryType){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -83,7 +82,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность создания места поиска c различными c type")
     @ParameterizedTest
     @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceTypes")
-    public void testAddSearchPlaceWithDifferentValidTypes(SearchPlaceType type){
+    public void testAddSearchPlaceWithDifferentValidTypes(String type){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -298,8 +297,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение categoryType в месте поиска с categoryType = FileShare, если место поиска не используется в деле")
     @Description("Тест проверяет возможность изменения categoryType в месте поиска с categoryType = FileShare, если место поиска не используется в деле")
     @ParameterizedTest
-    @EnumSource(SearchPlaceCategoryType.class)
-    public void testUpdateSearchPlaceCategoryTypeInFileShareWithoutDeal(SearchPlaceCategoryType categoryType){
+    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceCategoryTypes")
+    public void testUpdateSearchPlaceCategoryTypeInFileShareWithoutDeal(String categoryType){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -326,8 +325,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение type в месте поиска с categoryType = FileShare, если место поиска не используется в деле")
     @Description("Тест проверяет возможность изменения type в месте поиска с categoryType = FileShare, если место поиска не используется в деле")
     @ParameterizedTest
-    @EnumSource(SearchPlaceType.class)
-    public void testUpdateSearchPlaceTypeInFileShareWithoutDeal(SearchPlaceType type){
+    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceTypes")
+    public void testUpdateSearchPlaceTypeInFileShareWithoutDeal(String type){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -367,8 +366,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
-                .categoryType(SearchPlaceCategoryType.FileShare)
-                .type(SearchPlaceType.SMB)
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
                 .parameters(initialParameters)
                 .build();
 
@@ -415,8 +414,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
-                .categoryType(SearchPlaceCategoryType.FileShare)
-                .type(SearchPlaceType.SMB)
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
                 .parameters(initialParameters)
                 .build();
 
@@ -463,8 +462,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
-                .categoryType(SearchPlaceCategoryType.FileShare)
-                .type(SearchPlaceType.SMB)
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
                 .parameters(initialParameters)
                 .build();
 
@@ -510,8 +509,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
-                .categoryType(SearchPlaceCategoryType.FileShare)
-                .type(SearchPlaceType.SMB)
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
                 .parameters(initialParameters)
                 .build();
 
@@ -557,8 +556,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
-                .categoryType(SearchPlaceCategoryType.ARM)
-                .type(SearchPlaceType.LOCAL)
+                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .type(SearchPlaceType.LOCAL.name())
                 .excludes(Collections.singletonList("A:\\"))
                 .build();
 
@@ -595,8 +594,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
-                .categoryType(SearchPlaceCategoryType.ARM)
-                .type(SearchPlaceType.LOCAL)
+                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .type(SearchPlaceType.LOCAL.name())
                 .excludes(Collections.singletonList("A:\\"))
                 .build();
 
@@ -630,8 +629,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestSearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
-                .categoryType(SearchPlaceCategoryType.ARM)
-                .type(SearchPlaceType.LOCAL)
+                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .type(SearchPlaceType.LOCAL.name())
                 .excludes(Collections.singletonList("A:\\"))
                 .build();
 
@@ -673,8 +672,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
-                .categoryType(SearchPlaceCategoryType.FileShare)
-                .type(SearchPlaceType.SMB)
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
                 .excludes(Collections.singletonList("A:\\"))
                 .build();
 
@@ -710,8 +709,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
-                .categoryType(SearchPlaceCategoryType.FileShare)
-                .type(SearchPlaceType.SMB)
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
                 .excludes(Collections.singletonList("A:\\"))
                 .build();
 
@@ -745,8 +744,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestSearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
-                .categoryType(SearchPlaceCategoryType.FileShare)
-                .type(SearchPlaceType.SMB)
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
                 .excludes(Collections.singletonList("A:\\"))
                 .build();
 
@@ -786,8 +785,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(DataGeneratorDealService.getRandomName())
-                .categoryType(SearchPlaceCategoryType.FileShare)
-                .type(SearchPlaceType.SMB)
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
                 .build();
 
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
