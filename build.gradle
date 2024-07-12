@@ -37,7 +37,8 @@ dependencies {
             "com.google.code.gson:gson:$gsonVersion",
             "com.github.javafaker:javafaker:$javaFakerVersion",
             "org.junit.jupiter:junit-jupiter:$junitVersion",
-            "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+            "org.junit.jupiter:junit-jupiter-api:$junitVersion",
+            'org.postgresql:postgresql:42.7.3',
     )
     testRuntimeOnly(
             'org.slf4j:slf4j-simple:2.0.5',
@@ -56,16 +57,24 @@ task testWithEnv(type: Test) {
     def environment = 'test'
 
     // Установка системных свойств для использования во время выполнения тестов
-    System.setProperty('BASE_URL',      getProperty(environment as String, 'BASE_URL'))
-    System.setProperty('IDENTITY_URL',  getProperty(environment as String, 'IDENTITY_URL'))
-    System.setProperty('ADMIN_URL',     getProperty(environment as String, 'ADMIN_URL'))
-    System.setProperty('DEAL_URL',      getProperty(environment as String, 'DEAL_URL'))
+    System.setProperty('BASE_URL',              getProperty(environment as String, 'BASE_URL'))
+    System.setProperty('IDENTITY_URL',          getProperty(environment as String, 'IDENTITY_URL'))
+    System.setProperty('ADMIN_URL',             getProperty(environment as String, 'ADMIN_URL'))
+    System.setProperty('DEAL_URL',              getProperty(environment as String, 'DEAL_URL'))
+
+    System.setProperty('PG_USERNAME',           getProperty(environment as String, 'PG_USERNAME'))
+    System.setProperty('PG_PASSWORD',           getProperty(environment as String, 'PG_PASSWORD'))
+    System.setProperty('PG_DEAL_CONNECTION',    getProperty(environment as String, 'PG_DEAL_CONNECTION'))
 
     // Отладочное сообщение для проверки значения системного свойства
     println "System property 'BASE_URL': ${System.getProperty('BASE_URL')}"
     println "System property 'IDENTITY_URL': ${System.getProperty('IDENTITY_URL')}"
     println "System property 'ADMIN_URL': ${System.getProperty('ADMIN_URL')}"
     println "System property 'DEAL_URL': ${System.getProperty('DEAL_URL')}"
+
+    println "System property 'PG_USERNAME': ${System.getProperty('PG_USERNAME')}"
+    println "System property 'PG_PASSWORD': ${System.getProperty('PG_PASSWORD')}"
+    println "System property 'PG_DEAL_CONNECTION': ${System.getProperty('PG_DEAL_CONNECTION')}"
 
     systemProperties(System.getProperties())
     // Установка JUnit Platform как используемого фреймворка

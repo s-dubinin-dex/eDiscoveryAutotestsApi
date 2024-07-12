@@ -1,11 +1,12 @@
 package eDiscovery.databases;
 
 import java.sql.*;
+import java.util.List;
 
 public class PostgresDeal {
-    private final String urlConnection = "jdbc:postgresql://192.168.20.48:5432/TemplateDeal";
-    private final String dbUserName = "postgres";
-    private final String dbUserPassword = "my-pass~003";
+    private final String urlConnection = System.getProperty("PG_DEAL_CONNECTION");
+    private final String dbUserName = System.getProperty("PG_USERNAME");
+    private final String dbUserPassword = System.getProperty("PG_PASSWORD");
 
     private Connection connection = null;
     private Statement statement = null;
@@ -53,18 +54,30 @@ public class PostgresDeal {
     }
 
     public void deleteAllTablesData(){
-        executeSampleQuery("DELETE FROM \"Agent\"");
-        executeSampleQuery("DELETE FROM \"Deal\"");
-        executeSampleQuery("DELETE FROM \"DealDocumentFinded\"");
-        executeSampleQuery("DELETE FROM \"DealDocumentFindedDealTask\"");
-        executeSampleQuery("DELETE FROM \"DealDocumentProblemFinded\"");
-        executeSampleQuery("DELETE FROM \"DealDocumentProblemFindedDealTask\"");
-        executeSampleQuery("DELETE FROM \"DealSearchPlace\"");
-        executeSampleQuery("DELETE FROM \"DealSearchQuery\"");
-        executeSampleQuery("DELETE FROM \"DealStatusHistory\"");
-        executeSampleQuery("DELETE FROM \"DealTask\"");
-        executeSampleQuery("DELETE FROM \"SearchPlace\"");
-        executeSampleQuery("DELETE FROM \"SearchQuery\"");
+        for (String tableName: getDealTablesAllowedToDelete()){
+            executeSampleQuery("DELETE FROM " + tableName);
+        }
+    }
+
+    public void truncateAllTablesData(){
+        executeSampleQuery("TRUNCATE " + String.join(", ", getDealTablesAllowedToDelete()) + ";");
+    }
+
+    private List<String> getDealTablesAllowedToDelete(){
+        return List.of(
+                "\"Agent\"",
+                "\"Deal\"",
+                "\"DealDocumentFinded\"",
+                "\"DealDocumentFindedDealTask\"",
+                "\"DealDocumentProblemFinded\"",
+                "\"DealDocumentProblemFindedDealTask\"",
+                "\"DealSearchPlace\"",
+                "\"DealSearchQuery\"",
+                "\"DealStatusHistory\"",
+                "\"DealTask\"",
+                "\"SearchPlace\"",
+                "\"SearchQuery\""
+        );
     }
 
 }
