@@ -879,6 +879,37 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Feature("Место поиска")
     @Story("Получение списка мест поиска")
     @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка мест поиска по протоколу oData с подсчётом количества результатов")
+    @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData с подсчётом количества результатов")
+    @Test
+    public void testGetSearchPlaceListODataWithCount(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        HashMap<String, String> responseParameters = new HashMap<>();
+        responseParameters.put("$count", "true");
+
+        Response responseBodyWithCount =
+                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(responseParameters);
+
+        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
+
+        Response responseBodyWithCountAfterAddNewOne =
+                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(responseParameters);
+
+        int resultCount = responseBodyWithCount.jsonPath().getInt("\"@odata.count\"");
+        int resultCountAfterAddNewOne = responseBodyWithCountAfterAddNewOne.jsonPath().getInt("\"@odata.count\"");
+
+        List<CommonSearchPlaceResponseModel> responseBody = responseBodyWithCountAfterAddNewOne.jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+
+        assertThat(resultCountAfterAddNewOne).isEqualTo(resultCount + 1);
+        assertThat(responseBody.get(0)).isNotNull();
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка мест поиска по протоколу oData с дефолтной сортировкой результата (по возрастанию)")
     @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData с дефолтной сортировкой результата (по возрастанию)")
     @Test

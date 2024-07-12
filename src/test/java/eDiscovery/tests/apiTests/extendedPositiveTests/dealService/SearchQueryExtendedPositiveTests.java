@@ -342,6 +342,37 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @Feature("Поисковый запрос")
     @Story("Получение списка поисковых запросов")
     @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка поисковых запросов по протоколу oData с подсчётом количества результатов")
+    @Description("Тест проверяет возможность получения списка поисковых запросов по протоколу oData с подсчётом количества результатов")
+    @Test
+    public void testGetSearchQueryListODataWithCount(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        HashMap<String, String> responseParameters = new HashMap<>();
+        responseParameters.put("$count", "true");
+
+        Response responseBodyWithCount =
+                ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(responseParameters);
+
+        DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
+
+        Response responseBodyWithCountAfterAddNewOne =
+                ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(responseParameters);
+
+        int resultCount = responseBodyWithCount.jsonPath().getInt("\"@odata.count\"");
+        int resultCountAfterAddNewOne = responseBodyWithCountAfterAddNewOne.jsonPath().getInt("\"@odata.count\"");
+
+        List<CommonSearchQueryResponseModel> responseBody = responseBodyWithCountAfterAddNewOne.jsonPath().getList("value", CommonSearchQueryResponseModel.class);
+
+        assertThat(resultCountAfterAddNewOne).isEqualTo(resultCount + 1);
+        assertThat(responseBody.get(0)).isNotNull();
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Получение списка поисковых запросов")
+    @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка поисковых запросов по протоколу oData с дефолтной сортировкой результата (по возрастанию)")
     @Description("Тест проверяет возможность получения списка поисковых запросов по протоколу oData с дефолтной сортировкой результата (по возрастанию)")
     @Test
