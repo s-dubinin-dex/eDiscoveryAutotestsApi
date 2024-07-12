@@ -128,7 +128,9 @@ public class DataGeneratorDealService {
                 "\\\\server\\share\\subdir",
 
                 faker.regexify("[a-z]{1}"),             // Строка длиной 1 символ
-                faker.regexify("[a-z]{500}")            // Строка длиной 500 символов
+                faker.lorem().characters(5000),         // Строка длиной 5000 символов
+                "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",   // Строка из спецсимволов
+                "ё"                                     // Буква "ё"
         };
     }
 
@@ -153,7 +155,7 @@ public class DataGeneratorDealService {
                 "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",   // Строка из спецсимволов
                 "ё"                                     // Буква "ё"
         };
-    };
+    }
 
     /*
     * SearchQuery
@@ -279,7 +281,7 @@ public class DataGeneratorDealService {
 
     public static String[] getValidNames(){
         return new String[]{
-                faker.regexify("[a-zA-Zа-яА-Я]{1}"),             // Строка из 1 символа
+                faker.regexify("[a-zA-Zа-яА-Я]{1}"),    // Строка из 1 символа
                 faker.regexify("[a-z]{256}"),           // Строка из 256 символов
                 faker.regexify("[а-я]{25}"),            // Строка из русских символов в нижней раскладке
                 faker.regexify("[А-Я]{25}"),            // Строка из русских символов в верхней раскладке
@@ -291,12 +293,15 @@ public class DataGeneratorDealService {
                 faker.regexify("[0-9]{25}"),            // Строка из цифр
                 faker.regexify("[A-Za-z0-9]{25}"),      // Строка из английских символов вперемешку с цифрами
                 faker.regexify("[А-Яа-я0-9]{25}"),      // Строка из русских символов вперемешку с цифрами
-                faker.letterify("?????? ??????? ??????"),   // Строка, состоящая из нескольких слов, разделённых пробелами
-                faker.letterify("??????     ??????"),       // Строка с несколькими пробелами подряд
-                faker.letterify(" ??????"),                 // Строка, начинающаяся с пробела
-                faker.letterify("?????? "),                 // Строка, оканчивающаяяся пробелом
-                "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~" + getRandomName(),     // Строка из спецсимволов
-                "ё" + getRandomName()                                       // Буква "ё"
+                faker.letterify("?????? ???????"),                          // Строка, состоящая из двух слов, разделённых пробелом
+                faker.letterify("?????? ??????? ?????? ??????? ??????"),    // Строка, состоящая из нескольких слов, разделённых пробелами
+                faker.letterify("??????     ??????"),                       // Строка с несколькими пробелами подряд
+                faker.letterify(" ??????"),                                 // Строка, начинающаяся с пробела
+                faker.letterify("?????? "),                                 // Строка, оканчивающаяяся пробелом
+                "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~" + getRandomName(),               // Строка из спецсимволов
+                "ё" + getRandomName(),                                                // Буква "ё"
+                "اختبار إيجابي من اليمين إلى يسار النص" + getRandomName(),            // RTL текст
+                "✅✅✅" + getRandomName()                                           // Emoji
         };
     }
 
@@ -368,8 +373,9 @@ public class DataGeneratorDealService {
 
     public static String[] getInvalidNames(){
         return new String[]{
-                "",
-                " "
+                "",         // Пустая строка
+                " ",        // Пробел
+                "     "     // 5 пробелов
         };
     }
 
