@@ -28,7 +28,8 @@ public class ApiMethodsSearchPlace extends UrlBase {
                 .body(addSearchPlaceRequestModel)
                 .when()
                 .post(SEARCH_PLACE)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 
@@ -39,7 +40,8 @@ public class ApiMethodsSearchPlace extends UrlBase {
                 .body(addSearchPlaceRequestModel)
                 .when()
                 .post(SEARCH_PLACE)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 
@@ -49,7 +51,8 @@ public class ApiMethodsSearchPlace extends UrlBase {
         return given()
                 .when()
                 .post(SEARCH_PLACE)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 
@@ -61,7 +64,8 @@ public class ApiMethodsSearchPlace extends UrlBase {
                 .body(updateSearchPlaceRequestModel)
                 .when()
                 .put(SEARCH_PLACE)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 
@@ -73,7 +77,8 @@ public class ApiMethodsSearchPlace extends UrlBase {
                 .body(updateSearchPlaceRequestModel)
                 .when()
                 .put(SEARCH_PLACE)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 
@@ -84,7 +89,8 @@ public class ApiMethodsSearchPlace extends UrlBase {
         return given()
                 .when()
                 .put(SEARCH_PLACE)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 
@@ -96,7 +102,8 @@ public class ApiMethodsSearchPlace extends UrlBase {
                 .param("id", id)
                 .when()
                 .delete(SEARCH_PLACE)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 
@@ -107,7 +114,8 @@ public class ApiMethodsSearchPlace extends UrlBase {
         return given()
                 .when()
                 .delete(SEARCH_PLACE)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 
@@ -118,7 +126,8 @@ public class ApiMethodsSearchPlace extends UrlBase {
         return given()
                 .when()
                 .get(SEARCH_PLACE_SEARCH_PLACE)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 
@@ -130,7 +139,8 @@ public class ApiMethodsSearchPlace extends UrlBase {
                 .param("includeDeleted", includeDeleted)
                 .when()
                 .get("/SearchPlace/SearchPlace")
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 
@@ -141,7 +151,8 @@ public class ApiMethodsSearchPlace extends UrlBase {
         return given()
                 .when()
                 .get(ODATA_SEARCH_PLACE)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 
@@ -158,7 +169,8 @@ public class ApiMethodsSearchPlace extends UrlBase {
         return request
                 .when()
                 .get(ODATA_SEARCH_PLACE)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 
@@ -170,7 +182,8 @@ public class ApiMethodsSearchPlace extends UrlBase {
                 .param("includeDeleted", includeDeleted)
                 .when()
                 .get(ODATA_SEARCH_PLACE)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 }

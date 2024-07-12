@@ -28,7 +28,8 @@ public class ApiMethodsSearchQuery extends UrlBase {
                 .body(addSearchQueryRequestModel)
                 .when()
                 .post(SEARCH_QUERY)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Создание поискового запроса")
@@ -40,7 +41,8 @@ public class ApiMethodsSearchQuery extends UrlBase {
                 .body(addSearchQueryRequestModel)
                 .when()
                 .post(SEARCH_QUERY)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Создание поискового запроса")
@@ -51,7 +53,8 @@ public class ApiMethodsSearchQuery extends UrlBase {
         return given()
                 .when()
                 .post(SEARCH_QUERY)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Изменение поискового запроса")
@@ -63,7 +66,8 @@ public class ApiMethodsSearchQuery extends UrlBase {
                 .body(updateSearchQueryRequestModel)
                 .when()
                 .put(SEARCH_QUERY)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Изменение поискового запроса")
@@ -75,7 +79,8 @@ public class ApiMethodsSearchQuery extends UrlBase {
                 .body(updateSearchQueryRequestModel)
                 .when()
                 .put(SEARCH_QUERY)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Изменение поискового запроса")
@@ -86,7 +91,8 @@ public class ApiMethodsSearchQuery extends UrlBase {
         return given()
                 .when()
                 .put(SEARCH_QUERY)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Удаление поискового запроса")
@@ -98,7 +104,8 @@ public class ApiMethodsSearchQuery extends UrlBase {
                 .param("id", id)
                 .when()
                 .delete(SEARCH_QUERY)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Удаление поискового запроса")
@@ -109,7 +116,8 @@ public class ApiMethodsSearchQuery extends UrlBase {
         return given()
                 .when()
                 .delete(SEARCH_QUERY)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Получение списка поисковых запросов")
@@ -119,7 +127,8 @@ public class ApiMethodsSearchQuery extends UrlBase {
         return given()
                 .when()
                 .get(SEARCH_QUERY_SEARCH_QUERY)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 
@@ -131,7 +140,8 @@ public class ApiMethodsSearchQuery extends UrlBase {
                 .param("includeDeleted", includeDeleted)
                 .when()
                 .get(SEARCH_QUERY_SEARCH_QUERY)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 
@@ -142,7 +152,8 @@ public class ApiMethodsSearchQuery extends UrlBase {
         return given()
                 .when()
                 .get(ODATA_SEARCH_QUERY)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 
@@ -159,7 +170,8 @@ public class ApiMethodsSearchQuery extends UrlBase {
         return request
                 .when()
                 .get(ODATA_SEARCH_QUERY)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 
@@ -171,7 +183,8 @@ public class ApiMethodsSearchQuery extends UrlBase {
                 .param("includeDeleted", includeDeleted)
                 .when()
                 .get(ODATA_SEARCH_QUERY)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 }
