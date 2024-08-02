@@ -2,7 +2,9 @@ package eDiscovery.tests.apiTests.negativeTestsWithValidData.dealService;
 
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsSearchQuery;
-import eDiscovery.data.DataGeneratorDealService;
+import eDiscovery.data.dealService.DataGeneratorDealManipulation;
+import eDiscovery.data.dealService.DataGeneratorSearchPlace;
+import eDiscovery.data.dealService.DataGeneratorSearchQuery;
 import eDiscovery.models.ErrorModel;
 import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
 import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModel;
@@ -17,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 
+import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.ErrorDescription.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -33,7 +36,7 @@ public class SearchQueryNegativeTestsWithValidDataTests extends TestBase {
     public void testAddSearchQueryWithExistingNameIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
-        String name = DataGeneratorDealService.getRandomName();
+        String name = getRandomName();
 
         AddSearchQueryRequestModel requestBodySearchQueryCreation = AddSearchQueryRequestModel.builder()
                 .name(name)
@@ -66,7 +69,7 @@ public class SearchQueryNegativeTestsWithValidDataTests extends TestBase {
         ErrorModel responseErrorBody = ApiMethodsSearchQuery.updateSearchQuery(
                 UpdateSearchQueryRequestModel.builder()
                         .id(uuid)
-                        .name(DataGeneratorDealService.getRandomName())
+                        .name(getRandomName())
                         .value("\\d{10}")
                         .build()
         ).as(ErrorModel.class);
@@ -88,8 +91,8 @@ public class SearchQueryNegativeTestsWithValidDataTests extends TestBase {
     public void testUpdateSearchQueryNameToExistNameIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
-        CommonSearchQueryResponseModel responseSearchQueryCreationForUpdatingExists = DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
-        CommonSearchQueryResponseModel responseSearchQueryCreationForUpdating = DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
+        CommonSearchQueryResponseModel responseSearchQueryCreationForUpdatingExists = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
+        CommonSearchQueryResponseModel responseSearchQueryCreationForUpdating = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
         UpdateSearchQueryRequestModel requestSearchQueryUpdateBody = UpdateSearchQueryRequestModel.builder()
                 .name(responseSearchQueryCreationForUpdatingExists.name)
@@ -137,10 +140,10 @@ public class SearchQueryNegativeTestsWithValidDataTests extends TestBase {
     public void testDeleteSearchQueryFileShareSMBUsedInDealIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
-        CommonSearchPlaceResponseModel responseSearchPlaceCreationBody = DataGeneratorDealService.createBasicSearchPlaceFileShareSMB();
-        CommonSearchQueryResponseModel responseSearchQueryCreationBody = DataGeneratorDealService.createBasicSearchQuery();
+        CommonSearchPlaceResponseModel responseSearchPlaceCreationBody = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
+        CommonSearchQueryResponseModel responseSearchQueryCreationBody = DataGeneratorSearchQuery.createBasicSearchQuery();
 
-        DataGeneratorDealService.createDealManipulationWithOnlyRequiredParameters(
+        DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters(
                 Collections.singletonList(responseSearchPlaceCreationBody.id),
                 Collections.singletonList(responseSearchQueryCreationBody.id)
         );

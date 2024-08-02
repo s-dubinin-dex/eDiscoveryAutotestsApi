@@ -2,7 +2,7 @@ package eDiscovery.tests.apiTests.negativeTestsWithInvalidData.dealService;
 
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsSearchPlace;
-import eDiscovery.data.DataGeneratorDealService;
+import eDiscovery.data.dealService.DataGeneratorSearchPlace;
 import eDiscovery.helpers.enums.SearchPlaceCategoryType;
 import eDiscovery.helpers.enums.SearchPlaceType;
 import eDiscovery.models.ErrorModel;
@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.ErrorDescription.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -169,7 +170,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
         Response response = ApiMethodsSearchPlace.addSearchPlace(
                 AddSearchPlaceRequestModelNotNull.builder()
-                        .name(DataGeneratorDealService.getRandomName())
+                        .name(getRandomName())
                         .parameters(parameters)
                         .build()
         );
@@ -202,7 +203,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
         Response response = ApiMethodsSearchPlace.addSearchPlace(
                 AddSearchPlaceRequestModelNotNull.builder()
-                        .name(DataGeneratorDealService.getRandomName())
+                        .name(getRandomName())
                         .parameters(parameters)
                         .build()
         );
@@ -235,7 +236,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
         Response response = ApiMethodsSearchPlace.addSearchPlace(
                 AddSearchPlaceRequestModelNotNull.builder()
-                        .name(DataGeneratorDealService.getRandomName())
+                        .name(getRandomName())
                         .parameters(parameters)
                         .build()
         );
@@ -266,7 +267,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
         Response response = ApiMethodsSearchPlace.addSearchPlace(
                 AddSearchPlaceRequestModelNotNull.builder()
-                        .name(DataGeneratorDealService.getRandomName())
+                        .name(getRandomName())
                         .parameters(parameters)
                         .build()
         );
@@ -368,7 +369,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     public void testUpdateSearchPlaceWithIDOnlyIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
-        CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorDealService.createBasicSearchPlaceFileShareSMB();
+        CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
         ErrorModel responseErrorBody = ApiMethodsSearchPlace.updateSearchPlace(
@@ -398,7 +399,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
         ErrorModel responseErrorBody = ApiMethodsSearchPlace.updateSearchPlace(
                 UpdateSearchPlaceRequestModelNotNull.builder()
-                        .name(DataGeneratorDealService.getRandomName())
+                        .name(getRandomName())
                         .build()
         ).as(ErrorModel.class);
 
@@ -422,8 +423,8 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
         Response response = ApiMethodsSearchPlace.updateSearchPlace(
                 UpdateSearchPlaceRequestModelNotNull.builder()
-                        .name(DataGeneratorDealService.getRandomName())
-                        .id(DataGeneratorDealService.getRandomName(16))
+                        .name(getRandomName())
+                        .id(getRandomName(16))
                         .build()
         );
         ErrorModel responseErrorBody = response.as(ErrorModel.class);
@@ -530,7 +531,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     public void testUpdateSearchPlaceWithoutURIInParametersIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
-        CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorDealService.createBasicSearchPlaceFileShareSMB();
+        CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
         SearchPlaceParametersModelNotNull parameters = SearchPlaceParametersModelNotNull.builder()
                 .username("username")
@@ -541,7 +542,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
         Response response = ApiMethodsSearchPlace.updateSearchPlace(
                 UpdateSearchPlaceRequestModelNotNull.builder()
                         .id(responseSearchPlaceCreation.id)
-                        .name(DataGeneratorDealService.getRandomName())
+                        .name(getRandomName())
                         .parameters(parameters)
                         .build()
         );
@@ -566,7 +567,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     public void testUpdateSearchPlaceWithoutUsernameInParametersIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
-        CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorDealService.createBasicSearchPlaceFileShareSMB();
+        CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
         SearchPlaceParametersModelNotNull parameters = SearchPlaceParametersModelNotNull.builder()
                 .uri("uri")
@@ -577,7 +578,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
         Response response = ApiMethodsSearchPlace.updateSearchPlace(
                 UpdateSearchPlaceRequestModelNotNull.builder()
                         .id(responseSearchPlaceCreation.id)
-                        .name(DataGeneratorDealService.getRandomName())
+                        .name(getRandomName())
                         .parameters(parameters)
                         .build()
         );
@@ -602,7 +603,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     public void testUpdateSearchPlaceWithoutPasswordInParametersIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
-        CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorDealService.createBasicSearchPlaceFileShareSMB();
+        CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
         SearchPlaceParametersModelNotNull parameters = SearchPlaceParametersModelNotNull.builder()
                 .uri("uri")
@@ -613,7 +614,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
         Response response = ApiMethodsSearchPlace.updateSearchPlace(
                 UpdateSearchPlaceRequestModelNotNull.builder()
                         .id(responseSearchPlaceCreation.id)
-                        .name(DataGeneratorDealService.getRandomName())
+                        .name(getRandomName())
                         .parameters(parameters)
                         .build()
         );
@@ -638,7 +639,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     public void testAddSearchPlaceWithEmptyParametersIsImpossible1(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
-        CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorDealService.createBasicSearchPlaceFileShareSMB();
+        CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
         SearchPlaceParametersModelNotNull parameters = SearchPlaceParametersModelNotNull.builder()
                 .build();
@@ -647,7 +648,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
         Response response = ApiMethodsSearchPlace.updateSearchPlace(
                 UpdateSearchPlaceRequestModelNotNull.builder()
                         .id(responseSearchPlaceCreation.id)
-                        .name(DataGeneratorDealService.getRandomName())
+                        .name(getRandomName())
                         .parameters(parameters)
                         .build()
         );
@@ -721,7 +722,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         ErrorModel responseErrorBody = ApiMethodsSearchPlace.deleteSearchPlace(
-                DataGeneratorDealService.getRandomName(16)
+                getRandomName(16)
         ).as(ErrorModel.class);
 
         assertThat(responseErrorBody.title).isEqualTo(REQUEST_VALIDATION_ERROR);

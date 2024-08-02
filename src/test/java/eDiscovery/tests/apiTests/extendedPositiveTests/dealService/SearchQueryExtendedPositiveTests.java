@@ -2,7 +2,9 @@ package eDiscovery.tests.apiTests.extendedPositiveTests.dealService;
 
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsSearchQuery;
-import eDiscovery.data.DataGeneratorDealService;
+import eDiscovery.data.dealService.DataGeneratorDealManipulation;
+import eDiscovery.data.dealService.DataGeneratorSearchPlace;
+import eDiscovery.data.dealService.DataGeneratorSearchQuery;
 import eDiscovery.helpers.enums.SearchQueryType;
 import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
 import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModel;
@@ -23,6 +25,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Extended positive tests - SearchQuery")
@@ -35,7 +38,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @DisplayName("Создание поискового запроса c различными наименованиями")
     @Description("Тест проверяет возможность создания поискового запроса c различными наименованиями")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchQueryNames")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchQuery#getValidSearchQueryNames")
     public void testAddSearchQueryWithDifferentValidNames(String name){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -57,13 +60,13 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @DisplayName("Создание поискового запроса c различными type")
     @Description("Тест проверяет возможность создания поискового запроса c различными type")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchQueryTypes")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchQuery#getValidSearchQueryTypes")
     public void testAddSearchQueryWithDifferentValidTypes(String type){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
-                .name(DataGeneratorDealService.getRandomName())
+                .name(getRandomName())
                 .type(type)
                 .value("abc")
                 .build();
@@ -80,7 +83,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @DisplayName("Создание поискового запроса c различными values")
     @Description("Тест проверяет возможность создания поискового запроса c различными values")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchQueryValues")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchQuery#getValidSearchQueryValues")
     public void testAddSearchQueryWithDifferentValidValues(String value){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -98,12 +101,12 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение наименования в поисковом запросе")
     @Description("Тест проверяет возможность изменения наименования в поисковом запросе")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchQueryNames")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchQuery#getValidSearchQueryNames")
     public void testUpdateSearchQueryWithDifferentValidNames(String name){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorDealService.createBasicSearchQuery();
+        CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorSearchQuery.createBasicSearchQuery();
 
         UpdateSearchQueryRequestModel requestBody = UpdateSearchQueryRequestModel.builder()
                 .id(responseSearchQueryCreation.id)
@@ -127,15 +130,15 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorDealService.createBasicSearchQuery();
-        CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorDealService.createBasicSearchPlaceFileShareSMB();
+        CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorSearchQuery.createBasicSearchQuery();
+        CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
-        DataGeneratorDealService.createDealManipulationWithOnlyRequiredParameters(
+        DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters(
                 Collections.singletonList(responseSearchPlaceCreation.id),
                 Collections.singletonList(responseSearchQueryCreation.id)
         );
 
-        String nameForUpdate = DataGeneratorDealService.getRandomName();
+        String nameForUpdate = getRandomName();
 
         UpdateSearchQueryRequestModel requestBody = UpdateSearchQueryRequestModel.builder()
                 .id(responseSearchQueryCreation.id)
@@ -154,12 +157,12 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение type в поисковом запросе")
     @Description("Тест проверяет возможность изменения type в поисковом запросе")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchQueryTypes")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchQuery#getValidSearchQueryTypes")
     public void testUpdateSearchQueryWithDifferentValidTypes(String type){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorDealService.createBasicSearchQuery();
+        CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorSearchQuery.createBasicSearchQuery();
 
         UpdateSearchQueryRequestModel requestBody = UpdateSearchQueryRequestModel.builder()
                 .id(responseSearchQueryCreation.id)
@@ -184,10 +187,10 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorDealService.createBasicSearchQuery();
-        CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorDealService.createBasicSearchPlaceFileShareSMB();
+        CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorSearchQuery.createBasicSearchQuery();
+        CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
-        DataGeneratorDealService.createDealManipulationWithOnlyRequiredParameters(
+        DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters(
                 Collections.singletonList(responseSearchPlaceCreation.id),
                 Collections.singletonList(responseSearchQueryCreation.id)
         );
@@ -212,12 +215,12 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение value в поисковом запросе")
     @Description("Тест проверяет возможность изменения value в поисковом запросе")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchQueryValues")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchQuery#getValidSearchQueryValues")
     public void testUpdateSearchQueryWithDifferentValidValues(String value){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorDealService.createBasicSearchQuery();
+        CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorSearchQuery.createBasicSearchQuery();
 
         UpdateSearchQueryRequestModel requestBody = UpdateSearchQueryRequestModel.builder()
                 .id(responseSearchQueryCreation.id)
@@ -240,10 +243,10 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorDealService.createBasicSearchQuery();
-        CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorDealService.createBasicSearchPlaceFileShareSMB();
+        CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorSearchQuery.createBasicSearchQuery();
+        CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
-        DataGeneratorDealService.createDealManipulationWithOnlyRequiredParameters(
+        DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters(
                 Collections.singletonList(responseSearchPlaceCreation.id),
                 Collections.singletonList(responseSearchQueryCreation.id)
         );
@@ -251,7 +254,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         UpdateSearchQueryRequestModel requestBody = UpdateSearchQueryRequestModel.builder()
                 .id(responseSearchQueryCreation.id)
                 .name(responseSearchQueryCreation.name)
-                .value(DataGeneratorDealService.getRandomName())
+                .value(getRandomName())
                 .build();
 
         ApiMethodsSearchQuery.updateSearchQuery(requestBody).as(CommonSearchQueryResponseModel.class);
@@ -270,7 +273,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
+        DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
         Response response = ApiMethodsSearchQuery.getSearchQueryListWithIncludeDeletedParameter(includeDeleted);
 
         List<CommonSearchQueryResponseModel> responseBody = response.jsonPath().getList("", CommonSearchQueryResponseModel.class);
@@ -291,7 +294,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
+        DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
         Response response = ApiMethodsSearchQuery.getSearchQueryListODataWithIncludeDeletedParameter(includeDeleted);
 
         List<CommonSearchQueryResponseModel> responseBody = response.jsonPath().getList("value", CommonSearchQueryResponseModel.class);
@@ -310,9 +313,9 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
+        DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        String searchQueryNameForFilter = "testSearchQueryListODataWithFilter" + DataGeneratorDealService.getRandomName();
+        String searchQueryNameForFilter = "testSearchQueryListODataWithFilter" + getRandomName();
 
         AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
                 .name(searchQueryNameForFilter)
@@ -355,7 +358,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         Response responseBodyWithCount =
                 ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(responseParameters);
 
-        DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
+        DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
         Response responseBodyWithCountAfterAddNewOne =
                 ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(responseParameters);
@@ -380,9 +383,9 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
+        DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        String searchQueryNameForFilter = "testSearchQueryListODataWithDefaultAscendingSorting" + DataGeneratorDealService.getRandomName(10);
+        String searchQueryNameForFilter = "testSearchQueryListODataWithDefaultAscendingSorting" + getRandomName(10);
 
         for (int i = 0; i < 5; i++){
             String searchQueryNameForFilterWithNumber = searchQueryNameForFilter + i;
@@ -423,9 +426,9 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
+        DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        String searchQueryNameForFilter = "testSearchQueryListODataWithExplicitAscendingSorting" + DataGeneratorDealService.getRandomName(10);
+        String searchQueryNameForFilter = "testSearchQueryListODataWithExplicitAscendingSorting" + getRandomName(10);
 
         for (int i = 0; i < 5; i++){
             String searchQueryNameForFilterWithNumber = searchQueryNameForFilter + i;
@@ -465,9 +468,9 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
+        DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        String searchQueryNameForFilter = "testSearchQueryListODataWithExplicitDescendingSorting" + DataGeneratorDealService.getRandomName(10);
+        String searchQueryNameForFilter = "testSearchQueryListODataWithExplicitDescendingSorting" + getRandomName(10);
 
         for (int i = 0; i < 5; i++){
             String searchQueryNameForFilterWithNumber = searchQueryNameForFilter + i;
@@ -508,9 +511,9 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
+        DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        String searchQueryNameForFilter = "testSearchQueryListODataWithPagination" + DataGeneratorDealService.getRandomName(10);
+        String searchQueryNameForFilter = "testSearchQueryListODataWithPagination" + getRandomName(10);
 
         for (int i = 0; i < 10; i++){
             String searchQueryNameForFilterWithNumber = searchQueryNameForFilter + i;
@@ -566,9 +569,9 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
+        DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        String searchQueryNameForFilter = "testSearchQueryListODataWithPagination" + DataGeneratorDealService.getRandomName(10);
+        String searchQueryNameForFilter = "testSearchQueryListODataWithPagination" + getRandomName(10);
 
         for (int i = 0; i < 3; i++){
             String searchQueryNameForFilterWithNumber = searchQueryNameForFilter + i;

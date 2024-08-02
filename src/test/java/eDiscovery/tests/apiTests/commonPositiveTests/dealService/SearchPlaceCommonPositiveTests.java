@@ -2,7 +2,7 @@ package eDiscovery.tests.apiTests.commonPositiveTests.dealService;
 
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsSearchPlace;
-import eDiscovery.data.DataGeneratorDealService;
+import eDiscovery.data.dealService.DataGeneratorSearchPlace;
 import eDiscovery.models.deal.searchPlace.AddSearchPlaceRequestModel;
 import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
 import eDiscovery.models.deal.searchPlace.UpdateSearchPlaceRequestModel;
@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static eDiscovery.data.DataGeneratorDealService.getRandomName;
+import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Common positive tests - SearchPlace")
@@ -36,7 +36,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchPlaceRequestModel requestBody = DataGeneratorDealService.getSearchPlaceModelWithOnlyRequiredParameters();
+        AddSearchPlaceRequestModel requestBody = DataGeneratorSearchPlace.getSearchPlaceModelWithOnlyRequiredParameters();
 
         Response response = ApiMethodsSearchPlace.addSearchPlace(requestBody);
         CommonSearchPlaceResponseModel responseBody = response.as(CommonSearchPlaceResponseModel.class);
@@ -61,7 +61,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchPlaceRequestModel requestBodySearchPlaceCreation = DataGeneratorDealService.getBasicSearchPlaceModelFileShareSMB();
+        AddSearchPlaceRequestModel requestBodySearchPlaceCreation = DataGeneratorSearchPlace.getBasicSearchPlaceModelFileShareSMB();
         Response response = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation);
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = response.as(CommonSearchPlaceResponseModel.class);
 
@@ -92,7 +92,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     public void testDeleteSearchPlace(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
-        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
+        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
         ApiMethodsSearchPlace.deleteSearchPlace(responseBodySearchPlaceCreation.id);
@@ -109,7 +109,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
+        DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
         Response response = ApiMethodsSearchPlace.getSearchPlaceList();
 
         List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("", CommonSearchPlaceResponseModel.class);
@@ -128,7 +128,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
+        DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
         Response response = ApiMethodsSearchPlace.getSearchPlaceListOData();
 
         List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("value", CommonSearchPlaceResponseModel.class);

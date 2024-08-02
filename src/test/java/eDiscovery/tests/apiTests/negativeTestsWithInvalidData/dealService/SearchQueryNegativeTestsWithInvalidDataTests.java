@@ -2,7 +2,7 @@ package eDiscovery.tests.apiTests.negativeTestsWithInvalidData.dealService;
 
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsSearchQuery;
-import eDiscovery.data.DataGeneratorDealService;
+import eDiscovery.data.dealService.DataGeneratorSearchQuery;
 import eDiscovery.helpers.enums.SearchQueryType;
 import eDiscovery.models.ErrorModel;
 import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModelNotNull;
@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.UUID;
 
+import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.ErrorDescription.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -88,7 +89,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
                 AddSearchQueryRequestModelNotNull.builder()
-                        .name(DataGeneratorDealService.getRandomName())
+                        .name(getRandomName())
                         .build()
         );
         ErrorModel responseErrorBody = response.as(ErrorModel.class);
@@ -187,7 +188,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
                 AddSearchQueryRequestModelNotNull.builder()
-                        .name(DataGeneratorDealService.getRandomName())
+                        .name(getRandomName())
                         .build()
         );
         ErrorModel responseErrorBody = response.as(ErrorModel.class);
@@ -261,7 +262,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
         Response response = ApiMethodsSearchQuery.updateSearchQuery(
                 UpdateSearchQueryRequestModelNotNull.builder()
-                        .name(DataGeneratorDealService.getRandomName())
+                        .name(getRandomName())
                         .value("\\d{10}")
                         .build()
         );
@@ -287,7 +288,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
         Response response = ApiMethodsSearchQuery.updateSearchQuery(
                 UpdateSearchQueryRequestModelNotNull.builder()
-                        .name(DataGeneratorDealService.getRandomName())
+                        .name(getRandomName())
                         .build()
         );
         ErrorModel responseErrorBody = response.as(ErrorModel.class);
@@ -309,7 +310,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     public void testUpdateSearchQueryWithoutNameImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
-        CommonSearchQueryResponseModel responseCreation = DataGeneratorDealService.createBasicSearchQuery();
+        CommonSearchQueryResponseModel responseCreation = DataGeneratorSearchQuery.createBasicSearchQuery();
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
         Response response = ApiMethodsSearchQuery.updateSearchQuery(
@@ -392,7 +393,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
         Response response = ApiMethodsSearchQuery.updateSearchQuery(
                 UpdateSearchQueryRequestModelNotNull.builder()
                         .id(faker.internet().uuid())
-                        .name(DataGeneratorDealService.getRandomName())
+                        .name(getRandomName())
                         .type(SearchQueryType.Regex.name())
                         .build()
         );
@@ -436,7 +437,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
-        Response response = ApiMethodsSearchQuery.deleteSearchQuery(DataGeneratorDealService.getRandomName(16));
+        Response response = ApiMethodsSearchQuery.deleteSearchQuery(getRandomName(16));
         ErrorModel responseErrorBody = response.as(ErrorModel.class);
 
         assertThat(responseErrorBody.title).isEqualTo(REQUEST_VALIDATION_ERROR);

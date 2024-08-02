@@ -2,7 +2,9 @@ package eDiscovery.tests.apiTests.extendedPositiveTests.dealService;
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsDealManipulation;
 import eDiscovery.apiMethods.deal.ApiMethodsSearchPlace;
-import eDiscovery.data.DataGeneratorDealService;
+import eDiscovery.data.dealService.DataGeneratorDealManipulation;
+import eDiscovery.data.dealService.DataGeneratorSearchPlace;
+import eDiscovery.data.dealService.DataGeneratorSearchQuery;
 import eDiscovery.helpers.enums.SearchPlaceCategoryType;
 import eDiscovery.helpers.enums.SearchPlaceType;
 import eDiscovery.models.deal.searchPlace.AddSearchPlaceRequestModel;
@@ -25,7 +27,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import static eDiscovery.data.DataGeneratorDealService.getRandomName;
+import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Extended positive tests - SearchPlace")
@@ -38,7 +40,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Создание места поиска c различными наименованиями")
     @Description("Тест проверяет возможность создания места поиска c различными наименованиями")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceNames")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceNames")
     public void testAddSearchPlaceWithDifferentValidNames(String name){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -59,7 +61,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Создание места поиска c различными categoryType")
     @Description("Тест проверяет возможность создания места поиска c различными c различными categoryType")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceCategoryTypes")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceCategoryTypes")
     public void testAddSearchPlaceWithDifferentValidCategoryTypes(String categoryType){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -81,7 +83,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Создание места поиска c различными type")
     @Description("Тест проверяет возможность создания места поиска c различными c type")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceTypes")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceTypes")
     public void testAddSearchPlaceWithDifferentValidTypes(String type){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -103,7 +105,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Создание места поиска c различными uri в параметрах подключения")
     @Description("Тест проверяет возможность создания места поиска c различными uri в параметрах подключения")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceURIInParameters")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceURIInParameters")
     public void testAddSearchPlaceWithDifferentValidUriInParameters(String uri){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -131,7 +133,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Создание места поиска c различными username в параметрах подключения")
     @Description("Тест проверяет возможность создания места поиска c различными username в параметрах подключения")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceUsernamesInParameters")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceUsernamesInParameters")
     public void testAddSearchPlaceWithDifferentValidUsernamesInParameters(String username){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -159,7 +161,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Создание места поиска c различными password в параметрах подключения")
     @Description("Тест проверяет возможность создания места поиска c различными password в параметрах подключения")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlacePasswordsInParameters")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlacePasswordsInParameters")
     public void testAddSearchPlaceWithDifferentValidPasswordsInParameters(String password){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -187,7 +189,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Создание места поиска c различными исключениями директорий из поиска")
     @Description("Тест проверяет возможность создания места поиска c различными исключениями директорий из поиска")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceExclusions")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceExclusions")
     public void testAddSearchPlaceWithDifferentExcludes(String exclusion){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -211,7 +213,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Создание места поиска c различным количеством исключений директорий из поиска")
     @Description("Тест проверяет возможность создания места поиска c различным количеством исключений директорий из поиска")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceExclusionsWithDifferentCount")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceExclusionsWithDifferentCount")
     public void testAddSearchPlaceWithDifferentCountOfExcludes(List<String> excludes){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -234,12 +236,12 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение наименования места поиска с типом FileShare - SMB")
     @Description("Тест проверяет возможность изменения наименования места поиска с типом FileShare - SMB")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceNames")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceNames")
     public void testUpdateSearchPlaceNameWithDifferentValidNames(String name){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorDealService.createBasicSearchPlaceFileShareSMB();
+        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
         UpdateSearchPlaceRequestModel requestSearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
                 .name(name)
@@ -266,15 +268,15 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorDealService.createBasicSearchPlaceFileShareSMB();
-        CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
+        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
+        CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        ApiMethodsDealManipulation.addDeal(DataGeneratorDealService.getBasicDealManipulationModel(
+        ApiMethodsDealManipulation.addDeal(DataGeneratorDealManipulation.getBasicDealManipulationModel(
                 Collections.singletonList(responseBodySearchPlaceCreation.id),
                 Collections.singletonList(responseBodySearchQueryCreation.id)
         ));
 
-        String newName = DataGeneratorDealService.getRandomName();
+        String newName = getRandomName();
 
         UpdateSearchPlaceRequestModel requestSearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
                 .name(newName)
@@ -297,12 +299,12 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение categoryType в месте поиска с categoryType = FileShare, если место поиска не используется в деле")
     @Description("Тест проверяет возможность изменения categoryType в месте поиска с categoryType = FileShare, если место поиска не используется в деле")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceCategoryTypes")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceCategoryTypes")
     public void testUpdateSearchPlaceCategoryTypeInFileShareWithoutDeal(String categoryType){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorDealService.createBasicSearchPlaceFileShareSMB();
+        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
         UpdateSearchPlaceRequestModel requestSearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
                 .name(responseBodySearchPlaceCreation.name)
@@ -325,12 +327,12 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение type в месте поиска с categoryType = FileShare, если место поиска не используется в деле")
     @Description("Тест проверяет возможность изменения type в месте поиска с categoryType = FileShare, если место поиска не используется в деле")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceTypes")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceTypes")
     public void testUpdateSearchPlaceTypeInFileShareWithoutDeal(String type){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorDealService.createBasicSearchPlaceFileShareSMB();
+        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
         UpdateSearchPlaceRequestModel requestSearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
                 .name(responseBodySearchPlaceCreation.name)
@@ -353,7 +355,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение uri в параметрах места поиска с типом FileShare - SMB, если место поиска не используется в деле")
     @Description("Тест проверяет возможность изменения uri в параметрах места поиска с типом FileShare - SMB, если место поиска не используется в деле")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceURIInParameters")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceURIInParameters")
     public void testUpdateSearchPlaceUriParametersWithDifferentValidValues(String uri){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -365,7 +367,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
                 .build();
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
-                .name(DataGeneratorDealService.getRandomName())
+                .name(getRandomName())
                 .categoryType(SearchPlaceCategoryType.FileShare.name())
                 .type(SearchPlaceType.SMB.name())
                 .parameters(initialParameters)
@@ -401,7 +403,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение username в параметрах места поиска с типом FileShare - SMB, если место поиска не используется в деле")
     @Description("Тест проверяет возможность изменения username в параметрах места поиска с типом FileShare - SMB, если место поиска не используется в деле")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceUsernamesInParameters")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceUsernamesInParameters")
     public void testUpdateSearchPlaceUsernameParametersWithDifferentValidValues(String username){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -413,7 +415,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
                 .build();
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
-                .name(DataGeneratorDealService.getRandomName())
+                .name(getRandomName())
                 .categoryType(SearchPlaceCategoryType.FileShare.name())
                 .type(SearchPlaceType.SMB.name())
                 .parameters(initialParameters)
@@ -449,7 +451,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение password в параметрах места поиска с типом FileShare - SMB, если место поиска не используется в деле")
     @Description("Тест проверяет возможность изменения password в параметрах места поиска с типом FileShare - SMB, если место поиска не используется в деле")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlacePasswordsInParameters")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlacePasswordsInParameters")
     public void testUpdateSearchPlacePasswordParametersWithDifferentValidValues(String password){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -461,7 +463,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
                 .build();
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
-                .name(DataGeneratorDealService.getRandomName())
+                .name(getRandomName())
                 .categoryType(SearchPlaceCategoryType.FileShare.name())
                 .type(SearchPlaceType.SMB.name())
                 .parameters(initialParameters)
@@ -508,16 +510,16 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
                 .build();
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
-                .name(DataGeneratorDealService.getRandomName())
+                .name(getRandomName())
                 .categoryType(SearchPlaceCategoryType.FileShare.name())
                 .type(SearchPlaceType.SMB.name())
                 .parameters(initialParameters)
                 .build();
 
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);
-        CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
+        CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        ApiMethodsDealManipulation.addDeal(DataGeneratorDealService.getBasicDealManipulationModel(
+        ApiMethodsDealManipulation.addDeal(DataGeneratorDealManipulation.getBasicDealManipulationModel(
                 Collections.singletonList(responseBodySearchPlaceCreation.id),
                 Collections.singletonList(responseBodySearchQueryCreation.id)
         ));
@@ -549,13 +551,13 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение excludes места поиска с типом ARM - Local, если место поиска не используется в деле")
     @Description("Тест проверяет возможность изменения excludes в месте поиска с типом ARM - Local, если место поиска не используется в деле")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceExclusions")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceExclusions")
     public void testUpdateSearchPlaceExcludesInARMLocalWithDifferentValidValues(String exclusion){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
-                .name(DataGeneratorDealService.getRandomName())
+                .name(getRandomName())
                 .categoryType(SearchPlaceCategoryType.ARM.name())
                 .type(SearchPlaceType.LOCAL.name())
                 .excludes(Collections.singletonList("A:\\"))
@@ -587,13 +589,13 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение excludes места поиска с типом ARM - Local на разное количество исключений, если место поиска не используется в деле")
     @Description("Тест проверяет возможность изменения excludes в месте поиска с типом ARM - Local на разное количество исключений, если место поиска не используется в деле")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceExclusionsWithDifferentCount")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceExclusionsWithDifferentCount")
     public void testUpdateSearchPlaceExcludesInARMLocalWithDifferentCountOfExclusion(List<String> excludes){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
-                .name(DataGeneratorDealService.getRandomName())
+                .name(getRandomName())
                 .categoryType(SearchPlaceCategoryType.ARM.name())
                 .type(SearchPlaceType.LOCAL.name())
                 .excludes(Collections.singletonList("A:\\"))
@@ -628,16 +630,16 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestSearchPlaceCreation = AddSearchPlaceRequestModel.builder()
-                .name(DataGeneratorDealService.getRandomName())
+                .name(getRandomName())
                 .categoryType(SearchPlaceCategoryType.ARM.name())
                 .type(SearchPlaceType.LOCAL.name())
                 .excludes(Collections.singletonList("A:\\"))
                 .build();
 
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestSearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);
-        CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
+        CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        ApiMethodsDealManipulation.addDeal(DataGeneratorDealService.getBasicDealManipulationModel(
+        ApiMethodsDealManipulation.addDeal(DataGeneratorDealManipulation.getBasicDealManipulationModel(
                 Collections.singletonList(responseBodySearchPlaceCreation.id),
                 Collections.singletonList(responseBodySearchQueryCreation.id)
         ));
@@ -665,13 +667,13 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение excludes места поиска с типом FileShare - SMB, если место поиска не используется в деле")
     @Description("Тест проверяет возможность изменения excludes в месте поиска с типом FileShare - SMB, если место поиска не используется в деле")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceExclusions")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceExclusions")
     public void testUpdateSearchPlaceExcludesInFileShareSMBWithDifferentValidValues(String exclusion){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
-                .name(DataGeneratorDealService.getRandomName())
+                .name(getRandomName())
                 .categoryType(SearchPlaceCategoryType.FileShare.name())
                 .type(SearchPlaceType.SMB.name())
                 .excludes(Collections.singletonList("A:\\"))
@@ -702,13 +704,13 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение excludes места поиска с типом FileShare - SMB на разное количество исключений, если место поиска не используется в деле")
     @Description("Тест проверяет возможность изменения excludes в месте поиска с типом FileShare - SMB на разное количество исключений, если место поиска не используется в деле")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.DataGeneratorDealService#getValidSearchPlaceExclusionsWithDifferentCount")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceExclusionsWithDifferentCount")
     public void testUpdateSearchPlaceExcludesInFileShareSMBWithDifferentCountOfExclusion(List<String> excludes){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
-                .name(DataGeneratorDealService.getRandomName())
+                .name(getRandomName())
                 .categoryType(SearchPlaceCategoryType.FileShare.name())
                 .type(SearchPlaceType.SMB.name())
                 .excludes(Collections.singletonList("A:\\"))
@@ -743,16 +745,16 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestSearchPlaceCreation = AddSearchPlaceRequestModel.builder()
-                .name(DataGeneratorDealService.getRandomName())
+                .name(getRandomName())
                 .categoryType(SearchPlaceCategoryType.FileShare.name())
                 .type(SearchPlaceType.SMB.name())
                 .excludes(Collections.singletonList("A:\\"))
                 .build();
 
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestSearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);
-        CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorDealService.createSearchQueryWithOnlyRequiredParameters();
+        CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        ApiMethodsDealManipulation.addDeal(DataGeneratorDealService.getBasicDealManipulationModel(
+        ApiMethodsDealManipulation.addDeal(DataGeneratorDealManipulation.getBasicDealManipulationModel(
                 Collections.singletonList(responseBodySearchPlaceCreation.id),
                 Collections.singletonList(responseBodySearchQueryCreation.id)
         ));
@@ -784,7 +786,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
-                .name(DataGeneratorDealService.getRandomName())
+                .name(getRandomName())
                 .categoryType(SearchPlaceCategoryType.FileShare.name())
                 .type(SearchPlaceType.SMB.name())
                 .build();
@@ -808,7 +810,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
+        DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
         Response response = ApiMethodsSearchPlace.getSearchPlaceListWithIncludeDeletedParameter(includeDeleted);
 
         List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("", CommonSearchPlaceResponseModel.class);
@@ -829,7 +831,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
+        DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
         Response response = ApiMethodsSearchPlace.getSearchPlaceListODataWithIncludeDeletedParameter(includeDeleted);
 
         List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
@@ -848,9 +850,9 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
+        DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
 
-        String searchPlaceNameForFilter = "testSearchPlaceListODataWithFilter" + DataGeneratorDealService.getRandomName();
+        String searchPlaceNameForFilter = "testSearchPlaceListODataWithFilter" + getRandomName();
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(searchPlaceNameForFilter)
@@ -892,7 +894,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         Response responseBodyWithCount =
                 ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(responseParameters);
 
-        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
+        DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
 
         Response responseBodyWithCountAfterAddNewOne =
                 ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(responseParameters);
@@ -917,9 +919,9 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
+        DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
 
-        String searchPlaceNameForFilter = "testSearchPlaceListODataWithDefaultAscendingSorting" + DataGeneratorDealService.getRandomName(10);
+        String searchPlaceNameForFilter = "testSearchPlaceListODataWithDefaultAscendingSorting" + getRandomName(10);
 
         for (int i = 0; i < 5; i++){
             String searchPlaceNameForFilterWithNumber = searchPlaceNameForFilter + i;
@@ -959,9 +961,9 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
+        DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
 
-        String searchPlaceNameForFilter = "testSearchPlaceListODataWithExplicitAscendingSorting" + DataGeneratorDealService.getRandomName(10);
+        String searchPlaceNameForFilter = "testSearchPlaceListODataWithExplicitAscendingSorting" + getRandomName(10);
 
         for (int i = 0; i < 5; i++){
             String searchPlaceNameForFilterWithNumber = searchPlaceNameForFilter + i;
@@ -1001,9 +1003,9 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
+        DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
 
-        String searchPlaceNameForFilter = "testSearchPlaceListODataWithExplicitDescendingSorting" + DataGeneratorDealService.getRandomName(10);
+        String searchPlaceNameForFilter = "testSearchPlaceListODataWithExplicitDescendingSorting" + getRandomName(10);
 
         for (int i = 0; i < 5; i++){
             String searchPlaceNameForFilterWithNumber = searchPlaceNameForFilter + i;
@@ -1043,9 +1045,9 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
+        DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
 
-        String searchPlaceNameForFilter = "testSearchPlaceListODataWithPagination" + DataGeneratorDealService.getRandomName(10);
+        String searchPlaceNameForFilter = "testSearchPlaceListODataWithPagination" + getRandomName(10);
 
         for (int i = 0; i < 10; i++){
             String searchPlaceNameForFilterWithNumber = searchPlaceNameForFilter + i;
@@ -1100,9 +1102,9 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealService.createSearchPlaceWithOnlyRequiredParameters();
+        DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
 
-        String searchPlaceNameForFilter = "testSearchPlaceListODataWithPagination" + DataGeneratorDealService.getRandomName(10);
+        String searchPlaceNameForFilter = "testSearchPlaceListODataWithPagination" + getRandomName(10);
 
         for (int i = 0; i < 3; i++){
             String searchPlaceNameForFilterWithNumber = searchPlaceNameForFilter + i;
