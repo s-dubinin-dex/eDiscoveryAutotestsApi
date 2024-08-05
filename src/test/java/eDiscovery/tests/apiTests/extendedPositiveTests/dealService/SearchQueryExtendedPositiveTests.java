@@ -330,11 +330,11 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         assertThat(responseBodyWithoutFilter.size()).isGreaterThan(1);
         assertThat(responseBodyWithoutFilter.get(0)).isNotNull();
 
-        HashMap<String, String> responseParameters = new HashMap<>();
-        responseParameters.put("$filter", "contains(name, '" + searchQueryNameForFilter + "')");
+        HashMap<String, String> requestParameters = new HashMap<>();
+        requestParameters.put("$filter", "contains(name, '" + searchQueryNameForFilter + "')");
 
         List<CommonSearchQueryResponseModel> responseBodyWithFilter =
-                ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(responseParameters)
+                ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(requestParameters)
                         .jsonPath().getList("value", CommonSearchQueryResponseModel.class);
 
         assertThat(responseBodyWithFilter.size()).isEqualTo(1);
@@ -352,16 +352,16 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        HashMap<String, String> responseParameters = new HashMap<>();
-        responseParameters.put("$count", "true");
+        HashMap<String, String> requestParameters = new HashMap<>();
+        requestParameters.put("$count", "true");
 
         Response responseBodyWithCount =
-                ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(responseParameters);
+                ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(requestParameters);
 
         DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
         Response responseBodyWithCountAfterAddNewOne =
-                ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(responseParameters);
+                ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(requestParameters);
 
         int resultCount = responseBodyWithCount.jsonPath().getInt("\"@odata.count\"");
         int resultCountAfterAddNewOne = responseBodyWithCountAfterAddNewOne.jsonPath().getInt("\"@odata.count\"");

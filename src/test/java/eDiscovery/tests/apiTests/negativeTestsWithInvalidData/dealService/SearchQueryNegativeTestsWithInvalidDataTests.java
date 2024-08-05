@@ -182,7 +182,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса без передачи value")
     @Description("Тест проверяет невозможность создания поискового запроса без передачи value")
-    public void testAddSearchQueryWithoutValueOnlyIsImpossible(){
+    public void testAddSearchQueryWithoutValueIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 

@@ -137,7 +137,7 @@ public class SearchQueryNegativeTestsWithValidDataTests extends TestBase {
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность удалить используемый поисковый запрос")
     @Description("Тест проверяет невозможность удалить используемый поисковый запрос")
-    public void testDeleteSearchQueryFileShareSMBUsedInDealIsImpossible(){
+    public void testDeleteSearchQueryUsedInDealIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
 
         CommonSearchPlaceResponseModel responseSearchPlaceCreationBody = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();

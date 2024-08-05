@@ -97,7 +97,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
                 .id(responseBodyDealCreation.id)
                 .name(getRandomName())
                 .searchPlaces(requestBodyDealCreation.searchPlaces)
-                .searchQueueries(requestBodyDealCreation.searchQueueries)
+                .searchQueueries(requestBodyDealCreation.searchQueries)
                 .build();
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
