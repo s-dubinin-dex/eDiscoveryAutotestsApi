@@ -45,6 +45,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
 
         AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
                 .name(name)
+                .type(SearchQueryType.Regex.name())
                 .value("abc")
                 .build();
 
@@ -88,10 +89,13 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchQueryRequestModel.builder()
-                .name(DataGeneratorDealService.getRandomName())
+        AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
+                .name(getRandomName())
+                .type(SearchQueryType.Regex.name())
                 .value(value)
                 .build();
+
+        ApiMethodsSearchQuery.addSearchQuery(requestBody);
     }
 
     @Epic("Сервис Deal")
@@ -111,6 +115,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         UpdateSearchQueryRequestModel requestBody = UpdateSearchQueryRequestModel.builder()
                 .id(responseSearchQueryCreation.id)
                 .name(name)
+                .type(SearchQueryType.Regex.name())
                 .value("abc")
                 .build();
 
@@ -143,6 +148,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         UpdateSearchQueryRequestModel requestBody = UpdateSearchQueryRequestModel.builder()
                 .id(responseSearchQueryCreation.id)
                 .name(nameForUpdate)
+                .type(SearchQueryType.Regex.name())
                 .value("abc")
                 .build();
 
@@ -225,6 +231,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         UpdateSearchQueryRequestModel requestBody = UpdateSearchQueryRequestModel.builder()
                 .id(responseSearchQueryCreation.id)
                 .name(responseSearchQueryCreation.name)
+                .type(SearchQueryType.Regex.name())
                 .value(value)
                 .build();
 
@@ -254,6 +261,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         UpdateSearchQueryRequestModel requestBody = UpdateSearchQueryRequestModel.builder()
                 .id(responseSearchQueryCreation.id)
                 .name(responseSearchQueryCreation.name)
+                .type(SearchQueryType.Regex.name())
                 .value(getRandomName())
                 .build();
 
@@ -319,6 +327,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
 
         AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
                 .name(searchQueryNameForFilter)
+                .type(SearchQueryType.Regex.name())
                 .value("\\d{10}")
                 .build();
         ApiMethodsSearchQuery.addSearchQuery(requestBody);
@@ -391,6 +400,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
             String searchQueryNameForFilterWithNumber = searchQueryNameForFilter + i;
             AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
                     .name(searchQueryNameForFilterWithNumber)
+                    .type(SearchQueryType.Regex.name())
                     .value("\\d{10}")
                     .build();
             ApiMethodsSearchQuery.addSearchQuery(requestBody);
@@ -434,6 +444,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
             String searchQueryNameForFilterWithNumber = searchQueryNameForFilter + i;
             AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
                     .name(searchQueryNameForFilterWithNumber)
+                    .type(SearchQueryType.Regex.name())
                     .value("\\d{10}")
                     .build();
             ApiMethodsSearchQuery.addSearchQuery(requestBody);
@@ -476,6 +487,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
             String searchQueryNameForFilterWithNumber = searchQueryNameForFilter + i;
             AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
                     .name(searchQueryNameForFilterWithNumber)
+                    .type(SearchQueryType.Regex.name())
                     .value("\\d{10}")
                     .build();
             ApiMethodsSearchQuery.addSearchQuery(requestBody);
@@ -519,6 +531,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
             String searchQueryNameForFilterWithNumber = searchQueryNameForFilter + i;
             AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
                     .name(searchQueryNameForFilterWithNumber)
+                    .type(SearchQueryType.Regex.name())
                     .value("\\d{10}")
                     .build();
             ApiMethodsSearchQuery.addSearchQuery(requestBody);
@@ -577,6 +590,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
             String searchQueryNameForFilterWithNumber = searchQueryNameForFilter + i;
             AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
                     .name(searchQueryNameForFilterWithNumber)
+                    .type(SearchQueryType.Regex.name())
                     .value("\\d{10}")
                     .build();
             ApiMethodsSearchQuery.addSearchQuery(requestBody);

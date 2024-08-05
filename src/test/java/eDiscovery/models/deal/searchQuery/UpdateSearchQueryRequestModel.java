@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class UpdateSearchQueryRequestModel {
     @JsonInclude()
     public String name;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude()
     public String type;
     @JsonInclude()
     public String value;

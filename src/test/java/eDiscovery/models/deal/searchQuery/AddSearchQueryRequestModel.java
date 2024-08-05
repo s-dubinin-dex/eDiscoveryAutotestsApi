@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddSearchQueryRequestModel {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude()
     public String type;
     @JsonInclude()
     public String name;

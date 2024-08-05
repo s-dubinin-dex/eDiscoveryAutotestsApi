@@ -40,7 +40,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         CommonSearchQueryResponseModel responseBody = response.as(CommonSearchQueryResponseModel.class);
 
         assertThat(responseBody.name).isEqualTo(requestBody.name);
-        assertThat(responseBody.type).isEqualTo(SearchQueryType.Undefined.name());
+        assertThat(responseBody.type).isEqualTo(SearchQueryType.Regex.name());
         assertThat(responseBody.id).isNotBlank();
     }
 
@@ -59,6 +59,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
 
         UpdateSearchQueryRequestModel requestModelSearchQueryCreation = UpdateSearchQueryRequestModel.builder()
                 .name(getRandomName())
+                .type(SearchQueryType.Text.name())
                 .value("\\d{11}")
                 .id(responseBodySearchQueryCreation.id)
                 .build();
@@ -68,7 +69,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         CommonSearchQueryResponseModel responseBodySearchQueryUpdate = responseSearchQueryUpdate.as(CommonSearchQueryResponseModel.class);
 
         assertThat(responseBodySearchQueryUpdate.name).isEqualTo(requestModelSearchQueryCreation.name);
-        assertThat(responseBodySearchQueryUpdate.type).isEqualTo(SearchQueryType.Undefined.name());
+        assertThat(responseBodySearchQueryUpdate.type).isEqualTo(SearchQueryType.Text.name());
         assertThat(responseBodySearchQueryUpdate.id).isNotBlank();
     }
 

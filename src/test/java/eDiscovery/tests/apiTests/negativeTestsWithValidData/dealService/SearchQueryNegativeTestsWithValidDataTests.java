@@ -5,6 +5,7 @@ import eDiscovery.apiMethods.deal.ApiMethodsSearchQuery;
 import eDiscovery.data.dealService.DataGeneratorDealManipulation;
 import eDiscovery.data.dealService.DataGeneratorSearchPlace;
 import eDiscovery.data.dealService.DataGeneratorSearchQuery;
+import eDiscovery.helpers.enums.SearchQueryType;
 import eDiscovery.models.ErrorModel;
 import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
 import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModel;
@@ -40,6 +41,7 @@ public class SearchQueryNegativeTestsWithValidDataTests extends TestBase {
 
         AddSearchQueryRequestModel requestBodySearchQueryCreation = AddSearchQueryRequestModel.builder()
                 .name(name)
+                .type(SearchQueryType.Regex.name())
                 .value("\\d{10}")
                 .build();
 
@@ -70,6 +72,7 @@ public class SearchQueryNegativeTestsWithValidDataTests extends TestBase {
                 UpdateSearchQueryRequestModel.builder()
                         .id(uuid)
                         .name(getRandomName())
+                        .type(SearchQueryType.Regex.name())
                         .value("\\d{10}")
                         .build()
         ).as(ErrorModel.class);
@@ -97,6 +100,7 @@ public class SearchQueryNegativeTestsWithValidDataTests extends TestBase {
         UpdateSearchQueryRequestModel requestSearchQueryUpdateBody = UpdateSearchQueryRequestModel.builder()
                 .name(responseSearchQueryCreationForUpdatingExists.name)
                 .id(responseSearchQueryCreationForUpdating.id)
+                .type(SearchQueryType.Regex.name())
                 .value("\\d{10}")
                 .build();
 

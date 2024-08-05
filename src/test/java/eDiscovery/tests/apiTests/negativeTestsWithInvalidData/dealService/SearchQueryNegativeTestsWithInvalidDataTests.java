@@ -15,6 +15,8 @@ import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
 import java.util.UUID;
@@ -113,6 +115,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
                 AddSearchQueryRequestModelNotNull.builder()
+                        .type(SearchQueryType.Regex.name())
                         .value("\\d{10}")
                         .build()
         );
@@ -122,6 +125,58 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
         assertThat(responseErrorBody.status).isEqualTo(400);
         assertThat(responseErrorBody.detail).isEqualTo(SEE_ERRORS_FOR_DETAILS);
         assertThat(responseErrorBody.errors.name.get(0).errorCode).isEqualTo(VALIDATIONS_THE_NAME_FIELD_IS_REQUIRED);
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Создание поискового запроса")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность создания поискового запроса с некорректным name")
+    @Description("Тест проверяет невозможность создания поискового запроса с некорректным name")
+    @ParameterizedTest
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchQuery#getInvalidSearchQueryNames")
+    public void testAddSearchQueryWithInvalidNameIsImpossible(String name){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
+
+        Response response = ApiMethodsSearchQuery.addSearchQuery(
+                AddSearchQueryRequestModelNotNull.builder()
+                        .name(name)
+                        .type(SearchQueryType.Regex.name())
+                        .value("\\d{10}")
+                        .build()
+        );
+        ErrorModel responseErrorBody = response.as(ErrorModel.class);
+
+        assertThat(responseErrorBody.type).isEqualTo(ERRORS_ARGUMENT_EXCEPTION);
+        assertThat(responseErrorBody.message).isEqualTo(INCORRECT_NAME);
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Создание поискового запроса")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность создания поискового запроса с длиной name, превышающим допустимую длину")
+    @Description("Тест проверяет невозможность создания поискового запроса с длиной name, превышающим допустимую длину")
+    public void testAddSearchQueryWithExceedingNameLengthIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
+
+        Response response = ApiMethodsSearchQuery.addSearchQuery(
+                AddSearchQueryRequestModelNotNull.builder()
+                        .name(DataGeneratorSearchQuery.getSearchQueryNameWithExceedingLength())
+                        .type(SearchQueryType.Regex.name())
+                        .value("\\d{10}")
+                        .build()
+        );
+        ErrorModel responseErrorBody = response.as(ErrorModel.class);
+
+        assertThat(responseErrorBody.title).isEqualTo(REQUEST_VALIDATION_ERROR);
+        assertThat(responseErrorBody.status).isEqualTo(400);
+        assertThat(responseErrorBody.detail).isEqualTo(SEE_ERRORS_FOR_DETAILS);
+
+        assertThat(responseErrorBody.errors.name.get(0).errorCode).isEqualTo(VALIDATIONS_THE_FIELD_NAME_MAXIMUM_LENGTH_IS_256);
     }
 
     @Test
@@ -149,6 +204,84 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
         assertThat(responseErrorBody.errors.name.get(0).errorCode).isEqualTo(VALIDATIONS_THE_NAME_FIELD_IS_REQUIRED);
 
         assertThat(responseErrorBody.errors.value.get(0).errorCode).isEqualTo(VALIDATIONS_THE_VALUE_FIELD_IS_REQUIRED);
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Создание поискового запроса")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность создания поискового запроса без передачи type")
+    @Description("Тест проверяет невозможность создания поискового запроса без передачи type")
+    public void testAddSearchQueryWithoutTypeIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
+
+        Response response = ApiMethodsSearchQuery.addSearchQuery(
+                AddSearchQueryRequestModelNotNull.builder()
+                        .name(getRandomName())
+                        .value("\\d{10}")
+                        .build()
+        );
+        ErrorModel responseErrorBody = response.as(ErrorModel.class);
+
+        assertThat(responseErrorBody.type).isEqualTo(ERRORS_ARGUMENT_EXCEPTION);
+        assertThat(responseErrorBody.message).isEqualTo(TYPE_FIELD_IS_INCORRECT_UNSUPPORTABLE_UNDEFINED_VALUE);
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Создание поискового запроса")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность создания поискового с несуществующим type")
+    @Description("Тест проверяет невозможность создания поискового запроса с несуществующим type")
+    public void testAddSearchQueryWithNotExistingTypeIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
+
+        Response response = ApiMethodsSearchQuery.addSearchQuery(
+                AddSearchQueryRequestModelNotNull.builder()
+                        .name(getRandomName())
+                        .type(getRandomName())
+                        .value("\\d{10}")
+                        .build()
+        );
+        ErrorModel responseErrorBody = response.as(ErrorModel.class);
+
+        assertThat(responseErrorBody.title).isEqualTo(REQUEST_VALIDATION_ERROR);
+        assertThat(responseErrorBody.status).isEqualTo(400);
+        assertThat(responseErrorBody.detail).isEqualTo(SEE_ERRORS_FOR_DETAILS);
+        assertThat(responseErrorBody.errors.newEntity.get(0).errorCode).isEqualTo(VALIDATIONS_THE_NEW_ENTITY_FIELD_IS_REQUIRED);
+
+        List<ErrorModel.ErrorModelDetail> errorTypeBody = response.jsonPath()
+                .getList("errors['$.type']", ErrorModel.ErrorModelDetail.class);
+
+        assertThat(errorTypeBody.get(0).errorCode).matches(VALIDATIONS_THE_JSON_VALUE_NOT_BE_CONVERTED_TO_SEARCH_QUERY_TYPE);
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Создание поискового запроса")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность создания поискового запроса c type = Undefined")
+    @Description("Тест проверяет невозможность создания поискового запроса c type = Undefined")
+    public void testAddSearchQueryWithUndefinedTypeIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
+
+        Response response = ApiMethodsSearchQuery.addSearchQuery(
+                AddSearchQueryRequestModelNotNull.builder()
+                        .name(getRandomName())
+                        .type(SearchQueryType.Undefined.name())
+                        .value("\\d{10}")
+                        .build()
+        );
+        ErrorModel responseErrorBody = response.as(ErrorModel.class);
+
+        assertThat(responseErrorBody.type).isEqualTo(ERRORS_ARGUMENT_EXCEPTION);
+        assertThat(responseErrorBody.message).isEqualTo(TYPE_FIELD_IS_INCORRECT_UNSUPPORTABLE_UNDEFINED_VALUE);
     }
 
     @Test
@@ -189,6 +322,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
         Response response = ApiMethodsSearchQuery.addSearchQuery(
                 AddSearchQueryRequestModelNotNull.builder()
                         .name(getRandomName())
+                        .type(SearchQueryType.Regex.name())
                         .build()
         );
         ErrorModel responseErrorBody = response.as(ErrorModel.class);
@@ -221,6 +355,31 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
         assertThat(errorsWithEmptyKey.get(0).errorCode).isEqualTo(VALIDATIONS_A_NON_EMPTY_REQUEST_BODY_IS_REQUIRED);
 
         assertThat(responseErrorBody.errors.editEntity.get(0).errorCode).isEqualTo(VALIDATIONS_THE_EDIT_ENTITY_FIELD_IS_REQUIRED);
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Изменение поискового запроса")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность изменения поискового запроса с пустым телом")
+    @Description("Тест проверяет невозможность изменения поискового запроса с пустым телом")
+    public void testUpdateSearchQueryWithEmptyBodyIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
+
+        Response response = ApiMethodsSearchQuery.updateSearchQuery(
+                UpdateSearchQueryRequestModelNotNull.builder().build()
+        );
+        ErrorModel responseErrorBody = response.as(ErrorModel.class);
+
+        assertThat(responseErrorBody.title).isEqualTo(REQUEST_VALIDATION_ERROR);
+        assertThat(responseErrorBody.status).isEqualTo(400);
+        assertThat(responseErrorBody.detail).isEqualTo(SEE_ERRORS_FOR_DETAILS);
+
+        assertThat(responseErrorBody.errors.name.get(0).errorCode).isEqualTo(VALIDATIONS_THE_NAME_FIELD_IS_REQUIRED);
+        assertThat(responseErrorBody.errors.value.get(0).errorCode).isEqualTo(VALIDATIONS_THE_VALUE_FIELD_IS_REQUIRED);
+
     }
 
     @Test
@@ -263,6 +422,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
         Response response = ApiMethodsSearchQuery.updateSearchQuery(
                 UpdateSearchQueryRequestModelNotNull.builder()
                         .name(getRandomName())
+                        .type(SearchQueryType.Regex.name())
                         .value("\\d{10}")
                         .build()
         );
@@ -316,6 +476,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
         Response response = ApiMethodsSearchQuery.updateSearchQuery(
                 UpdateSearchQueryRequestModelNotNull.builder()
                         .id(responseCreation.id)
+                        .type(SearchQueryType.Regex.name())
                         .value("\\d{10}")
                         .build()
         );
@@ -352,6 +513,87 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
         assertThat(responseErrorBody.errors.name.get(0).errorCode).isEqualTo(VALIDATIONS_THE_NAME_FIELD_IS_REQUIRED);
         assertThat(responseErrorBody.errors.value.get(0).errorCode).isEqualTo(VALIDATIONS_THE_VALUE_FIELD_IS_REQUIRED);
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Изменение поискового запроса")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность изменения поискового запроса без передачи type")
+    @Description("Тест проверяет невозможность изменения поискового запроса без передачи type")
+    public void testUpdateSearchQueryWithoutTypeIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
+
+        Response response = ApiMethodsSearchQuery.updateSearchQuery(
+                UpdateSearchQueryRequestModelNotNull.builder()
+                        .id(faker.internet().uuid())
+                        .name(getRandomName())
+                        .value("\\d{10}")
+                        .build()
+        );
+        ErrorModel responseErrorBody = response.as(ErrorModel.class);
+
+        assertThat(responseErrorBody.type).isEqualTo(ERRORS_ARGUMENT_EXCEPTION);
+        assertThat(responseErrorBody.message).isEqualTo(TYPE_FIELD_IS_INCORRECT_UNSUPPORTABLE_UNDEFINED_VALUE);
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Изменение поискового запроса")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность изменения поискового запроса с несуществующим type")
+    @Description("Тест проверяет невозможность изменения поискового запроса с несуществующим type")
+    public void testUpdateSearchQueryWithNotExistingTypeIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
+
+        Response response = ApiMethodsSearchQuery.updateSearchQuery(
+                UpdateSearchQueryRequestModelNotNull.builder()
+                        .id(faker.internet().uuid())
+                        .name(getRandomName())
+                        .type(getRandomName())
+                        .value("\\d{10}")
+                        .build()
+        );
+        ErrorModel responseErrorBody = response.as(ErrorModel.class);
+
+        assertThat(responseErrorBody.title).isEqualTo(REQUEST_VALIDATION_ERROR);
+        assertThat(responseErrorBody.status).isEqualTo(400);
+        assertThat(responseErrorBody.detail).isEqualTo(SEE_ERRORS_FOR_DETAILS);
+        assertThat(responseErrorBody.errors.editEntity.get(0).errorCode).isEqualTo(VALIDATIONS_THE_EDIT_ENTITY_FIELD_IS_REQUIRED);
+
+        List<ErrorModel.ErrorModelDetail> errorTypeBody = response.jsonPath()
+                .getList("errors['$.type']", ErrorModel.ErrorModelDetail.class);
+
+        assertThat(errorTypeBody.get(0).errorCode).matches(VALIDATIONS_THE_JSON_VALUE_NOT_BE_CONVERTED_TO_SEARCH_QUERY_TYPE);
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Изменение поискового запроса")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность изменения поискового запроса с type = Undefined")
+    @Description("Тест проверяет невозможность изменения поискового запроса с type = Undefined")
+    public void testUpdateSearchQueryWithUndefinedTypeIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
+
+        Response response = ApiMethodsSearchQuery.updateSearchQuery(
+                UpdateSearchQueryRequestModelNotNull.builder()
+                        .id(faker.internet().uuid())
+                        .name(getRandomName())
+                        .type(SearchQueryType.Undefined.name())
+                        .value("\\d{10}")
+                        .build()
+        );
+        ErrorModel responseErrorBody = response.as(ErrorModel.class);
+
+        assertThat(responseErrorBody.type).isEqualTo(ERRORS_ARGUMENT_EXCEPTION);
+        assertThat(responseErrorBody.message).isEqualTo(TYPE_FIELD_IS_INCORRECT_UNSUPPORTABLE_UNDEFINED_VALUE);
     }
 
     @Test
