@@ -20,8 +20,8 @@ public class AddDealManipulationRequestModel {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<String> excludes;
     @JsonInclude()
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<String> searchQueries;
+    @JsonInclude()
     public String dealStatus;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public boolean quarantine;

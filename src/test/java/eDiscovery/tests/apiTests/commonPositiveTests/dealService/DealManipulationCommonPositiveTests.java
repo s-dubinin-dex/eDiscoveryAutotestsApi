@@ -62,8 +62,8 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         assertThat(responseBody.name).isEqualTo(requestBody.name);
         assertThat(responseBody.quarantine).isEqualTo(false);
         assertThat(responseBody.searchPlaces).isEqualTo(Collections.singletonList(searchPlaceRequestBody.name));
-        assertThat(responseBody.searchQueueries).isEqualTo(Collections.singletonList(searchQueryRequestBody.name));
-        assertThat(responseBody.dealStatus).isEqualTo(DealStatus.Undefined.name());
+        assertThat(responseBody.searchQueries).isEqualTo(Collections.singletonList(searchQueryRequestBody.name));
+        assertThat(responseBody.dealStatus).isEqualTo(DealStatus.Waiting.name());
         assertThat(responseBody.creatorUserId).isNotBlank();
         assertThat(responseBody.creatorUserName).isEqualTo("Администратор");
 
@@ -97,7 +97,8 @@ public class DealManipulationCommonPositiveTests extends TestBase {
                 .id(responseBodyDealCreation.id)
                 .name(getRandomName())
                 .searchPlaces(requestBodyDealCreation.searchPlaces)
-                .searchQueueries(requestBodyDealCreation.searchQueries)
+                .searchQueries(requestBodyDealCreation.searchQueries)
+                .dealStatus(DealStatus.Waiting.name())
                 .build();
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -109,8 +110,8 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         assertThat(responseBodyDealUpdate.name).isEqualTo(requestBodyDealUpdate.name);
         assertThat(responseBodyDealUpdate.quarantine).isEqualTo(false);
         assertThat(responseBodyDealUpdate.searchPlaces).isEqualTo(Collections.singletonList(searchPlaceRequestBody.name));
-        assertThat(responseBodyDealUpdate.searchQueueries).isEqualTo(Collections.singletonList(searchQueryRequestBody.name));
-        assertThat(responseBodyDealUpdate.dealStatus).isEqualTo(DealStatus.Undefined.name());
+        assertThat(responseBodyDealUpdate.searchQueries).isEqualTo(Collections.singletonList(searchQueryRequestBody.name));
+        assertThat(responseBodyDealUpdate.dealStatus).isEqualTo(DealStatus.Waiting.name());
         assertThat(responseBodyDealUpdate.creatorUserId).isNotBlank();
         assertThat(responseBodyDealUpdate.creatorUserName).isEqualTo("Администратор");
 
@@ -166,7 +167,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         assertThat(responseDealCardBody.name).isEqualTo(requestDealCreationBody.name);
         assertThat(responseDealCardBody.quarantine).isEqualTo(requestDealCreationBody.quarantine);
         assertThat(responseDealCardBody.searchPlaces).isEqualTo(Collections.singletonList(searchPlaceRequestBody.name));
-        assertThat(responseDealCardBody.searchQueueries).isEqualTo(Collections.singletonList(searchQueryRequestBody.name));
+        assertThat(responseDealCardBody.searchQueries).isEqualTo(Collections.singletonList(searchQueryRequestBody.name));
         assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Waiting.name());
         assertThat(responseDealCardBody.creatorUserId).isEqualTo(responseDealCreationBody.creatorUserId);
         assertThat(responseDealCardBody.creatorUserName).isEqualTo(responseDealCreationBody.creatorUserName);

@@ -33,7 +33,8 @@ public class ApiMethodsDealManipulation extends UrlBase {
                 .body(addDealManipulationRequestModel)
                 .when()
                 .post(DEAL_MANIPULATION)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Изменение дела")
@@ -44,7 +45,8 @@ public class ApiMethodsDealManipulation extends UrlBase {
                 .body(updateDealManipulationRequestModel)
                 .when()
                 .put(DEAL_MANIPULATION)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Удаление дела")
@@ -55,7 +57,8 @@ public class ApiMethodsDealManipulation extends UrlBase {
                 .param("id", dealId)
                 .when()
                 .delete(DEAL_MANIPULATION)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Просмотр информации по делу")
@@ -66,7 +69,8 @@ public class ApiMethodsDealManipulation extends UrlBase {
                 .param("id", dealId)
                 .when()
                 .get(DEAL_MANIPULATION_CARD)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Восстановление удалённого дела (СЛУЖЕБНЫЙ МЕТОД)")
@@ -77,7 +81,8 @@ public class ApiMethodsDealManipulation extends UrlBase {
                 .param("id", dealId)
                 .when()
                 .put(DEAL_MANIPULATION_RESTORE)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Закрытие дела")
@@ -88,7 +93,8 @@ public class ApiMethodsDealManipulation extends UrlBase {
                 .param("id", dealId)
                 .when()
                 .put(DEAL_MANIPULATION_CLOSE)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Открытие закрытого дела (СЛУЖЕБНЫЙ МЕТОД)")
@@ -99,7 +105,8 @@ public class ApiMethodsDealManipulation extends UrlBase {
                 .param("id", dealId)
                 .when()
                 .put(DEAL_MANIPULATION_UNCLOSE)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Остановка дела")
@@ -110,7 +117,8 @@ public class ApiMethodsDealManipulation extends UrlBase {
                 .param("id", dealId)
                 .when()
                 .put(DEAL_MANIPULATION_STOP)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Запуск дела")
@@ -121,7 +129,8 @@ public class ApiMethodsDealManipulation extends UrlBase {
                 .param("id", dealId)
                 .when()
                 .put(DEAL_MANIPULATION_START)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Помещение файла в карантин")
@@ -132,7 +141,8 @@ public class ApiMethodsDealManipulation extends UrlBase {
                 .body(toOutQuarantineRequestModel)
                 .when()
                 .put(DEAL_MANIPULATION_TO_QUARANTINE)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Изъятие файла из карантина")
@@ -143,7 +153,8 @@ public class ApiMethodsDealManipulation extends UrlBase {
                 .body(toOutQuarantineRequestModel)
                 .when()
                 .put(DEAL_MANIPULATION_OUT_QUARANTINE)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Экспорт файла")
@@ -154,7 +165,8 @@ public class ApiMethodsDealManipulation extends UrlBase {
                 .body(toExportRequestModel)
                 .when()
                 .put(DEAL_MANIPULATION_TO_EXPORT)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Получение списка активных задач по агенту")
@@ -165,7 +177,8 @@ public class ApiMethodsDealManipulation extends UrlBase {
                 .body(activeTasksRequestsModel)
                 .when()
                 .get(DEAL_MANIPULATION_ACTIVE_TASKS)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Изменение статуса задачи (СЛУЖЕБНЫЙ МЕТОД)")
@@ -176,7 +189,8 @@ public class ApiMethodsDealManipulation extends UrlBase {
                 .body(toExportRequestModel)
                 .when()
                 .put(DEAL_MANIPULATION_CHANGE_TASK_STATUS)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Получение списка дел")
@@ -186,7 +200,8 @@ public class ApiMethodsDealManipulation extends UrlBase {
         return given()
                 .when()
                 .get(DEAL_MANIPULATION_DEAL_MANIPULATION)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 
@@ -197,7 +212,8 @@ public class ApiMethodsDealManipulation extends UrlBase {
         return given()
                 .when()
                 .get(ODATA_DEAL_MANIPULATION)
-                .andReturn();
+                .then()
+                .extract().response();
 
     }
 

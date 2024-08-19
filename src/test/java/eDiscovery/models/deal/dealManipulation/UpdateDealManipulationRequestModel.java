@@ -22,7 +22,7 @@ public class UpdateDealManipulationRequestModel {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<String> excludes;
     @JsonInclude()
-    public List<String> searchQueueries;
+    public List<String> searchQueries;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public String dealStatus;
     @JsonInclude(JsonInclude.Include.NON_NULL)
