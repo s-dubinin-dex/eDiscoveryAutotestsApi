@@ -43,6 +43,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(name)
+                .categoryType(SearchPlaceCategoryType.ARM.name())
                 .build();
 
         ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation);
@@ -72,6 +73,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
                 UpdateSearchPlaceRequestModel.builder()
                         .id(uuid)
                         .name(getRandomName())
+                        .categoryType(SearchPlaceCategoryType.ARM.name())
                         .build()
         ).as(ErrorModel.class);
 
