@@ -5,9 +5,7 @@ import eDiscovery.apiMethods.deal.ApiMethodsSearchQuery;
 import eDiscovery.data.dealService.DataGeneratorSearchQuery;
 import eDiscovery.helpers.enums.SearchQueryType;
 import eDiscovery.models.ErrorModel;
-import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModelNotNull;
-import eDiscovery.models.deal.searchQuery.CommonSearchQueryResponseModel;
-import eDiscovery.models.deal.searchQuery.UpdateSearchQueryRequestModelNotNull;
+import eDiscovery.models.deal.searchQuery.*;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
@@ -127,14 +125,39 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
         assertThat(responseErrorBody.errors.name.get(0).errorCode).isEqualTo(VALIDATIONS_THE_NAME_FIELD_IS_REQUIRED);
     }
 
+    @Test
     @Epic("Сервис Deal")
     @Feature("Поисковый запрос")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
-    @DisplayName("Невозможность создания поискового запроса с некорректным name")
-    @Description("Тест проверяет невозможность создания поискового запроса с некорректным name")
+    @DisplayName("Невозможность создания поискового запроса с name = null")
+    @Description("Тест проверяет невозможность создания поискового запроса с name = null")
+    public void testAddSearchQueryWithNullNameIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
+
+        Response response = ApiMethodsSearchQuery.addSearchQuery(
+                AddSearchQueryRequestModel.builder()
+                        .type(SearchQueryType.Regex.name())
+                        .value("\\d{10}")
+                        .build()
+        );
+        ErrorModel responseErrorBody = response.as(ErrorModel.class);
+
+        assertThat(responseErrorBody.title).isEqualTo(REQUEST_VALIDATION_ERROR);
+        assertThat(responseErrorBody.status).isEqualTo(400);
+        assertThat(responseErrorBody.detail).isEqualTo(SEE_ERRORS_FOR_DETAILS);
+        assertThat(responseErrorBody.errors.name.get(0).errorCode).isEqualTo(VALIDATIONS_THE_NAME_FIELD_IS_REQUIRED);
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Создание поискового запроса")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность создания поискового запроса с пустым name")
+    @Description("Тест проверяет невозможность создания поискового запроса с пустым name")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchQuery#getInvalidSearchQueryNames")
+    @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchQuery#getEmptySearchQueryNames")
     public void testAddSearchQueryWithInvalidNameIsImpossible(String name){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
@@ -227,6 +250,38 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
         assertThat(responseErrorBody.type).isEqualTo(ERRORS_ARGUMENT_EXCEPTION);
         assertThat(responseErrorBody.message).isEqualTo(TYPE_FIELD_IS_INCORRECT_UNSUPPORTABLE_UNDEFINED_VALUE);
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Создание поискового запроса")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность создания поискового запроса с type = null")
+    @Description("Тест проверяет невозможность создания поискового запроса с type = null")
+    public void testAddSearchQueryWithNullTypeIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
+
+        Response response = ApiMethodsSearchQuery.addSearchQuery(
+                AddSearchQueryRequestModel.builder()
+                        .name(getRandomName())
+                        .value("\\d{10}")
+                        .build()
+        );
+        ErrorModel responseErrorBody = response.as(ErrorModel.class);
+
+        assertThat(responseErrorBody.title).isEqualTo(REQUEST_VALIDATION_ERROR);
+        assertThat(responseErrorBody.status).isEqualTo(400);
+        assertThat(responseErrorBody.detail).isEqualTo(SEE_ERRORS_FOR_DETAILS);
+
+        assertThat(responseErrorBody.errors.newEntity.get(0).errorCode).isEqualTo(VALIDATIONS_THE_NEW_ENTITY_FIELD_IS_REQUIRED);
+
+        List<ErrorModel.ErrorModelDetail> errorTypeBody = response.jsonPath()
+                .getList("errors['$.type']", ErrorModel.ErrorModelDetail.class);
+
+        assertThat(errorTypeBody.get(0).errorCode).matches(VALIDATIONS_THE_JSON_VALUE_NOT_BE_CONVERTED_TO_SEARCH_QUERY_TYPE);
+
     }
 
     @Test
@@ -336,6 +391,58 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @Test
     @Epic("Сервис Deal")
     @Feature("Поисковый запрос")
+    @Story("Создание поискового запроса")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность создания поискового запроса с value = null")
+    @Description("Тест проверяет невозможность создания поискового запроса с value = null")
+    public void testAddSearchQueryWithNullValueIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
+
+        Response response = ApiMethodsSearchQuery.addSearchQuery(
+                AddSearchQueryRequestModel.builder()
+                        .name(getRandomName())
+                        .type(SearchQueryType.Regex.name())
+                        .build()
+        );
+        ErrorModel responseErrorBody = response.as(ErrorModel.class);
+
+        assertThat(responseErrorBody.title).isEqualTo(REQUEST_VALIDATION_ERROR);
+        assertThat(responseErrorBody.status).isEqualTo(400);
+        assertThat(responseErrorBody.detail).isEqualTo(SEE_ERRORS_FOR_DETAILS);
+        assertThat(responseErrorBody.errors.value.get(0).errorCode).isEqualTo(VALIDATIONS_THE_VALUE_FIELD_IS_REQUIRED);
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Создание поискового запроса")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность создания поискового запроса с длиной value, превышающим допустимую длину")
+    @Description("Тест проверяет невозможность создания поискового запроса с длиной value, превышающим допустимую длину")
+    public void testAddSearchQueryWithExceedingValueLengthIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
+
+        Response response = ApiMethodsSearchQuery.addSearchQuery(
+                AddSearchQueryRequestModel.builder()
+                        .name(getRandomName())
+                        .type(SearchQueryType.Regex.name())
+                        .value(DataGeneratorSearchQuery.getSearchQueryValueWithExceedingLength())
+                        .build()
+        );
+        ErrorModel responseErrorBody = response.as(ErrorModel.class);
+
+        assertThat(responseErrorBody.title).isEqualTo(REQUEST_VALIDATION_ERROR);
+        assertThat(responseErrorBody.status).isEqualTo(400);
+        assertThat(responseErrorBody.detail).isEqualTo(SEE_ERRORS_FOR_DETAILS);
+
+        assertThat(responseErrorBody.errors.value.get(0).errorCode).isEqualTo(VALIDATIONS_THE_FIELD_VALUE_MAXIMUM_LENGTH_IS_2000);
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса без указания тела")
@@ -432,6 +539,37 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
         assertThat(responseErrorBody.message).isEqualTo(EXCEPTION_ENTITY_NOT_FOUND_SEARCH_QUERY_INFO);
         assertThat(responseErrorBody.data.key).isEqualTo(new UUID(0,0).toString());
         assertThat(responseErrorBody.data.type).isEqualTo(SEARCH_QUERY_INFO);
+
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Изменение поискового запроса")
+    @Severity(SeverityLevel.MINOR)
+    @DisplayName("Невозможность изменения поискового запроса c id = null")
+    @Description("Тест проверяет невозможность изменения поискового запроса c id = null")
+    public void testUpdateSearchQueryWithNullIdIsImpossible(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
+
+        Response response = ApiMethodsSearchQuery.updateSearchQuery(
+                UpdateSearchQueryRequestModel.builder()
+                        .name(getRandomName())
+                        .type(SearchQueryType.Regex.name())
+                        .value("\\d{10}")
+                        .build()
+        );
+        ErrorModel responseErrorBody = response.as(ErrorModel.class);
+
+        assertThat(responseErrorBody.title).isEqualTo(REQUEST_VALIDATION_ERROR);
+        assertThat(responseErrorBody.status).isEqualTo(400);
+        assertThat(responseErrorBody.detail).isEqualTo(SEE_ERRORS_FOR_DETAILS);
+
+        assertThat(responseErrorBody.errors.editEntity.get(0).errorCode).isEqualTo(VALIDATIONS_THE_EDIT_ENTITY_FIELD_IS_REQUIRED);
+
+        List<ErrorModel.ErrorModelDetail> errorsId = response.jsonPath().getList("errors['$.id']", ErrorModel.ErrorModelDetail.class);
+        assertThat(errorsId.get(0).errorCode).matches(VALIDATIONS_THE_JSON_VALUE_NOT_BE_CONVERTED_TO_GUID);
 
     }
 

@@ -46,7 +46,7 @@ public class DataGeneratorSearchQuery {
      * Valid SearchQuery attributes
      * */
 
-    public static String[] getValidSearchQueryNames(){
+    public static List<String> getValidSearchQueryNames(){
         return DataGeneratorCommon.getValidNames();
     }
 
@@ -54,9 +54,13 @@ public class DataGeneratorSearchQuery {
         return SearchQueryType.getValidSearchQueryTypes();
     }
 
-    public static String[] getValidSearchQueryValues(){
+    public static List<String> getValidSearchQueryValues(){
         //TODO: расширить валидными REGEX выражениями
-        return DataGeneratorCommon.getValidNames();
+
+        List<String> result = new ArrayList<>(DataGeneratorCommon.getValidNames());
+        result.add(DataGeneratorCommon.getRandomName(2000)); // Строка из 2000 символов
+
+        return result;
     }
 
     /*

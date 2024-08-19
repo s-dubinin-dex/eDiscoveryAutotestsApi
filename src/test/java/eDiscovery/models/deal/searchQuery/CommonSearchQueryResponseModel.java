@@ -13,4 +13,5 @@ public class CommonSearchQueryResponseModel {
     public String name;
     public String type;
     public String id;
+    public String value;
 }
