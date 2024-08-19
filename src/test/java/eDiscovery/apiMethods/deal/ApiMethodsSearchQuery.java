@@ -11,6 +11,7 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
@@ -147,18 +148,11 @@ public class ApiMethodsSearchQuery extends UrlBase {
 
     @Step("Получение списка поисковых запросов по протоколу oData")
     public static Response getSearchQueryListOData(){
-        SpecificationsServer.setBaseUrl(DEAL_URL);
-
-        return given()
-                .when()
-                .get(ODATA_SEARCH_QUERY)
-                .then()
-                .extract().response();
-
+        return getSearchQueryListOData(new HashMap<>());
     }
 
     @Step("Получение списка поисковых запросов по протоколу oData")
-    public static Response getSearchQueryListODataWithParametersMap(HashMap<String, String> parameters){
+    public static Response getSearchQueryListOData(Map<String, String> parameters){
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
         RequestSpecification request = given();
@@ -176,15 +170,8 @@ public class ApiMethodsSearchQuery extends UrlBase {
     }
 
     @Step("Получение списка поисковых запросов по протоколу oData")
-    public static Response getSearchQueryListODataWithIncludeDeletedParameter(boolean includeDeleted){
-        SpecificationsServer.setBaseUrl(DEAL_URL);
+    public static Response getSearchQueryListOData(boolean includeDeleted){
 
-        return given()
-                .param("includeDeleted", includeDeleted)
-                .when()
-                .get(ODATA_SEARCH_QUERY)
-                .then()
-                .extract().response();
-
+        return getSearchQueryListOData(Map.of("includeDeleted", String.valueOf(includeDeleted)));
     }
 }
