@@ -26,6 +26,7 @@ public class DataGeneratorSearchPlace {
     public static AddSearchPlaceRequestModel getSearchPlaceModelWithOnlyRequiredParameters(String name){
         return AddSearchPlaceRequestModel.builder()
                 .name(name)
+                .categoryType(SearchPlaceCategoryType.ARM.name())
                 .build();
     }
 
@@ -89,14 +90,12 @@ public class DataGeneratorSearchPlace {
         return DataGeneratorCommon.getValidNames();
     }
 
-    public static String[] getValidSearchPlaceCategoryTypes(){
-        // TODO: исправить по примеру searchQuery
-        return Arrays.stream(SearchPlaceCategoryType.values()).map(Enum::name).toArray(String[]::new);
+    public static List<String> getValidSearchPlaceCategoryTypes(){
+        return SearchPlaceCategoryType.getValidSearchPlaceCategoryTypes();
     }
 
-    public static String[] getValidSearchPlaceTypes(){
-        // TODO: исправить по примеру searchQuery
-        return Arrays.stream(SearchPlaceType.values()).map(Enum::name).toArray(String[]::new);
+    public static List<String> getValidSearchPlaceTypes(){
+        return SearchPlaceType.getValidSearchPlaceTypes();
     }
 
     public static String[] getValidSearchPlaceExclusions(){

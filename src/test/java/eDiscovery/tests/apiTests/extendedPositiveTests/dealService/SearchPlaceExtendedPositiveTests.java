@@ -47,6 +47,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(name)
+                .categoryType(SearchPlaceCategoryType.ARM.name())
                 .build();
 
         CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
@@ -90,6 +91,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
+                .categoryType(SearchPlaceCategoryType.ARM.name())
                 .type(type)
                 .build();
 
@@ -118,6 +120,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
+                .categoryType(SearchPlaceCategoryType.ARM.name())
                 .parameters(parameters)
                 .build();
 
@@ -146,6 +149,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
                 .parameters(parameters)
                 .build();
 
@@ -174,6 +178,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
+                .categoryType(SearchPlaceCategoryType.ARM.name())
                 .parameters(parameters)
                 .build();
 
@@ -198,6 +203,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
+                .categoryType(SearchPlaceCategoryType.ARM.name())
                 .excludes(excludes)
                 .build();
 
@@ -220,6 +226,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
+                .categoryType(SearchPlaceCategoryType.ARM.name())
                 .excludes(excludes)
                 .build();
 
@@ -856,6 +863,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(searchPlaceNameForFilter)
+                .categoryType(SearchPlaceCategoryType.ARM.name())
                 .build();
         ApiMethodsSearchPlace.addSearchPlace(requestBody);
 
@@ -927,6 +935,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
             String searchPlaceNameForFilterWithNumber = searchPlaceNameForFilter + i;
             AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                     .name(searchPlaceNameForFilterWithNumber)
+                    .categoryType(SearchPlaceCategoryType.ARM.name())
                     .build();
             ApiMethodsSearchPlace.addSearchPlace(requestBody);
         }
@@ -969,6 +978,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
             String searchPlaceNameForFilterWithNumber = searchPlaceNameForFilter + i;
             AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                     .name(searchPlaceNameForFilterWithNumber)
+                    .categoryType(SearchPlaceCategoryType.ARM.name())
                     .build();
             ApiMethodsSearchPlace.addSearchPlace(requestBody);
         }
@@ -1011,6 +1021,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
             String searchPlaceNameForFilterWithNumber = searchPlaceNameForFilter + i;
             AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                     .name(searchPlaceNameForFilterWithNumber)
+                    .categoryType(SearchPlaceCategoryType.ARM.name())
                     .build();
             ApiMethodsSearchPlace.addSearchPlace(requestBody);
         }
@@ -1053,6 +1064,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
             String searchPlaceNameForFilterWithNumber = searchPlaceNameForFilter + i;
             AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                     .name(searchPlaceNameForFilterWithNumber)
+                    .categoryType(SearchPlaceCategoryType.ARM.name())
                     .build();
             ApiMethodsSearchPlace.addSearchPlace(requestBody);
         }
@@ -1110,6 +1122,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
             String searchPlaceNameForFilterWithNumber = searchPlaceNameForFilter + i;
             AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                     .name(searchPlaceNameForFilterWithNumber)
+                    .categoryType(SearchPlaceCategoryType.ARM.name())
                     .build();
             ApiMethodsSearchPlace.addSearchPlace(requestBody);
         }

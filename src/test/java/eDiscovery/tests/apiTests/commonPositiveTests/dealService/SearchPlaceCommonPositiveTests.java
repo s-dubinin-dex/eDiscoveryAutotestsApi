@@ -41,7 +41,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         Response response = ApiMethodsSearchPlace.addSearchPlace(requestBody);
         CommonSearchPlaceResponseModel responseBody = response.as(CommonSearchPlaceResponseModel.class);
 
-        assertThat(responseBody.categoryType).isEqualTo(SearchPlaceCategoryType.Undefined.name());
+        assertThat(responseBody.categoryType).isEqualTo(SearchPlaceCategoryType.ARM.name());
         assertThat(responseBody.type).isEqualTo(SearchPlaceType.Undefined.name());
         assertThat(responseBody.parameters).isEqualTo(null);
         assertThat(responseBody.excludes).isEmpty();
@@ -68,12 +68,13 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         UpdateSearchPlaceRequestModel requestBodySearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
                 .id(responseBodySearchPlaceCreation.id)
                 .name(getRandomName())
+                .categoryType(SearchPlaceCategoryType.ARM.name())
                 .build();
 
         Response responseSearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestBodySearchPlaceUpdate);
         UpdateSearchPlaceRequestModel responseBodySearchPlaceUpdate = responseSearchPlaceUpdate.as(UpdateSearchPlaceRequestModel.class);
 
-        assertThat(responseBodySearchPlaceUpdate.categoryType).isEqualTo(SearchPlaceCategoryType.Undefined.name());
+        assertThat(responseBodySearchPlaceUpdate.categoryType).isEqualTo(SearchPlaceCategoryType.ARM.name());
         assertThat(responseBodySearchPlaceUpdate.type).isEqualTo(SearchPlaceType.Undefined.name());
         assertThat(responseBodySearchPlaceUpdate.parameters).isEqualTo(null);
         assertThat(responseBodySearchPlaceUpdate.excludes).isEmpty();

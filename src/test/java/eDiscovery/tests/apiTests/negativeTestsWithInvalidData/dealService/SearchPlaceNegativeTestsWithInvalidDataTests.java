@@ -56,8 +56,8 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @Feature("Место поиска")
     @Story("Создание места поиска")
     @Severity(SeverityLevel.MINOR)
-    @DisplayName("Невозможность создания места поиска без указания параметра name (без указания параметров)")
-    @Description("Тест проверяет невозможность создания места поиска без указания параметра name (без указания параметров)")
+    @DisplayName("Невозможность создания места поиска с пустым телом")
+    @Description("Тест проверяет невозможность создания места поиска с пустым телом")
     public void testAddSearchPlaceWithoutNameIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
@@ -391,8 +391,8 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @Feature("Место поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
-    @DisplayName("Невозможность изменения места поиска c телом запроса с передачей только name, без передачи параметра id")
-    @Description("Тест проверяет невозможность изменения места поиска c телом запроса с передачей только name, без передачи параметра id")
+    @DisplayName("Невозможность изменения места поиска без передачи параметра id")
+    @Description("Тест проверяет невозможность изменения места поиска без передачи параметра id")
     public void testUpdateSearchPlaceWithoutIDIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec404NotFound());
@@ -400,6 +400,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
         ErrorModel responseErrorBody = ApiMethodsSearchPlace.updateSearchPlace(
                 UpdateSearchPlaceRequestModelNotNull.builder()
                         .name(getRandomName())
+                        .categoryType(SearchPlaceCategoryType.ARM.name())
                         .build()
         ).as(ErrorModel.class);
 

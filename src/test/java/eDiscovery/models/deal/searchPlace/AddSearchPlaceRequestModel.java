@@ -15,7 +15,7 @@ import java.util.List;
 public class AddSearchPlaceRequestModel {
     @JsonInclude()
     public String name;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude()
     public String categoryType;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public String type;
