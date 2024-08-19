@@ -85,7 +85,7 @@ public class DataGeneratorSearchPlace {
      * Valid SearchPlace attributes
      * */
 
-    public static String[] getValidSearchPlaceNames(){
+    public static List<String> getValidSearchPlaceNames(){
         return DataGeneratorCommon.getValidNames();
     }
 
@@ -111,7 +111,7 @@ public class DataGeneratorSearchPlace {
         return DataGeneratorCommon.getValidURI();
     }
 
-    public static String[] getValidSearchPlaceUsernamesInParameters() {
+    public static List<String> getValidSearchPlaceUsernamesInParameters() {
         return DataGeneratorCommon.getValidNames();
     }
 

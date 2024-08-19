@@ -6,6 +6,7 @@ import eDiscovery.helpers.enums.SearchQueryType;
 import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModel;
 import eDiscovery.models.deal.searchQuery.CommonSearchQueryResponseModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataGeneratorSearchQuery {
@@ -67,15 +68,19 @@ public class DataGeneratorSearchQuery {
      * Invalid SearchQuery attributes
      * */
 
-    public static String[] getInvalidSearchQueryNames(){
-        return DataGeneratorCommon.getInvalidNames();
+    public static String[] getEmptySearchQueryNames(){
+        return DataGeneratorCommon.getEmptyNames();
     }
 
     public static String getSearchQueryNameWithExceedingLength(){
-        return DataGeneratorCommon.getNameWithExceedingLength();
+        return DataGeneratorCommon.getRandomName(257);
     }
 
     public static List<String> getInvalidSearchQueryTypes(){
         return SearchQueryType.getInvalidSearchQueryTypes();
+    }
+
+    public static String getSearchQueryValueWithExceedingLength(){
+        return DataGeneratorCommon.getRandomName(2001);
     }
 }

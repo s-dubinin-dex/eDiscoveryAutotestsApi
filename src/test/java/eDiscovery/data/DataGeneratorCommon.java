@@ -149,7 +149,7 @@ public class DataGeneratorCommon {
     * Invalid Data
     * */
 
-    public static String[] getInvalidNames(){
+    public static String[] getEmptyNames(){
         return new String[]{
                 "",         // Пустая строка
                 " ",        // Пробел

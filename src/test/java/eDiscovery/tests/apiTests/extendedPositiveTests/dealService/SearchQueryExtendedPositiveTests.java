@@ -303,7 +303,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
-        Response response = ApiMethodsSearchQuery.getSearchQueryListODataWithIncludeDeletedParameter(includeDeleted);
+        Response response = ApiMethodsSearchQuery.getSearchQueryListOData(includeDeleted);
 
         List<CommonSearchQueryResponseModel> responseBody = response.jsonPath().getList("value", CommonSearchQueryResponseModel.class);
         assertThat(responseBody).isNotEmpty();
@@ -343,7 +343,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         requestParameters.put("$filter", "contains(name, '" + searchQueryNameForFilter + "')");
 
         List<CommonSearchQueryResponseModel> responseBodyWithFilter =
-                ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(requestParameters)
+                ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
                         .jsonPath().getList("value", CommonSearchQueryResponseModel.class);
 
         assertThat(responseBodyWithFilter.size()).isEqualTo(1);
@@ -365,12 +365,12 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         requestParameters.put("$count", "true");
 
         Response responseBodyWithCount =
-                ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(requestParameters);
+                ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters);
 
         DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
         Response responseBodyWithCountAfterAddNewOne =
-                ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(requestParameters);
+                ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters);
 
         int resultCount = responseBodyWithCount.jsonPath().getInt("\"@odata.count\"");
         int resultCountAfterAddNewOne = responseBodyWithCountAfterAddNewOne.jsonPath().getInt("\"@odata.count\"");
@@ -412,7 +412,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
 
 
         List<CommonSearchQueryResponseModel> responseBodyWithFilterSorting =
-                ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(requestParameters)
+                ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
                         .jsonPath().getList("value", CommonSearchQueryResponseModel.class);
 
         assertThat(responseBodyWithFilterSorting.size()).isEqualTo(5);
@@ -455,7 +455,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         requestParameters.put("$orderby", "name ASC");
 
         List<CommonSearchQueryResponseModel> responseBodyWithFilterSorting =
-                ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(requestParameters)
+                ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
                         .jsonPath().getList("value", CommonSearchQueryResponseModel.class);
 
         assertThat(responseBodyWithFilterSorting.size()).isEqualTo(5);
@@ -499,7 +499,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
 
 
         List<CommonSearchQueryResponseModel> responseBodyWithFilterSorting =
-                ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(requestParameters)
+                ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
                         .jsonPath().getList("value", CommonSearchQueryResponseModel.class);
 
         assertThat(responseBodyWithFilterSorting.size()).isEqualTo(5);
@@ -544,7 +544,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         requestParameters.put("$skip", "0");
 
         List<CommonSearchQueryResponseModel> responseBodyWithPagination =
-                ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(requestParameters)
+                ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
                         .jsonPath().getList("value", CommonSearchQueryResponseModel.class);
 
         assertThat(responseBodyWithPagination.size()).isEqualTo(5);
@@ -558,7 +558,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         requestParameters.put("$skip", "5");
 
         responseBodyWithPagination =
-                ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(requestParameters)
+                ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
                         .jsonPath().getList("value", CommonSearchQueryResponseModel.class);
 
         assertThat(responseBodyWithPagination.size()).isEqualTo(5);
@@ -601,7 +601,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         requestParameters.put("$top", "2");
 
         List<CommonSearchQueryResponseModel> responseBodyWithLimiting =
-                ApiMethodsSearchQuery.getSearchQueryListODataWithParametersMap(requestParameters)
+                ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
                         .jsonPath().getList("value", CommonSearchQueryResponseModel.class);
 
         assertThat(responseBodyWithLimiting.size()).isEqualTo(2);
