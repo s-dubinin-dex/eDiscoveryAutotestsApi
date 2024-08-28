@@ -10,7 +10,7 @@ import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
@@ -145,19 +145,7 @@ public class ApiMethodsSearchPlace extends UrlBase {
     }
 
     @Step("Получение списка мест поиска по протоколу oData")
-    public static Response getSearchPlaceListOData(){
-        SpecificationsServer.setBaseUrl(DEAL_URL);
-
-        return given()
-                .when()
-                .get(ODATA_SEARCH_PLACE)
-                .then()
-                .extract().response();
-
-    }
-
-    @Step("Получение списка мест поиска по протоколу oData")
-    public static Response getSearchPlaceListODataWithParametersMap(HashMap<String, String> parameters){
+    public static Response getSearchPlaceListOData(Map<String, String> parameters){
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
         RequestSpecification request = given();
@@ -175,15 +163,32 @@ public class ApiMethodsSearchPlace extends UrlBase {
     }
 
     @Step("Получение списка мест поиска по протоколу oData")
-    public static Response getSearchPlaceListODataWithIncludeDeletedParameter(Boolean includeDeleted){
+    public static Response getSearchPlaceListOData(Boolean includeDeleted){
+
+        return getSearchPlaceListOData(Map.of("includeDeleted", String.valueOf(includeDeleted)));
+
+    }
+
+    @Step("Получение места поиска по id")
+    public static Response getSearchPlaceODataById(String id){
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
-                .param("includeDeleted", includeDeleted)
                 .when()
-                .get(ODATA_SEARCH_PLACE)
+                .get(ODATA_SEARCH_PLACE + "(" + id + ")")
                 .then()
                 .extract().response();
+    }
 
+    @Step("Получение места поиска по id")
+    public static Response getSearchPlaceODataByIdPath (String id){
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+
+        return given()
+                .log().all()
+                .when()
+                .get(ODATA_SEARCH_PLACE + "/" + id)
+                .then()
+                .extract().response();
     }
 }

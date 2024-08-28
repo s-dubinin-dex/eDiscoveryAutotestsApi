@@ -334,7 +334,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
 
 
         List<CommonSearchQueryResponseModel> responseBodyWithoutFilter =
-                ApiMethodsSearchQuery.getSearchQueryListOData().jsonPath().getList("value", CommonSearchQueryResponseModel.class);
+                ApiMethodsSearchQuery.getSearchQueryListOData(new HashMap<>()).jsonPath().getList("value", CommonSearchQueryResponseModel.class);
 
         assertThat(responseBodyWithoutFilter.size()).isGreaterThan(1);
         assertThat(responseBodyWithoutFilter.get(0)).isNotNull();

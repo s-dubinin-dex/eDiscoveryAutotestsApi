@@ -5,6 +5,7 @@ import eDiscovery.apiMethods.deal.ApiMethodsSearchPlace;
 import eDiscovery.data.dealService.DataGeneratorSearchPlace;
 import eDiscovery.models.deal.searchPlace.AddSearchPlaceRequestModel;
 import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
+import eDiscovery.models.deal.searchPlace.SearchPlaceParametersModel;
 import eDiscovery.models.deal.searchPlace.UpdateSearchPlaceRequestModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
@@ -130,11 +132,109 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
-        Response response = ApiMethodsSearchPlace.getSearchPlaceListOData();
+        Response response = ApiMethodsSearchPlace.getSearchPlaceListOData(new HashMap<>());
 
         List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
         assertThat(responseBody).isNotEmpty();
         assertThat(responseBody.get(0)).isNotNull();
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Получение места поиска по протоколу oData по id")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение места поиска по протоколу oData по id")
+    @Description("Тест проверяет возможность получения места поиска по протоколу oData по id в скобках")
+    public void testGetSearchPlaceODataById(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        String searchPlaceNameForFilter = "testSearchPlaceODataByIdInRoundBrackets" + getRandomName();
+
+        SearchPlaceParametersModel parameters = SearchPlaceParametersModel.builder()
+                .uri(faker.internet().url())
+                .username(faker.name().username())
+                .password(faker.internet().password())
+                .build();
+
+        AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
+                .name(searchPlaceNameForFilter)
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
+                .excludes(List.of("C:\\", "D:\\"))
+                .parameters(parameters)
+                .build();
+
+        ApiMethodsSearchPlace.addSearchPlace(requestBody);
+
+        HashMap<String, String> requestParameters = new HashMap<>();
+        requestParameters.put("$filter", "contains(name, '" + searchPlaceNameForFilter + "')");
+
+        List<CommonSearchPlaceResponseModel> responseBodyWithFilter =
+                ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters)
+                        .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+
+        CommonSearchPlaceResponseModel responseBodyOData = responseBodyWithFilter.get(0);
+
+        CommonSearchPlaceResponseModel responseBodyODataById = ApiMethodsSearchPlace.getSearchPlaceODataById(responseBodyOData.id).as(CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBodyOData.id).isEqualTo(responseBodyODataById.id);
+        assertThat(responseBodyOData.name).isEqualTo(responseBodyODataById.name);
+        assertThat(responseBodyOData.type).isEqualTo(responseBodyODataById.type);
+        assertThat(responseBodyOData.categoryType).isEqualTo(responseBodyODataById.categoryType);
+        assertThat(responseBodyOData.parameters).isEqualTo(responseBodyODataById.parameters);
+        assertThat(responseBodyOData.excludes).isEqualTo(responseBodyODataById.excludes);
+
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Получение места поиска по протоколу oData по id")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение места поиска по протоколу oData по id")
+    @Description("Тест проверяет возможность получения еста поиска по протоколу oData по id в path param")
+    public void testGetSearchPlaceODataByIdInPath(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        String searchPlaceNameForFilter = "testSearchPlaceODataByIdInRoundBrackets" + getRandomName();
+
+        SearchPlaceParametersModel parameters = SearchPlaceParametersModel.builder()
+                .uri(faker.internet().url())
+                .username(faker.name().username())
+                .password(faker.internet().password())
+                .build();
+
+        AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
+                .name(searchPlaceNameForFilter)
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
+                .excludes(List.of("C:\\", "D:\\"))
+                .parameters(parameters)
+                .build();
+
+        ApiMethodsSearchPlace.addSearchPlace(requestBody);
+
+        HashMap<String, String> requestParameters = new HashMap<>();
+        requestParameters.put("$filter", "contains(name, '" + searchPlaceNameForFilter + "')");
+
+        List<CommonSearchPlaceResponseModel> responseBodyWithFilter =
+                ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters)
+                        .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+
+        CommonSearchPlaceResponseModel responseBodyOData = responseBodyWithFilter.get(0);
+
+        CommonSearchPlaceResponseModel responseBodyODataById = ApiMethodsSearchPlace.getSearchPlaceODataByIdPath(responseBodyOData.id).as(CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBodyOData.id).isEqualTo(responseBodyODataById.id);
+        assertThat(responseBodyOData.name).isEqualTo(responseBodyODataById.name);
+        assertThat(responseBodyOData.type).isEqualTo(responseBodyODataById.type);
+        assertThat(responseBodyOData.categoryType).isEqualTo(responseBodyODataById.categoryType);
+        assertThat(responseBodyOData.parameters).isEqualTo(responseBodyODataById.parameters);
+        assertThat(responseBodyOData.excludes).isEqualTo(responseBodyODataById.excludes);
+
     }
 
 }

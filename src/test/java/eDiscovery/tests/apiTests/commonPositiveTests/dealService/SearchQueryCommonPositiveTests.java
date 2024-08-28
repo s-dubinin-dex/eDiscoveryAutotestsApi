@@ -15,6 +15,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
@@ -122,11 +123,87 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
-        Response response = ApiMethodsSearchQuery.getSearchQueryListOData();
+        Response response = ApiMethodsSearchQuery.getSearchQueryListOData(new HashMap<>());
 
         List<CommonSearchQueryResponseModel> responseBody = response.jsonPath().getList("value", CommonSearchQueryResponseModel.class);
         assertThat(responseBody).isNotEmpty();
         assertThat(responseBody.get(0)).isNotNull();
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Получение поискового запроса по протоколу oData по id")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение поискового запроса по протоколу oData по id")
+    @Description("Тест проверяет возможность получения поискового запроса по протоколу oData по id в скобках")
+    public void testGetSearchQueryODataById(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        String searchQueryNameForFilter = "testSearchQueryODataByIdInRoundBrackets" + getRandomName();
+
+        AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
+                .name(searchQueryNameForFilter)
+                .type(SearchQueryType.Regex.name())
+                .value("\\d{10}")
+                .build();
+        ApiMethodsSearchQuery.addSearchQuery(requestBody);
+
+        HashMap<String, String> requestParameters = new HashMap<>();
+        requestParameters.put("$filter", "contains(name, '" + searchQueryNameForFilter + "')");
+
+        List<CommonSearchQueryResponseModel> responseBodyWithFilter =
+                ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
+                        .jsonPath().getList("value", CommonSearchQueryResponseModel.class);
+
+        CommonSearchQueryResponseModel responseBodyOData = responseBodyWithFilter.get(0);
+
+        CommonSearchQueryResponseModel responseBodyODataById = ApiMethodsSearchQuery.getSearchQueryODataById(responseBodyOData.id).as(CommonSearchQueryResponseModel.class);
+
+        assertThat(responseBodyOData.id).isEqualTo(responseBodyODataById.id);
+        assertThat(responseBodyOData.name).isEqualTo(responseBodyODataById.name);
+        assertThat(responseBodyOData.type).isEqualTo(responseBodyODataById.type);
+        assertThat(responseBodyOData.value).isEqualTo(responseBodyODataById.value);
+
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Получение поискового запроса по протоколу oData по id")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение поискового запроса по протоколу oData по id")
+    @Description("Тест проверяет возможность получения поискового запроса по протоколу oData по id в path param")
+    public void testGetSearchQueryODataByIdInPath(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        String searchQueryNameForFilter = "testSearchQueryODataByIdInRoundBrackets" + getRandomName();
+
+        AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
+                .name(searchQueryNameForFilter)
+                .type(SearchQueryType.Regex.name())
+                .value("\\d{10}")
+                .build();
+        ApiMethodsSearchQuery.addSearchQuery(requestBody);
+
+        HashMap<String, String> requestParameters = new HashMap<>();
+        requestParameters.put("$filter", "contains(name, '" + searchQueryNameForFilter + "')");
+
+        List<CommonSearchQueryResponseModel> responseBodyWithFilter =
+                ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
+                        .jsonPath().getList("value", CommonSearchQueryResponseModel.class);
+
+        CommonSearchQueryResponseModel responseBodyOData = responseBodyWithFilter.get(0);
+
+        CommonSearchQueryResponseModel responseBodyODataById = ApiMethodsSearchQuery.getSearchQueryODataByIdPath(responseBodyOData.id).as(CommonSearchQueryResponseModel.class);
+
+        assertThat(responseBodyOData.id).isEqualTo(responseBodyODataById.id);
+        assertThat(responseBodyOData.name).isEqualTo(responseBodyODataById.name);
+        assertThat(responseBodyOData.type).isEqualTo(responseBodyODataById.type);
+        assertThat(responseBodyOData.value).isEqualTo(responseBodyODataById.value);
+
     }
 
 }

@@ -839,7 +839,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
-        Response response = ApiMethodsSearchPlace.getSearchPlaceListODataWithIncludeDeletedParameter(includeDeleted);
+        Response response = ApiMethodsSearchPlace.getSearchPlaceListOData(includeDeleted);
 
         List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
         assertThat(responseBody).isNotEmpty();
@@ -869,7 +869,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
 
         List<CommonSearchPlaceResponseModel> responseBodyWithoutFilter =
-                ApiMethodsSearchPlace.getSearchPlaceListOData().jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+                ApiMethodsSearchPlace.getSearchPlaceListOData(new HashMap<>()).jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
 
         assertThat(responseBodyWithoutFilter.size()).isGreaterThan(1);
         assertThat(responseBodyWithoutFilter.get(0)).isNotNull();
@@ -878,7 +878,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         responseParameters.put("$filter", "contains(name, '" + searchPlaceNameForFilter + "')");
 
         List<CommonSearchPlaceResponseModel> responseBodyWithFilter =
-                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(responseParameters)
+                ApiMethodsSearchPlace.getSearchPlaceListOData(responseParameters)
                         .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
 
         assertThat(responseBodyWithFilter.size()).isEqualTo(1);
@@ -900,12 +900,12 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         responseParameters.put("$count", "true");
 
         Response responseBodyWithCount =
-                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(responseParameters);
+                ApiMethodsSearchPlace.getSearchPlaceListOData(responseParameters);
 
         DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
 
         Response responseBodyWithCountAfterAddNewOne =
-                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(responseParameters);
+                ApiMethodsSearchPlace.getSearchPlaceListOData(responseParameters);
 
         int resultCount = responseBodyWithCount.jsonPath().getInt("\"@odata.count\"");
         int resultCountAfterAddNewOne = responseBodyWithCountAfterAddNewOne.jsonPath().getInt("\"@odata.count\"");
@@ -946,7 +946,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
 
         List<CommonSearchPlaceResponseModel> responseBodyWithFilterSorting =
-                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(requestParameters)
+                ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters)
                         .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
 
         assertThat(responseBodyWithFilterSorting.size()).isEqualTo(5);
@@ -989,7 +989,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
 
         List<CommonSearchPlaceResponseModel> responseBodyWithFilterSorting =
-                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(requestParameters)
+                ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters)
                         .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
 
         assertThat(responseBodyWithFilterSorting.size()).isEqualTo(5);
@@ -1032,7 +1032,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
 
         List<CommonSearchPlaceResponseModel> responseBodyWithFilterSorting =
-                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(requestParameters)
+                ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters)
                         .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
 
         assertThat(responseBodyWithFilterSorting.size()).isEqualTo(5);
@@ -1076,7 +1076,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         requestParameters.put("$skip", "0");
 
         List<CommonSearchPlaceResponseModel> responseBodyWithPagination =
-                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(requestParameters)
+                ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters)
                         .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
 
         assertThat(responseBodyWithPagination.size()).isEqualTo(5);
@@ -1090,7 +1090,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         requestParameters.put("$skip", "5");
 
         responseBodyWithPagination =
-                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(requestParameters)
+                ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters)
                         .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
 
         assertThat(responseBodyWithPagination.size()).isEqualTo(5);
@@ -1132,7 +1132,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         requestParameters.put("$top", "2");
 
         List<CommonSearchPlaceResponseModel> responseBodyWithLimiting =
-                ApiMethodsSearchPlace.getSearchPlaceListODataWithParametersMap(requestParameters)
+                ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters)
                         .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
 
         assertThat(responseBodyWithLimiting.size()).isEqualTo(2);

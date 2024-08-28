@@ -147,11 +147,6 @@ public class ApiMethodsSearchQuery extends UrlBase {
     }
 
     @Step("Получение списка поисковых запросов по протоколу oData")
-    public static Response getSearchQueryListOData(){
-        return getSearchQueryListOData(new HashMap<>());
-    }
-
-    @Step("Получение списка поисковых запросов по протоколу oData")
     public static Response getSearchQueryListOData(Map<String, String> parameters){
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
@@ -174,4 +169,31 @@ public class ApiMethodsSearchQuery extends UrlBase {
 
         return getSearchQueryListOData(Map.of("includeDeleted", String.valueOf(includeDeleted)));
     }
+
+    @Step("Получение поискового запроса по id")
+    public static Response getSearchQueryODataById(String id){
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+
+        return given()
+                .log().all()
+                .when()
+                .get(ODATA_SEARCH_QUERY + "(" + id + ")")
+                .then()
+                .log().all()
+                .extract().response();
+    }
+
+    @Step("Получение поискового запроса по id")
+    public static Response getSearchQueryODataByIdPath (String id){
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+
+        return given()
+                .log().all()
+                .when()
+                .get(ODATA_SEARCH_QUERY + "/" + id)
+                .then()
+                .log().all()
+                .extract().response();
+    }
+
 }
