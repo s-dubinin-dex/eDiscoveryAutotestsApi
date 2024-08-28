@@ -24,6 +24,7 @@ public class ApiMethodsIdentity extends UrlBase {
                 .formParam("password", "005")
                 .when()
                 .post(CONNECT_TOKEN)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 }

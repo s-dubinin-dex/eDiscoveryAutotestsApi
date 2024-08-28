@@ -56,6 +56,7 @@ task testWithEnv(type: Test) {
     def environment = project.hasProperty('env') ? project.findProperty('env') : 'test'
 
 //    def environment = 'dev'
+//    def environment = 'test'
 //    def environment = 'local'
 
     // Установка системных свойств для использования во время выполнения тестов
