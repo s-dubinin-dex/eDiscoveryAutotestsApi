@@ -13,6 +13,7 @@ public class TestBase extends UrlBase {
 
     @BeforeAll
     static void beforeAll(){
+        RestAssured.useRelaxedHTTPSValidation();
         TOKEN = Authorization.getToken();
     }
 
