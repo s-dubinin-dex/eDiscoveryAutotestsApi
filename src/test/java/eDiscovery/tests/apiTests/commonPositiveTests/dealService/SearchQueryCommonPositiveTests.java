@@ -168,6 +168,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         assertThat(responseBodyODataById.name).isEqualTo(responseBodyOData.name);
         assertThat(responseBodyODataById.type).isEqualTo(responseBodyOData.type);
         assertThat(responseBodyODataById.value).isEqualTo(responseBodyOData.value);
+        assertThat(responseBodyODataById.createdUtc).matches(dateTimeISOPattern());
         assertThat(responseBodyODataById.createdUtc).isEqualTo(responseBodyOData.createdUtc);
 
     }
@@ -207,6 +208,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         assertThat(responseBodyODataById.name).isEqualTo(responseBodyOData.name);
         assertThat(responseBodyODataById.type).isEqualTo(responseBodyOData.type);
         assertThat(responseBodyODataById.value).isEqualTo(responseBodyOData.value);
+        assertThat(responseBodyODataById.createdUtc).matches(dateTimeISOPattern());
         assertThat(responseBodyODataById.createdUtc).isEqualTo(responseBodyOData.createdUtc);
 
     }
