@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
+import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Common positive tests - SearchQuery")
@@ -43,7 +44,8 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         assertThat(responseBody.name).isEqualTo(requestBody.name);
         assertThat(responseBody.type).isEqualTo(SearchQueryType.Regex.name());
         assertThat(responseBody.value).isEqualTo(requestBody.value);
-        assertThat(responseBody.id).isNotBlank();
+        assertThat(isValidUUID(responseBody.id)).isTrue();
+        assertThat(responseBody.createdUtc).matches(dateTimeUTCPattern());
     }
 
     @Test
@@ -73,7 +75,8 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         assertThat(responseBodySearchQueryUpdate.name).isEqualTo(requestModelSearchQueryUpdate.name);
         assertThat(responseBodySearchQueryUpdate.type).isEqualTo(SearchQueryType.Text.name());
         assertThat(responseBodySearchQueryUpdate.value).isEqualTo(requestModelSearchQueryUpdate.value);
-        assertThat(responseBodySearchQueryUpdate.id).isNotBlank();
+        assertThat(isValidUUID(responseBodySearchQueryUpdate.id)).isTrue();
+        assertThat(responseBodySearchQueryUpdate.createdUtc).matches(dateTimeUTCPattern());
     }
 
     @Test
@@ -161,10 +164,11 @@ public class SearchQueryCommonPositiveTests extends TestBase {
 
         CommonSearchQueryResponseModel responseBodyODataById = ApiMethodsSearchQuery.getSearchQueryODataById(responseBodyOData.id).as(CommonSearchQueryResponseModel.class);
 
-        assertThat(responseBodyOData.id).isEqualTo(responseBodyODataById.id);
-        assertThat(responseBodyOData.name).isEqualTo(responseBodyODataById.name);
-        assertThat(responseBodyOData.type).isEqualTo(responseBodyODataById.type);
-        assertThat(responseBodyOData.value).isEqualTo(responseBodyODataById.value);
+        assertThat(responseBodyODataById.id).isEqualTo(responseBodyOData.id);
+        assertThat(responseBodyODataById.name).isEqualTo(responseBodyOData.name);
+        assertThat(responseBodyODataById.type).isEqualTo(responseBodyOData.type);
+        assertThat(responseBodyODataById.value).isEqualTo(responseBodyOData.value);
+        assertThat(responseBodyODataById.createdUtc).isEqualTo(responseBodyOData.createdUtc);
 
     }
 
@@ -199,10 +203,11 @@ public class SearchQueryCommonPositiveTests extends TestBase {
 
         CommonSearchQueryResponseModel responseBodyODataById = ApiMethodsSearchQuery.getSearchQueryODataByIdPath(responseBodyOData.id).as(CommonSearchQueryResponseModel.class);
 
-        assertThat(responseBodyOData.id).isEqualTo(responseBodyODataById.id);
-        assertThat(responseBodyOData.name).isEqualTo(responseBodyODataById.name);
-        assertThat(responseBodyOData.type).isEqualTo(responseBodyODataById.type);
-        assertThat(responseBodyOData.value).isEqualTo(responseBodyODataById.value);
+        assertThat(responseBodyODataById.id).isEqualTo(responseBodyOData.id);
+        assertThat(responseBodyODataById.name).isEqualTo(responseBodyOData.name);
+        assertThat(responseBodyODataById.type).isEqualTo(responseBodyOData.type);
+        assertThat(responseBodyODataById.value).isEqualTo(responseBodyOData.value);
+        assertThat(responseBodyODataById.createdUtc).isEqualTo(responseBodyOData.createdUtc);
 
     }
 

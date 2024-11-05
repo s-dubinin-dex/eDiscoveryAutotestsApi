@@ -10,7 +10,6 @@ import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -175,11 +174,9 @@ public class ApiMethodsSearchQuery extends UrlBase {
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
-                .log().all()
                 .when()
-                .get(ODATA_SEARCH_QUERY + "(" + id + ")")
+                .get(ODATA_SEARCH_QUERY + String.format("(%s)", id))
                 .then()
-                .log().all()
                 .extract().response();
     }
 
@@ -188,11 +185,10 @@ public class ApiMethodsSearchQuery extends UrlBase {
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
-                .log().all()
+                .pathParam("id", id)
                 .when()
-                .get(ODATA_SEARCH_QUERY + "/" + id)
+                .get(ODATA_SEARCH_QUERY + "/{id}")
                 .then()
-                .log().all()
                 .extract().response();
     }
 
