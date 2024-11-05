@@ -32,7 +32,7 @@ public class SearchQueryNegativeTestsWithValidDataTests extends TestBase {
     @Feature("Поисковый запрос")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
-    @DisplayName("Невозможность создать поискового запроса с существующим наименованием")
+    @DisplayName("Невозможность создать поисковый запрос с существующим наименованием")
     @Description("Тест проверяет невозможность создания поискового запроса с существующим наименованием")
     public void testAddSearchQueryWithExistingNameIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
@@ -148,8 +148,8 @@ public class SearchQueryNegativeTestsWithValidDataTests extends TestBase {
         CommonSearchQueryResponseModel responseSearchQueryCreationBody = DataGeneratorSearchQuery.createBasicSearchQuery();
 
         DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters(
-                Collections.singletonList(responseSearchPlaceCreationBody.id),
-                Collections.singletonList(responseSearchQueryCreationBody.id)
+                responseSearchPlaceCreationBody.id,
+                responseSearchQueryCreationBody.id
         );
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec409Conflict());
