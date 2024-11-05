@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
+import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Common positive tests - SearchPlace")
@@ -43,13 +44,14 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         Response response = ApiMethodsSearchPlace.addSearchPlace(requestBody);
         CommonSearchPlaceResponseModel responseBody = response.as(CommonSearchPlaceResponseModel.class);
 
-        assertThat(responseBody.categoryType).isEqualTo(SearchPlaceCategoryType.ARM.name());
-        assertThat(responseBody.type).isEqualTo(SearchPlaceType.Undefined.name());
+        assertThat(responseBody.categoryType).isEqualTo(SearchPlaceCategoryType.FileShare.name());
+        assertThat(responseBody.type).isEqualTo(SearchPlaceType.SMB.name());
         assertThat(responseBody.parameters).isEqualTo(null);
         assertThat(responseBody.excludes).isEmpty();
         assertThat(responseBody.excludes).isInstanceOf(ArrayList.class);
-        assertThat(responseBody.id).isNotBlank();
+        assertThat(isValidUUID(responseBody.id)).isTrue();
         assertThat(responseBody.name).isEqualTo(requestBody.name);
+        assertThat(responseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
     }
 
     @Test
@@ -71,18 +73,20 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
                 .id(responseBodySearchPlaceCreation.id)
                 .name(getRandomName())
                 .categoryType(SearchPlaceCategoryType.ARM.name())
+                .type(SearchPlaceType.LOCAL.name())
                 .build();
 
         Response responseSearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestBodySearchPlaceUpdate);
-        UpdateSearchPlaceRequestModel responseBodySearchPlaceUpdate = responseSearchPlaceUpdate.as(UpdateSearchPlaceRequestModel.class);
+        CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = responseSearchPlaceUpdate.as(CommonSearchPlaceResponseModel.class);
 
         assertThat(responseBodySearchPlaceUpdate.categoryType).isEqualTo(SearchPlaceCategoryType.ARM.name());
-        assertThat(responseBodySearchPlaceUpdate.type).isEqualTo(SearchPlaceType.Undefined.name());
+        assertThat(responseBodySearchPlaceUpdate.type).isEqualTo(SearchPlaceType.LOCAL.name());
         assertThat(responseBodySearchPlaceUpdate.parameters).isEqualTo(null);
         assertThat(responseBodySearchPlaceUpdate.excludes).isEmpty();
         assertThat(responseBodySearchPlaceUpdate.excludes).isInstanceOf(ArrayList.class);
-        assertThat(responseBodySearchPlaceUpdate.id).isNotBlank();
+        assertThat(isValidUUID(responseBodySearchPlaceUpdate.id)).isTrue();
         assertThat(responseBodySearchPlaceUpdate.name).isEqualTo(requestBodySearchPlaceUpdate.name);
+        assertThat(responseBodySearchPlaceUpdate.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
     }
 
     @Test
@@ -166,25 +170,17 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
                 .parameters(parameters)
                 .build();
 
-        ApiMethodsSearchPlace.addSearchPlace(requestBody);
+        CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
 
-        HashMap<String, String> requestParameters = new HashMap<>();
-        requestParameters.put("$filter", "contains(name, '" + searchPlaceNameForFilter + "')");
+        CommonSearchPlaceResponseModel responseBodyODataById = ApiMethodsSearchPlace.getSearchPlaceODataById(responseBody.id).as(CommonSearchPlaceResponseModel.class);
 
-        List<CommonSearchPlaceResponseModel> responseBodyWithFilter =
-                ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters)
-                        .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
-
-        CommonSearchPlaceResponseModel responseBodyOData = responseBodyWithFilter.get(0);
-
-        CommonSearchPlaceResponseModel responseBodyODataById = ApiMethodsSearchPlace.getSearchPlaceODataById(responseBodyOData.id).as(CommonSearchPlaceResponseModel.class);
-
-        assertThat(responseBodyOData.id).isEqualTo(responseBodyODataById.id);
-        assertThat(responseBodyOData.name).isEqualTo(responseBodyODataById.name);
-        assertThat(responseBodyOData.type).isEqualTo(responseBodyODataById.type);
-        assertThat(responseBodyOData.categoryType).isEqualTo(responseBodyODataById.categoryType);
-        assertThat(responseBodyOData.parameters).isEqualTo(responseBodyODataById.parameters);
-        assertThat(responseBodyOData.excludes).isEqualTo(responseBodyODataById.excludes);
+        assertThat(responseBodyODataById.id).isEqualTo(responseBody.id);
+        assertThat(responseBodyODataById.name).isEqualTo(responseBody.name);
+        assertThat(responseBodyODataById.type).isEqualTo(responseBody.type);
+        assertThat(responseBodyODataById.categoryType).isEqualTo(responseBody.categoryType);
+        assertThat(responseBodyODataById.parameters).usingRecursiveComparison().isEqualTo(responseBody.parameters);
+        assertThat(responseBodyODataById.excludes).isEqualTo(responseBody.excludes);
+        assertThat(responseBodyODataById.createdUtc).matches(dateTimeISOPattern());
 
     }
 
@@ -215,25 +211,17 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
                 .parameters(parameters)
                 .build();
 
-        ApiMethodsSearchPlace.addSearchPlace(requestBody);
+        CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
 
-        HashMap<String, String> requestParameters = new HashMap<>();
-        requestParameters.put("$filter", "contains(name, '" + searchPlaceNameForFilter + "')");
+        CommonSearchPlaceResponseModel responseBodyODataById = ApiMethodsSearchPlace.getSearchPlaceODataByIdPath(responseBody.id).as(CommonSearchPlaceResponseModel.class);
 
-        List<CommonSearchPlaceResponseModel> responseBodyWithFilter =
-                ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters)
-                        .jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
-
-        CommonSearchPlaceResponseModel responseBodyOData = responseBodyWithFilter.get(0);
-
-        CommonSearchPlaceResponseModel responseBodyODataById = ApiMethodsSearchPlace.getSearchPlaceODataByIdPath(responseBodyOData.id).as(CommonSearchPlaceResponseModel.class);
-
-        assertThat(responseBodyOData.id).isEqualTo(responseBodyODataById.id);
-        assertThat(responseBodyOData.name).isEqualTo(responseBodyODataById.name);
-        assertThat(responseBodyOData.type).isEqualTo(responseBodyODataById.type);
-        assertThat(responseBodyOData.categoryType).isEqualTo(responseBodyODataById.categoryType);
-        assertThat(responseBodyOData.parameters).isEqualTo(responseBodyODataById.parameters);
-        assertThat(responseBodyOData.excludes).isEqualTo(responseBodyODataById.excludes);
+        assertThat(responseBodyODataById.id).isEqualTo(responseBody.id);
+        assertThat(responseBodyODataById.name).isEqualTo(responseBody.name);
+        assertThat(responseBodyODataById.type).isEqualTo(responseBody.type);
+        assertThat(responseBodyODataById.categoryType).isEqualTo(responseBody.categoryType);
+        assertThat(responseBodyODataById.parameters).usingRecursiveComparison().isEqualTo(responseBody.parameters);
+        assertThat(responseBodyODataById.excludes).isEqualTo(responseBody.excludes);
+        assertThat(responseBodyODataById.createdUtc).matches(dateTimeISOPattern());
 
     }
 

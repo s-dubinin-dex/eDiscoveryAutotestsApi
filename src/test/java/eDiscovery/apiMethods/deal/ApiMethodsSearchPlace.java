@@ -185,9 +185,9 @@ public class ApiMethodsSearchPlace extends UrlBase {
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
-                .log().all()
+                .pathParam("id", id)
                 .when()
-                .get(ODATA_SEARCH_PLACE + "/" + id)
+                .get(ODATA_SEARCH_PLACE + "/{id}")
                 .then()
                 .extract().response();
     }

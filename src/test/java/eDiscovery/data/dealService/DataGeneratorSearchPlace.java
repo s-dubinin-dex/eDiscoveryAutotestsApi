@@ -1,6 +1,5 @@
 package eDiscovery.data.dealService;
 
-import com.github.javafaker.Faker;
 import eDiscovery.apiMethods.deal.ApiMethodsSearchPlace;
 import eDiscovery.data.DataGeneratorCommon;
 import eDiscovery.helpers.enums.SearchPlaceCategoryType;
@@ -8,7 +7,6 @@ import eDiscovery.helpers.enums.SearchPlaceType;
 import eDiscovery.models.deal.searchPlace.AddSearchPlaceRequestModel;
 import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class DataGeneratorSearchPlace {
@@ -26,7 +24,8 @@ public class DataGeneratorSearchPlace {
     public static AddSearchPlaceRequestModel getSearchPlaceModelWithOnlyRequiredParameters(String name){
         return AddSearchPlaceRequestModel.builder()
                 .name(name)
-                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
                 .build();
     }
 

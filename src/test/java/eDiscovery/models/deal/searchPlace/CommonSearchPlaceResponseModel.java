@@ -12,4 +12,5 @@ public class CommonSearchPlaceResponseModel {
     public SearchPlaceParametersModel parameters;
     public List<String> excludes;;
     public String id;
+    public String createdUtc;
 }

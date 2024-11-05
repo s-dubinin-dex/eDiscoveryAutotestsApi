@@ -11,7 +11,7 @@ public class AddSearchPlaceRequestModel {
     public String name;
     @JsonInclude()
     public String categoryType;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude()
     public String type;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public SearchPlaceParametersModel parameters;

@@ -8,9 +8,9 @@ import java.util.List;
 public class UpdateSearchPlaceRequestModel {
     @JsonInclude()
     public String name;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude()
     public String categoryType;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude()
     public String type;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public SearchPlaceParametersModel parameters;
