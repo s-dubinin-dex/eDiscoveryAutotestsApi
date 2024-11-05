@@ -151,25 +151,16 @@ public class SearchQueryCommonPositiveTests extends TestBase {
                 .type(SearchQueryType.Regex.name())
                 .value("\\d{10}")
                 .build();
-        ApiMethodsSearchQuery.addSearchQuery(requestBody);
+        CommonSearchQueryResponseModel responseBody = ApiMethodsSearchQuery.addSearchQuery(requestBody).as(CommonSearchQueryResponseModel.class);
 
-        HashMap<String, String> requestParameters = new HashMap<>();
-        requestParameters.put("$filter", "contains(name, '" + searchQueryNameForFilter + "')");
+        CommonSearchQueryResponseModel responseBodyODataById = ApiMethodsSearchQuery.getSearchQueryODataById(responseBody.id).as(CommonSearchQueryResponseModel.class);
 
-        List<CommonSearchQueryResponseModel> responseBodyWithFilter =
-                ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
-                        .jsonPath().getList("value", CommonSearchQueryResponseModel.class);
-
-        CommonSearchQueryResponseModel responseBodyOData = responseBodyWithFilter.get(0);
-
-        CommonSearchQueryResponseModel responseBodyODataById = ApiMethodsSearchQuery.getSearchQueryODataById(responseBodyOData.id).as(CommonSearchQueryResponseModel.class);
-
-        assertThat(responseBodyODataById.id).isEqualTo(responseBodyOData.id);
-        assertThat(responseBodyODataById.name).isEqualTo(responseBodyOData.name);
-        assertThat(responseBodyODataById.type).isEqualTo(responseBodyOData.type);
-        assertThat(responseBodyODataById.value).isEqualTo(responseBodyOData.value);
+        assertThat(responseBodyODataById.id).isEqualTo(responseBody.id);
+        assertThat(responseBodyODataById.name).isEqualTo(responseBody.name);
+        assertThat(responseBodyODataById.type).isEqualTo(responseBody.type);
+        assertThat(responseBodyODataById.value).isEqualTo(responseBody.value);
         assertThat(responseBodyODataById.createdUtc).matches(dateTimeISOPattern());
-        assertThat(responseBodyODataById.createdUtc).isEqualTo(responseBodyOData.createdUtc);
+        assertThat(responseBodyODataById.createdUtc).isEqualTo(responseBody.createdUtc);
 
     }
 
@@ -191,25 +182,16 @@ public class SearchQueryCommonPositiveTests extends TestBase {
                 .type(SearchQueryType.Regex.name())
                 .value("\\d{10}")
                 .build();
-        ApiMethodsSearchQuery.addSearchQuery(requestBody);
+        CommonSearchQueryResponseModel responseBody = ApiMethodsSearchQuery.addSearchQuery(requestBody).as(CommonSearchQueryResponseModel.class);
 
-        HashMap<String, String> requestParameters = new HashMap<>();
-        requestParameters.put("$filter", "contains(name, '" + searchQueryNameForFilter + "')");
+        CommonSearchQueryResponseModel responseBodyODataById = ApiMethodsSearchQuery.getSearchQueryODataByIdPath(responseBody.id).as(CommonSearchQueryResponseModel.class);
 
-        List<CommonSearchQueryResponseModel> responseBodyWithFilter =
-                ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
-                        .jsonPath().getList("value", CommonSearchQueryResponseModel.class);
-
-        CommonSearchQueryResponseModel responseBodyOData = responseBodyWithFilter.get(0);
-
-        CommonSearchQueryResponseModel responseBodyODataById = ApiMethodsSearchQuery.getSearchQueryODataByIdPath(responseBodyOData.id).as(CommonSearchQueryResponseModel.class);
-
-        assertThat(responseBodyODataById.id).isEqualTo(responseBodyOData.id);
-        assertThat(responseBodyODataById.name).isEqualTo(responseBodyOData.name);
-        assertThat(responseBodyODataById.type).isEqualTo(responseBodyOData.type);
-        assertThat(responseBodyODataById.value).isEqualTo(responseBodyOData.value);
+        assertThat(responseBodyODataById.id).isEqualTo(responseBody.id);
+        assertThat(responseBodyODataById.name).isEqualTo(responseBody.name);
+        assertThat(responseBodyODataById.type).isEqualTo(responseBody.type);
+        assertThat(responseBodyODataById.value).isEqualTo(responseBody.value);
         assertThat(responseBodyODataById.createdUtc).matches(dateTimeISOPattern());
-        assertThat(responseBodyODataById.createdUtc).isEqualTo(responseBodyOData.createdUtc);
+        assertThat(responseBodyODataById.createdUtc).isEqualTo(responseBody.createdUtc);
 
     }
 
