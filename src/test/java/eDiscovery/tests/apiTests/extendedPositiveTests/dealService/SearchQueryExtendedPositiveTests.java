@@ -21,7 +21,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -95,7 +94,9 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
                 .value(value)
                 .build();
 
-        ApiMethodsSearchQuery.addSearchQuery(requestBody);
+        CommonSearchQueryResponseModel responseBody = ApiMethodsSearchQuery.addSearchQuery(requestBody).as(CommonSearchQueryResponseModel.class);
+
+        assertThat(responseBody.value).isEqualTo(value);
     }
 
     @Epic("Сервис Deal")
@@ -139,8 +140,8 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
         DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters(
-                Collections.singletonList(responseSearchPlaceCreation.id),
-                Collections.singletonList(responseSearchQueryCreation.id)
+                responseSearchPlaceCreation.id,
+                responseSearchQueryCreation.id
         );
 
         String nameForUpdate = getRandomName();
@@ -197,8 +198,8 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
         DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters(
-                Collections.singletonList(responseSearchPlaceCreation.id),
-                Collections.singletonList(responseSearchQueryCreation.id)
+                responseSearchPlaceCreation.id,
+                responseSearchQueryCreation.id
         );
 
         String typeForUpdating = SearchQueryType.Text.name();
@@ -254,8 +255,8 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
         DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters(
-                Collections.singletonList(responseSearchPlaceCreation.id),
-                Collections.singletonList(responseSearchQueryCreation.id)
+                responseSearchPlaceCreation.id,
+                responseSearchQueryCreation.id
         );
 
         UpdateSearchQueryRequestModel requestBody = UpdateSearchQueryRequestModel.builder()
