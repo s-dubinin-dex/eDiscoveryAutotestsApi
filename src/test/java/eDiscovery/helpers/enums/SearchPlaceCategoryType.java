@@ -10,6 +10,7 @@ public enum SearchPlaceCategoryType {
     FileShare;
 
     public static List<String> getValidSearchPlaceCategoryTypes(){
+
         List<String> result = new ArrayList<>();
 
         for (SearchPlaceCategoryType entity: SearchPlaceCategoryType.values()){

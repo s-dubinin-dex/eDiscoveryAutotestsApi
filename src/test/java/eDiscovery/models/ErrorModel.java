@@ -1,11 +1,9 @@
 package eDiscovery.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
 
 import java.util.ArrayList;
 
-@Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ErrorModel {
     public String type;
@@ -23,7 +21,6 @@ public class ErrorModel {
         public String type;
     }
 
-    @Data
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class ErrorModelErrors{
         public ArrayList<ErrorModelDetail> editEntity;
@@ -33,7 +30,6 @@ public class ErrorModel {
         public ArrayList<ErrorModelDetail> value;
     }
 
-    @Data
     public static class ErrorModelDetail{
         public String errorCode;
         public String params;

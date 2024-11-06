@@ -1,4 +1,5 @@
 package eDiscovery.tests.apiTests.extendedPositiveTests.dealService;
+
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsDealManipulation;
 import eDiscovery.apiMethods.deal.ApiMethodsSearchPlace;
