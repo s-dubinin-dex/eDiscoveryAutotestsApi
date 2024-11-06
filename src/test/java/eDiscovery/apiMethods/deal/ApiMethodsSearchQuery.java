@@ -1,5 +1,6 @@
 package eDiscovery.apiMethods.deal;
 
+import com.google.gson.JsonObject;
 import eDiscovery.UrlBase;
 import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModel;
 import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModelNotNull;
@@ -39,6 +40,19 @@ public class ApiMethodsSearchQuery extends UrlBase {
 
         return given()
                 .body(addSearchQueryRequestModel)
+                .when()
+                .post(SEARCH_QUERY)
+                .then()
+                .extract().response();
+    }
+
+    @Step("Создание поискового запроса")
+    public static Response addSearchQuery(JsonObject jsonObject){
+
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+        // Сделал скорее всего для того, чтобы передавать в поля данные других типов
+        return given()
+                .body(jsonObject)
                 .when()
                 .post(SEARCH_QUERY)
                 .then()
