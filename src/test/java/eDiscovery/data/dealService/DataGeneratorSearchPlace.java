@@ -1,17 +1,22 @@
 package eDiscovery.data.dealService;
 
+import com.github.javafaker.Faker;
 import eDiscovery.apiMethods.deal.ApiMethodsSearchPlace;
 import eDiscovery.data.DataGeneratorCommon;
+import eDiscovery.helpers.MaxAllowedFieldLengths;
 import eDiscovery.helpers.enums.SearchPlaceCategoryType;
 import eDiscovery.helpers.enums.SearchPlaceType;
 import eDiscovery.models.deal.searchPlace.AddSearchPlaceRequestModel;
 import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DataGeneratorSearchPlace {
 
     /*
+    public static Faker faker = new Faker();
+
      * SearchPlace Models
      * */
 
@@ -86,7 +91,11 @@ public class DataGeneratorSearchPlace {
      * */
 
     public static List<String> getValidSearchPlaceNames(){
-        return DataGeneratorCommon.getValidNames();
+        List<String> result = new ArrayList<>(DataGeneratorCommon.getValidNames());
+
+        result.add(DataGeneratorCommon.getRandomName(MaxAllowedFieldLengths.DEAL_SEARCH_PLACE_NAME));
+
+        return result;
     }
 
     public static List<String> getValidSearchPlaceCategoryTypes(){
@@ -105,20 +114,39 @@ public class DataGeneratorSearchPlace {
         return DataGeneratorCommon.getValidFolderExclusionsWithDifferentCount();
     }
 
-    public static String[] getValidSearchPlaceURIInParameters() {
-        return DataGeneratorCommon.getValidURI();
+    public static List<String> getValidSearchPlaceURIInParameters() {
+        List<String> result = new ArrayList<>(DataGeneratorCommon.getValidURI());
+
+        result.add(faker.lorem().characters(MaxAllowedFieldLengths.DEAL_SEARCH_PLACE_URI));
+
+        return result;
     }
 
     public static List<String> getValidSearchPlaceUsernamesInParameters() {
-        return DataGeneratorCommon.getValidNames();
+        List<String> result = new ArrayList<>(DataGeneratorCommon.getValidNames());
+
+        result.add(DataGeneratorCommon.getRandomName(MaxAllowedFieldLengths.DEAL_SEARCH_PLACE_USERNAME));
+
+        return result;
     }
 
-    public static String[] getValidSearchPlacePasswordsInParameters(){
-        return DataGeneratorCommon.getValidPasswords();
+    public static List<String> getValidSearchPlacePasswordsInParameters(){
+        List<String> result = new ArrayList<>(DataGeneratorCommon.getValidPasswords());
+
+        result.add(DataGeneratorCommon.getRandomName(MaxAllowedFieldLengths.DEAL_SEARCH_PLACE_PASSWORD));
+
+        return result;
     }
 
     /*
      * Invalid SearchPlace attributes
      * */
 
+    public static List<String> getInvalidSearchPlaceNames(){
+        List<String> result = new ArrayList<>();
+
+        result.add(DataGeneratorCommon.getRandomName(MaxAllowedFieldLengths.DEAL_SEARCH_PLACE_NAME + 1));
+
+        return result;
+    }
 }

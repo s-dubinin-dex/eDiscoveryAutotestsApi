@@ -14,7 +14,6 @@ public class DataGeneratorCommon {
     public static List<String> getValidNames(){
         return List.of(
                 faker.regexify("[a-zA-Zа-яА-Я]{1}"),    // Строка из 1 символа
-                        faker.regexify("[a-z]{256}"),           // Строка из 256 символов
                         faker.regexify("[а-я]{25}"),            // Строка из русских символов в нижней раскладке
                         faker.regexify("[А-Я]{25}"),            // Строка из русских символов в верхней раскладке
                         faker.regexify("[А-Яа-я]{25}"),         // Строка из русских символов в смешанной раскладке
@@ -99,8 +98,8 @@ public class DataGeneratorCommon {
 
     }
 
-    public static String[] getValidURI(){
-        return new String[]{
+    public static List<String> getValidURI(){
+        return List.of(
 
                 "smb://server/share",
                 "\\server\\share",
@@ -120,16 +119,14 @@ public class DataGeneratorCommon {
                 "\\\\server\\share\\subdir",
 
                 faker.regexify("[a-z]{1}"),                                 // Строка длиной 1 символ
-                faker.lorem().characters(5000),         // Строка длиной 5000 символов
                 "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",                       // Строка из спецсимволов
                 "ё"                                                         // Буква "ё"
-        };
+        );
     }
 
-    public static String[] getValidPasswords(){
-        return new  String[]{
+    public static List<String> getValidPasswords(){
+        return List.of(
                 faker.regexify("[a-z]{1}"),             // Строка из 1 символа
-                faker.regexify("[a-z]{256}"),           // Строка из 256 символов
                 faker.regexify("[а-я]{25}"),            // Строка из русских символов в нижней раскладке
                 faker.regexify("[А-Я]{25}"),            // Строка из русских символов в верхней раскладке
                 faker.regexify("[А-Яа-я]{25}"),         // Строка из русских символов в смешанной раскладке
@@ -142,7 +139,7 @@ public class DataGeneratorCommon {
                 faker.regexify("[А-Яа-я0-9]{25}"),      // Строка из русских символов вперемешку с цифрами
                 "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~",   // Строка из спецсимволов
                 "ё"                                     // Буква "ё"
-        };
+        );
     }
 
     /*

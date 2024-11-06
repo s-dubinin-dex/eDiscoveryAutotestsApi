@@ -2,6 +2,7 @@ package eDiscovery.data.dealService;
 
 import eDiscovery.apiMethods.deal.ApiMethodsSearchQuery;
 import eDiscovery.data.DataGeneratorCommon;
+import eDiscovery.helpers.MaxAllowedFieldLengths;
 import eDiscovery.helpers.enums.SearchQueryType;
 import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModel;
 import eDiscovery.models.deal.searchQuery.CommonSearchQueryResponseModel;
@@ -48,7 +49,12 @@ public class DataGeneratorSearchQuery {
      * */
 
     public static List<String> getValidSearchQueryNames(){
-        return DataGeneratorCommon.getValidNames();
+
+        List<String> result = new ArrayList<>(DataGeneratorCommon.getValidNames());
+
+        result.add(DataGeneratorCommon.getRandomName(MaxAllowedFieldLengths.DEAL_SEARCH_QUERY_NAME));
+
+        return result;
     }
 
     public static List<String> getValidSearchQueryTypes(){
@@ -59,7 +65,8 @@ public class DataGeneratorSearchQuery {
         //TODO: расширить валидными REGEX выражениями
 
         List<String> result = new ArrayList<>(DataGeneratorCommon.getValidNames());
-        result.add(DataGeneratorCommon.getRandomName(2000)); // Строка из 2000 символов
+
+        result.add(DataGeneratorCommon.getRandomName(MaxAllowedFieldLengths.DEAL_SEARCH_QUERY_VALUE)); // Строка из 2000 символов
 
         return result;
     }
