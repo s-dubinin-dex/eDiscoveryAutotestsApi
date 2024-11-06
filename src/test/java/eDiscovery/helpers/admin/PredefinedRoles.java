@@ -1,4 +1,4 @@
-package eDiscovery.helpers.enums;
+package eDiscovery.helpers.admin;
 
 public enum PredefinedRoles {
 

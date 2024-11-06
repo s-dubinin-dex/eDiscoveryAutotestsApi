@@ -3,7 +3,7 @@ package eDiscovery.tests.apiTests.commonPositiveTests.adminService;
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.admin.ApiMethodsEmployee;
 import eDiscovery.helpers.admin.RoleHelper;
-import eDiscovery.helpers.enums.PredefinedRoles;
+import eDiscovery.helpers.admin.PredefinedRoles;
 import eDiscovery.models.admin.emplyee.AddEmployeeRequestModel;
 import eDiscovery.models.admin.emplyee.CommonEmployeeResponseModel;
 import eDiscovery.models.admin.emplyee.UpdateEmployeeRequestModel;
