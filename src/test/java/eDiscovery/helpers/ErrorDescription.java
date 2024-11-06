@@ -41,7 +41,7 @@ public class ErrorDescription {
     public static final String VALIDATIONS_THE_FIELD_VALUE_MAXIMUM_LENGTH_IS_2000       = "validations.The field Value must be a string or array type with a maximum length of '2000'.";
 
     public static final String VALIDATIONS_THE_JSON_VALUE_NOT_BE_CONVERTED_TO_GUID              = "validations\\.The JSON value could not be converted to System\\.Guid\\. Path: \\$\\.id \\| LineNumber: \\d+ \\| BytePositionInLine: \\d+\\.";
-    public static final String VALIDATIONS_THE_JSON_VALUE_NOT_BE_CONVERTED_TO_SEARCH_QUERY_TYPE = "validations\\.The JSON value could not be converted to Shared\\.SearchEngine\\.Engines\\.SearchQueryType\\. Path: \\$\\.type \\| LineNumber: \\d+ \\| BytePositionInLine: \\d+\\.";
+    public static final String VALIDATIONS_THE_JSON_VALUE_NOT_BE_CONVERTED_TO_SEARCH_QUERY_TYPE = "validations\\.The JSON value could not be converted to Shared\\.SearchEngine\\.Models\\.Parameters\\.SearchQueryType\\. Path: \\$\\.type \\| LineNumber: \\d+ \\| BytePositionInLine: \\d+\\.";
     public static final String VALIDATIONS_THE_VALUE___IS_NOT_VALID                             = "validations\\.The value .+ is not valid\\.";
 
     public static final String ID_IS_EMPTY_PARAMETER_ID                                 = "id is empty (Parameter 'id')";
