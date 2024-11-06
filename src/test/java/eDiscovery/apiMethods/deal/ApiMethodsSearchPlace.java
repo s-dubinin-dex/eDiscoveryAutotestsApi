@@ -175,7 +175,7 @@ public class ApiMethodsSearchPlace extends UrlBase {
 
         return given()
                 .when()
-                .get(ODATA_SEARCH_PLACE + "(" + id + ")")
+                .get(ODATA_SEARCH_PLACE + String.format("(%s)", id))
                 .then()
                 .extract().response();
     }
