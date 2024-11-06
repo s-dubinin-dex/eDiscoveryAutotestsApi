@@ -64,6 +64,7 @@ task testWithEnv(type: Test) {
     System.setProperty('IDENTITY_URL',          getProperty(environment as String, 'IDENTITY_URL'))
     System.setProperty('ADMIN_URL',             getProperty(environment as String, 'ADMIN_URL'))
     System.setProperty('DEAL_URL',              getProperty(environment as String, 'DEAL_URL'))
+    System.setProperty('CLASSIFIER_URL',        getProperty(environment as String, 'CLASSIFIER_URL'))
 
     System.setProperty('PG_USERNAME',           getProperty(environment as String, 'PG_USERNAME'))
     System.setProperty('PG_PASSWORD',           getProperty(environment as String, 'PG_PASSWORD'))
@@ -74,6 +75,7 @@ task testWithEnv(type: Test) {
     println "System property 'IDENTITY_URL': ${System.getProperty('IDENTITY_URL')}"
     println "System property 'ADMIN_URL': ${System.getProperty('ADMIN_URL')}"
     println "System property 'DEAL_URL': ${System.getProperty('DEAL_URL')}"
+    println "System property 'CLASSIFIER_URL': ${System.getProperty('CLASSIFIER_URL')}"
 
     println "System property 'PG_USERNAME': ${System.getProperty('PG_USERNAME')}"
     println "System property 'PG_PASSWORD': ${System.getProperty('PG_PASSWORD')}"
