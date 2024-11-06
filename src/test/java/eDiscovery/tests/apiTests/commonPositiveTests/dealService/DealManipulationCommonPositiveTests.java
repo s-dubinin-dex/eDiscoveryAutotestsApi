@@ -24,7 +24,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.DataChecker.*;
@@ -78,9 +77,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
                         )
                 )
         );
-        assertThat(responseBody.progressInfo).usingRecursiveComparison().isEqualTo(
-                new DealProgressInfoModel(new UUID(0L, 0L).toString(), 0, 0, 0, 0, 0)
-        );
+        assertThat(responseBody.progressInfo).isNull();
         assertThat(responseBody.dealStatus).isEqualTo(DealStatus.Waiting.name());
         assertThat(responseBody.excludes).hasSize(0);
         assertThat(responseBody.searchMask).isNull();
@@ -148,9 +145,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
                         )
                 )
         );
-        assertThat(responseBodyDealUpdate.progressInfo).usingRecursiveComparison().isEqualTo(
-                new DealProgressInfoModel(new UUID(0L, 0L).toString(), 0, 0, 0, 0, 0)
-        );
+        assertThat(responseBodyDealUpdate.progressInfo).isNull();
         assertThat(responseBodyDealUpdate.dealStatus).isEqualTo(DealStatus.Waiting.name());
         assertThat(responseBodyDealUpdate.excludes).hasSize(0);
         assertThat(responseBodyDealUpdate.searchMask).isEqualTo(responseBodyDealCreation.searchMask);
@@ -228,9 +223,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
                         )
                 )
         );
-        assertThat(responseDealCardBody.progressInfo).usingRecursiveComparison().isEqualTo(
-                new DealProgressInfoModel(new UUID(0L, 0L).toString(), 0, 0, 0, 0, 0)
-        );
+        assertThat(responseDealCardBody.progressInfo).isNull();
         assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Waiting.name());
         assertThat(responseDealCardBody.excludes).hasSize(0);
         assertThat(responseDealCardBody.searchMask).isEqualTo(responseDealCreationBody.searchMask);
