@@ -48,6 +48,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(name)
                 .categoryType(SearchPlaceCategoryType.ARM.name())
+                .type(SearchPlaceType.LOCAL.name())
                 .build();
 
         CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
@@ -70,6 +71,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
                 .categoryType(categoryType)
+                .type(SearchPlaceType.FTP.name())
                 .build();
 
         CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
@@ -120,13 +122,14 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
-                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
                 .parameters(parameters)
                 .build();
 
         CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
 
-        assertThat(responseBody.parameters).isEqualTo(parameters);
+        assertThat(responseBody.parameters).usingRecursiveComparison().isEqualTo(parameters);
     }
 
     @Epic("Сервис Deal")
@@ -150,12 +153,13 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
                 .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
                 .parameters(parameters)
                 .build();
 
         CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
 
-        assertThat(responseBody.parameters).isEqualTo(parameters);
+        assertThat(responseBody.parameters).usingRecursiveComparison().isEqualTo(parameters);
     }
 
     @Epic("Сервис Deal")
@@ -178,13 +182,14 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
-                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
                 .parameters(parameters)
                 .build();
 
         CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
 
-        assertThat(responseBody.parameters).isEqualTo(parameters);
+        assertThat(responseBody.parameters).usingRecursiveComparison().isEqualTo(parameters);
     }
 
     @Epic("Сервис Deal")
@@ -203,7 +208,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
-                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
                 .excludes(excludes)
                 .build();
 
@@ -226,7 +232,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
-                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .categoryType(SearchPlaceCategoryType.FileShare.name())
+                .type(SearchPlaceType.SMB.name())
                 .excludes(excludes)
                 .build();
 
@@ -278,9 +285,9 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
         CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        ApiMethodsDealManipulation.addDeal(DataGeneratorDealManipulation.getBasicDealManipulationModel(
-                Collections.singletonList(responseBodySearchPlaceCreation.id),
-                Collections.singletonList(responseBodySearchQueryCreation.id)
+        ApiMethodsDealManipulation.addDeal(DataGeneratorDealManipulation.getDealManipulationModelWithOnlyRequiredParameters(
+                responseBodySearchPlaceCreation.id,
+                responseBodySearchQueryCreation.id
         ));
 
         String newName = getRandomName();
@@ -400,7 +407,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestSearchPlaceUpdate).as(CommonSearchPlaceResponseModel.class);
 
-        assertThat(responseBodySearchPlaceUpdate.parameters).isEqualTo(parametersForUpdate);
+        assertThat(responseBodySearchPlaceUpdate.parameters).usingRecursiveComparison().isEqualTo(parametersForUpdate);
     }
 
     @Epic("Сервис Deal")
@@ -448,7 +455,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestSearchPlaceUpdate).as(CommonSearchPlaceResponseModel.class);
 
-        assertThat(responseBodySearchPlaceUpdate.parameters).isEqualTo(parametersForUpdate);
+        assertThat(responseBodySearchPlaceUpdate.parameters).usingRecursiveComparison().isEqualTo(parametersForUpdate);
     }
 
     @Epic("Сервис Deal")
@@ -496,7 +503,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestSearchPlaceUpdate).as(CommonSearchPlaceResponseModel.class);
 
-        assertThat(responseBodySearchPlaceUpdate.parameters).isEqualTo(parametersForUpdate);
+        assertThat(responseBodySearchPlaceUpdate.parameters).usingRecursiveComparison().isEqualTo(parametersForUpdate);
     }
 
     @Test
@@ -526,9 +533,9 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);
         CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        ApiMethodsDealManipulation.addDeal(DataGeneratorDealManipulation.getBasicDealManipulationModel(
-                Collections.singletonList(responseBodySearchPlaceCreation.id),
-                Collections.singletonList(responseBodySearchQueryCreation.id)
+        ApiMethodsDealManipulation.addDeal(DataGeneratorDealManipulation.getDealManipulationModelWithOnlyRequiredParameters(
+                responseBodySearchPlaceCreation.id,
+                responseBodySearchQueryCreation.id
         ));
 
         SearchPlaceParametersModel parametersForUpdate = SearchPlaceParametersModel.builder()
@@ -548,7 +555,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestSearchPlaceUpdate).as(CommonSearchPlaceResponseModel.class);
 
-        assertThat(responseBodySearchPlaceUpdate.parameters).isEqualTo(parametersForUpdate);
+        assertThat(responseBodySearchPlaceUpdate.parameters).usingRecursiveComparison().isEqualTo(parametersForUpdate);
     }
 
     @Epic("Сервис Deal")
@@ -646,9 +653,9 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestSearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);
         CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        ApiMethodsDealManipulation.addDeal(DataGeneratorDealManipulation.getBasicDealManipulationModel(
-                Collections.singletonList(responseBodySearchPlaceCreation.id),
-                Collections.singletonList(responseBodySearchQueryCreation.id)
+        ApiMethodsDealManipulation.addDeal(DataGeneratorDealManipulation.getDealManipulationModelWithOnlyRequiredParameters(
+                responseBodySearchPlaceCreation.id,
+                responseBodySearchQueryCreation.id
         ));
 
         List<String> excludesUpdate = Collections.singletonList("B:\\");
@@ -761,9 +768,9 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = ApiMethodsSearchPlace.addSearchPlace(requestSearchPlaceCreation).as(CommonSearchPlaceResponseModel.class);
         CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        ApiMethodsDealManipulation.addDeal(DataGeneratorDealManipulation.getBasicDealManipulationModel(
-                Collections.singletonList(responseBodySearchPlaceCreation.id),
-                Collections.singletonList(responseBodySearchQueryCreation.id)
+        ApiMethodsDealManipulation.addDeal(DataGeneratorDealManipulation.getDealManipulationModelWithOnlyRequiredParameters(
+                responseBodySearchPlaceCreation.id,
+                responseBodySearchQueryCreation.id
         ));
 
         List<String> excludesUpdate = Collections.singletonList("B:\\");
@@ -864,6 +871,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(searchPlaceNameForFilter)
                 .categoryType(SearchPlaceCategoryType.ARM.name())
+                .type(SearchPlaceType.LOCAL.name())
                 .build();
         ApiMethodsSearchPlace.addSearchPlace(requestBody);
 
@@ -936,6 +944,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
             AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                     .name(searchPlaceNameForFilterWithNumber)
                     .categoryType(SearchPlaceCategoryType.ARM.name())
+                    .type(SearchPlaceType.LOCAL.name())
                     .build();
             ApiMethodsSearchPlace.addSearchPlace(requestBody);
         }
@@ -979,6 +988,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
             AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                     .name(searchPlaceNameForFilterWithNumber)
                     .categoryType(SearchPlaceCategoryType.ARM.name())
+                    .type(SearchPlaceType.LOCAL.name())
                     .build();
             ApiMethodsSearchPlace.addSearchPlace(requestBody);
         }
@@ -1022,6 +1032,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
             AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                     .name(searchPlaceNameForFilterWithNumber)
                     .categoryType(SearchPlaceCategoryType.ARM.name())
+                    .type(SearchPlaceType.LOCAL.name())
                     .build();
             ApiMethodsSearchPlace.addSearchPlace(requestBody);
         }
@@ -1065,6 +1076,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
             AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                     .name(searchPlaceNameForFilterWithNumber)
                     .categoryType(SearchPlaceCategoryType.ARM.name())
+                    .type(SearchPlaceType.LOCAL.name())
                     .build();
             ApiMethodsSearchPlace.addSearchPlace(requestBody);
         }
@@ -1123,6 +1135,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
             AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                     .name(searchPlaceNameForFilterWithNumber)
                     .categoryType(SearchPlaceCategoryType.ARM.name())
+                    .type(SearchPlaceType.LOCAL.name())
                     .build();
             ApiMethodsSearchPlace.addSearchPlace(requestBody);
         }
