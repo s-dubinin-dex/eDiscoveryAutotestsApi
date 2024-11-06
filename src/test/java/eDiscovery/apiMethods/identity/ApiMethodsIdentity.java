@@ -9,6 +9,7 @@ import static io.restassured.RestAssured.given;
 
 public class ApiMethodsIdentity extends UrlBase {
     private static final String CONNECT_TOKEN       = "/connect/token";
+    private static final String CONNECT_USERINFO    = "/connect/userinfo";
 
     @Step("Авторизация и получение токена")
     public static Response connectToken(){
@@ -23,6 +24,18 @@ public class ApiMethodsIdentity extends UrlBase {
                 .formParam("password", "005")
                 .when()
                 .post(CONNECT_TOKEN)
+                .then()
+                .extract().response();
+    }
+
+    @Step("Получение информации от текущем пользователе")
+    public static Response userInfo(){
+
+        SpecificationsServer.setBaseUrl(IDENTITY_URL);
+
+        return given()
+                .when()
+                .get(CONNECT_USERINFO)
                 .then()
                 .extract().response();
     }
