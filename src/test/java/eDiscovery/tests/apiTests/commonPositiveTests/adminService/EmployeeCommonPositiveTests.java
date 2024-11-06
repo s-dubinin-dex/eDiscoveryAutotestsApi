@@ -52,7 +52,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
         assertThat(responseBody.email).isEqualTo(requestBody.email);
         assertThat(responseBody.role).isEqualTo(role.name);
         assertThat(responseBody.activationDate).isNull();
-        assertThat(responseBody.createdUtc).matches(dateTimeUTCPattern());
+        assertThat(responseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
         assertThat(responseBody.deletedUtc).isNull();
     }
 
@@ -92,7 +92,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
         assertThat(responseBodyEmployeeUpdate.email).isEqualTo(requestBodyEmployeeCreation.email);
         assertThat(responseBodyEmployeeUpdate.role).isEqualTo(roleForUpdate.name);
         assertThat(responseBodyEmployeeUpdate.activationDate).isNull();
-        assertThat(responseBodyEmployeeUpdate.createdUtc).matches(dateTimeUTCPattern());
+        assertThat(responseBodyEmployeeUpdate.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
         assertThat(responseBodyEmployeeUpdate.deletedUtc).isNull();
     }
 
@@ -161,7 +161,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
         assertThat(responseBodyEmployeeAfterUpdateInvitation.email).isEqualTo(responseBodyEmployeeCreation.email);
         assertThat(responseBodyEmployeeAfterUpdateInvitation.role).isEqualTo(roleForCreation.name);
         assertThat(responseBodyEmployeeAfterUpdateInvitation.activationDate).isNull();
-        assertThat(responseBodyEmployeeAfterUpdateInvitation.createdUtc).matches(dateTimeUTCPattern());
+        assertThat(responseBodyEmployeeAfterUpdateInvitation.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
         assertThat(responseBodyEmployeeAfterUpdateInvitation.deletedUtc).isNull();
     }
 

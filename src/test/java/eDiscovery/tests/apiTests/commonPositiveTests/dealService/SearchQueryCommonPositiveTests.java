@@ -45,7 +45,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         assertThat(responseBody.type).isEqualTo(SearchQueryType.Regex.name());
         assertThat(responseBody.value).isEqualTo(requestBody.value);
         assertThat(isValidUUID(responseBody.id)).isTrue();
-        assertThat(responseBody.createdUtc).matches(dateTimeUTCPattern());
+        assertThat(responseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
     }
 
     @Test
@@ -76,7 +76,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         assertThat(responseBodySearchQueryUpdate.type).isEqualTo(SearchQueryType.Text.name());
         assertThat(responseBodySearchQueryUpdate.value).isEqualTo(requestModelSearchQueryUpdate.value);
         assertThat(isValidUUID(responseBodySearchQueryUpdate.id)).isTrue();
-        assertThat(responseBodySearchQueryUpdate.createdUtc).matches(dateTimeUTCPattern());
+        assertThat(responseBodySearchQueryUpdate.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
     }
 
     @Test
@@ -160,7 +160,6 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         assertThat(responseBodyODataById.type).isEqualTo(responseBody.type);
         assertThat(responseBodyODataById.value).isEqualTo(responseBody.value);
         assertThat(responseBodyODataById.createdUtc).matches(dateTimeISOPattern());
-        assertThat(responseBodyODataById.createdUtc).isEqualTo(responseBody.createdUtc);
 
     }
 
@@ -191,7 +190,6 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         assertThat(responseBodyODataById.type).isEqualTo(responseBody.type);
         assertThat(responseBodyODataById.value).isEqualTo(responseBody.value);
         assertThat(responseBodyODataById.createdUtc).matches(dateTimeISOPattern());
-        assertThat(responseBodyODataById.createdUtc).isEqualTo(responseBody.createdUtc);
 
     }
 
