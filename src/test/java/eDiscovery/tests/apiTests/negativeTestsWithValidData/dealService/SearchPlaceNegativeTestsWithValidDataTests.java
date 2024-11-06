@@ -19,8 +19,6 @@ import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
 
-import java.util.Collections;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.ErrorDescription.*;
@@ -44,6 +42,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(name)
                 .categoryType(SearchPlaceCategoryType.ARM.name())
+                .type(SearchPlaceType.LOCAL.name())
                 .build();
 
         ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation);
@@ -74,6 +73,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
                         .id(uuid)
                         .name(getRandomName())
                         .categoryType(SearchPlaceCategoryType.ARM.name())
+                        .type(SearchPlaceType.LOCAL.name())
                         .build()
         ).as(ErrorModel.class);
 
@@ -198,8 +198,8 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
         CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
         DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters(
-                Collections.singletonList(responseBodySearchPlaceCreation.id),
-                Collections.singletonList(responseBodySearchQueryCreation.id)
+                responseBodySearchPlaceCreation.id,
+                responseBodySearchQueryCreation.id
         );
 
         UpdateSearchPlaceRequestModel requestSearchPlaceUpdateBody = UpdateSearchPlaceRequestModel.builder()
@@ -270,8 +270,8 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
         CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
         DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters(
-                Collections.singletonList(responseBodySearchPlaceCreation.id),
-                Collections.singletonList(responseBodySearchQueryCreation.id)
+                responseBodySearchPlaceCreation.id,
+                responseBodySearchQueryCreation.id
         );
 
         UpdateSearchPlaceRequestModel requestSearchPlaceUpdateBody = UpdateSearchPlaceRequestModel.builder()
@@ -366,8 +366,8 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
         CommonSearchQueryResponseModel responseSearchQueryCreationBody = DataGeneratorSearchQuery.createBasicSearchQuery();
 
         DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters(
-                Collections.singletonList(responseSearchPlaceCreationBody.id),
-                Collections.singletonList(responseSearchQueryCreationBody.id)
+                responseSearchPlaceCreationBody.id,
+                responseSearchQueryCreationBody.id
         );
 
 
