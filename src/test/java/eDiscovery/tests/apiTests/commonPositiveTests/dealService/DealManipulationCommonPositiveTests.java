@@ -7,11 +7,9 @@ import eDiscovery.apiMethods.deal.ApiMethodsSearchQuery;
 import eDiscovery.data.dealService.DataGeneratorDealManipulation;
 import eDiscovery.data.dealService.DataGeneratorSearchPlace;
 import eDiscovery.data.dealService.DataGeneratorSearchQuery;
+import eDiscovery.helpers.enums.DealPriority;
 import eDiscovery.helpers.enums.DealStatus;
-import eDiscovery.models.deal.dealManipulation.AddDealManipulationRequestModel;
-import eDiscovery.models.deal.dealManipulation.CommonDealManipulationResponseModel;
-import eDiscovery.models.deal.dealManipulation.DealCardModel;
-import eDiscovery.models.deal.dealManipulation.UpdateDealManipulationRequestModel;
+import eDiscovery.models.deal.dealManipulation.*;
 import eDiscovery.models.deal.searchPlace.AddSearchPlaceRequestModel;
 import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
 import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModel;
@@ -26,8 +24,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
+import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Common positive tests - DealManipulation")
@@ -50,21 +50,44 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         CommonSearchQueryResponseModel searchQueryResponseBody = ApiMethodsSearchQuery.addSearchQuery(searchQueryRequestBody).as(CommonSearchQueryResponseModel.class);
 
         AddDealManipulationRequestModel requestBody = DataGeneratorDealManipulation.getDealManipulationModelWithOnlyRequiredParameters(
-                Collections.singletonList(searchPlaceResponseBody.id),
-                Collections.singletonList(searchQueryResponseBody.id)
+                searchPlaceResponseBody.id,
+                searchQueryResponseBody.id
         );
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-        Response response = ApiMethodsDealManipulation.addDeal(requestBody);
-        CommonDealManipulationResponseModel responseBody = response.as(CommonDealManipulationResponseModel.class);
+        CommonDealManipulationResponseModel responseBody = ApiMethodsDealManipulation.addDeal(requestBody).as(CommonDealManipulationResponseModel.class);
 
-        assertThat(responseBody.id).isNotBlank();
+        assertThat(isValidUUID(responseBody.id)).isTrue();
         assertThat(responseBody.name).isEqualTo(requestBody.name);
-        assertThat(responseBody.quarantine).isEqualTo(false);
-        assertThat(responseBody.searchPlaces).isEqualTo(Collections.singletonList(searchPlaceRequestBody.name));
-        assertThat(responseBody.searchQueries).isEqualTo(Collections.singletonList(searchQueryRequestBody.name));
+        assertThat(responseBody.dealPriority).isEqualTo(DealPriority.Medium.name());
+        assertThat(responseBody.quarantine).isFalse();
+        assertThat(responseBody.fileTypes).hasSize(0);
+        assertThat(responseBody.searchPlaces).usingRecursiveComparison().isEqualTo(
+                Collections.singletonList(
+                        new DealSearchPlaceModel(searchPlaceResponseBody.id, searchPlaceResponseBody.name)
+                )
+        );
+        assertThat(responseBody.classifySearchPlaces).hasSize(0);
+        assertThat(responseBody.searchPlaceGroups).hasSize(0);
+        assertThat(responseBody.dealSearchQueries).isEqualTo(
+                Collections.singletonList(
+                        new DealSearchQueryModel(
+                                requestBody.dealSearchQueries.get(0).isActive,
+                                requestBody.dealSearchQueries.get(0).id,
+                                searchQueryRequestBody.name
+                        )
+                )
+        );
+        assertThat(responseBody.progressInfo).usingRecursiveComparison().isEqualTo(
+                new DealProgressInfoModel(new UUID(0L, 0L).toString(), 0, 0, 0, 0, 0)
+        );
         assertThat(responseBody.dealStatus).isEqualTo(DealStatus.Waiting.name());
-        assertThat(responseBody.creatorUserId).isNotBlank();
+        assertThat(responseBody.excludes).hasSize(0);
+        assertThat(responseBody.searchMask).isNull();
+        assertThat(responseBody.needClassify).isFalse();
+        assertThat(responseBody.classifierProfileId).isNull();
+        assertThat(responseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
+        assertThat(isValidUUID(responseBody.creatorUserId)).isTrue();
         assertThat(responseBody.creatorUserName).isEqualTo("Администратор");
 
     }
@@ -85,9 +108,9 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         AddSearchQueryRequestModel searchQueryRequestBody = DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
         CommonSearchQueryResponseModel searchQueryResponseBody = ApiMethodsSearchQuery.addSearchQuery(searchQueryRequestBody).as(CommonSearchQueryResponseModel.class);
 
-        AddDealManipulationRequestModel requestBodyDealCreation = DataGeneratorDealManipulation.getBasicDealManipulationModel(
-                Collections.singletonList(searchPlaceResponseBody.id),
-                Collections.singletonList(searchQueryResponseBody.id)
+        AddDealManipulationRequestModel requestBodyDealCreation = DataGeneratorDealManipulation.getDealManipulationModelWithOnlyRequiredParameters(
+                searchPlaceResponseBody.id,
+                searchQueryResponseBody.id
         );
 
         Response responseDealCreation = ApiMethodsDealManipulation.addDeal(requestBodyDealCreation);
@@ -97,23 +120,45 @@ public class DealManipulationCommonPositiveTests extends TestBase {
                 .id(responseBodyDealCreation.id)
                 .name(getRandomName())
                 .searchPlaces(requestBodyDealCreation.searchPlaces)
-                .searchQueries(requestBodyDealCreation.searchQueries)
-                .dealStatus(DealStatus.Waiting.name())
+                .dealSearchQueries(requestBodyDealCreation.dealSearchQueries)
                 .build();
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        Response responseDealUpdate = ApiMethodsDealManipulation.updateDeal(requestBodyDealUpdate);
-        CommonDealManipulationResponseModel responseBodyDealUpdate = responseDealUpdate.as(CommonDealManipulationResponseModel.class);
+        CommonDealManipulationResponseModel responseBodyDealUpdate = ApiMethodsDealManipulation.updateDeal(requestBodyDealUpdate).as(CommonDealManipulationResponseModel.class);
 
-        assertThat(responseBodyDealUpdate.id).isNotBlank();
+        assertThat(responseBodyDealUpdate.id).isEqualTo(responseBodyDealCreation.id);
         assertThat(responseBodyDealUpdate.name).isEqualTo(requestBodyDealUpdate.name);
-        assertThat(responseBodyDealUpdate.quarantine).isEqualTo(false);
-        assertThat(responseBodyDealUpdate.searchPlaces).isEqualTo(Collections.singletonList(searchPlaceRequestBody.name));
-        assertThat(responseBodyDealUpdate.searchQueries).isEqualTo(Collections.singletonList(searchQueryRequestBody.name));
+        assertThat(responseBodyDealUpdate.dealPriority).isEqualTo(DealPriority.Medium.name());
+        assertThat(responseBodyDealUpdate.quarantine).isFalse();
+        assertThat(responseBodyDealUpdate.fileTypes).hasSize(0);
+        assertThat(responseBodyDealUpdate.searchPlaces).usingRecursiveComparison().isEqualTo(
+                Collections.singletonList(
+                        new DealSearchPlaceModel(searchPlaceResponseBody.id, searchPlaceResponseBody.name)
+                )
+        );
+        assertThat(responseBodyDealUpdate.classifySearchPlaces).hasSize(0);
+        assertThat(responseBodyDealUpdate.searchPlaceGroups).hasSize(0);
+        assertThat(responseBodyDealUpdate.dealSearchQueries).isEqualTo(
+                Collections.singletonList(
+                        new DealSearchQueryModel(
+                                requestBodyDealCreation.dealSearchQueries.get(0).isActive,
+                                requestBodyDealCreation.dealSearchQueries.get(0).id,
+                                searchQueryRequestBody.name
+                        )
+                )
+        );
+        assertThat(responseBodyDealUpdate.progressInfo).usingRecursiveComparison().isEqualTo(
+                new DealProgressInfoModel(new UUID(0L, 0L).toString(), 0, 0, 0, 0, 0)
+        );
         assertThat(responseBodyDealUpdate.dealStatus).isEqualTo(DealStatus.Waiting.name());
-        assertThat(responseBodyDealUpdate.creatorUserId).isNotBlank();
-        assertThat(responseBodyDealUpdate.creatorUserName).isEqualTo("Администратор");
+        assertThat(responseBodyDealUpdate.excludes).hasSize(0);
+        assertThat(responseBodyDealUpdate.searchMask).isEqualTo(responseBodyDealCreation.searchMask);
+        assertThat(responseBodyDealUpdate.needClassify).isEqualTo(responseBodyDealCreation.needClassify);
+        assertThat(responseBodyDealUpdate.classifierProfileId).isEqualTo(responseBodyDealCreation.classifierProfileId);
+        assertThat(responseBodyDealUpdate.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
+        assertThat(responseBodyDealUpdate.creatorUserId).isEqualTo(responseBodyDealCreation.creatorUserId);
+        assertThat(responseBodyDealUpdate.creatorUserName).isEqualTo(responseBodyDealCreation.creatorUserName);
 
     }
 
@@ -150,13 +195,12 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         AddSearchQueryRequestModel searchQueryRequestBody = DataGeneratorSearchQuery.getBasicSearchQueryModel();
         CommonSearchQueryResponseModel searchQueryResponseBody = ApiMethodsSearchQuery.addSearchQuery(searchQueryRequestBody).as(CommonSearchQueryResponseModel.class);
 
-        AddDealManipulationRequestModel requestDealCreationBody = DataGeneratorDealManipulation.getBasicDealManipulationModel(
-                Collections.singletonList(searchPlaceResponseBody.id),
-                Collections.singletonList(searchQueryResponseBody.id)
+        AddDealManipulationRequestModel requestDealCreationBody = DataGeneratorDealManipulation.getDealManipulationModelWithOnlyRequiredParameters(
+                searchPlaceResponseBody.id,
+                searchQueryResponseBody.id
         );
 
-        Response responseDealCreation = ApiMethodsDealManipulation.addDeal(requestDealCreationBody);
-        CommonDealManipulationResponseModel responseDealCreationBody = responseDealCreation.as(CommonDealManipulationResponseModel.class);
+        CommonDealManipulationResponseModel responseDealCreationBody = ApiMethodsDealManipulation.addDeal(requestDealCreationBody).as(CommonDealManipulationResponseModel.class);
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
         Response responseDealCard = ApiMethodsDealManipulation.getDealCard(responseDealCreationBody.id);
@@ -164,11 +208,35 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         DealCardModel responseDealCardBody = responseDealCard.as(DealCardModel.class);
 
         assertThat(responseDealCardBody.id).isEqualTo(responseDealCreationBody.id);
-        assertThat(responseDealCardBody.name).isEqualTo(requestDealCreationBody.name);
-        assertThat(responseDealCardBody.quarantine).isEqualTo(requestDealCreationBody.quarantine);
-        assertThat(responseDealCardBody.searchPlaces).isEqualTo(Collections.singletonList(searchPlaceRequestBody.name));
-        assertThat(responseDealCardBody.searchQueries).isEqualTo(Collections.singletonList(searchQueryRequestBody.name));
+        assertThat(responseDealCardBody.name).isEqualTo(responseDealCreationBody.name);
+        assertThat(responseDealCardBody.dealPriority).isEqualTo(DealPriority.Medium.name());
+        assertThat(responseDealCardBody.quarantine).isEqualTo(responseDealCreationBody.quarantine);
+        assertThat(responseDealCardBody.fileTypes).hasSize(0);
+        assertThat(responseDealCardBody.searchPlaces).usingRecursiveComparison().isEqualTo(
+                Collections.singletonList(
+                        new DealSearchPlaceModel(searchPlaceResponseBody.id, searchPlaceResponseBody.name)
+                )
+        );
+        assertThat(responseDealCardBody.classifySearchPlaces).hasSize(0);
+        assertThat(responseDealCardBody.searchPlaceGroups).hasSize(0);
+        assertThat(responseDealCardBody.dealSearchQueries).isEqualTo(
+                Collections.singletonList(
+                        new DealSearchQueryModel(
+                                responseDealCreationBody.dealSearchQueries.get(0).isActive,
+                                responseDealCreationBody.dealSearchQueries.get(0).id,
+                                searchQueryRequestBody.name
+                        )
+                )
+        );
+        assertThat(responseDealCardBody.progressInfo).usingRecursiveComparison().isEqualTo(
+                new DealProgressInfoModel(new UUID(0L, 0L).toString(), 0, 0, 0, 0, 0)
+        );
         assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Waiting.name());
+        assertThat(responseDealCardBody.excludes).hasSize(0);
+        assertThat(responseDealCardBody.searchMask).isEqualTo(responseDealCreationBody.searchMask);
+        assertThat(responseDealCardBody.needClassify).isEqualTo(responseDealCreationBody.needClassify);
+        assertThat(responseDealCardBody.classifierProfileId).isEqualTo(responseDealCreationBody.classifierProfileId);
+        assertThat(responseDealCardBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
         assertThat(responseDealCardBody.creatorUserId).isEqualTo(responseDealCreationBody.creatorUserId);
         assertThat(responseDealCardBody.creatorUserName).isEqualTo(responseDealCreationBody.creatorUserName);
 
