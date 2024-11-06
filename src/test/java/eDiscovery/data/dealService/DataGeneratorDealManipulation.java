@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DataGeneratorDealManipulation {
 
-    /*
+    /**
      * DealManipulation Models
      * */
 
@@ -37,7 +37,7 @@ public class DataGeneratorDealManipulation {
                 .build();
     }
 
-    /*
+    /**
      * DealManipulation Generators
      * */
 

@@ -11,7 +11,7 @@ import io.restassured.response.Response;
 
 public class DataGeneratorRole {
 
-    /*
+    /**
     * Role Models
     * */
 
@@ -22,7 +22,7 @@ public class DataGeneratorRole {
                 .build();
     }
 
-    /*
+    /**
      * Role Generators
      * */
 
@@ -30,7 +30,7 @@ public class DataGeneratorRole {
         return ApiMethodsRole.addRole(getRoleModelWithOnlyRequiredParameters());
     }
 
-    /*
+    /**
     * EtalonData
     * */
 

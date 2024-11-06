@@ -7,7 +7,7 @@ public class DataGeneratorCommon {
 
     public static Faker faker = new Faker();
 
-    /*
+    /**
      * Valid Data
      * */
 
@@ -142,7 +142,7 @@ public class DataGeneratorCommon {
         );
     }
 
-    /*
+    /**
     * Invalid Data
     * */
 
@@ -158,7 +158,7 @@ public class DataGeneratorCommon {
         return faker.regexify("[a-z]{257}");
     }
 
-    /*
+    /**
      * Random Data
      * */
 

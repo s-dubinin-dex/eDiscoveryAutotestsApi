@@ -14,9 +14,9 @@ import java.util.List;
 
 public class DataGeneratorSearchPlace {
 
-    /*
     public static Faker faker = new Faker();
 
+    /**
      * SearchPlace Models
      * */
 
@@ -58,7 +58,7 @@ public class DataGeneratorSearchPlace {
         );
     }
 
-    /*
+    /**
      * SearchPlace Generators
      * */
 
@@ -86,7 +86,7 @@ public class DataGeneratorSearchPlace {
         ).as(CommonSearchPlaceResponseModel.class);
     }
 
-    /*
+    /**
      * Valid SearchPlace attributes
      * */
 
@@ -138,7 +138,7 @@ public class DataGeneratorSearchPlace {
         return result;
     }
 
-    /*
+    /**
      * Invalid SearchPlace attributes
      * */
 

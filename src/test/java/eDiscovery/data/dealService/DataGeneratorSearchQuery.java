@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DataGeneratorSearchQuery {
 
-    /*
+    /**
      * SearchQuery Models
      * */
 
@@ -28,7 +28,7 @@ public class DataGeneratorSearchQuery {
         return getSearchQueryModelWithOnlyRequiredParameters();
     }
 
-    /*
+    /**
      * SearchQuery Generators
      * */
 
@@ -44,7 +44,7 @@ public class DataGeneratorSearchQuery {
         ).as(CommonSearchQueryResponseModel.class);
     }
 
-    /*
+    /**
      * Valid SearchQuery attributes
      * */
 
@@ -71,7 +71,7 @@ public class DataGeneratorSearchQuery {
         return result;
     }
 
-    /*
+    /**
      * Invalid SearchQuery attributes
      * */
 
