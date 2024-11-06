@@ -10,14 +10,26 @@ public class UpdateDealManipulationRequestModel {
     public String id;
     @JsonInclude()
     public String name;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String dealPriority;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public List<String> fileTypes;
     @JsonInclude()
     public List<String> searchPlaces;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public List<String> excludes;
-    @JsonInclude()
-    public List<String> searchQueries;
+    public List<String> classifySearchPlaces;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String dealStatus;
+    public List<String> searchPlaceGroups;
+    @JsonInclude()
+    public List<DealSearchQueryModel> dealSearchQueries;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String searchMask;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public List<String> excludes;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String classifierProfileId;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public boolean quarantine;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public boolean needClassify;
 }
