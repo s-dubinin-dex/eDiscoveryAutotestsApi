@@ -46,6 +46,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
 
         CommonEmployeeResponseModel responseBody = ApiMethodsEmployee.addEmployee(requestBody).as(CommonEmployeeResponseModel.class);
 
+        // TODO: Здесь и далее вынести проверку успешного создания и проверку каждого атрибута в отдельные тесты для атомарности
         assertThat(isValidUUID(responseBody.id)).isTrue();
         assertThat(responseBody.name).isEqualTo(requestBody.name);
         assertThat(responseBody.roleId).isEqualTo(requestBody.roleId);

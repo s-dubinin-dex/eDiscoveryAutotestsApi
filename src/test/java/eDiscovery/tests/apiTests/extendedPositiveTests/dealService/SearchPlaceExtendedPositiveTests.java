@@ -79,6 +79,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         assertThat(responseBody.categoryType).isEqualTo(categoryType);
     }
+// TODO: Добавить проверку создания ARM + Local и FileShare + SMB
 
     @Epic("Сервис Deal")
     @Feature("Место поиска")

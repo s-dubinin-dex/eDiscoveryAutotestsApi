@@ -112,6 +112,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         List<CommonSearchQueryResponseModel> responseBody = response.jsonPath().getList("", CommonSearchQueryResponseModel.class);
         assertThat(responseBody).isNotEmpty();
         assertThat(responseBody.get(0)).isNotNull();
+        //TODO: Здесь и везде дальше проверять, что в ответе валидные данные с непустыми полями
     }
 
     @Test

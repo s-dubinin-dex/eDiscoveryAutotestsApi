@@ -90,4 +90,24 @@ public class DataGeneratorSearchQuery {
     public static String getSearchQueryValueWithExceedingLength(){
         return DataGeneratorCommon.getRandomName(2001);
     }
+
+    //TODO: Для негативных тестов с невалидными (недопустимыми) данными, например, цифр в полях запроса использоватьт JSONObject requestBody = new JSONObject();
+    // И добавить перегрузку в методах апи на JsonObject
+    // Пример:
+    /*
+    *
+    * JSONObject requestBody = new JSONObject();
+    * requestBody.put("FirstName", someRandomString);
+    * requestBody.put("LastName", someRandomString);
+    *
+    * RequestSpecification request = RestAssured.given();
+    * request.header("Content-Type", "application/json");
+    * request.body(requestBody.toJSONString());
+    * Response response = request.post("https://webhook.site/a18a23cb-e9a0-4f03-a7fa-cdfcfa76ca98");
+    * int statusCode = response.getStatusCode();
+    * Assert.assertEquals(statusCode, 200);
+    * System.out.println("The status code recieved: " + statusCode);
+    *
+    *
+    * */
 }

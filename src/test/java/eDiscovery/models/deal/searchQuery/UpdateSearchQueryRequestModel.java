@@ -5,6 +5,7 @@ import lombok.Builder;
 
 @Builder
 public class UpdateSearchQueryRequestModel {
+    //TODO: Подумать, как сделать конструктор копирования. Сделать констраутор, который принимает объект AddSearchQuery, а возвращается UpdateSearchQuery
     @JsonInclude()
     public String name;
     @JsonInclude()

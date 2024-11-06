@@ -27,6 +27,27 @@ import static eDiscovery.helpers.ErrorDescription.*;
 @DisplayName("Negative tests with valid data - SearchPlace")
 public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
+//    @Nested
+//    @DisplayName("test display name")
+//    class TestNested{
+//        //TODO: придумать, как вынести сгруппированные тесты во вложенные классы
+//        //Проверить, как они выглядят в allure и как выполняются
+//
+//        @BeforeAll
+//        static void beforeAll() {
+//        // TODO: вложенные классы удобно использовать вместе с beforeEach для каких-то тестов с авторизацией, например, или ролевой моделью
+//        }
+//
+//        // https://www.baeldung.com/junit-5-nested-test-classes
+//
+//        @BeforeEach
+//        void setUp() {
+//
+//        }
+//    }
+//
+
+
     @Test
     @Epic("Сервис Deal")
     @Feature("Место поиска")
