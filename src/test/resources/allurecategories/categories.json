@@ -1,0 +1,7 @@
+[
+  {
+    "name": "AutoMapper Errors",
+    "matchedStatuses": ["failed"],
+    "matchedMessageRegex": ".*Premature end of chunk coded message body: closing chunk expected.*"
+  }
+]

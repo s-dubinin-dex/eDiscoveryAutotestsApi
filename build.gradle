@@ -51,6 +51,16 @@ tasks.withType(JavaCompile).configureEach {
     targetCompatibility = JavaVersion.VERSION_16
 }
 
+tasks.register('copyCategoriesFile', Copy) {
+    from 'src/test/resources/allurecategories/categories.json'
+    into "$buildDir/allure-results"
+}
+
+tasks.register('copyEnvironmentFile', Copy) {
+    from 'src/test/resources/allureenvironment/environment.properties'
+    into "$buildDir/allure-results"
+}
+
 task testWithEnv(type: Test) {
     // Параметр Gradle, указывающий стенд (dev, test, prod и т.д.)
     def environment = project.hasProperty('env') ? project.findProperty('env') : 'test'
@@ -86,7 +96,7 @@ task testWithEnv(type: Test) {
     useJUnitPlatform()
 
     // Запуск тестов
-    dependsOn test
+    dependsOn test, copyEnvironmentFile, copyCategoriesFile
 }
 
 def getProperty(String environment, String propertyName) {
