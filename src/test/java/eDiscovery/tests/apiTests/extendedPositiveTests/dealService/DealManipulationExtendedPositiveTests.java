@@ -32,7 +32,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка мест поиска по протоколу oData для страницы списка дел")
     @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData для страницы списка дел")
-    public void testGetDealListODataWithExpand(){
+    public void testGetDealListODataForDealManipulationList(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -61,7 +61,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение дела по id для карточки дела")
     @Description("Тест проверяет возможность получить дело по id в path param для карточки дела")
-    public void testGetDealManipulationByIdPath(){
+    public void testGetDealManipulationForDealManipulationCard(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
