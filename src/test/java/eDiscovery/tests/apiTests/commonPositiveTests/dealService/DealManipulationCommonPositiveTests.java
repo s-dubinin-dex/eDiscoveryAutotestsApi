@@ -93,7 +93,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @Epic("Сервис Deal")
     @Feature("Дело")
     @Story("Изменение дела")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Изменение дела")
     @Description("Тест проверяет возможность изменения дела")
     public void testUpdateDeal(){
@@ -161,7 +161,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @Epic("Сервис Deal")
     @Feature("Дело")
     @Story("Удаление дела")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.TRIVIAL)
     @DisplayName("Удаление дела")
     @Description("Тест проверяет возможность удаления дела")
     public void testDeleteDeal(){
@@ -178,7 +178,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @Epic("Сервис Deal")
     @Feature("Дело")
     @Story("Просмотр информации по делу")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Просмотр информации по делу")
     @Description("Тест проверяет возможность просмотреть информацию по делу")
     public void testGetDealCard(){
@@ -312,7 +312,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @Epic("Сервис Deal")
     @Feature("Дело")
     @Story("Остановка дела")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Остановка дела")
     @Description("Тест проверяет возможность остановить дело")
     public void testStopDeal(){
@@ -336,7 +336,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @Epic("Сервис Deal")
     @Feature("Дело")
     @Story("Запуск дела")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Запуск дела")
     @Description("Тест проверяет возможность запустить дело")
     public void testStartDeal(){
@@ -360,7 +360,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @Epic("Сервис Deal")
     @Feature("Дело")
     @Story("Получение списка дел")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка дел")
     @Description("Тест проверяет возможность получения списка дел")
     public void testGetDealList(){
@@ -378,8 +378,8 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @Test
     @Epic("Сервис Deal")
     @Feature("Место поиска")
-    @Story("Получение списка мест поиска")
-    @Severity(SeverityLevel.NORMAL)
+    @Story("Получение списка дел")
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка мест поиска по протоколу oData")
     @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData")
     public void testGetDealListOData(){
