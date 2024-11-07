@@ -22,7 +22,6 @@ public class ApiMethodsDealManipulation extends UrlBase {
     private static final String DEAL_MANIPULATION_TO_QUARANTINE         = "/DealManipulation/toQuarantine";
     private static final String DEAL_MANIPULATION_OUT_QUARANTINE        = "/DealManipulation/outQuarantine";
     private static final String DEAL_MANIPULATION_TO_EXPORT             = "/DealManipulation/toExport";
-    private static final String DEAL_MANIPULATION_ACTIVE_TASKS          = "/DealManipulation/activeTasks";
     private static final String DEAL_MANIPULATION_CHANGE_TASK_STATUS    = "/DealManipulation/changeTaskStatus";
     private static final String DEAL_MANIPULATION_DEAL_MANIPULATION     = "/DealManipulation/DealManipulation";
     private static final String ODATA_DEAL_MANIPULATION                 = "/odata/DealManipulation";
@@ -172,17 +171,6 @@ public class ApiMethodsDealManipulation extends UrlBase {
                 .extract().response();
     }
 
-    @Step("Получение списка активных задач по агенту")
-    public static Response activeTasks(ActiveTasksRequestsModel activeTasksRequestsModel){
-        SpecificationsServer.setBaseUrl(DEAL_URL);
-
-        return given()
-                .body(activeTasksRequestsModel)
-                .when()
-                .get(DEAL_MANIPULATION_ACTIVE_TASKS)
-                .then()
-                .extract().response();
-    }
 
     @Step("Изменение статуса задачи (СЛУЖЕБНЫЙ МЕТОД)")
     public static Response changeTaskStatus(ToExportRequestModel toExportRequestModel){
