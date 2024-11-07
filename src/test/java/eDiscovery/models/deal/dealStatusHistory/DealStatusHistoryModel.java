@@ -1,4 +1,4 @@
-package eDiscovery.models.deal.dealManipulation;
+package eDiscovery.models.deal.dealStatusHistory;
 
 public class DealStatusHistoryModel {
     public String id;
