@@ -1,6 +1,7 @@
 package eDiscovery.models.deal.dealManipulation;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import eDiscovery.models.deal.dealProgress.ProgressInfoModel;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class CommonDealManipulationResponseModel {
     public List<ClassifySearchPlacesModel> classifySearchPlaces;
     public List<SearchPlaceGroupsModel> searchPlaceGroups;
     public List<DealSearchQueryModel> dealSearchQueries;
-    public DealProgressInfoModel progressInfo;
+    public ProgressInfoModel progressInfo;
     public String dealStatus;
     public List<String> excludes;
     public String searchMask;
