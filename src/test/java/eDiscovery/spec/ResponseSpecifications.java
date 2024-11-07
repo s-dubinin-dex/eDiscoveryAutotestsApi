@@ -12,11 +12,15 @@ import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
 public class ResponseSpecifications {
     public static ResponseSpecification responseSpecOK200JSONBody(){
+        return responseSpecOK200JSONBody(1);
+    }
+
+    public static ResponseSpecification responseSpecOK200JSONBody(Integer responseTime){
         return new ResponseSpecBuilder()
                 .log(LogDetail.STATUS)
                 .expectContentType(ContentType.JSON)
                 .expectStatusCode(HttpStatus.SC_OK)
-                .expectResponseTime(lessThanOrEqualTo(1L), SECONDS)
+                .expectResponseTime(lessThanOrEqualTo(responseTime.longValue()), SECONDS)
                 .build();
     }
 

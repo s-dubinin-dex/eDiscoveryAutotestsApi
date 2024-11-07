@@ -365,7 +365,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @Description("Тест проверяет возможность получения списка дел")
     public void testGetDealList(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody(5));
 
         DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
         Response response = ApiMethodsDealManipulation.getDealManipulationList();
