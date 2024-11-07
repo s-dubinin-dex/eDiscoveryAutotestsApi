@@ -6,6 +6,9 @@ import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiMethodsDealManipulation extends UrlBase {
@@ -207,9 +210,17 @@ public class ApiMethodsDealManipulation extends UrlBase {
 
     @Step("Получение списка дел по протоколу oData")
     public static Response getDealManipulationListOData(){
+
+        return getDealManipulationListOData(new HashMap<>());
+
+    }
+
+    @Step("Получение списка дел по протоколу oData")
+    public static Response getDealManipulationListOData(Map<String, String> parameters){
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
+                .params(parameters)
                 .when()
                 .get(ODATA_DEAL_MANIPULATION)
                 .then()
@@ -233,6 +244,20 @@ public class ApiMethodsDealManipulation extends UrlBase {
     public static Response getDealManipulationByIdPath(String id){
 
         return getDealManipulationByIdPath(id, new HashMap<>());
+
+    }
+
+    @Step("Получение дела по id")
+    public static Response getDealManipulationByIdPath(String id, Map<String, String> parameters){
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+
+        return given()
+                .pathParam("id", id)
+                .params(parameters)
+                .when()
+                .get(ODATA_DEAL_MANIPULATION + "/{id}")
+                .then()
+                .extract().response();
 
     }
 
