@@ -217,4 +217,23 @@ public class ApiMethodsDealManipulation extends UrlBase {
 
     }
 
+    @Step("Получение дела по id")
+    public static Response getDealManipulationById(String id){
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+
+        return given()
+                .when()
+                .get(ODATA_DEAL_MANIPULATION + String.format("(%s)", id))
+                .then()
+                .extract().response();
+
+    }
+
+    @Step("Получение дела по id")
+    public static Response getDealManipulationByIdPath(String id){
+
+        return getDealManipulationByIdPath(id, new HashMap<>());
+
+    }
+
 }

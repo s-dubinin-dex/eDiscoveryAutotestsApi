@@ -394,4 +394,66 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         assertThat(responseBody.get(0)).isNotNull();
     }
 
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Дело")
+    @Story("Получение дела по ID")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Получение дела по id")
+    @Description("Тест проверяет возможность получить дело по id в скобках")
+    public void testGetDealManipulationById(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        CommonDealManipulationResponseModel responseBodyCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+
+        CommonDealManipulationResponseModel responseBody = ApiMethodsDealManipulation.getDealManipulationById(responseBodyCreation.id).as(CommonDealManipulationResponseModel.class);
+
+        assertThat(responseBody.id).isEqualTo(responseBodyCreation.id);
+        assertThat(responseBody.name).isEqualTo(responseBodyCreation.name);
+        assertThat(responseBody.dealPriority).isEqualTo(responseBodyCreation.dealPriority);
+        assertThat(responseBody.quarantine).isEqualTo(responseBodyCreation.quarantine);
+        assertThat(responseBody.progressInfo).isEqualTo(responseBodyCreation.progressInfo);
+        assertThat(responseBody.dealStatus).isEqualTo(responseBodyCreation.dealStatus);
+        assertThat(responseBody.excludes).isEqualTo(responseBodyCreation.excludes);
+        assertThat(responseBody.searchMask).isEqualTo(responseBodyCreation.searchMask);
+        assertThat(responseBody.needClassify).isEqualTo(responseBodyCreation.needClassify);
+        assertThat(responseBody.classifierProfileId).isEqualTo(responseBodyCreation.classifierProfileId);
+        assertThat(responseBody.createdUtc).matches(dateTimeISOPattern());
+        assertThat(responseBody.creatorUserId).isEqualTo(responseBodyCreation.creatorUserId);
+        assertThat(responseBody.creatorUserName).isEqualTo(responseBodyCreation.creatorUserName);
+
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Дело")
+    @Story("Получение дела по ID")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Получение дела по id")
+    @Description("Тест проверяет возможность получить дело по id в path param")
+    public void testGetDealManipulationByIdPath(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        CommonDealManipulationResponseModel responseBodyCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+
+        CommonDealManipulationResponseModel responseBody = ApiMethodsDealManipulation.getDealManipulationByIdPath(responseBodyCreation.id).as(CommonDealManipulationResponseModel.class);
+
+        assertThat(responseBody.id).isEqualTo(responseBodyCreation.id);
+        assertThat(responseBody.name).isEqualTo(responseBodyCreation.name);
+        assertThat(responseBody.dealPriority).isEqualTo(responseBodyCreation.dealPriority);
+        assertThat(responseBody.quarantine).isEqualTo(responseBodyCreation.quarantine);
+        assertThat(responseBody.progressInfo).isEqualTo(responseBodyCreation.progressInfo);
+        assertThat(responseBody.dealStatus).isEqualTo(responseBodyCreation.dealStatus);
+        assertThat(responseBody.excludes).isEqualTo(responseBodyCreation.excludes);
+        assertThat(responseBody.searchMask).isEqualTo(responseBodyCreation.searchMask);
+        assertThat(responseBody.needClassify).isEqualTo(responseBodyCreation.needClassify);
+        assertThat(responseBody.classifierProfileId).isEqualTo(responseBodyCreation.classifierProfileId);
+        assertThat(responseBody.createdUtc).matches(dateTimeISOPattern());
+        assertThat(responseBody.creatorUserId).isEqualTo(responseBodyCreation.creatorUserId);
+        assertThat(responseBody.creatorUserName).isEqualTo(responseBodyCreation.creatorUserName);
+
+    }
+
 }

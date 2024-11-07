@@ -1,7 +1,10 @@
 package eDiscovery.models.deal.dealManipulation;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CommonDealManipulationResponseModel {
 
     public String id;
