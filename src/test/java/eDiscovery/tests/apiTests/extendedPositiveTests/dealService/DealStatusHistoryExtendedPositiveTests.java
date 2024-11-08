@@ -31,7 +31,7 @@ public class DealStatusHistoryExtendedPositiveTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка изменений статусов по протоколу odata для карточки дела")
     @Description("Тест проверяет возможность получения списка изменений статусов по протоколу odata для карточки дела")
-    public void testGetDealProgressListForDealCard(){
+    public void testGetDealStatusHistoryListForDealCard(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 

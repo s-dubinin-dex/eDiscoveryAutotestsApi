@@ -24,7 +24,7 @@ public class DealStatusHistoryCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка изменений статусов")
     @Description("Тест проверяет возможность получения списка изменений статусов")
-    public void testGetDealProgressList(){
+    public void testGetStatusHistoryList(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -41,7 +41,7 @@ public class DealStatusHistoryCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка изменений статусов по протоколу odata")
     @Description("Тест проверяет возможность получения списка изменений статусов по протоколу odata")
-    public void testGetDealProgressListOData(){
+    public void testGetDealStatusHistoryListOData(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
