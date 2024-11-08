@@ -22,7 +22,7 @@ public class DiscoveredDocumentCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка обнаруженных документов")
     @Description("Тест проверяет возможность получения списка обнаруженных документов")
-    public void testGetDiscoveredDocument(){
+    public void testGetDiscoveredDocumentList(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -36,7 +36,7 @@ public class DiscoveredDocumentCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка обнаруженных документов по протоколу odata")
     @Description("Тест проверяет возможность получения списка обнаруженных документов по протоколу odata")
-    public void testGetDiscoveredDocumentOData(){
+    public void testGetDiscoveredDocumentListOData(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
