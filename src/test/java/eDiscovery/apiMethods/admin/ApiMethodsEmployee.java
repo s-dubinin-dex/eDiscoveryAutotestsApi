@@ -90,7 +90,6 @@ public class ApiMethodsEmployee extends UrlBase {
     public static Response getEmployeeById(String employeeId){
         SpecificationsServer.setBaseUrl(ADMIN_URL);
         return given()
-                .log().all()
                 .when()
                 .get(ODATA_EMPLOYEE + String.format("(%s)", employeeId))
                 .then()
@@ -102,7 +101,6 @@ public class ApiMethodsEmployee extends UrlBase {
     public static Response getEmployeeByIdPath(String employeeId){
         SpecificationsServer.setBaseUrl(ADMIN_URL);
         return given()
-                .log().all()
                 .pathParam("employeeId", employeeId)
                 .when()
                 .get(ODATA_EMPLOYEE + "/{employeeId}")

@@ -41,7 +41,6 @@ public class ApiMethodsDealTask extends UrlBase {
                 .when()
                 .get(ODATA_DEAL_TASK)
                 .then()
-                .log().all()
                 .extract().response();
     }
 }
