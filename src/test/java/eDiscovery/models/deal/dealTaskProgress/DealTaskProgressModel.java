@@ -1,11 +1,11 @@
-package eDiscovery.models.deal.dealProgress;
+package eDiscovery.models.deal.dealTaskProgress;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProgressInfoModel {
+public class DealTaskProgressModel {
     public String id;
     public int totalFiles;
     public int totalVolume;
