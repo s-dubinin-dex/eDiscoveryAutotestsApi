@@ -1,6 +1,6 @@
-package eDiscovery.models.deal.dealManipulation;
+package eDiscovery.models.deal.discoveredDocument;
 
-public class FindedDocumentsModel {
+public class DiscoveredDocumentModel {
     public String id;
     public String dealId;
     public String findedUtc;
