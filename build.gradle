@@ -8,7 +8,7 @@ repositories {
     mavenCentral()
 }
 
-def allureVersion = '2.20.0',
+def allureVersion = '2.27.0',
     selenideVersion = '6.10.1',
     junitVersion = '5.9.0',
     javaFakerVersion = "1.0.2",
@@ -63,11 +63,11 @@ tasks.register('copyEnvironmentFile', Copy) {
 
 task testWithEnv(type: Test) {
     // Параметр Gradle, указывающий стенд (dev, test, prod и т.д.)
-    def environment = project.hasProperty('env') ? project.findProperty('env') : 'test'
+//    def environment = project.hasProperty('env') ? project.findProperty('env') : 'test'
 
 //    def environment = 'dev'
 //    def environment = 'test'
-//    def environment = 'local'
+    def environment = 'local'
 
     // Установка системных свойств для использования во время выполнения тестов
     System.setProperty('BASE_URL',              getProperty(environment as String, 'BASE_URL'))
