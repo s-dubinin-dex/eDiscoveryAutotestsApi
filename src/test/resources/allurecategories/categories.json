@@ -2,18 +2,18 @@
   {
     "name": "[BACK] AutoMapper Errors",
     "matchedStatuses": ["failed"],
-    "messageRegex": ".*Premature end of chunk coded message body: closing chunk expected.*"
+    "matchedMessageRegex": ".*Premature end of chunk coded message body: closing chunk expected.*"
   },
   {
     "name": "Response timeout errors",
     "matchedStatuses": ["failed"],
-    "messageRegex": ".*Expected response time was not a value less than or equal to .* seconds, was .* milliseconds.*",
+    "matchedMessageRegex": ".*Expected response time was not a value less than or equal to .* seconds, was .* milliseconds.*",
     "flaky": true
   },
   {
     "name": "Test data instability",
     "matchedStatuses": ["failed"],
-    "messageRegex": ".*Expected status code <200> but was <409>.*",
+    "matchedMessageRegex": ".*Expected status code <200> but was <409>.*",
     "flaky": true
   }
 ]
