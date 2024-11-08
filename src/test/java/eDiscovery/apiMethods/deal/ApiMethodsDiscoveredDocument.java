@@ -22,7 +22,8 @@ public class ApiMethodsDiscoveredDocument extends UrlBase {
         return given()
                 .when()
                 .get(DISCOVERED_DOCUMENT_DISCOVERED_DOCUMENT)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
     @Step("Получение списка обнаруженных документов по протоколу oData")
@@ -40,7 +41,8 @@ public class ApiMethodsDiscoveredDocument extends UrlBase {
                 .params(parameters)
                 .when()
                 .get(ODATA_DISCOVERED_DOCUMENT)
-                .andReturn();
+                .then()
+                .extract().response();
     }
 
 }
