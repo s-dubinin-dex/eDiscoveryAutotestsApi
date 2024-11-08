@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -41,11 +40,6 @@ public class DealProgressExtendedPositiveTests extends TestBase {
         DealProgressModel responseBody = ApiMethodsDealProgress.getDealProgressListOData(parameters).jsonPath().getList("value", DealProgressModel.class).get(0);
 
         assertThat(responseBody.id).isEqualTo(responseDealCreation.id);
-        assertThat(responseBody.progressInfo.id).isEqualTo(new UUID(0L, 0L).toString());
-        assertThat(responseBody.progressInfo.totalFiles).isEqualTo(0);
-        assertThat(responseBody.progressInfo.totalVolume).isEqualTo(0);
-        assertThat(responseBody.progressInfo.proceededFiles).isEqualTo(0);
-        assertThat(responseBody.progressInfo.proceededVolume).isEqualTo(0);
-        assertThat(responseBody.progressInfo.timeToFinish).isNull();
+        assertThat(responseBody.progressInfo).isNull();
     }
 }

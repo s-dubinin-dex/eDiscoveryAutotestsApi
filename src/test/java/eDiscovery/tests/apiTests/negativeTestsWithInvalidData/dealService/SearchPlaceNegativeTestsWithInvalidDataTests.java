@@ -401,6 +401,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
                 UpdateSearchPlaceRequestModelNotNull.builder()
                         .name(getRandomName())
                         .categoryType(SearchPlaceCategoryType.ARM.name())
+                        .type(SearchPlaceType.LOCAL.name())
                         .build()
         ).as(ErrorModel.class);
 
