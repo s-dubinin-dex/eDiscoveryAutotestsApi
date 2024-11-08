@@ -13,7 +13,7 @@ import static io.restassured.RestAssured.given;
 public class ApiMethodsDealProgress extends UrlBase {
 
     private static final String DEAL_PROGRESS_DEAL_PROGRESS = "/DealProgress/DealProgress";
-    private static final String ODATA_DEAL_PROGRESS = "/odata/DealProgress";
+    private static final String ODATA_DEAL_PROGRESS         = "/odata/DealProgress";
 
     @Step("Получение списка прогрессов")
     public static Response getDealProgressList(){

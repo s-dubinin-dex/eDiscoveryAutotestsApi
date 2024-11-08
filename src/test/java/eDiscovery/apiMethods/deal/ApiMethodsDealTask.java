@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.given;
 
 public class ApiMethodsDealTask extends UrlBase {
     private static final String DEAL_TASK_DEAL_TASK = "/DealTask/DealTask";
-    private static final String ODATA_DEAL_TASK = "/odata/DealTask";
+    private static final String ODATA_DEAL_TASK     = "/odata/DealTask";
 
     @Step("Получение списка задач")
     public static Response getDealTaskList(){

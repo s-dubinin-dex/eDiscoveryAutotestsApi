@@ -11,8 +11,8 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 
 public class ApiMethodsDealStatusHistory extends UrlBase {
-    public static final String DEAL_STATUS_HISTORY_DEAL_STATUS_HISTORY = "/DealStatusHistory/DealStatusHistory";
-    public static final String ODATA_DEAL_STATUS_HISTORY = "/odata/DealStatusHistory";
+    public static final String DEAL_STATUS_HISTORY_DEAL_STATUS_HISTORY  = "/DealStatusHistory/DealStatusHistory";
+    public static final String ODATA_DEAL_STATUS_HISTORY                = "/odata/DealStatusHistory";
 
     @Step("Получение списка изменений статусов")
     public static Response getDealStatusHistoryList(){
