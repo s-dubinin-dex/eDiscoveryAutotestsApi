@@ -21,10 +21,8 @@ public class CommonDealManipulationResponseModel {
     public String dealStatus;
     public List<String> excludes;
     public String searchMask;
-    public boolean needClassify;
-    public String classifierProfileId;
     public String createdUtc;
     public String creatorUserId;
     public String creatorUserName;
-
+    public ClassifierDealData classifierDealData;
 }

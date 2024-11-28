@@ -97,8 +97,8 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
         assertThat(responseBody.dealStatus).isEqualTo(responseBodyCreation.dealStatus);
         assertThat(responseBody.excludes).isEqualTo(responseBodyCreation.excludes);
         assertThat(responseBody.searchMask).isEqualTo(responseBodyCreation.searchMask);
-        assertThat(responseBody.needClassify).isEqualTo(responseBodyCreation.needClassify);
-        assertThat(responseBody.classifierProfileId).isEqualTo(responseBodyCreation.classifierProfileId);
+        assertThat(responseBody.classifierDealData.needClassify).isEqualTo(responseBodyCreation.classifierDealData.needClassify);
+        assertThat(responseBody.classifierDealData.classifierProfileId).isEqualTo(responseBodyCreation.classifierDealData.classifierProfileId);
         assertThat(responseBody.createdUtc).matches(dateTimeISOPattern());
         assertThat(responseBody.creatorUserId).isEqualTo(responseBodyCreation.creatorUserId);
         assertThat(responseBody.creatorUserName).isEqualTo(responseBodyCreation.creatorUserName);

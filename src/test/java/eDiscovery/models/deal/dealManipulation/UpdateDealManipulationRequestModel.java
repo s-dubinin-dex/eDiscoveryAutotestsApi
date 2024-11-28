@@ -27,9 +27,7 @@ public class UpdateDealManipulationRequestModel {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<String> excludes;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String classifierProfileId;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public boolean quarantine;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    public boolean needClassify;
+    @JsonInclude()
+    public ClassifierDealData classifierDealData;
 }

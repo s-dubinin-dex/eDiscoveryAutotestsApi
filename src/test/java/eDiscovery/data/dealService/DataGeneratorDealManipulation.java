@@ -3,6 +3,7 @@ package eDiscovery.data.dealService;
 import eDiscovery.apiMethods.deal.ApiMethodsDealManipulation;
 import eDiscovery.data.DataGeneratorCommon;
 import eDiscovery.models.deal.dealManipulation.AddDealManipulationRequestModel;
+import eDiscovery.models.deal.dealManipulation.ClassifierDealData;
 import eDiscovery.models.deal.dealManipulation.CommonDealManipulationResponseModel;
 import eDiscovery.models.deal.dealManipulation.DealSearchQueryModel;
 
@@ -19,6 +20,7 @@ public class DataGeneratorDealManipulation {
                 .name(DataGeneratorCommon.getRandomName())
                 .searchPlaces(Collections.singletonList(searchPlaceID))
                 .dealSearchQueries(Collections.singletonList(new DealSearchQueryModel(searchQueryID, true)))
+                .classifierDealData(new ClassifierDealData())
                 .build();
     }
 

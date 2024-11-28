@@ -81,8 +81,8 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         assertThat(responseBody.dealStatus).isEqualTo(DealStatus.Waiting.name());
         assertThat(responseBody.excludes).hasSize(0);
         assertThat(responseBody.searchMask).isNull();
-        assertThat(responseBody.needClassify).isFalse();
-        assertThat(responseBody.classifierProfileId).isNull();
+        assertThat(responseBody.classifierDealData.needClassify).isFalse();
+        assertThat(responseBody.classifierDealData.classifierProfileId).isNull();
         assertThat(responseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
         assertThat(isValidUUID(responseBody.creatorUserId)).isTrue();
         assertThat(responseBody.creatorUserName).isEqualTo("Администратор");
@@ -149,8 +149,8 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         assertThat(responseBodyDealUpdate.dealStatus).isEqualTo(DealStatus.Waiting.name());
         assertThat(responseBodyDealUpdate.excludes).hasSize(0);
         assertThat(responseBodyDealUpdate.searchMask).isEqualTo(responseBodyDealCreation.searchMask);
-        assertThat(responseBodyDealUpdate.needClassify).isEqualTo(responseBodyDealCreation.needClassify);
-        assertThat(responseBodyDealUpdate.classifierProfileId).isEqualTo(responseBodyDealCreation.classifierProfileId);
+        assertThat(responseBodyDealUpdate.classifierDealData.needClassify).isEqualTo(responseBodyDealCreation.classifierDealData.needClassify);
+        assertThat(responseBodyDealUpdate.classifierDealData.classifierProfileId).isEqualTo(responseBodyDealCreation.classifierDealData.classifierProfileId);
         assertThat(responseBodyDealUpdate.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
         assertThat(responseBodyDealUpdate.creatorUserId).isEqualTo(responseBodyDealCreation.creatorUserId);
         assertThat(responseBodyDealUpdate.creatorUserName).isEqualTo(responseBodyDealCreation.creatorUserName);
@@ -227,8 +227,8 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Waiting.name());
         assertThat(responseDealCardBody.excludes).hasSize(0);
         assertThat(responseDealCardBody.searchMask).isEqualTo(responseDealCreationBody.searchMask);
-        assertThat(responseDealCardBody.needClassify).isEqualTo(responseDealCreationBody.needClassify);
-        assertThat(responseDealCardBody.classifierProfileId).isEqualTo(responseDealCreationBody.classifierProfileId);
+        assertThat(responseDealCardBody.classifierDealData.needClassify).isEqualTo(responseDealCreationBody.classifierDealData.needClassify);
+        assertThat(responseDealCardBody.classifierDealData.classifierProfileId).isEqualTo(responseDealCreationBody.classifierDealData.classifierProfileId);
         assertThat(responseDealCardBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
         assertThat(responseDealCardBody.creatorUserId).isEqualTo(responseDealCreationBody.creatorUserId);
         assertThat(responseDealCardBody.creatorUserName).isEqualTo(responseDealCreationBody.creatorUserName);
@@ -417,8 +417,8 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         assertThat(responseBody.dealStatus).isEqualTo(responseBodyCreation.dealStatus);
         assertThat(responseBody.excludes).isEqualTo(responseBodyCreation.excludes);
         assertThat(responseBody.searchMask).isEqualTo(responseBodyCreation.searchMask);
-        assertThat(responseBody.needClassify).isEqualTo(responseBodyCreation.needClassify);
-        assertThat(responseBody.classifierProfileId).isEqualTo(responseBodyCreation.classifierProfileId);
+        assertThat(responseBody.classifierDealData.needClassify).isEqualTo(responseBodyCreation.classifierDealData.needClassify);
+        assertThat(responseBody.classifierDealData.classifierProfileId).isEqualTo(responseBodyCreation.classifierDealData.classifierProfileId);
         assertThat(responseBody.createdUtc).matches(dateTimeISOPattern());
         assertThat(responseBody.creatorUserId).isEqualTo(responseBodyCreation.creatorUserId);
         assertThat(responseBody.creatorUserName).isEqualTo(responseBodyCreation.creatorUserName);
@@ -448,8 +448,8 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         assertThat(responseBody.dealStatus).isEqualTo(responseBodyCreation.dealStatus);
         assertThat(responseBody.excludes).isEqualTo(responseBodyCreation.excludes);
         assertThat(responseBody.searchMask).isEqualTo(responseBodyCreation.searchMask);
-        assertThat(responseBody.needClassify).isEqualTo(responseBodyCreation.needClassify);
-        assertThat(responseBody.classifierProfileId).isEqualTo(responseBodyCreation.classifierProfileId);
+        assertThat(responseBody.classifierDealData.needClassify).isEqualTo(responseBodyCreation.classifierDealData.needClassify);
+        assertThat(responseBody.classifierDealData.classifierProfileId).isEqualTo(responseBodyCreation.classifierDealData.classifierProfileId);
         assertThat(responseBody.createdUtc).matches(dateTimeISOPattern());
         assertThat(responseBody.creatorUserId).isEqualTo(responseBodyCreation.creatorUserId);
         assertThat(responseBody.creatorUserName).isEqualTo(responseBodyCreation.creatorUserName);
