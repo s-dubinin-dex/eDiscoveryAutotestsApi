@@ -33,7 +33,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
     @DisplayName("Создание пользователя")
     @Description("Тест проверяет возможность создания пользователя")
     public void testAddEmployee(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonRoleResponseModel role = RoleHelper.getRoleByName(PredefinedRoles.FULL_WRITE.name);
@@ -65,7 +65,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
     @DisplayName("Изменение пользователя")
     @Description("Тест проверяет возможность изменения пользователя")
     public void testUpdateEmployee(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonRoleResponseModel roleForCreation = RoleHelper.getRoleByName(PredefinedRoles.FULL_WRITE.name);
@@ -105,7 +105,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
     @DisplayName("Удаление пользователя")
     @Description("Тест проверяет возможность удаления пользователя")
     public void testDeleteEmployee(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonRoleResponseModel roleForCreation = RoleHelper.getRoleByName(PredefinedRoles.FULL_WRITE.name);
 
@@ -141,7 +141,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
     @DisplayName("Генерация приглашения")
     @Description("Тест проверяет возможность генерации нового приглашения с новым токеном активации")
     public void testUpdateEmployeeInvitation(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonRoleResponseModel roleForCreation = RoleHelper.getRoleByName(PredefinedRoles.FULL_WRITE.name);
@@ -174,7 +174,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка пользователей")
     @Description("Тест проверяет возможность получения списка пользователей")
     public void testGetRolesList(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         Response response = ApiMethodsEmployee.getEmployeeList();
@@ -193,7 +193,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка пользователей по протоколу odata")
     @Description("Тест проверяет возможность получения списка пользователей по протоколу odata")
     public void testGetRolesListOData(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         Response response = ApiMethodsEmployee.getEmployeeListOData();
@@ -212,7 +212,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
     @DisplayName("Получение пользователя по протоколу oData по id в скобках")
     @Description("Тест проверяет возможность получения пользователя по протоколу oData по id в скобках")
     public void testGetRoleById(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonRoleResponseModel role = RoleHelper.getRoleByName(PredefinedRoles.FULL_WRITE.name);
@@ -245,7 +245,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
     @DisplayName("Получение пользователя по протоколу oData по id в path param")
     @Description("Тест проверяет возможность получения пользователя по протоколу oData по id в path param")
     public void testGetRoleByIdPath(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonRoleResponseModel role = RoleHelper.getRoleByName(PredefinedRoles.FULL_WRITE.name);

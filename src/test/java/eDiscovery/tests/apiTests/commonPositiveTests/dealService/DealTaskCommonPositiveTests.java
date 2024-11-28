@@ -25,7 +25,7 @@ public class DealTaskCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка задач")
     @Description("Тест проверяет возможность получения списка задач")
     public void testGetDealTaskList(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         List<DealTaskModel> responseBody = ApiMethodsDealTask.getDealTaskList().jsonPath().getList("", DealTaskModel.class);
@@ -42,7 +42,7 @@ public class DealTaskCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка задач по протоколу odata")
     @Description("Тест проверяет возможность получения списка задач по протоколу odata")
     public void testGetDealTaskListOData(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         List<DealTaskModel> responseBody = ApiMethodsDealTask.getDealTaskListOData().jsonPath().getList("value", DealTaskModel.class);

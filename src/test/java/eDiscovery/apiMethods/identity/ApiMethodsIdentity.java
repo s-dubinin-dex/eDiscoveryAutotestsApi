@@ -5,6 +5,8 @@ import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiMethodsIdentity extends UrlBase {
@@ -12,16 +14,12 @@ public class ApiMethodsIdentity extends UrlBase {
     private static final String CONNECT_USERINFO    = "/connect/userinfo";
 
     @Step("Авторизация и получение токена")
-    public static Response connectToken(){
+    public static Response connectToken(Map<String, String> authorizationScope){
 
         SpecificationsServer.setBaseUrl(IDENTITY_URL);
 
         return given()
-                .formParam("client_id", "admin.client")
-                .formParam("client_secret", "9F45EA47-9BD6-48D8-B218-273A256DB093")
-                .formParam("grant_type", "password")
-                .formParam("username", "test@gmail.com")
-                .formParam("password", "005")
+                .formParams(authorizationScope)
                 .when()
                 .post(CONNECT_TOKEN)
                 .then()

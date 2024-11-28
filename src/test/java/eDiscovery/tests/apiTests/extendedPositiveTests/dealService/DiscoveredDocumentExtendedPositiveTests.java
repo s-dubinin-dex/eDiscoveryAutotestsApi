@@ -27,7 +27,7 @@ public class DiscoveredDocumentExtendedPositiveTests extends TestBase {
     @DisplayName("Получение списка обнаруженных документов для карточки дела для карточки дела - список Документы")
     @Description("Тест проверяет возможность получения списка обнаруженных документов  - список Документы")
     public void testGetDiscoveredDocumentForDealCardDocumentsTab(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonDealManipulationResponseModel responseBodyDealManipulation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
@@ -51,7 +51,7 @@ public class DiscoveredDocumentExtendedPositiveTests extends TestBase {
     @DisplayName("Получение списка обнаруженных документов для карточки дела для карточки дела - список Необработанные")
     @Description("Тест проверяет возможность получения списка обнаруженных документов  - список Необработанные")
     public void testGetDiscoveredDocumentForDealCardUnprocessedTab(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonDealManipulationResponseModel responseBodyDealManipulation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();

@@ -23,7 +23,7 @@ public class DiscoveredDocumentCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка обнаруженных документов")
     @Description("Тест проверяет возможность получения списка обнаруженных документов")
     public void testGetDiscoveredDocumentList(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         List<DiscoveredDocumentModel> responseBody = ApiMethodsDiscoveredDocument.getDiscoveredDocument().jsonPath().getList("", DiscoveredDocumentModel.class);
@@ -37,7 +37,7 @@ public class DiscoveredDocumentCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка обнаруженных документов по протоколу odata")
     @Description("Тест проверяет возможность получения списка обнаруженных документов по протоколу odata")
     public void testGetDiscoveredDocumentListOData(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         List<DiscoveredDocumentModel> responseBody = ApiMethodsDiscoveredDocument.getDiscoveredDocumentOData().jsonPath().getList("value", DiscoveredDocumentModel.class);

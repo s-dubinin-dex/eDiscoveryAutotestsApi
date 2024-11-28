@@ -36,7 +36,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     @DisplayName("Создание места поиска")
     @Description("Тест проверяет возможность создания места поиска")
     public void testAddSearchPlace(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestBody = DataGeneratorSearchPlace.getSearchPlaceModelWithOnlyRequiredParameters();
@@ -62,7 +62,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     @DisplayName("Изменение места поиска")
     @Description("Тест проверяет возможность изменения места поиска")
     public void testUpdateSearchPlace(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = DataGeneratorSearchPlace.getBasicSearchPlaceModelFileShareSMB();
@@ -97,7 +97,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     @DisplayName("Удаление места поиска")
     @Description("Тест проверяет возможность удаления места поиска")
     public void testDeleteSearchPlace(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
 
@@ -113,7 +113,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка мест поиска")
     @Description("Тест проверяет возможность получения списка мест поиска")
     public void testGetSearchPlaceList(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
@@ -132,7 +132,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка мест поиска по протоколу oData")
     @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData")
     public void testGetSearchPlaceListOData(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
@@ -151,7 +151,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     @DisplayName("Получение места поиска по протоколу oData по id")
     @Description("Тест проверяет возможность получения места поиска по протоколу oData по id в скобках")
     public void testGetSearchPlaceODataById(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         String searchPlaceNameForFilter = "testSearchPlaceODataByIdInRoundBrackets" + getRandomName();
@@ -192,7 +192,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     @DisplayName("Получение места поиска по протоколу oData по id")
     @Description("Тест проверяет возможность получения еста поиска по протоколу oData по id в path param")
     public void testGetSearchPlaceODataByIdInPath(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         String searchPlaceNameForFilter = "testSearchPlaceODataByIdInRoundBrackets" + getRandomName();

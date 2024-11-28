@@ -27,7 +27,7 @@ public class DealProgressCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка прогрессов по делу")
     @Description("Тест проверяет возможность получения списка прогрессов по делу")
     public void testGetDealProgressList(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
@@ -45,7 +45,7 @@ public class DealProgressCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка прогрессов по делу по протоколу odata")
     @Description("Тест проверяет возможность получения списка прогрессов по делу по протоколу odata")
     public void testGetDealProgressListOData(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
@@ -63,7 +63,7 @@ public class DealProgressCommonPositiveTests extends TestBase {
     @DisplayName("Получение прогресса по id дела")
     @Description("Тест проверяет возможность полученить прогресс по id дела path param")
     public void testGetDealProgressByID(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonDealManipulationResponseModel responseDealCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
@@ -80,7 +80,7 @@ public class DealProgressCommonPositiveTests extends TestBase {
     @DisplayName("Получение прогресса по id дела")
     @Description("Тест проверяет возможность полученить прогресс по id дела path param")
     public void testGetDealProgressByIDPath(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonDealManipulationResponseModel responseDealCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();

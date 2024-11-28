@@ -1,6 +1,8 @@
 package eDiscovery.spec;
 
 import eDiscovery.UrlBase;
+import eDiscovery.helpers.Authorization;
+import eDiscovery.helpers.AuthorizationScope;
 import eDiscovery.helpers.CustomAllureListener;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -17,8 +19,13 @@ public class RequestSpecifications extends UrlBase {
                 .contentType(ContentType.JSON);
     }
 
-    public static RequestSpecification basicRequestSpecificationWithAuthorization(){
+    public static RequestSpecification basicRequestSpecificationWithAdminAuthorization(){
         return basicRequestSpecificationWithoutAuthorization()
-                .header("Authorization", "BEARER " + TOKEN);
+                .header("Authorization", "BEARER " + Authorization.getAccessToken(AuthorizationScope.getAdminClientScope()));
+    }
+
+    public static RequestSpecification basicRequestSpecificationWithLocalAgentAuthorization(){
+        return basicRequestSpecificationWithoutAuthorization()
+                .header("Authorization", "BEARER " + Authorization.getAccessToken(AuthorizationScope.getLocalAgentClientScope()));
     }
 }

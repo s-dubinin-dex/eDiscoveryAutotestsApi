@@ -23,7 +23,7 @@ public class MarkerResultFromDealCommonPositiveTests extends TestBase {
     @DisplayName("Получение результатов маркирования из сервиса Deal")
     @Description("Тест проверяет возможность получения результатов маркирования из сервиса Deal")
     public void testGetMarkerResultListFromDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         List<CommonMarkerResultFromDealModel> responseBody = ApiMethodsMarkerResultFromDeal.getMarkerResultListFromDeal().jsonPath().getList("value", CommonMarkerResultFromDealModel.class);

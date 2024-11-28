@@ -34,7 +34,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания поискового запроса без указания тела")
     @Description("Тест проверяет невозможность создания поискового запроса без указания тела")
     public void testAddSearchQueryWithoutBodyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.addSearchQuery();
@@ -58,7 +58,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания поискового запроса с пустым телом")
     @Description("Тест проверяет невозможность создания поискового запроса с пустым телом")
     public void testAddSearchQueryWithEmptyBodyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
@@ -84,7 +84,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания поискового запроса с передачей только name")
     @Description("Тест проверяет невозможность создания поискового запроса с передачей только name")
     public void testAddSearchQueryWithNameOnlyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
@@ -108,7 +108,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания поискового запроса без передачи name")
     @Description("Тест проверяет невозможность создания поискового запроса без передачи name")
     public void testAddSearchQueryWithoutNameIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
@@ -133,7 +133,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания поискового запроса с name = null")
     @Description("Тест проверяет невозможность создания поискового запроса с name = null")
     public void testAddSearchQueryWithNullNameIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
@@ -159,7 +159,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchQuery#getEmptySearchQueryNames")
     public void testAddSearchQueryWithInvalidNameIsImpossible(String name){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
@@ -183,7 +183,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания поискового запроса с длиной name, превышающим допустимую длину")
     @Description("Тест проверяет невозможность создания поискового запроса с длиной name, превышающим допустимую длину")
     public void testAddSearchQueryWithExceedingNameLengthIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
@@ -210,7 +210,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания поискового запроса с передачей только type")
     @Description("Тест проверяет невозможность создания поискового запроса с передачей только type")
     public void testAddSearchQueryWithTypeOnlyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
@@ -237,7 +237,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания поискового запроса без передачи type")
     @Description("Тест проверяет невозможность создания поискового запроса без передачи type")
     public void testAddSearchQueryWithoutTypeIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
@@ -260,7 +260,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания поискового запроса с type = null")
     @Description("Тест проверяет невозможность создания поискового запроса с type = null")
     public void testAddSearchQueryWithNullTypeIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
@@ -292,7 +292,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания поискового с несуществующим type")
     @Description("Тест проверяет невозможность создания поискового запроса с несуществующим type")
     public void testAddSearchQueryWithNotExistingTypeIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
@@ -323,7 +323,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания поискового запроса c type = Undefined")
     @Description("Тест проверяет невозможность создания поискового запроса c type = Undefined")
     public void testAddSearchQueryWithUndefinedTypeIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
@@ -347,7 +347,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания поискового запроса с передачей только value")
     @Description("Тест проверяет невозможность создания поискового с передачей только value")
     public void testAddSearchQueryWithValueOnlyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
@@ -371,7 +371,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания поискового запроса без передачи value")
     @Description("Тест проверяет невозможность создания поискового запроса без передачи value")
     public void testAddSearchQueryWithoutValueIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
@@ -396,7 +396,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания поискового запроса с value = null")
     @Description("Тест проверяет невозможность создания поискового запроса с value = null")
     public void testAddSearchQueryWithNullValueIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
@@ -421,7 +421,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания поискового запроса с длиной value, превышающим допустимую длину")
     @Description("Тест проверяет невозможность создания поискового запроса с длиной value, превышающим допустимую длину")
     public void testAddSearchQueryWithExceedingValueLengthIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.addSearchQuery(
@@ -448,7 +448,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения поискового запроса без указания тела")
     @Description("Тест проверяет невозможность изменения поискового запроса без указания тела")
     public void testUpdateSearchQueryWithoutBodyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.updateSearchQuery();
@@ -472,7 +472,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения поискового запроса с пустым телом")
     @Description("Тест проверяет невозможность изменения поискового запроса с пустым телом")
     public void testUpdateSearchQueryWithEmptyBodyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.updateSearchQuery(
@@ -497,7 +497,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения поискового запроса с передачей только id")
     @Description("Тест проверяет невозможность изменения поискового запроса с передачей только id")
     public void testUpdateSearchQueryWithIdOnlyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.updateSearchQuery(
@@ -523,7 +523,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения поискового запроса без передачи id")
     @Description("Тест проверяет невозможность изменения поискового запроса без передачи id")
     public void testUpdateSearchQueryWithoutIdIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec404NotFound());
 
         Response response = ApiMethodsSearchQuery.updateSearchQuery(
@@ -550,7 +550,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения поискового запроса c id = null")
     @Description("Тест проверяет невозможность изменения поискового запроса c id = null")
     public void testUpdateSearchQueryWithNullIdIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.updateSearchQuery(
@@ -581,7 +581,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения поискового запроса с передачей только name")
     @Description("Тест проверяет невозможность изменения поискового запроса с передачей только name")
     public void testUpdateSearchQueryWithNameOnlyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.updateSearchQuery(
@@ -606,7 +606,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения поискового запроса без передачи name")
     @Description("Тест проверяет невозможность изменения поискового запроса без передачи name")
     public void testUpdateSearchQueryWithoutNameImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonSearchQueryResponseModel responseCreation = DataGeneratorSearchQuery.createBasicSearchQuery();
 
@@ -635,7 +635,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения поискового запроса с передачей только type")
     @Description("Тест проверяет невозможность изменения поискового запроса с передачей только type")
     public void testUpdateSearchQueryWithTypeOnlyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.updateSearchQuery(
@@ -661,7 +661,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения поискового запроса без передачи type")
     @Description("Тест проверяет невозможность изменения поискового запроса без передачи type")
     public void testUpdateSearchQueryWithoutTypeIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.updateSearchQuery(
@@ -685,7 +685,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения поискового запроса с несуществующим type")
     @Description("Тест проверяет невозможность изменения поискового запроса с несуществующим type")
     public void testUpdateSearchQueryWithNotExistingTypeIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.updateSearchQuery(
@@ -717,7 +717,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения поискового запроса с type = Undefined")
     @Description("Тест проверяет невозможность изменения поискового запроса с type = Undefined")
     public void testUpdateSearchQueryWithUndefinedTypeIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.updateSearchQuery(
@@ -742,7 +742,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения поискового запроса с передачей только value")
     @Description("Тест проверяет невозможность изменения поискового запроса с передачей только value")
     public void testUpdateSearchQueryWithValueOnlyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.updateSearchQuery(
@@ -767,7 +767,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения поискового запроса без передачи value")
     @Description("Тест проверяет невозможность изменения поискового запроса без передачи value")
     public void testUpdateSearchQueryWithoutValueIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.updateSearchQuery(
@@ -795,7 +795,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность удаления поискового запроса без передачи id")
     @Description("Тест проверяет невозможность удаления поискового запроса без передачи id")
     public void testDeleteSearchQueryWithoutIdIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.deleteSearchQuery();
@@ -814,7 +814,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность удаления поискового запроса с передачей id, не соответствующем маске uuid")
     @Description("Тест проверяет невозможность удаления поискового запроса c передачей id, не соответствующем маске uuid")
     public void testDeleteSearchQueryWithIdIsNotUUIDIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchQuery.deleteSearchQuery(getRandomName(16));

@@ -43,7 +43,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceNames")
     public void testAddSearchPlaceWithDifferentValidNames(String name){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
@@ -66,7 +66,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceCategoryTypes")
     public void testAddSearchPlaceWithDifferentValidCategoryTypes(String categoryType){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
@@ -90,7 +90,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceTypes")
     public void testAddSearchPlaceWithDifferentValidTypes(String type){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
@@ -113,7 +113,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceURIInParameters")
     public void testAddSearchPlaceWithDifferentValidUriInParameters(String uri){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         SearchPlaceParametersModel parameters = SearchPlaceParametersModel.builder()
@@ -143,7 +143,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceUsernamesInParameters")
     public void testAddSearchPlaceWithDifferentValidUsernamesInParameters(String username){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         SearchPlaceParametersModel parameters = SearchPlaceParametersModel.builder()
@@ -173,7 +173,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlacePasswordsInParameters")
     public void testAddSearchPlaceWithDifferentValidPasswordsInParameters(String password){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         SearchPlaceParametersModel parameters = SearchPlaceParametersModel.builder()
@@ -203,7 +203,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceExclusions")
     public void testAddSearchPlaceWithDifferentExcludes(String exclusion){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         List<String> excludes = Collections.singletonList(exclusion);
@@ -229,7 +229,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceExclusionsWithDifferentCount")
     public void testAddSearchPlaceWithDifferentCountOfExcludes(List<String> excludes){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
@@ -254,7 +254,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceNames")
     public void testUpdateSearchPlaceNameWithDifferentValidNames(String name){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
@@ -281,7 +281,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение наименования места поиска с типом FileShare - SMB, которое используется в созданном деле")
     @Description("Тест проверяет возможность изменения наименования места поиска с типом FileShare - SMB, которое используется в созданном деле")
     public void testUpdateSearchPlaceNameUsedInCreatedDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
@@ -317,7 +317,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceCategoryTypes")
     public void testUpdateSearchPlaceCategoryTypeInFileShareWithoutDeal(String categoryType){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
@@ -345,7 +345,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceTypes")
     public void testUpdateSearchPlaceTypeInFileShareWithoutDeal(String type){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
@@ -373,7 +373,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceURIInParameters")
     public void testUpdateSearchPlaceUriParametersWithDifferentValidValues(String uri){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         SearchPlaceParametersModel initialParameters = SearchPlaceParametersModel.builder()
@@ -421,7 +421,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceUsernamesInParameters")
     public void testUpdateSearchPlaceUsernameParametersWithDifferentValidValues(String username){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         SearchPlaceParametersModel initialParameters = SearchPlaceParametersModel.builder()
@@ -469,7 +469,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlacePasswordsInParameters")
     public void testUpdateSearchPlacePasswordParametersWithDifferentValidValues(String password){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         SearchPlaceParametersModel initialParameters = SearchPlaceParametersModel.builder()
@@ -516,7 +516,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение параметров места поиска с типом FileShare - SMB, которое используется в созданном деле")
     @Description("Тест проверяет возможность изменения параметров места поиска с типом FileShare - SMB, которое используется в созданном деле")
     public void testUpdateSearchPlaceParametersUsedInCreatedDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         SearchPlaceParametersModel initialParameters = SearchPlaceParametersModel.builder()
@@ -569,7 +569,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceExclusions")
     public void testUpdateSearchPlaceExcludesInARMLocalWithDifferentValidValues(String exclusion){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
@@ -607,7 +607,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceExclusionsWithDifferentCount")
     public void testUpdateSearchPlaceExcludesInARMLocalWithDifferentCountOfExclusion(List<String> excludes){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
@@ -642,7 +642,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение excludes места поиска с типом ARM - Local, которое используется в созданном деле")
     @Description("Тест проверяет возможность изменения excludes места поиска с типом ARM - Local, которое используется в созданном деле")
     public void testUpdateSearchPlaceExcludesInARMLocalInCreatedDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestSearchPlaceCreation = AddSearchPlaceRequestModel.builder()
@@ -685,7 +685,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceExclusions")
     public void testUpdateSearchPlaceExcludesInFileShareSMBWithDifferentValidValues(String exclusion){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
@@ -722,7 +722,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceExclusionsWithDifferentCount")
     public void testUpdateSearchPlaceExcludesInFileShareSMBWithDifferentCountOfExclusion(List<String> excludes){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
@@ -757,7 +757,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение excludes места поиска с типом FileShare - SMB, которое используется в созданном деле")
     @Description("Тест проверяет возможность изменения excludes места поиска с типом FileShare - SMB, которое используется в созданном деле")
     public void testUpdateSearchPlaceExcludesInFileShareSMBWithDifferentValidValuesInCreatedDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestSearchPlaceCreation = AddSearchPlaceRequestModel.builder()
@@ -799,7 +799,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @DisplayName("Удаление места поиска FileShare - SMB")
     @Description("Тест проверяет возможность удаления места поиска FileShare - SMB")
     public void testDeleteSearchPlaceFileShareSMB(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
@@ -823,7 +823,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @ValueSource(booleans = {false, true})
     public void testGetSearchPlaceListWithIncludeDeletedParameter(Boolean includeDeleted){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
@@ -844,7 +844,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @ValueSource(booleans = {false, true})
     public void testGetSearchPlaceListODataWithIncludeDeletedParameter(Boolean includeDeleted){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
@@ -863,7 +863,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData с фильтрацией результата")
     @Test
     public void testGetSearchPlaceListODataWithFilter(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
@@ -903,7 +903,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData с подсчётом количества результатов")
     @Test
     public void testGetSearchPlaceListODataWithCount(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         HashMap<String, String> responseParameters = new HashMap<>();
@@ -934,7 +934,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData с дефолтной сортировкой результата (по возрастанию)")
     @Test
     public void testGetSearchPlaceListODataWithDefaultAscendingSorting(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
@@ -978,7 +978,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData с явной сортировкой результата (по возрастанию)")
     @Test
     public void testGetSearchPlaceListODataWithExplicitAscendingSorting(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
@@ -1022,7 +1022,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData с явной сортировкой результата (по убыванию)")
     @Test
     public void testGetSearchPlaceListODataWithExplicitDescendingSorting(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
@@ -1066,7 +1066,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData с пагинацией результата")
     @Test
     public void testGetSearchPlaceListODataWithPagination(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
@@ -1125,7 +1125,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData с лимитированием количества объектов в результате")
     @Test
     public void testGetSearchPlaceListODataWithLimit(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();

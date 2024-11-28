@@ -25,7 +25,7 @@ public class DealStatusHistoryCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка изменений статусов")
     @Description("Тест проверяет возможность получения списка изменений статусов")
     public void testGetStatusHistoryList(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         List<DealStatusHistoryModel> responseBody = ApiMethodsDealStatusHistory.getDealStatusHistoryList().jsonPath().getList("", DealStatusHistoryModel.class);
@@ -42,7 +42,7 @@ public class DealStatusHistoryCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка изменений статусов по протоколу odata")
     @Description("Тест проверяет возможность получения списка изменений статусов по протоколу odata")
     public void testGetDealStatusHistoryListOData(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         List<DealStatusHistoryModel> responseBody = ApiMethodsDealStatusHistory.getDealStatusHistoryListOData().jsonPath().getList("value", DealStatusHistoryModel.class);

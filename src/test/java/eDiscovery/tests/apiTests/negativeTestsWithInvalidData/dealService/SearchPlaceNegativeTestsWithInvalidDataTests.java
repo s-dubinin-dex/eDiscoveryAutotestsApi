@@ -35,7 +35,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания места поиска без указания тела")
     @Description("Тест проверяет невозможность создания места поиска без указания тела")
     public void testAddSearchPlaceWithoutBodyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchPlace.addSearchPlace();
@@ -59,7 +59,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания места поиска с пустым телом")
     @Description("Тест проверяет невозможность создания места поиска с пустым телом")
     public void testAddSearchPlaceWithoutNameIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchPlace.addSearchPlace(
@@ -82,7 +82,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания места поиска с передачей только categoryType")
     @Description("Тест проверяет невозможность создания места поиска с передачей только categoryType")
     public void testAddSearchPlaceWithCategoryTypeOnlyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchPlace.addSearchPlace(
@@ -106,7 +106,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания места поиска с передачей только type")
     @Description("Тест проверяет невозможность создания места поиска с передачей только type")
     public void testAddSearchPlaceWithTypeOnlyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchPlace.addSearchPlace(
@@ -130,7 +130,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания места поиска с передачей только parameters")
     @Description("Тест проверяет невозможность создания места поиска с передачей только parameters")
     public void testAddSearchPlaceWithParametersOnlyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         SearchPlaceParametersModelNotNull parameters = SearchPlaceParametersModelNotNull.builder()
@@ -160,7 +160,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания места поиска с неполной передачей parameters, не передан uri")
     @Description("Тест проверяет невозможность создания места поиска с неполной передачей parameters, не передан uri")
     public void testAddSearchPlaceWithoutURIInParametersIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         SearchPlaceParametersModelNotNull parameters = SearchPlaceParametersModelNotNull.builder()
@@ -193,7 +193,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания места поиска с неполной передачей parameters, не передан username")
     @Description("Тест проверяет невозможность создания места поиска с неполной передачей parameters, не передан username")
     public void testAddSearchPlaceWithoutUsernameInParametersIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         SearchPlaceParametersModelNotNull parameters = SearchPlaceParametersModelNotNull.builder()
@@ -226,7 +226,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания места поиска с неполной передачей parameters, не передан password")
     @Description("Тест проверяет невозможность создания места поиска с неполной передачей parameters, не передан password")
     public void testAddSearchPlaceWithoutPasswordInParametersIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         SearchPlaceParametersModelNotNull parameters = SearchPlaceParametersModelNotNull.builder()
@@ -259,7 +259,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания места поиска с передачей пустого объекта parameters, не передан ни один из параметров")
     @Description("Тест проверяет невозможность создания места поиска с передачей пустого объекта parameters, не передан ни один из параметров")
     public void testAddSearchPlaceWithEmptyParametersIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         SearchPlaceParametersModelNotNull parameters = SearchPlaceParametersModelNotNull.builder()
@@ -294,7 +294,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность создания места поиска с передачей только excludes")
     @Description("Тест проверяет невозможность создания места поиска с передачей только excludes")
     public void testAddSearchPlaceWithExcludesOnlyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchPlace.addSearchPlace(
@@ -318,7 +318,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения места поиска без передачи тела запроса")
     @Description("Тест проверяет невозможность изменения места поиска без передачи тела запроса")
     public void testUpdateSearchPlaceWithoutBodyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchPlace.updateSearchPlace();
@@ -343,7 +343,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения места поиска c телом запроса без параметров")
     @Description("Тест проверяет невозможность изменения места поиска c телом запроса без параметров")
     public void testUpdateSearchPlaceWithEmptyBodyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         ErrorModel responseErrorBody = ApiMethodsSearchPlace.updateSearchPlace(
@@ -367,7 +367,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения места поиска c телом запроса с передачей только параметра id")
     @Description("Тест проверяет невозможность изменения места поиска c телом запроса с передачей только параметра id")
     public void testUpdateSearchPlaceWithIDOnlyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
@@ -394,7 +394,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения места поиска без передачи параметра id")
     @Description("Тест проверяет невозможность изменения места поиска без передачи параметра id")
     public void testUpdateSearchPlaceWithoutIDIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec404NotFound());
 
         ErrorModel responseErrorBody = ApiMethodsSearchPlace.updateSearchPlace(
@@ -420,7 +420,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения места поиска c телом запроса c id, не соответствующим маске UUID")
     @Description("Тест проверяет невозможность изменения места поиска c телом запроса c id, не соответствующим маске UUID")
     public void testUpdateSearchPlaceWithIDIsNotUUIDIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         Response response = ApiMethodsSearchPlace.updateSearchPlace(
@@ -450,7 +450,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения места поиска c телом запроса с передачей только параметра categoryType")
     @Description("Тест проверяет невозможность изменения места поиска c телом запроса с передачей только параметра categoryType")
     public void testUpdateSearchPlaceWithCategoryTypeOnlyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         ErrorModel responseErrorBody = ApiMethodsSearchPlace.updateSearchPlace(
@@ -475,7 +475,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения места поиска c телом запроса с передачей только параметра type")
     @Description("Тест проверяет невозможность изменения места поиска c телом запроса с передачей только параметра type")
     public void testUpdateSearchPlaceWithTypeOnlyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         ErrorModel responseErrorBody = ApiMethodsSearchPlace.updateSearchPlace(
@@ -500,7 +500,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения места поиска c телом запроса с передачей только параметра parameters")
     @Description("Тест проверяет невозможность изменения места поиска c телом запроса с передачей только параметра parameters")
     public void testUpdateSearchPlaceWithParametersOnlyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         SearchPlaceParametersModelNotNull parameters = SearchPlaceParametersModelNotNull.builder()
@@ -531,7 +531,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения места поиска с неполной передачей parameters, не передан uri")
     @Description("Тест проверяет невозможность изменения места поиска с неполной передачей parameters, не передан uri")
     public void testUpdateSearchPlaceWithoutURIInParametersIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
@@ -567,7 +567,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения места поиска с неполной передачей parameters, не передан username")
     @Description("Тест проверяет невозможность изменения места поиска с неполной передачей parameters, не передан username")
     public void testUpdateSearchPlaceWithoutUsernameInParametersIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
@@ -603,7 +603,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения места поиска с неполной передачей parameters, не передан password")
     @Description("Тест проверяет невозможность изменения места поиска с неполной передачей parameters, не передан password")
     public void testUpdateSearchPlaceWithoutPasswordInParametersIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
@@ -639,7 +639,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения места поиска с передачей пустого объекта parameters, не передан ни один из параметров")
     @Description("Тест проверяет невозможность изменения места поиска с передачей пустого объекта parameters, не передан ни один из параметров")
     public void testAddSearchPlaceWithEmptyParametersIsImpossible1(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
 
@@ -677,7 +677,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность изменения места поиска c телом запроса с передачей только параметра exclude")
     @Description("Тест проверяет невозможность изменения места поиска c телом запроса с передачей только параметра exclude")
     public void testUpdateSearchPlaceWithExcludesOnlyIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         ErrorModel responseErrorBody = ApiMethodsSearchPlace.updateSearchPlace(
@@ -702,7 +702,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность удаления места поиска без передачи id")
     @Description("Тест проверяет невозможность удаления места поиска без передачи id")
     public void testDeleteSearchPlaceWithoutIdIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         ErrorModel responseErrorBody = ApiMethodsSearchPlace.deleteSearchPlace().as(ErrorModel.class);
@@ -720,7 +720,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
     @DisplayName("Невозможность удаления места поиска с id, не соответствующим маске uuid")
     @Description("Тест проверяет невозможность удаления места поиска с id, не соответствующим маске uuid")
     public void testDeleteSearchPlaceWithIdIsNotUUIDIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
         ErrorModel responseErrorBody = ApiMethodsSearchPlace.deleteSearchPlace(

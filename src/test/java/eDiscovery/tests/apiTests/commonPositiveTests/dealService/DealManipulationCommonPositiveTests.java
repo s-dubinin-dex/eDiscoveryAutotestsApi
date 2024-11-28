@@ -40,7 +40,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @DisplayName("Создание дела")
     @Description("Тест проверяет возможность создания дела")
     public void testAddDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         AddSearchPlaceRequestModel searchPlaceRequestBody = DataGeneratorSearchPlace.getSearchPlaceModelWithOnlyRequiredParameters();
         CommonSearchPlaceResponseModel searchPlaceResponseBody = ApiMethodsSearchPlace.addSearchPlace(searchPlaceRequestBody).as(CommonSearchPlaceResponseModel.class);
@@ -97,7 +97,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @DisplayName("Изменение дела")
     @Description("Тест проверяет возможность изменения дела")
     public void testUpdateDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         AddSearchPlaceRequestModel searchPlaceRequestBody = DataGeneratorSearchPlace.getSearchPlaceModelWithOnlyRequiredParameters();
         CommonSearchPlaceResponseModel searchPlaceResponseBody = ApiMethodsSearchPlace.addSearchPlace(searchPlaceRequestBody).as(CommonSearchPlaceResponseModel.class);
@@ -165,7 +165,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @DisplayName("Удаление дела")
     @Description("Тест проверяет возможность удаления дела")
     public void testDeleteDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonDealManipulationResponseModel responseBodyDealCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
@@ -182,7 +182,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @DisplayName("Просмотр информации по делу")
     @Description("Тест проверяет возможность просмотреть информацию по делу")
     public void testGetDealCard(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         AddSearchPlaceRequestModel searchPlaceRequestBody = DataGeneratorSearchPlace.getBasicSearchPlaceModelArmLocal();
         CommonSearchPlaceResponseModel searchPlaceResponseBody = ApiMethodsSearchPlace.addSearchPlace(searchPlaceRequestBody).as(CommonSearchPlaceResponseModel.class);
@@ -243,7 +243,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @DisplayName("Восстановление удалённого дела (Служебный метод)")
     @Description("Тест проверяет возможность восстановить удалённое дело (Служебный метод, должен быть удалён)")
     public void testRestoreDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
@@ -266,7 +266,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @DisplayName("Закрытие дела")
     @Description("Тест проверяет возможность закрыть (Архивировать) дело")
     public void testCloseDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
@@ -290,7 +290,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @DisplayName("Открытие закрытого дела (Служебный метод)")
     @Description("Тест проверяет возможность открыть закрытое дело (Служебный метод, должен быть удалён)")
     public void testUncloseDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
@@ -316,7 +316,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @DisplayName("Остановка дела")
     @Description("Тест проверяет возможность остановить дело")
     public void testStopDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
@@ -340,7 +340,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @DisplayName("Запуск дела")
     @Description("Тест проверяет возможность запустить дело")
     public void testStartDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
@@ -364,7 +364,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка дел")
     @Description("Тест проверяет возможность получения списка дел")
     public void testGetDealList(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody(5));
 
         DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
@@ -383,7 +383,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка мест поиска по протоколу oData")
     @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData")
     public void testGetDealListOData(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
@@ -402,7 +402,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @DisplayName("Получение дела по id")
     @Description("Тест проверяет возможность получить дело по id в скобках")
     public void testGetDealManipulationById(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonDealManipulationResponseModel responseBodyCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
@@ -433,7 +433,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @DisplayName("Получение дела по id")
     @Description("Тест проверяет возможность получить дело по id в path param")
     public void testGetDealManipulationByIdPath(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonDealManipulationResponseModel responseBodyCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();

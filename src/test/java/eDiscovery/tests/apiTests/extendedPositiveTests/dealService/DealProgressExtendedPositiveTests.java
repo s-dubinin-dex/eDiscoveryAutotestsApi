@@ -28,7 +28,7 @@ public class DealProgressExtendedPositiveTests extends TestBase {
     @DisplayName("Получение прогресса по делу для ручного обновления в карточке дела")
     @Description("Тест проверяет возможность получения прогресса по делу для ручного обновления в карточке дела")
     public void testGetDealProgressForUpdateInDealManipulationCard(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonDealManipulationResponseModel responseDealCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();

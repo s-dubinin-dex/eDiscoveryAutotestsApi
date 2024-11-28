@@ -25,7 +25,7 @@ public class AgentsCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка агентов")
     @Description("Тест проверяет возможность получения списка агентов")
     public void testGetAgents(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         List<CommonAgentsResponseModel> responseBody = ApiMethodsAgents.getAgentsList().jsonPath().getList("", CommonAgentsResponseModel.class);

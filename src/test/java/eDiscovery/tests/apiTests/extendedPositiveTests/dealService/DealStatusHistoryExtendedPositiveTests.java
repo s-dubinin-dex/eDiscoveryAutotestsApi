@@ -32,7 +32,7 @@ public class DealStatusHistoryExtendedPositiveTests extends TestBase {
     @DisplayName("Получение списка изменений статусов по протоколу odata для карточки дела")
     @Description("Тест проверяет возможность получения списка изменений статусов по протоколу odata для карточки дела")
     public void testGetDealStatusHistoryListForDealCard(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonDealManipulationResponseModel responseBodyDealCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();

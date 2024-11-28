@@ -33,7 +33,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
     @DisplayName("Получение списка мест поиска по протоколу oData для страницы списка дел")
     @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData для страницы списка дел")
     public void testGetDealListODataForDealManipulationList(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
@@ -62,7 +62,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
     @DisplayName("Получение дела по id для карточки дела")
     @Description("Тест проверяет возможность получить дело по id в path param для карточки дела")
     public void testGetDealManipulationForDealManipulationCard(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonDealManipulationResponseModel responseBodyCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();

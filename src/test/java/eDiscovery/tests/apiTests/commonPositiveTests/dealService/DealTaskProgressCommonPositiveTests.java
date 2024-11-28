@@ -23,7 +23,7 @@ public class DealTaskProgressCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка прогрессов по задачам")
     @Description("Тест проверяет возможность получения списка прогрессов по задачам")
     public void testGetDealTaskProgressList(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         List<DealTaskProgressModel> responseBody = ApiMethodsDealTaskProgress.getDealTaskProgressList().jsonPath().getList("", DealTaskProgressModel.class);
@@ -37,7 +37,7 @@ public class DealTaskProgressCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка прогрессов по задачам по протоколу odata")
     @Description("Тест проверяет возможность получения списка прогрессов по задачам по протоколу odata")
     public void testGetDealTaskProgressListOData(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         List<DealTaskProgressModel> responseBody = ApiMethodsDealTaskProgress.getDealTaskProgressListOData().jsonPath().getList("value", DealTaskProgressModel.class);

@@ -1,7 +1,6 @@
 package eDiscovery;
 
 import com.github.javafaker.Faker;
-import eDiscovery.helpers.Authorization;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,7 +13,6 @@ public class TestBase extends UrlBase {
     @BeforeAll
     static void beforeAll(){
         RestAssured.useRelaxedHTTPSValidation();
-        TOKEN = Authorization.getToken();
     }
 
     @BeforeEach

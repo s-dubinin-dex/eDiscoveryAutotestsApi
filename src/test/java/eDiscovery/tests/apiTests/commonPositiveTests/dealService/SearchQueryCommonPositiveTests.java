@@ -33,7 +33,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
     @DisplayName("Создание поискового запроса")
     @Description("Тест проверяет возможность создания поискового запроса")
     public void testAddSearchQuery(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchQueryRequestModel requestBody = DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
@@ -56,7 +56,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
     @DisplayName("Изменение поискового запроса")
     @Description("Тест проверяет возможность изменения поискового запроса")
     public void testUpdateSearchQuery(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
@@ -87,7 +87,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
     @DisplayName("Удаление поискового запроса")
     @Description("Тест проверяет возможность удаления поискового запроса")
     public void testDeleteSearchQuery(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
@@ -103,7 +103,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка поисковых запросов")
     @Description("Тест проверяет возможность получения списка поисковых запросов")
     public void testGetSearchQueryList(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
@@ -123,7 +123,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка поисковых запросов по протоколу oData")
     @Description("Тест проверяет возможность получения списка поисковых запросов по протоколу oData")
     public void testGetSearchQueryListOData(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
@@ -142,7 +142,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
     @DisplayName("Получение поискового запроса по протоколу oData по id")
     @Description("Тест проверяет возможность получения поискового запроса по протоколу oData по id в скобках")
     public void testGetSearchQueryODataById(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         String searchQueryNameForFilter = "testSearchQueryODataByIdInRoundBrackets" + getRandomName();
@@ -172,7 +172,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
     @DisplayName("Получение поискового запроса по протоколу oData по id")
     @Description("Тест проверяет возможность получения поискового запроса по протоколу oData по id в path param")
     public void testGetSearchQueryODataByIdInPath(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         String searchQueryNameForFilter = "testSearchQueryODataByIdInRoundBrackets" + getRandomName();

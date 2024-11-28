@@ -25,7 +25,7 @@ public class FileTypesCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка типов файлов")
     @Description("Тест проверяет возможность получения списка типов файлов")
     public void testGetFileTypesList(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         List<CommonFileTypesResponseModel> responseBody = ApiMethodsFileTypes.getFileTypesList().jsonPath().getList("", CommonFileTypesResponseModel.class);
@@ -46,7 +46,7 @@ public class FileTypesCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка типов файлов по протоколу oData")
     @Description("Тест проверяет возможность получения списка типов файлов по протоколу oData")
     public void testGetFileTypesListOdata(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         List<CommonFileTypesResponseModel> responseBody = ApiMethodsFileTypes.getFileTypesListOData().jsonPath().getList("value", CommonFileTypesResponseModel.class);

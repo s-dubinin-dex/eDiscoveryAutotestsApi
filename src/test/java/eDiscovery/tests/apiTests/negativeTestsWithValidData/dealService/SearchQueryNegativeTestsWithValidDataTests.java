@@ -35,7 +35,7 @@ public class SearchQueryNegativeTestsWithValidDataTests extends TestBase {
     @DisplayName("Невозможность создать поисковый запрос с существующим наименованием")
     @Description("Тест проверяет невозможность создания поискового запроса с существующим наименованием")
     public void testAddSearchQueryWithExistingNameIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         String name = getRandomName();
 
@@ -63,7 +63,7 @@ public class SearchQueryNegativeTestsWithValidDataTests extends TestBase {
     @DisplayName("Невозможность изменить поисковый запрос с несуществующим ID")
     @Description("Тест проверяет невозможность изменить поисковый запрос с несуществующим ID")
     public void testUpdateSearchQueryWithNotExistsIDIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec404NotFound());
 
         String uuid = faker.internet().uuid();
@@ -92,7 +92,7 @@ public class SearchQueryNegativeTestsWithValidDataTests extends TestBase {
     @DisplayName("Невозможность изменить name у поискового запроса на существующее")
     @Description("Тест проверяет невозможность изменить name у поискового запроса на существующее")
     public void testUpdateSearchQueryNameToExistNameIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonSearchQueryResponseModel responseSearchQueryCreationForUpdatingExists = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
         CommonSearchQueryResponseModel responseSearchQueryCreationForUpdating = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
@@ -120,7 +120,7 @@ public class SearchQueryNegativeTestsWithValidDataTests extends TestBase {
     @DisplayName("Невозможность удалить поисковый запрос с несуществующим ID")
     @Description("Тест проверяет невозможность удалить поисковый запрос с несуществующим ID")
     public void testDeleteSearchQueryWithNotExistsIDIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         String uuid = faker.internet().uuid();
 
@@ -142,7 +142,7 @@ public class SearchQueryNegativeTestsWithValidDataTests extends TestBase {
     @DisplayName("Невозможность удалить используемый поисковый запрос")
     @Description("Тест проверяет невозможность удалить используемый поисковый запрос")
     public void testDeleteSearchQueryUsedInDealIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonSearchPlaceResponseModel responseSearchPlaceCreationBody = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
         CommonSearchQueryResponseModel responseSearchQueryCreationBody = DataGeneratorSearchQuery.createBasicSearchQuery();

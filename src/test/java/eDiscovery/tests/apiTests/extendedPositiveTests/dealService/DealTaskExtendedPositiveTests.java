@@ -34,7 +34,7 @@ public class DealTaskExtendedPositiveTests extends TestBase {
     @DisplayName("Получение списка задач для карточки дела")
     @Description("Тест проверяет возможность получения списка задач для карточки дела")
     public void testGetDealTaskListForDealCard(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonDealManipulationResponseModel responseBodyDealCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();

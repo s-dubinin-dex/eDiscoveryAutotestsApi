@@ -35,7 +35,7 @@ public class RoleCommonPositiveTests extends TestBase {
     @DisplayName("Создание роли")
     @Description("Тест проверяет возможность создания роли")
     public void testAddRole(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddRoleRequestModel requestBody = AddRoleRequestModel.builder()
@@ -61,7 +61,7 @@ public class RoleCommonPositiveTests extends TestBase {
     @DisplayName("Изменение роли")
     @Description("Тест проверяет возможность изменения роли")
     public void testUpdateRole(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonRoleResponseModel responseBodyRoleCreation = DataGeneratorRole.createRoleWithOnlyRequiredParameters().as(CommonRoleResponseModel.class);
@@ -90,7 +90,7 @@ public class RoleCommonPositiveTests extends TestBase {
     @DisplayName("Удаление роли")
     @Description("Тест проверяет возможность удаления роли")
     public void testDeleteRole(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         AddRoleRequestModel requestBodyRoleCreation = AddRoleRequestModel.builder()
                 .name(getRandomName())
@@ -122,7 +122,7 @@ public class RoleCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка полиси")
     @Description("Тест проверяет возможность получить список полиси")
     public void testGetPolicies(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         List<PolicyResponseModel> responseBody = ApiMethodsRole.getPolicies().jsonPath().getList("", PolicyResponseModel.class);
@@ -139,7 +139,7 @@ public class RoleCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка ролей")
     @Description("Тест проверяет возможность получения ролей")
     public void testGetRolesList(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorRole.createRoleWithOnlyRequiredParameters();
@@ -160,7 +160,7 @@ public class RoleCommonPositiveTests extends TestBase {
     @DisplayName("Получение списка ролей по протоколу oData")
     @Description("Тест проверяет возможность получения ролей по протоколу oData")
     public void testGetRolesListOData(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorRole.createRoleWithOnlyRequiredParameters();
@@ -181,7 +181,7 @@ public class RoleCommonPositiveTests extends TestBase {
     @DisplayName("Получение роли по протоколу oData по id")
     @Description("Тест проверяет возможность получения роли по протоколу oData по id в скобках")
     public void testGetRoleODataById(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonRoleResponseModel responseBodyCreation = DataGeneratorRole.createRoleWithOnlyRequiredParameters().as(CommonRoleResponseModel.class);
@@ -205,7 +205,7 @@ public class RoleCommonPositiveTests extends TestBase {
     @DisplayName("Получение роли по протоколу oData по id")
     @Description("Тест проверяет возможность получения роли по протоколу oData по id в path Param")
     public void testGetRoleODataByIdInPath(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonRoleResponseModel responseBodyCreation = DataGeneratorRole.createRoleWithOnlyRequiredParameters().as(CommonRoleResponseModel.class);

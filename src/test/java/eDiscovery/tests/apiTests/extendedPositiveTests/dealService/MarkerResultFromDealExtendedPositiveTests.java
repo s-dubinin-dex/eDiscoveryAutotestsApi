@@ -27,7 +27,7 @@ public class MarkerResultFromDealExtendedPositiveTests extends TestBase {
     @DisplayName("Получение результатов маркирования из сервиса Deal для карточки дела")
     @Description("Тест проверяет возможность получения результатов маркирования из сервиса Deal для карточки дела")
     public void testGetMarkerResultListFromDealForDealCard(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonDealManipulationResponseModel dealManipulationResponseModel = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
@@ -53,7 +53,7 @@ public class MarkerResultFromDealExtendedPositiveTests extends TestBase {
     @DisplayName("Получение результатов маркирования из сервиса Deal для карточки дела (без фильтров)")
     @Description("Тест проверяет возможность получения результатов маркирования из сервиса Deal для карточки дела (без фильтров)")
     public void testGetMarkerResultListFromDealForDealCardWithoutFilters(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonDealManipulationResponseModel dealManipulationResponseModel = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();

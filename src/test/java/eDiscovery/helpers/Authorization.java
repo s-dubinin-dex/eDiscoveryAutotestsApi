@@ -3,10 +3,12 @@ package eDiscovery.helpers;
 import eDiscovery.apiMethods.identity.ApiMethodsIdentity;
 import eDiscovery.models.identity.UserInfo;
 
+import java.util.Map;
+
 public class Authorization {
 
-    public static String getToken(){
-        return ApiMethodsIdentity.connectToken().jsonPath().get("access_token");
+    public static String getAccessToken(Map<String, String> authorizationScope){
+        return ApiMethodsIdentity.connectToken(authorizationScope).jsonPath().get("access_token");
     }
 
     public static UserInfo getCurrentUserInfo(){

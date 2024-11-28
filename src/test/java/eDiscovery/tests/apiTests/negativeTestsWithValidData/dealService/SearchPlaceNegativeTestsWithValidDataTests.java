@@ -56,7 +56,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
     @DisplayName("Невозможность создать место поиска с существующим наименованием")
     @Description("Тест проверяет невозможность создания места поиска с существующим наименованием")
     public void testAddSearchPlaceWithExistingNameIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         String name = getRandomName();
 
@@ -84,7 +84,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
     @DisplayName("Невозможность изменить место поиска с несуществующим ID")
     @Description("Тест проверяет невозможность изменить место поиска с несуществующим ID")
     public void testUpdateSearchPlaceWithNotExistsIDIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec404NotFound());
 
         String uuid = faker.internet().uuid();
@@ -113,7 +113,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
     @DisplayName("Невозможность изменить name у места поиска с типом ARM")
     @Description("Тест проверяет невозможность изменить name у места поиска с типом ARM")
     public void testUpdateSearchPlaceNameWithARMLocalIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
@@ -146,7 +146,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
     @DisplayName("Невозможность изменить name у места поиска с типом FileShare - SMB на существующее")
     @Description("Тест проверяет невозможность изменить name у места поиска с типом FileShare - SMB на существующее")
     public void testUpdateSearchPlaceNameWithFileShareToExistNameIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonSearchPlaceResponseModel responseSearchPlaceCreationForUpdatingExists = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
         CommonSearchPlaceResponseModel responseSearchPlaceCreationForUpdating = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
@@ -174,7 +174,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
     @DisplayName("Невозможность изменить categoryType у места поиска с типом ARM")
     @Description("Тест проверяет невозможность изменить categoryType у места поиска с типом ARM")
     public void testUpdateSearchPlaceCategoryTypeWithARMLocalIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
@@ -207,7 +207,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
     @DisplayName("Невозможность изменить categoryType у места поиска с типом FileShare - SMB, если место поиска используется в деле")
     @Description("Тест проверяет невозможность изменить categoryType у места поиска с типом FileShare - SMB, если место поиска используется в деле")
     public void testUpdateSearchPlaceCategoryTypeWithFileShareSMBUsedInDealIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
@@ -246,7 +246,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
     @DisplayName("Невозможность изменить type у места поиска с типом ARM")
     @Description("Тест проверяет невозможность изменить type у места поиска с типом ARM")
     public void testUpdateSearchPlaceTypeWithARMLocalIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
@@ -279,7 +279,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
     @DisplayName("Невозможность изменить type у места поиска с типом FileShare - SMB, если место поиска используется в деле")
     @Description("Тест проверяет невозможность изменить type у места поиска с типом FileShare - SMB, если место поиска используется в деле")
     public void testUpdateSearchPlaceTypeWithFileShareSMBUsedInDealIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
@@ -318,7 +318,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
     @DisplayName("Невозможность изменить parameters у места поиска с типом ARM")
     @Description("Тест проверяет невозможность изменить parameters у места поиска с типом ARM")
     public void testUpdateSearchPlaceParametersWithARMLocalIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
@@ -359,7 +359,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
     @DisplayName("Невозможность удалить место поиска с несуществующим ID")
     @Description("Тест проверяет невозможность удалить место поиска с несуществующим ID")
     public void testDeleteSearchPlaceWithNotExistsIDIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         String uuid = faker.internet().uuid();
 
@@ -381,7 +381,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
     @DisplayName("Невозможность удалить используемое место поиска FileShare - SMB")
     @Description("Тест проверяет невозможность удалить используемое место поиска FileShare - SMB")
     public void testDeleteSearchPlaceFileShareSMBUsedInDealIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonSearchPlaceResponseModel responseSearchPlaceCreationBody = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
         CommonSearchQueryResponseModel responseSearchQueryCreationBody = DataGeneratorSearchQuery.createBasicSearchQuery();
@@ -410,7 +410,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
     @DisplayName("Невозможность удалить место поиска ARM - Local")
     @Description("Тест проверяет невозможность удалить место поиска ARM - Local")
     public void testDeleteSearchPlaceARMLocalIsImpossible(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonSearchPlaceResponseModel responseSearchPlaceCreationBody = DataGeneratorSearchPlace.createBasicSearchPlaceArmLocal();
 

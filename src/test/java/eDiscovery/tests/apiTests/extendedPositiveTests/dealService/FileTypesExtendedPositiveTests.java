@@ -27,7 +27,7 @@ public class FileTypesExtendedPositiveTests extends TestBase {
     @DisplayName("Получение списка типов файлов по протоколу oData с расширениями")
     @Description("Тест проверяет возможность получения списка типов файлов по протоколу oData с расширениями")
     public void testGetFileTypesListOdata(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         Map<String, String> parameters= new HashMap<>();

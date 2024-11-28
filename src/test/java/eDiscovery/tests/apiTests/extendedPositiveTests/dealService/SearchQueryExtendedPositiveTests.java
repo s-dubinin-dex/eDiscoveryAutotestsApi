@@ -39,7 +39,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchQuery#getValidSearchQueryNames")
     public void testAddSearchQueryWithDifferentValidNames(String name){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
@@ -62,7 +62,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchQuery#getValidSearchQueryTypes")
     public void testAddSearchQueryWithDifferentValidTypes(String type){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
@@ -85,7 +85,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchQuery#getValidSearchQueryValues")
     public void testAddSearchQueryWithDifferentValidValues(String value){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
@@ -108,7 +108,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchQuery#getValidSearchQueryNames")
     public void testUpdateSearchQueryWithDifferentValidNames(String name){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorSearchQuery.createBasicSearchQuery();
@@ -133,7 +133,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение наименования в поисковом запросе, который используется в деле")
     @Description("Тест проверяет возможность изменения наименования в поисковом запросе, который используется в деле")
     public void testUpdateSearchQueryNameInCreatedDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorSearchQuery.createBasicSearchQuery();
@@ -166,7 +166,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchQuery#getValidSearchQueryTypes")
     public void testUpdateSearchQueryWithDifferentValidTypes(String type){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorSearchQuery.createBasicSearchQuery();
@@ -191,7 +191,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение type в поисковом запросе, который используется в деле")
     @Description("Тест проверяет возможность изменения type в поисковом запросе, который используется в деле")
     public void testUpdateSearchQueryTypeInCreatedDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorSearchQuery.createBasicSearchQuery();
@@ -224,7 +224,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchQuery#getValidSearchQueryValues")
     public void testUpdateSearchQueryWithDifferentValidValues(String value){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorSearchQuery.createBasicSearchQuery();
@@ -248,7 +248,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение value в поисковом запросе, который используется в деле")
     @Description("Тест проверяет возможность изменения value в поисковом запросе, который используется в деле")
     public void testUpdateSearchQueryValueInCreatedDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         CommonSearchQueryResponseModel responseSearchQueryCreation = DataGeneratorSearchQuery.createBasicSearchQuery();
@@ -279,7 +279,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @ValueSource(booleans = {false, true})
     public void testGetSearchQueryListWithIncludeDeletedParameter(Boolean includeDeleted){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
@@ -300,7 +300,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @ParameterizedTest
     @ValueSource(booleans = {false, true})
     public void testGetSearchQueryListODataWithIncludeDeletedParameter(Boolean includeDeleted){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
@@ -319,7 +319,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность получения списка поисковых запросов по протоколу oData с фильтрацией результата")
     @Test
     public void testGetSearchQueryListODataWithFilter(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
@@ -359,7 +359,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность получения списка поисковых запросов по протоколу oData с подсчётом количества результатов")
     @Test
     public void testGetSearchQueryListODataWithCount(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         HashMap<String, String> requestParameters = new HashMap<>();
@@ -390,7 +390,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность получения списка поисковых запросов по протоколу oData с дефолтной сортировкой результата (по возрастанию)")
     @Test
     public void testGetSearchQueryListODataWithDefaultAscendingSorting(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
@@ -434,7 +434,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность получения списка поисковых запросов по протоколу oData с явной сортировкой результата (по возрастанию)")
     @Test
     public void testGetSearchQueryListODataWithExplicitAscendingSorting(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
@@ -477,7 +477,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность получения списка поисковых запросов по протоколу oData с явной сортировкой результата (по убыванию)")
     @Test
     public void testGetSearchQueryListODataWithExplicitDescendingSorting(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
@@ -521,7 +521,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность получения списка поисковых запросов по протоколу oData с пагинацией результата")
     @Test
     public void testGetSearchQueryListODataWithPagination(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
@@ -580,7 +580,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность получения списка поисковых запросов по протоколу oData с лимитированием количества объектов в результате")
     @Test
     public void testGetSearchQueryListODataWithLimit(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAuthorization());
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
