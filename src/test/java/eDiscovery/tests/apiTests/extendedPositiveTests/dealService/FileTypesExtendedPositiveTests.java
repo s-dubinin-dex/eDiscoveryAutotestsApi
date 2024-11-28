@@ -1,8 +1,8 @@
 package eDiscovery.tests.apiTests.extendedPositiveTests.dealService;
 
 import eDiscovery.TestBase;
-import eDiscovery.apiMethods.deal.ApiMethodsFileTypes;
-import eDiscovery.models.deal.fileExtensions.CommonFileTypesResponseModel;
+import eDiscovery.apiMethods.deal.ApiMethodsFileType;
+import eDiscovery.models.deal.fileType.FileTypeResponseModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
@@ -33,7 +33,7 @@ public class FileTypesExtendedPositiveTests extends TestBase {
         Map<String, String> parameters= new HashMap<>();
         parameters.put("$expand", "fileExtensions");
 
-        List<CommonFileTypesResponseModel> responseBody = ApiMethodsFileTypes.getFileTypesListOData(parameters).jsonPath().getList("value", CommonFileTypesResponseModel.class);
+        List<FileTypeResponseModel> responseBody = ApiMethodsFileType.getFileTypeListOData(parameters).jsonPath().getList("value", FileTypeResponseModel.class);
 
         assertThat(responseBody).isNotEmpty();
         assertThat(responseBody.get(0)).isNotNull();

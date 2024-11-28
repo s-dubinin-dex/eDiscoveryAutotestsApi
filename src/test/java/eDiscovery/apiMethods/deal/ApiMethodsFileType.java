@@ -10,37 +10,38 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
-public class ApiMethodsFileTypes extends UrlBase {
-    public static final String FILE_EXTENSIONS_FILE_EXTENSIONS  = "/FileExtensions/FileExtensions";
-    public static final String ODATA_FILE_EXTENSIONS            = "/odata/FileExtensions";
+public class ApiMethodsFileType extends UrlBase {
+    public static final String FILE_TYPE_FILE_TYPE  = "/FileType/FileType";
+    public static final String ODATA_FILE_TYPE      = "/odata/FileType";
 
     @Step("Получение списка типов файлов")
-    public static Response getFileTypesList(){
+    public static Response getFileTypeList(){
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
                 .when()
-                .get(FILE_EXTENSIONS_FILE_EXTENSIONS)
+                .get(FILE_TYPE_FILE_TYPE)
                 .then()
                 .extract().response();
     }
 
     @Step("Получение списка типов файлов")
-    public static Response getFileTypesListOData(){
+    public static Response getFileTypeListOData(){
 
-        return getFileTypesListOData(new HashMap<>());
+        return getFileTypeListOData(new HashMap<>());
 
     }
 
     @Step("Получение списка типов файлов")
-    public static Response getFileTypesListOData(Map<String, String> parameters){
+    public static Response getFileTypeListOData(Map<String, String> parameters){
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
                 .params(parameters)
                 .when()
-                .get(ODATA_FILE_EXTENSIONS)
+                .get(ODATA_FILE_TYPE)
                 .then()
+                .log().all()
                 .extract().response();
     }
 }
