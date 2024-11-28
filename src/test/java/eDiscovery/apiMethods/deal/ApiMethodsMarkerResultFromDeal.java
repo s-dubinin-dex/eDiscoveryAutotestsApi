@@ -30,7 +30,6 @@ public class ApiMethodsMarkerResultFromDeal extends UrlBase {
                 .when()
                 .get(ODATA_MARKER_RESULT)
                 .then()
-                .log().all()
                 .extract().response();
     }
 }

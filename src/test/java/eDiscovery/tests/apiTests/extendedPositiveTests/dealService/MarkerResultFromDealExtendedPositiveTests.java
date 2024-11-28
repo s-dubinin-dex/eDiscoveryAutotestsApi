@@ -56,8 +56,6 @@ public class MarkerResultFromDealExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonDealManipulationResponseModel dealManipulationResponseModel = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
-
         Map<String, String> parameters = new HashMap<>();
         parameters.put("$expand", "startMarker,resultMarker");
         parameters.put("$orderby", "actionDate desc");

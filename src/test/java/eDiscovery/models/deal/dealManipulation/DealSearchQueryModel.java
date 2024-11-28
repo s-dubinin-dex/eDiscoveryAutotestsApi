@@ -1,6 +1,7 @@
 package eDiscovery.models.deal.dealManipulation;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DealSearchQueryModel {
     @JsonInclude()
+    @JsonProperty("isActive")
     public boolean isActive;
     @JsonInclude()
     public String id;
@@ -20,5 +22,6 @@ public class DealSearchQueryModel {
         this.id = id;
         this.isActive = isActive;
     }
+
 }
 
