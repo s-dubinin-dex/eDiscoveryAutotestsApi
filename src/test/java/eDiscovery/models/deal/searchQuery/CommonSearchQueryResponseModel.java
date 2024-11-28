@@ -9,4 +9,5 @@ public class CommonSearchQueryResponseModel {
     public String id;
     public String value;
     public String createdUtc;
+    public String deletedUtc;
 }

@@ -52,6 +52,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         assertThat(isValidUUID(responseBody.id)).isTrue();
         assertThat(responseBody.name).isEqualTo(requestBody.name);
         assertThat(responseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
+        assertThat(responseBody.deletedUtc).isNull();
     }
 
     @Test
@@ -87,6 +88,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         assertThat(isValidUUID(responseBodySearchPlaceUpdate.id)).isTrue();
         assertThat(responseBodySearchPlaceUpdate.name).isEqualTo(requestBodySearchPlaceUpdate.name);
         assertThat(responseBodySearchPlaceUpdate.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
+        assertThat(responseBodySearchPlaceUpdate.deletedUtc).isNull();
     }
 
     @Test
@@ -103,6 +105,19 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
         ApiMethodsSearchPlace.deleteSearchPlace(responseBodySearchPlaceCreation.id);
+
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+        CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.getSearchPlaceODataByIdPath(responseBodySearchPlaceCreation.id).as(CommonSearchPlaceResponseModel.class);
+
+        assertThat(responseBody.categoryType).isEqualTo(SearchPlaceCategoryType.FileShare.name());
+        assertThat(responseBody.type).isEqualTo(SearchPlaceType.SMB.name());
+        assertThat(responseBody.parameters).isEqualTo(null);
+        assertThat(responseBody.excludes).isEmpty();
+        assertThat(responseBody.excludes).isInstanceOf(ArrayList.class);
+        assertThat(isValidUUID(responseBody.id)).isTrue();
+        assertThat(responseBody.name).isEqualTo(responseBodySearchPlaceCreation.name);
+        assertThat(responseBody.createdUtc).matches(dateTimeISOPattern());
+        assertThat(responseBody.deletedUtc).matches(dateTimeISOPattern());
     }
 
     @Test
@@ -181,6 +196,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         assertThat(responseBodyODataById.parameters).usingRecursiveComparison().isEqualTo(responseBody.parameters);
         assertThat(responseBodyODataById.excludes).isEqualTo(responseBody.excludes);
         assertThat(responseBodyODataById.createdUtc).matches(dateTimeISOPattern());
+        assertThat(responseBodyODataById.deletedUtc).isNull();
 
     }
 
@@ -222,6 +238,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         assertThat(responseBodyODataById.parameters).usingRecursiveComparison().isEqualTo(responseBody.parameters);
         assertThat(responseBodyODataById.excludes).isEqualTo(responseBody.excludes);
         assertThat(responseBodyODataById.createdUtc).matches(dateTimeISOPattern());
+        assertThat(responseBodyODataById.deletedUtc).isNull();
 
     }
 

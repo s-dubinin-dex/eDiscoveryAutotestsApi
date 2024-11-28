@@ -13,4 +13,5 @@ public class CommonSearchPlaceResponseModel {
     public List<String> excludes;;
     public String id;
     public String createdUtc;
+    public String deletedUtc;
 }

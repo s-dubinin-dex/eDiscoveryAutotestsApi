@@ -46,6 +46,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         assertThat(responseBody.value).isEqualTo(requestBody.value);
         assertThat(isValidUUID(responseBody.id)).isTrue();
         assertThat(responseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
+        assertThat(responseBody.deletedUtc).isNull();
     }
 
     @Test
@@ -77,6 +78,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         assertThat(responseBodySearchQueryUpdate.value).isEqualTo(requestModelSearchQueryUpdate.value);
         assertThat(isValidUUID(responseBodySearchQueryUpdate.id)).isTrue();
         assertThat(responseBodySearchQueryUpdate.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
+        assertThat(responseBodySearchQueryUpdate.deletedUtc).isNull();
     }
 
     @Test
@@ -93,6 +95,16 @@ public class SearchQueryCommonPositiveTests extends TestBase {
 
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
         ApiMethodsSearchQuery.deleteSearchQuery(responseBodySearchQueryCreation.id);
+
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+        CommonSearchQueryResponseModel responseBody = ApiMethodsSearchQuery.getSearchQueryODataByIdPath(responseBodySearchQueryCreation.id).as(CommonSearchQueryResponseModel.class);
+
+        assertThat(responseBody.name).isEqualTo(responseBodySearchQueryCreation.name);
+        assertThat(responseBody.type).isEqualTo(SearchQueryType.Regex.name());
+        assertThat(responseBody.value).isEqualTo(responseBodySearchQueryCreation.value);
+        assertThat(isValidUUID(responseBody.id)).isTrue();
+        assertThat(responseBody.createdUtc).matches(dateTimeISOPattern());
+        assertThat(responseBody.deletedUtc).matches(dateTimeISOPattern());
     }
 
     @Test
@@ -161,6 +173,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         assertThat(responseBodyODataById.type).isEqualTo(responseBody.type);
         assertThat(responseBodyODataById.value).isEqualTo(responseBody.value);
         assertThat(responseBodyODataById.createdUtc).matches(dateTimeISOPattern());
+        assertThat(responseBodyODataById.deletedUtc).isNull();
 
     }
 
@@ -191,6 +204,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         assertThat(responseBodyODataById.type).isEqualTo(responseBody.type);
         assertThat(responseBodyODataById.value).isEqualTo(responseBody.value);
         assertThat(responseBodyODataById.createdUtc).matches(dateTimeISOPattern());
+        assertThat(responseBodyODataById.deletedUtc).isNull();
 
     }
 
