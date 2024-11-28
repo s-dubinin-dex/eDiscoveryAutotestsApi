@@ -28,4 +28,9 @@ public class RequestSpecifications extends UrlBase {
         return basicRequestSpecificationWithoutAuthorization()
                 .header("Authorization", "BEARER " + Authorization.getAccessToken(AuthorizationScope.getLocalAgentClientScope()));
     }
+
+    public static RequestSpecification basicRequestSpecificationWithCloudAgentAuthorization(){
+        return basicRequestSpecificationWithoutAuthorization()
+                .header("Authorization", "BEARER " + Authorization.getAccessToken(AuthorizationScope.getCloudAgentClientScope()));
+    }
 }

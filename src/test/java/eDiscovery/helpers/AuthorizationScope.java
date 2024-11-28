@@ -23,4 +23,13 @@ public class AuthorizationScope {
         );
     }
 
+    public static Map<String, String> getCloudAgentClientScope(){
+        return Map.of(
+                "client_id", "cloudAgent.client",
+                "client_secret","E4775430-3684-45FE-81FA-F31EE9DC13A7",
+                "grant_type", "client_credentials",
+                "username", "crossService.agent2deal"
+        );
+    }
+
 }
