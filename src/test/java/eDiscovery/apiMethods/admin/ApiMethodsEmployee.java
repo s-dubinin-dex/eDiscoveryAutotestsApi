@@ -11,10 +11,10 @@ import static io.restassured.RestAssured.given;
 
 public class ApiMethodsEmployee extends UrlBase {
 
-    private static final String EMPLOYEE = "/Employee";
+    private static final String EMPLOYEE            = "/Employee";
     private static final String EMPLOYEE_INVITATION = "/Employee/invitation";
-    private static final String EMPLOYEE_EMPLOYEE = "/Employee/Employee";
-    private static final String ODATA_EMPLOYEE = "/odata/Employee";
+    private static final String EMPLOYEE_EMPLOYEE   = "/Employee/Employee";
+    private static final String ODATA_EMPLOYEE      = "/odata/Employee";
 
     @Step("Создание пользователя")
     public static Response addEmployee(AddEmployeeRequestModel addEmployeeRequestModel){
