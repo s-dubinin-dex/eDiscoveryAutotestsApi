@@ -16,7 +16,7 @@ import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.DataChecker.isValidUUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Common positive tests - DealAgent")
+@DisplayName("Common positive tests: Deal - DealAgent")
 public class DealAgentCommonPositiveTests extends TestBase {
 
     @Test

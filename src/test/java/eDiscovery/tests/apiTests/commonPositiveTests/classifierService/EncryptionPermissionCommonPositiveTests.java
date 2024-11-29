@@ -15,7 +15,7 @@ import java.util.List;
 import static eDiscovery.helpers.DataChecker.isValidUUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Common positive tests - EncryptionPermission")
+@DisplayName("Common positive tests: Classifier - EncryptionPermission")
 public class EncryptionPermissionCommonPositiveTests extends TestBase {
 
     @Test

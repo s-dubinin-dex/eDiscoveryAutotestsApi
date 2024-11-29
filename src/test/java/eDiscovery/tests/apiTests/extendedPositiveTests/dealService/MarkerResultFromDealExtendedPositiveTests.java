@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@DisplayName("Extended positive tests - MarkerResultFromDeal")
+@DisplayName("Extended positive tests: Deal - MarkerResultFromDeal")
 public class MarkerResultFromDealExtendedPositiveTests extends TestBase {
 
     @Test

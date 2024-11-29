@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@DisplayName("Extended positive tests - DiscoveredDocument")
+@DisplayName("Extended positive tests: Deal - DiscoveredDocument")
 public class DiscoveredDocumentExtendedPositiveTests extends TestBase {
 
     @Test

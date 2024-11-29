@@ -22,7 +22,7 @@ import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Common positive tests - Employee")
+@DisplayName("Common positive tests: Admin - Employee")
 public class EmployeeCommonPositiveTests extends TestBase {
 
     @Test

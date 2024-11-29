@@ -29,7 +29,7 @@ import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Common positive tests - DealManipulation")
+@DisplayName("Common positive tests: Deal - DealManipulation")
 public class DealManipulationCommonPositiveTests extends TestBase {
 
     @Test

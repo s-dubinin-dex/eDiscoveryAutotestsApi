@@ -16,7 +16,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Extended positive tests - FileTypes")
+@DisplayName("Extended positive tests: Deal - FileTypes")
 public class FileTypesExtendedPositiveTests extends TestBase {
 
     @Test

@@ -23,7 +23,7 @@ import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.ErrorDescription.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Negative tests with invalid data - SearchQuery")
+@DisplayName("Negative tests with invalid data: Deal - SearchQuery")
 public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test

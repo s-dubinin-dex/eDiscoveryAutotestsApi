@@ -21,7 +21,7 @@ import java.util.Map;
 import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Extended positive tests - DealStatusHistory")
+@DisplayName("Extended positive tests: Deal - DealStatusHistory")
 public class DealStatusHistoryExtendedPositiveTests extends TestBase {
 
     @Test

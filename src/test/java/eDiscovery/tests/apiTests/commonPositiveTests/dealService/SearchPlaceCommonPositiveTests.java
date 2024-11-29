@@ -25,7 +25,7 @@ import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Common positive tests - SearchPlace")
+@DisplayName("Common positive tests: Deal - SearchPlace")
 public class SearchPlaceCommonPositiveTests extends TestBase {
 
     @Test

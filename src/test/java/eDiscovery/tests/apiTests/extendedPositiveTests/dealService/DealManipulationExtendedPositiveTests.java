@@ -22,7 +22,7 @@ import java.util.Map;
 import static eDiscovery.helpers.DataChecker.dateTimeISOPattern;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Extended positive tests - DealManipulation")
+@DisplayName("Extended positive tests: Deal - DealManipulation")
 public class DealManipulationExtendedPositiveTests extends TestBase {
 
     @Test

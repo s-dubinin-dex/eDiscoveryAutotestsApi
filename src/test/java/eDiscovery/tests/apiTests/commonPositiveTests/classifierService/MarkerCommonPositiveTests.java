@@ -15,7 +15,7 @@ import java.util.List;
 import static eDiscovery.helpers.DataChecker.isValidUUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Common positive tests - Marker")
+@DisplayName("Common positive tests: Classifier - Marker")
 public class MarkerCommonPositiveTests extends TestBase {
 
     @Test

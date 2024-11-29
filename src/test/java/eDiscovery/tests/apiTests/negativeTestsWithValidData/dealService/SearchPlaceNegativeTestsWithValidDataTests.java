@@ -24,7 +24,7 @@ import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.ErrorDescription.*;
 
 
-@DisplayName("Negative tests with valid data - SearchPlace")
+@DisplayName("Negative tests with valid data: Deal - SearchPlace")
 public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
 //    @Nested

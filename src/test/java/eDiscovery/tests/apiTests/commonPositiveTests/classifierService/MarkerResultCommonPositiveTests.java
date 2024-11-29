@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-@DisplayName("Common positive tests - MarkerResult")
+@DisplayName("Common positive tests: Classifier - MarkerResult")
 public class MarkerResultCommonPositiveTests extends TestBase {
 
     @Test

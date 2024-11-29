@@ -23,7 +23,7 @@ import static eDiscovery.helpers.DataChecker.dateTimeISOPattern;
 import static eDiscovery.helpers.DataChecker.isValidUUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Extended positive tests - DealTask")
+@DisplayName("Extended positive tests: Deal - DealTask")
 public class DealTaskExtendedPositiveTests extends TestBase {
 
     @Test

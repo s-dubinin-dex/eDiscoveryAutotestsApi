@@ -22,7 +22,7 @@ import static eDiscovery.helpers.DataChecker.isValidUUID;
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Common positive tests - SearchPlaceGroup")
+@DisplayName("Common positive tests: Deal - SearchPlaceGroup")
 public class SearchPlaceGroupCommonPositiveTests extends TestBase {
 
     @Test

@@ -17,7 +17,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Extended positive tests - DealProgress")
+@DisplayName("Extended positive tests: Deal - DealProgress")
 public class DealProgressExtendedPositiveTests extends TestBase {
 
     @Test

@@ -24,7 +24,7 @@ import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static eDiscovery.data.adminService.DataGeneratorRole.*;
 
-@DisplayName("Common positive tests - Role")
+@DisplayName("Common positive tests: Admin - Role")
 public class RoleCommonPositiveTests extends TestBase {
 
     @Test
