@@ -14,6 +14,7 @@ import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -173,7 +174,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка пользователей")
     @Description("Тест проверяет возможность получения списка пользователей")
-    public void testGetRolesList(){
+    public void testGetEmployeeList(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -192,7 +193,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка пользователей по протоколу odata")
     @Description("Тест проверяет возможность получения списка пользователей по протоколу odata")
-    public void testGetRolesListOData(){
+    public void testGetEmployeeListOData(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -211,7 +212,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение пользователя по протоколу oData по id в скобках")
     @Description("Тест проверяет возможность получения пользователя по протоколу oData по id в скобках")
-    public void testGetRoleById(){
+    public void testGetEmployeeById(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -241,10 +242,11 @@ public class EmployeeCommonPositiveTests extends TestBase {
     @Epic("Сервис Admin")
     @Feature("Пользователь")
     @Story("Получение пользователя по id")
+    @Tag("webui")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение пользователя по протоколу oData по id в path param")
     @Description("Тест проверяет возможность получения пользователя по протоколу oData по id в path param")
-    public void testGetRoleByIdPath(){
+    public void testGetEmployeeByIdPath(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 

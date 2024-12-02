@@ -93,7 +93,7 @@ public class ApiMethodsSearchPlaceGroup extends UrlBase {
 
         return given()
                 .when()
-                .get(String.format("%1s(%2s)", ODATA_SEARCH_PLACE_GROUP, id))
+                .get(String.format(ODATA_SEARCH_PLACE_GROUP + "(%s)", id))
                 .then()
                 .extract().response();
 
