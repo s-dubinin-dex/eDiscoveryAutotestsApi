@@ -83,7 +83,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         assertThat(responseBody.searchMask).isNull();
         assertThat(responseBody.classifierDealData.needClassify).isFalse();
         assertThat(responseBody.classifierDealData.classifierProfileId).isNull();
-        assertThat(responseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
+        assertThat(responseBody.createdUtc).matches(dateTimeUTCPattern());
         assertThat(isValidUUID(responseBody.creatorUserId)).isTrue();
         assertThat(responseBody.creatorUserName).isEqualTo("Администратор");
 
@@ -151,7 +151,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         assertThat(responseBodyDealUpdate.searchMask).isEqualTo(responseBodyDealCreation.searchMask);
         assertThat(responseBodyDealUpdate.classifierDealData.needClassify).isEqualTo(responseBodyDealCreation.classifierDealData.needClassify);
         assertThat(responseBodyDealUpdate.classifierDealData.classifierProfileId).isEqualTo(responseBodyDealCreation.classifierDealData.classifierProfileId);
-        assertThat(responseBodyDealUpdate.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
+        assertThat(responseBodyDealUpdate.createdUtc).matches(dateTimeUTCPattern());
         assertThat(responseBodyDealUpdate.creatorUserId).isEqualTo(responseBodyDealCreation.creatorUserId);
         assertThat(responseBodyDealUpdate.creatorUserName).isEqualTo(responseBodyDealCreation.creatorUserName);
 
@@ -229,7 +229,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
         assertThat(responseDealCardBody.searchMask).isEqualTo(responseDealCreationBody.searchMask);
         assertThat(responseDealCardBody.classifierDealData.needClassify).isEqualTo(responseDealCreationBody.classifierDealData.needClassify);
         assertThat(responseDealCardBody.classifierDealData.classifierProfileId).isEqualTo(responseDealCreationBody.classifierDealData.classifierProfileId);
-        assertThat(responseDealCardBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
+        assertThat(responseDealCardBody.createdUtc).matches(dateTimeUTCPattern());
         assertThat(responseDealCardBody.creatorUserId).isEqualTo(responseDealCreationBody.creatorUserId);
         assertThat(responseDealCardBody.creatorUserName).isEqualTo(responseDealCreationBody.creatorUserName);
 

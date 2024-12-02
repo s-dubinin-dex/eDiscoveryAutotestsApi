@@ -51,7 +51,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         assertThat(responseBody.excludes).isInstanceOf(ArrayList.class);
         assertThat(isValidUUID(responseBody.id)).isTrue();
         assertThat(responseBody.name).isEqualTo(requestBody.name);
-        assertThat(responseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
+        assertThat(responseBody.createdUtc).matches(dateTimeUTCPattern());
         assertThat(responseBody.deletedUtc).isNull();
     }
 
@@ -87,7 +87,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         assertThat(responseBodySearchPlaceUpdate.excludes).isInstanceOf(ArrayList.class);
         assertThat(isValidUUID(responseBodySearchPlaceUpdate.id)).isTrue();
         assertThat(responseBodySearchPlaceUpdate.name).isEqualTo(requestBodySearchPlaceUpdate.name);
-        assertThat(responseBodySearchPlaceUpdate.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
+        assertThat(responseBodySearchPlaceUpdate.createdUtc).matches(dateTimeUTCPattern());
         assertThat(responseBodySearchPlaceUpdate.deletedUtc).isNull();
     }
 
