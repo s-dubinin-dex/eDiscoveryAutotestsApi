@@ -6,6 +6,7 @@ import eDiscovery.apiMethods.deal.ApiMethodsSearchPlace;
 import eDiscovery.data.dealService.DataGeneratorDealManipulation;
 import eDiscovery.data.dealService.DataGeneratorSearchPlace;
 import eDiscovery.data.dealService.DataGeneratorSearchQuery;
+import eDiscovery.helpers.OdataParametersBuilder;
 import eDiscovery.helpers.enums.SearchPlaceCategoryType;
 import eDiscovery.helpers.enums.SearchPlaceType;
 import eDiscovery.models.deal.searchPlace.AddSearchPlaceRequestModel;
@@ -19,6 +20,7 @@ import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -27,6 +29,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -1152,6 +1155,30 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         assertThat(responseBodyWithLimiting.size()).isEqualTo(2);
         assertThat(responseBodyWithLimiting.get(1)).isNotNull();
+
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Tag("webui")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Получение списка мест поиска для отображения в списке мест поиска")
+    @Description("Тест проверяет возможность получения списка мест для отображения в списке мест поиска")
+    @Test
+    public void testGetSearchPlaceListWEBUI(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("contains(tolower(name),'')")
+                .withOrderBy("createdUtc desc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonSearchPlaceResponseModel> responseBodyWithLimiting = ApiMethodsSearchPlace.getSearchPlaceListOData(params).jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
 
     }
 

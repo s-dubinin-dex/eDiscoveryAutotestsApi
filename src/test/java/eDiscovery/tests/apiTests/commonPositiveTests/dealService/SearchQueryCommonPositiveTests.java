@@ -13,6 +13,7 @@ import eDiscovery.helpers.enums.SearchQueryType;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -180,6 +181,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
     @Test
     @Epic("Сервис Deal")
     @Feature("Поисковый запрос")
+    @Tag("webui")
     @Story("Получение поискового запроса по протоколу oData по id")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение поискового запроса по протоколу oData по id")
@@ -188,7 +190,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        String searchQueryNameForFilter = "testSearchQueryODataByIdInRoundBrackets" + getRandomName();
+        String searchQueryNameForFilter = "testSearchQueryODataByIdInPathParam" + getRandomName();
 
         AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
                 .name(searchQueryNameForFilter)

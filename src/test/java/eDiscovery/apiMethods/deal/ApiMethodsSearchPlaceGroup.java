@@ -7,6 +7,9 @@ import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiMethodsSearchPlaceGroup extends UrlBase {
@@ -67,15 +70,21 @@ public class ApiMethodsSearchPlaceGroup extends UrlBase {
     }
 
     @Step("Получение списка групп мест поиска по протоколу odata")
-    public static Response getSearchPlaceGroupListOData(){
+    public static Response getSearchPlaceGroupListOData(Map<String, String> params){
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
+                .params(params)
                 .when()
                 .get(ODATA_SEARCH_PLACE_GROUP)
                 .then()
                 .extract().response();
 
+    }
+
+    @Step("Получение списка групп мест поиска по протоколу odata")
+    public static Response getSearchPlaceGroupListOData(){
+        return getSearchPlaceGroupListOData(new HashMap<>());
     }
 
     @Step("Получение группы мест поиска по id")

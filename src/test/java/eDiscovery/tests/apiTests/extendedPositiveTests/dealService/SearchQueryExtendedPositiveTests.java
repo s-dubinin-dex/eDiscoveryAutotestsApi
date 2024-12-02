@@ -5,6 +5,7 @@ import eDiscovery.apiMethods.deal.ApiMethodsSearchQuery;
 import eDiscovery.data.dealService.DataGeneratorDealManipulation;
 import eDiscovery.data.dealService.DataGeneratorSearchPlace;
 import eDiscovery.data.dealService.DataGeneratorSearchQuery;
+import eDiscovery.helpers.OdataParametersBuilder;
 import eDiscovery.helpers.enums.SearchQueryType;
 import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
 import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModel;
@@ -16,6 +17,7 @@ import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -23,6 +25,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -608,5 +611,28 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         assertThat(responseBodyWithLimiting.size()).isEqualTo(2);
         assertThat(responseBodyWithLimiting.get(1)).isNotNull();
 
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Получение списка поисковых запросов")
+    @Tag("webui")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Получение списка поисковых запросов для отображения в списке поисковых запросов")
+    @Description("Тест проверяет возможность получения списка поисковых запросов для отображения в списке поисковых запросов")
+    @Test
+    public void testGetSearchQueryListForSearchQueriesListWEBUI() {
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("contains(tolower(name), '')")
+                .withOrderBy("createdUtc desc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonSearchQueryResponseModel> resultBody = ApiMethodsSearchQuery.getSearchQueryListOData(params).jsonPath().getList("value", CommonSearchQueryResponseModel.class);
     }
 }
