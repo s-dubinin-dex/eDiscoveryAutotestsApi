@@ -21,16 +21,16 @@ public class RequestSpecifications extends UrlBase {
 
     public static RequestSpecification basicRequestSpecificationWithAdminAuthorization(){
         return basicRequestSpecificationWithoutAuthorization()
-                .header("Authorization", "BEARER " + Authorization.getAccessToken(AuthorizationScope.getAdminClientScope()));
+                .auth().oauth2(Authorization.getAccessToken(AuthorizationScope.getAdminClientScope()));
     }
 
     public static RequestSpecification basicRequestSpecificationWithLocalAgentAuthorization(){
         return basicRequestSpecificationWithoutAuthorization()
-                .header("Authorization", "BEARER " + Authorization.getAccessToken(AuthorizationScope.getLocalAgentClientScope()));
+                .auth().oauth2(Authorization.getAccessToken(AuthorizationScope.getLocalAgentClientScope()));
     }
 
     public static RequestSpecification basicRequestSpecificationWithCloudAgentAuthorization(){
         return basicRequestSpecificationWithoutAuthorization()
-                .header("Authorization", "BEARER " + Authorization.getAccessToken(AuthorizationScope.getCloudAgentClientScope()));
+                .auth().oauth2(Authorization.getAccessToken(AuthorizationScope.getCloudAgentClientScope()));
     }
 }
