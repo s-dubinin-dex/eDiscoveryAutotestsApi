@@ -15,5 +15,12 @@
     "matchedStatuses": ["failed"],
     "matchedMessageRegex": ".*Expected status code <200> but was <409>.*",
     "flaky": true
+  },
+  {
+    "name": "WEB UI Tests",
+    "matchedStatuses": ["failed", "broken", "passed"],
+    "messageRegex": ".*",
+    "traceRegex": ".*",
+    "tags": ["webui"]
   }
 ]
