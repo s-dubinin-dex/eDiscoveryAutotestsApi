@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 public class DealTaskProgressModel {
     public String id;
     public int totalFiles;
-    public int totalVolume;
+    public long totalVolume;
     public int proceededFiles;
-    public int proceededVolume;
+    public long proceededVolume;
     public Integer timeToFinish;
 }
