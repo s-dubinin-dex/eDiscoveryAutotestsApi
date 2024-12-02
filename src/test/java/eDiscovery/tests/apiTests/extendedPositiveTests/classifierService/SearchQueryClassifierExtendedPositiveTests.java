@@ -35,7 +35,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     @DisplayName("Создание поискового запроса c различными наименованиями")
     @Description("Тест проверяет возможность создания поискового запроса c различными наименованиями")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.classifierService.DataGeneratorSearchQuery#getValidSearchQueryNames")
+    @MethodSource("eDiscovery.data.classifierService.DataGeneratorSearchQueryClassifier#getValidSearchQueryNames")
     public void testAddSearchQueryWithDifferentValidNames(String name){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -58,7 +58,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     @DisplayName("Создание поискового запроса c различными type")
     @Description("Тест проверяет возможность создания поискового запроса c различными type")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.classifierService.DataGeneratorSearchQuery#getValidSearchQueryTypes")
+    @MethodSource("eDiscovery.data.classifierService.DataGeneratorSearchQueryClassifier#getValidSearchQueryTypes")
     public void testAddSearchQueryWithDifferentValidTypes(String type){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -81,7 +81,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     @DisplayName("Создание поискового запроса c различными values")
     @Description("Тест проверяет возможность создания поискового запроса c различными values")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.classifierService.DataGeneratorSearchQuery#getValidSearchQueryValues")
+    @MethodSource("eDiscovery.data.classifierService.DataGeneratorSearchQueryClassifier#getValidSearchQueryValues")
     public void testAddSearchQueryWithDifferentValidValues(String value){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -104,7 +104,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение наименования в поисковом запросе")
     @Description("Тест проверяет возможность изменения наименования в поисковом запросе")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.classifierService.DataGeneratorSearchQuery#getValidSearchQueryNames")
+    @MethodSource("eDiscovery.data.classifierService.DataGeneratorSearchQueryClassifier#getValidSearchQueryNames")
     public void testUpdateSearchQueryWithDifferentValidNames(String name){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -130,7 +130,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение type в поисковом запросе")
     @Description("Тест проверяет возможность изменения type в поисковом запросе")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.classifierService.DataGeneratorSearchQuery#getValidSearchQueryTypes")
+    @MethodSource("eDiscovery.data.classifierService.DataGeneratorSearchQueryClassifier#getValidSearchQueryTypes")
     public void testUpdateSearchQueryWithDifferentValidTypes(String type){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -156,7 +156,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     @DisplayName("Изменение value в поисковом запросе")
     @Description("Тест проверяет возможность изменения value в поисковом запросе")
     @ParameterizedTest
-    @MethodSource("eDiscovery.data.classifierService.DataGeneratorSearchQuery#getValidSearchQueryValues")
+    @MethodSource("eDiscovery.data.classifierService.DataGeneratorSearchQueryClassifier#getValidSearchQueryValues")
     public void testUpdateSearchQueryWithDifferentValidValues(String value){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());

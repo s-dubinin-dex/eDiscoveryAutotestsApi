@@ -33,7 +33,7 @@ public class SearchQueryClassifierCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Создание поискового запроса")
     @Description("Тест проверяет возможность создания поискового запроса")
-    public void testAddSearchQuery(){
+    public void testAddSearchQueryClassifier(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -57,7 +57,7 @@ public class SearchQueryClassifierCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Изменение поискового запроса")
     @Description("Тест проверяет возможность изменения поискового запроса")
-    public void testUpdateSearchQuery(){
+    public void testUpdateSearchQueryClassifier(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -89,7 +89,7 @@ public class SearchQueryClassifierCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Удаление поискового запроса")
     @Description("Тест проверяет возможность удаления поискового запроса")
-    public void testDeleteSearchQuery(){
+    public void testDeleteSearchQueryClassifier(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonSearchQueryClassifierResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQueryClassifier.createSearchQueryWithOnlyRequiredParameters();
@@ -115,7 +115,7 @@ public class SearchQueryClassifierCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка поисковых запросов")
     @Description("Тест проверяет возможность получения списка поисковых запросов")
-    public void testGetSearchQueryList(){
+    public void testGetSearchQueryClassifierList(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -135,7 +135,7 @@ public class SearchQueryClassifierCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка поисковых запросов по протоколу oData")
     @Description("Тест проверяет возможность получения списка поисковых запросов по протоколу oData")
-    public void testGetSearchQueryListOData(){
+    public void testGetSearchQueryClassifierListOData(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -154,7 +154,7 @@ public class SearchQueryClassifierCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение поискового запроса по протоколу oData по id")
     @Description("Тест проверяет возможность получения поискового запроса по протоколу oData по id в скобках")
-    public void testGetSearchQueryODataById(){
+    public void testGetSearchQueryClassifierODataById(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -185,7 +185,7 @@ public class SearchQueryClassifierCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение поискового запроса по протоколу oData по id")
     @Description("Тест проверяет возможность получения поискового запроса по протоколу oData по id в path param")
-    public void testGetSearchQueryODataByIdInPath(){
+    public void testGetSearchQueryClassifierODataByIdInPath(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
