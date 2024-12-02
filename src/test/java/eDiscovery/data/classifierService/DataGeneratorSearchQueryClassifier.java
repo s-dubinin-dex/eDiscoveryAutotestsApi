@@ -44,6 +44,10 @@ public class DataGeneratorSearchQueryClassifier {
         ).as(CommonSearchQueryClassifierResponseModel.class);
     }
 
+    public static CommonSearchQueryClassifierResponseModel getFirstSearchQueryClassifier(){
+        return ApiMethodsSearchQueryClassifier.getSearchQueryList().jsonPath().getList("value", CommonSearchQueryClassifierResponseModel.class).get(0);
+    }
+
     /**
      * Valid SearchQuery attributes
      * */
