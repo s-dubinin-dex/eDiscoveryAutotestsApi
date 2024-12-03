@@ -62,7 +62,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(name)
-                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .categoryType(SearchPlaceCategoryType.Workspace.name())
                 .type(SearchPlaceType.LOCAL.name())
                 .build();
 
@@ -93,7 +93,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
                 UpdateSearchPlaceRequestModel.builder()
                         .id(uuid)
                         .name(getRandomName())
-                        .categoryType(SearchPlaceCategoryType.ARM.name())
+                        .categoryType(SearchPlaceCategoryType.Workspace.name())
                         .type(SearchPlaceType.LOCAL.name())
                         .build()
         ).as(ErrorModel.class);
@@ -117,7 +117,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
-                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .categoryType(SearchPlaceCategoryType.Workspace.name())
                 .type(SearchPlaceType.LOCAL.name())
                 .build();
 
@@ -178,7 +178,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
-                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .categoryType(SearchPlaceCategoryType.Workspace.name())
                 .type(SearchPlaceType.LOCAL.name())
                 .build();
 
@@ -226,7 +226,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
         UpdateSearchPlaceRequestModel requestSearchPlaceUpdateBody = UpdateSearchPlaceRequestModel.builder()
                 .name(responseBodySearchPlaceCreation.name)
                 .id(responseBodySearchPlaceCreation.id)
-                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .categoryType(SearchPlaceCategoryType.Workspace.name())
                 .type(responseBodySearchPlaceCreation.type)
                 .build();
 
@@ -250,7 +250,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
-                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .categoryType(SearchPlaceCategoryType.Workspace.name())
                 .type(SearchPlaceType.LOCAL.name())
                 .build();
 
@@ -322,7 +322,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
         AddSearchPlaceRequestModel requestBodySearchPlaceCreation = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
-                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .categoryType(SearchPlaceCategoryType.Workspace.name())
                 .type(SearchPlaceType.LOCAL.name())
                 .build();
 

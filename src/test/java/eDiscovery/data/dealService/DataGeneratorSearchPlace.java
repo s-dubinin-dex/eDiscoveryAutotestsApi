@@ -46,7 +46,7 @@ public class DataGeneratorSearchPlace {
 
     public static AddSearchPlaceRequestModel getBasicSearchPlaceModelArmLocal(){
         return getBasicSearchPlaceModel(
-                SearchPlaceCategoryType.ARM.name(),
+                SearchPlaceCategoryType.Workspace.name(),
                 SearchPlaceType.LOCAL.name()
         );
     }

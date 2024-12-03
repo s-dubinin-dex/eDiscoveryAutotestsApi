@@ -73,14 +73,14 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         UpdateSearchPlaceRequestModel requestBodySearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
                 .id(responseBodySearchPlaceCreation.id)
                 .name(getRandomName())
-                .categoryType(SearchPlaceCategoryType.ARM.name())
+                .categoryType(SearchPlaceCategoryType.Workspace.name())
                 .type(SearchPlaceType.LOCAL.name())
                 .build();
 
         Response responseSearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestBodySearchPlaceUpdate);
         CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = responseSearchPlaceUpdate.as(CommonSearchPlaceResponseModel.class);
 
-        assertThat(responseBodySearchPlaceUpdate.categoryType).isEqualTo(SearchPlaceCategoryType.ARM.name());
+        assertThat(responseBodySearchPlaceUpdate.categoryType).isEqualTo(SearchPlaceCategoryType.Workspace.name());
         assertThat(responseBodySearchPlaceUpdate.type).isEqualTo(SearchPlaceType.LOCAL.name());
         assertThat(responseBodySearchPlaceUpdate.parameters).isEqualTo(null);
         assertThat(responseBodySearchPlaceUpdate.excludes).isEmpty();

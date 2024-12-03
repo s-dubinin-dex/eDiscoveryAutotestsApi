@@ -6,7 +6,7 @@ import java.util.List;
 
 public enum SearchPlaceCategoryType {
     Undefined,
-    ARM,
+    Workspace,
     FileShare;
 
     public static List<String> getValidSearchPlaceCategoryTypes(){
