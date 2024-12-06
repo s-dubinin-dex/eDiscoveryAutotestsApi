@@ -20,12 +20,10 @@ public class ApiMethodsMetadataFilter extends UrlBase {
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
-                .log().all()
                 .body(requestBody)
                 .when()
                 .post(METADATA_FILTER)
                 .then()
-                .log().all()
                 .extract().response();
     }
 
@@ -34,12 +32,10 @@ public class ApiMethodsMetadataFilter extends UrlBase {
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
-                .log().all()
                 .body(requestBody)
                 .when()
                 .put(METADATA_FILTER)
                 .then()
-                .log().all()
                 .extract().response();
     }
 

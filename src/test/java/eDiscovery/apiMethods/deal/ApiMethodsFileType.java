@@ -41,7 +41,6 @@ public class ApiMethodsFileType extends UrlBase {
                 .when()
                 .get(ODATA_FILE_TYPE)
                 .then()
-                .log().all()
                 .extract().response();
     }
 }
