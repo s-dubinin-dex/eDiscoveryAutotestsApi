@@ -12,7 +12,7 @@ public class CommonDealManipulationResponseModel {
     public String name;
     public String dealPriority;
     public boolean quarantine;
-    public List<String> fileTypes;
+    public DealMetadataFilterModel metadataFilter;
     public List<DealSearchPlaceModel> searchPlaces;
     public List<ClassifySearchPlacesModel> classifySearchPlaces;
     public List<SearchPlaceGroupsModel> searchPlaceGroups;
@@ -20,7 +20,6 @@ public class CommonDealManipulationResponseModel {
     public DealTaskProgressModel progressInfo;
     public String dealStatus;
     public List<String> excludes;
-    public String searchMask;
     public String createdUtc;
     public String creatorUserId;
     public String creatorUserName;

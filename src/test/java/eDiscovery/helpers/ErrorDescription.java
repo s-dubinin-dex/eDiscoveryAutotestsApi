@@ -5,11 +5,13 @@ public class ErrorDescription {
     public static final String DUPLICATE_KEY_SEARCH_QUERY_NAME                          = "duplicate key value violates unique constraint \"IX_SearchQuery_Name\"";
 
     public static final String ERRORS_ARGUMENT_EXCEPTION                                = "errors.ArgumentException";
+    public static final String ERRORS_ARGUMENT_NULL_EXCEPTION                           = "errors.ArgumentNullException";
     public static final String ERRORS_ENTITY_ALREADY_EXISTS_EXCEPTION                   = "errors.EntityAlreadyExistsException";
     public static final String ERRORS_ENTITY_IN_USE_EXCEPTION_SEARCH_PLACE_INFO         = "errors.EntityInUseException.SearchPlaceInfo";
     public static final String ERRORS_ENTITY_IN_USE_EXCEPTION_SEARCH_QUERY_INFO         = "errors.EntityInUseException.SearchQueryInfo";
     public static final String ERRORS_ENTITY_NOT_FOUND_EXCEPTION_SEARCH_PLACE_INFO      = "errors.EntityNotFoundException.SearchPlaceInfo";
     public static final String ERRORS_ENTITY_NOT_FOUND_EXCEPTION_SEARCH_QUERY_INFO      = "errors.EntityNotFoundException.SearchQueryInfo";
+    public static final String ERRORS_VALIDATION_EXCEPTION                              = "errors.ValidationException";
 
     public static final String SEARCH_PLACE_INFO                                        = "SearchPlaceInfo";
     public static final String SEARCH_QUERY_INFO                                        = "SearchQueryInfo";
@@ -19,11 +21,15 @@ public class ErrorDescription {
     public static final String EXCEPTION_ENTITY_IN_USE_EXCEPTION_SEARCH_PLACE_INFO      = "Exception of type 'Shared.Domain.Exceptions.EntityInUseException`1[Deal.Application.Abstraction.Models.Queries.SearchPlaces.SearchPlaceInfo]' was thrown.";
     public static final String EXCEPTION_ENTITY_IN_USE_EXCEPTION_SEARCH_QUERY_INFO      = "Exception of type 'Shared.Domain.Exceptions.EntityInUseException`1[Deal.Application.Abstraction.Models.Queries.SearchQueries.SearchQueryInfo]' was thrown.";
 
+    public static final String ARRAY_CAN_NOT_BE_EMPTY                                   = "Массив не может быть пустым!";
     public static final String FOR_LOCAL_AGENT_ALLOWED_ONLY_EXCEPTIONS_UPDATE           = "Для локального агента разрешено обновлять в местах поиска только 'Excludes'.";
     public static final String FOR_FILE_SHARE_CATEGORY_USED_IN_DEAL_ALLOWED_ONLY_NAME_EXCLUDES_PARAMETERS_UPDATE = "Для категории места поиска FileShare используемых в деле разрешено обновлять только 'Name', 'Excludes' и 'Parameters'.";
+    public static final String FROM_MUST_BE_LESS_OR_EQUAL_TO                            = "From (.*) должен быть меньше или равен To (.*).";
     public static final String DELETING_SEARCH_PLACES_FOR_LOCAL_AGENT_IS_FORBIDDEN      = "Места поиска созданные для локального агента удалить нельзя!";
+    public static final String PARAMETERS_FROM_TO_CANNOT_BE_NULL_SIMULTANEOUSLY         = "Параметры From () и To () одновременно не могут быть null.";
     public static final String TYPE_FIELD_IS_INCORRECT_UNSUPPORTABLE_UNDEFINED_VALUE    = "Указано не верное значение для поля 'Type. Значение 'Undefined' не поддерживается!";
     public static final String INCORRECT_NAME                                           = "Задано не корректное наименование: 'Name'.";
+
 
     public static final String REQUEST_VALIDATION_ERROR                                 = "Request Validation Error";
     public static final String SEE_ERRORS_FOR_DETAILS                                   = "See Errors for details";
@@ -45,4 +51,5 @@ public class ErrorDescription {
     public static final String VALIDATIONS_THE_VALUE___IS_NOT_VALID                             = "validations\\.The value .+ is not valid\\.";
 
     public static final String ID_IS_EMPTY_PARAMETER_ID                                 = "id is empty (Parameter 'id')";
+    public static final String VALUE_CANNOT_BE_NULL_VALUE                               = "Value cannot be null. (Parameter 'Value')";
 }
