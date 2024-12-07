@@ -343,8 +343,9 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         assertThat(responseBodyWithoutFilter.size()).isGreaterThan(1);
         assertThat(responseBodyWithoutFilter.get(0)).isNotNull();
 
-        HashMap<String, String> requestParameters = new HashMap<>();
-        requestParameters.put("$filter", "contains(name, '" + searchQueryNameForFilter + "')");
+        Map<String, String> requestParameters = OdataParametersBuilder.builder()
+                .withFilter("contains(name, '" + searchQueryNameForFilter + "')")
+                .build();
 
         List<CommonSearchQueryResponseModel> responseBodyWithFilter =
                 ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
@@ -365,16 +366,15 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        HashMap<String, String> requestParameters = new HashMap<>();
-        requestParameters.put("$count", "true");
+        Map<String, String> requestParameters = OdataParametersBuilder.builder()
+                .withCount(true)
+                .build();
 
-        Response responseBodyWithCount =
-                ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters);
+        Response responseBodyWithCount = ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters);
 
         DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        Response responseBodyWithCountAfterAddNewOne =
-                ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters);
+        Response responseBodyWithCountAfterAddNewOne = ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters);
 
         int resultCount = responseBodyWithCount.jsonPath().getInt("\"@odata.count\"");
         int resultCountAfterAddNewOne = responseBodyWithCountAfterAddNewOne.jsonPath().getInt("\"@odata.count\"");
@@ -410,10 +410,10 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
             ApiMethodsSearchQuery.addSearchQuery(requestBody);
         }
 
-        HashMap<String, String> requestParameters = new HashMap<>();
-        requestParameters.put("$filter", "contains(name, '" + searchQueryNameForFilter + "')");
-        requestParameters.put("$orderby", "name");
-
+        Map<String, String> requestParameters = OdataParametersBuilder.builder()
+                .withFilter("contains(name, '" + searchQueryNameForFilter + "')")
+                .withOrderBy("name")
+                .build();
 
         List<CommonSearchQueryResponseModel> responseBodyWithFilterSorting =
                 ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
@@ -454,9 +454,10 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
             ApiMethodsSearchQuery.addSearchQuery(requestBody);
         }
 
-        HashMap<String, String> requestParameters = new HashMap<>();
-        requestParameters.put("$filter", "contains(name, '" + searchQueryNameForFilter + "')");
-        requestParameters.put("$orderby", "name ASC");
+        Map<String, String> requestParameters = OdataParametersBuilder.builder()
+                .withFilter("contains(name, '" + searchQueryNameForFilter + "')")
+                .withOrderBy("name ASC")
+                .build();
 
         List<CommonSearchQueryResponseModel> responseBodyWithFilterSorting =
                 ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
@@ -497,10 +498,10 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
             ApiMethodsSearchQuery.addSearchQuery(requestBody);
         }
 
-        HashMap<String, String> requestParameters = new HashMap<>();
-        requestParameters.put("$filter", "contains(name, '" + searchQueryNameForFilter + "')");
-        requestParameters.put("$orderby", "name DESC");
-
+        Map<String, String> requestParameters = OdataParametersBuilder.builder()
+                .withFilter("contains(name, '" + searchQueryNameForFilter + "')")
+                .withOrderBy("name DESC")
+                .build();
 
         List<CommonSearchQueryResponseModel> responseBodyWithFilterSorting =
                 ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
@@ -541,11 +542,12 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
             ApiMethodsSearchQuery.addSearchQuery(requestBody);
         }
 
-        HashMap<String, String> requestParameters = new HashMap<>();
-        requestParameters.put("$filter", "contains(name, '" + searchQueryNameForFilter + "')");
-        requestParameters.put("$orderby", "name");
-        requestParameters.put("$top", "5");
-        requestParameters.put("$skip", "0");
+        Map<String, String> requestParameters = OdataParametersBuilder.builder()
+                .withFilter("contains(name, '" + searchQueryNameForFilter + "')")
+                .withOrderBy("name")
+                .withTop(5)
+                .withSkip(0)
+                .build();
 
         List<CommonSearchQueryResponseModel> responseBodyWithPagination =
                 ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
@@ -600,9 +602,10 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
             ApiMethodsSearchQuery.addSearchQuery(requestBody);
         }
 
-        HashMap<String, String> requestParameters = new HashMap<>();
-        requestParameters.put("$filter", "contains(name, '" + searchQueryNameForFilter + "')");
-        requestParameters.put("$top", "2");
+        Map<String, String> requestParameters = OdataParametersBuilder.builder()
+                .withFilter("contains(name, '" + searchQueryNameForFilter + "')")
+                .withTop(2)
+                .build();
 
         List<CommonSearchQueryResponseModel> responseBodyWithLimiting =
                 ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
@@ -628,6 +631,98 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         Map<String, String> params = OdataParametersBuilder.builder()
                 .withFilter("contains(tolower(name), '')")
                 .withOrderBy("createdUtc desc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonSearchQueryResponseModel> resultBody = ApiMethodsSearchQuery.getSearchQueryListOData(params).jsonPath().getList("value", CommonSearchQueryResponseModel.class);
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Получение списка поисковых запросов")
+    @Tag("webui")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Получение списка поисковых запросов для фильтра по поисковому запросу")
+    @Description("Тест проверяет возможность получения списка поисковых запросов для фильтра по поисковому запросу")
+    @Test
+    public void testGetSearchQueryListForSearchQueriesListWEBUIForFilterSearchQuery() {
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("contains(tolower(name), '')")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonSearchQueryResponseModel> resultBody = ApiMethodsSearchQuery.getSearchQueryListOData(params).jsonPath().getList("value", CommonSearchQueryResponseModel.class);
+    }
+
+    @ParameterizedTest
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Получение списка поисковых запросов")
+    @Tag("webui")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка поисковых запросов для отображения в списке поисковых запросов с фильтром по типу поискового запроса")
+    @Description("Тест проверяет возможность получения списка поисковых запросов для отображения в списке поисковых запросов с фильтром по типу поискового запроса")
+    @MethodSource("eDiscovery.helpers.enums.SearchQueryType#getValidSearchQueryTypes")
+    public void testGetSearchQueryListForSearchQueriesListWEBUIWithFilterSearchQueryType(String searchQueryType) {
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter(String.format("contains(tolower(name),'') and type eq '%s'", searchQueryType))
+                .withOrderBy("createdUtc desc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonSearchQueryResponseModel> resultBody = ApiMethodsSearchQuery.getSearchQueryListOData(params).jsonPath().getList("value", CommonSearchQueryResponseModel.class);
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Получение списка поисковых запросов")
+    @Tag("webui")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка поисковых запросов для отображения в списке поисковых запросов с сортировкой по Названию")
+    @Description("Тест проверяет возможность получения списка поисковых запросов для отображения в списке поисковых запросов с сортировкой по Названию")
+    @Test
+    public void testGetSearchQueryListForSearchQueriesListWEBUIWithSortingName() {
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("contains(tolower(name), '')")
+                .withOrderBy("name asc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonSearchQueryResponseModel> resultBody = ApiMethodsSearchQuery.getSearchQueryListOData(params).jsonPath().getList("value", CommonSearchQueryResponseModel.class);
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Поисковый запрос")
+    @Story("Получение списка поисковых запросов")
+    @Tag("webui")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка поисковых запросов для отображения в списке поисковых запросов с сортировкой по Типу")
+    @Description("Тест проверяет возможность получения списка поисковых запросов для отображения в списке поисковых запросов с сортировкой по Типу")
+    @Test
+    public void testGetSearchQueryListForSearchQueriesListWEBUIWithSortingType() {
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("contains(tolower(name), '')")
+                .withOrderBy("type asc")
                 .withCount(true)
                 .withTop(10)
                 .withSkip(0)
