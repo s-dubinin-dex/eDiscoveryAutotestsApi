@@ -1,5 +1,9 @@
 package eDiscovery.helpers.enums;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum FileTypes {
     Presentation("Презентации"),
     Spreadsheet("Электронные таблицы"),
@@ -13,6 +17,10 @@ public enum FileTypes {
 
     FileTypes(String description){
         this.description = description;
+    }
+
+    public static List<FileTypes> getFileTypesAvailableForDiscoveredDocumentFilter(){
+        return Arrays.stream(FileTypes.values()).filter(fileType -> fileType != FileTypes.Archives).collect(Collectors.toList());
     }
 
 }
