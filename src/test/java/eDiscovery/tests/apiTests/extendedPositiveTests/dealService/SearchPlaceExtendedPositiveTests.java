@@ -887,8 +887,9 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         assertThat(responseBodyWithoutFilter.size()).isGreaterThan(1);
         assertThat(responseBodyWithoutFilter.get(0)).isNotNull();
 
-        HashMap<String, String> responseParameters = new HashMap<>();
-        responseParameters.put("$filter", "contains(name, '" + searchPlaceNameForFilter + "')");
+        Map<String, String> responseParameters = OdataParametersBuilder.builder()
+                .withFilter("contains(name, '" + searchPlaceNameForFilter + "')")
+                .build();
 
         List<CommonSearchPlaceResponseModel> responseBodyWithFilter =
                 ApiMethodsSearchPlace.getSearchPlaceListOData(responseParameters)
@@ -909,8 +910,9 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        HashMap<String, String> responseParameters = new HashMap<>();
-        responseParameters.put("$count", "true");
+        Map<String, String> responseParameters = OdataParametersBuilder.builder()
+                .withCount(true)
+                .build();
 
         Response responseBodyWithCount =
                 ApiMethodsSearchPlace.getSearchPlaceListOData(responseParameters);
@@ -954,10 +956,10 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
             ApiMethodsSearchPlace.addSearchPlace(requestBody);
         }
 
-        HashMap<String, String> requestParameters = new HashMap<>();
-        requestParameters.put("$filter", "contains(name, '" + searchPlaceNameForFilter + "')");
-        requestParameters.put("$orderby", "name");
-
+        Map<String, String> requestParameters = OdataParametersBuilder.builder()
+                .withFilter("contains(name, '" + searchPlaceNameForFilter + "')")
+                .withOrderBy("name")
+                .build();
 
         List<CommonSearchPlaceResponseModel> responseBodyWithFilterSorting =
                 ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters)
@@ -998,10 +1000,10 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
             ApiMethodsSearchPlace.addSearchPlace(requestBody);
         }
 
-        HashMap<String, String> requestParameters = new HashMap<>();
-        requestParameters.put("$filter", "contains(name, '" + searchPlaceNameForFilter + "')");
-        requestParameters.put("$orderby", "name ASC");
-
+        Map<String, String> requestParameters = OdataParametersBuilder.builder()
+                .withFilter("contains(name, '" + searchPlaceNameForFilter + "')")
+                .withOrderBy("name ASC")
+                .build();
 
         List<CommonSearchPlaceResponseModel> responseBodyWithFilterSorting =
                 ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters)
@@ -1042,10 +1044,10 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
             ApiMethodsSearchPlace.addSearchPlace(requestBody);
         }
 
-        HashMap<String, String> requestParameters = new HashMap<>();
-        requestParameters.put("$filter", "contains(name, '" + searchPlaceNameForFilter + "')");
-        requestParameters.put("$orderby", "name DESC");
-
+        Map<String, String> requestParameters = OdataParametersBuilder.builder()
+                .withFilter("contains(name, '" + searchPlaceNameForFilter + "')")
+                .withOrderBy("name DESC")
+                .build();
 
         List<CommonSearchPlaceResponseModel> responseBodyWithFilterSorting =
                 ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters)
@@ -1086,11 +1088,12 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
             ApiMethodsSearchPlace.addSearchPlace(requestBody);
         }
 
-        HashMap<String, String> requestParameters = new HashMap<>();
-        requestParameters.put("$filter", "contains(name, '" + searchPlaceNameForFilter + "')");
-        requestParameters.put("$orderby", "name");
-        requestParameters.put("$top", "5");
-        requestParameters.put("$skip", "0");
+        Map<String, String> requestParameters = OdataParametersBuilder.builder()
+                .withFilter("contains(name, '" + searchPlaceNameForFilter + "')")
+                .withOrderBy("name")
+                .withTop(5)
+                .withSkip(0)
+                .build();
 
         List<CommonSearchPlaceResponseModel> responseBodyWithPagination =
                 ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters)
@@ -1145,9 +1148,10 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
             ApiMethodsSearchPlace.addSearchPlace(requestBody);
         }
 
-        HashMap<String, String> requestParameters = new HashMap<>();
-        requestParameters.put("$filter", "contains(name, '" + searchPlaceNameForFilter + "')");
-        requestParameters.put("$top", "2");
+        Map<String, String> requestParameters = OdataParametersBuilder.builder()
+                .withFilter("contains(name, '" + searchPlaceNameForFilter + "')")
+                .withTop(2)
+                .build();
 
         List<CommonSearchPlaceResponseModel> responseBodyWithLimiting =
                 ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters)
@@ -1178,8 +1182,154 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
                 .withSkip(0)
                 .build();
 
-        List<CommonSearchPlaceResponseModel> responseBodyWithLimiting = ApiMethodsSearchPlace.getSearchPlaceListOData(params).jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+        List<CommonSearchPlaceResponseModel> responseBody = ApiMethodsSearchPlace.getSearchPlaceListOData(params).jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
 
     }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Tag("webui")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Получение списка мест поиска для фильтра по местам поиска")
+    @Description("Тест проверяет возможность получения списка мест для по местам поиска")
+    @Test
+    public void testGetSearchPlaceListWEBUIForFilterSearchPlace(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("contains(tolower(name),'')")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonSearchPlaceResponseModel> responseBody = ApiMethodsSearchPlace.getSearchPlaceListOData(params).jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Tag("webui")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка мест поиска для отображения в списке мест поиска с фильтром по Категории места поиска")
+    @Description("Тест проверяет возможность получения списка мест для отображения в списке мест поиска с фильтром по Категории места поиска")
+    @ParameterizedTest
+    @MethodSource("eDiscovery.helpers.enums.SearchPlaceCategoryType#getValidSearchPlaceCategoryTypes")
+    public void testGetSearchPlaceListWEBUIWithFilterSearchPlaceCategoryType(String searchPlaceCategoryType){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter(String.format("contains(tolower(name),'') and categoryType eq '%s'", searchPlaceCategoryType))
+                .withOrderBy("createdUtc desc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonSearchPlaceResponseModel> responseBody = ApiMethodsSearchPlace.getSearchPlaceListOData(params).jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Tag("webui")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка мест поиска для отображения в списке мест поиска с фильтром по Типу места поиска")
+    @Description("Тест проверяет возможность получения списка мест для отображения в списке мест поиска с фильтром по Типу места поиска")
+    @ParameterizedTest
+    @MethodSource("eDiscovery.helpers.enums.SearchPlaceType#getValidSearchPlaceTypes")
+    public void testGetSearchPlaceListWEBUIWithFilterSearchPlaceType(String searchPlaceType){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter(String.format("contains(tolower(name),'') and type eq '%s'", searchPlaceType))
+                .withOrderBy("createdUtc desc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonSearchPlaceResponseModel> responseBody = ApiMethodsSearchPlace.getSearchPlaceListOData(params).jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Tag("webui")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка мест поиска для отображения в списке мест поиска с сортировкой по Названию")
+    @Description("Тест проверяет возможность получения списка мест для отображения в списке мест поиска с сортировкой по Названию")
+    @Test
+    public void testGetSearchPlaceListWEBUIWithSortingName(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("contains(tolower(name),'')")
+                .withOrderBy("name asc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonSearchPlaceResponseModel> responseBody = ApiMethodsSearchPlace.getSearchPlaceListOData(params).jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Tag("webui")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка мест поиска для отображения в списке мест поиска с сортировкой по Категории")
+    @Description("Тест проверяет возможность получения списка мест для отображения в списке мест поиска с сортировкой по Категории")
+    @Test
+    public void testGetSearchPlaceListWEBUIWithSortingCategoryType(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("contains(tolower(name),'')")
+                .withOrderBy("categoryType asc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonSearchPlaceResponseModel> responseBody = ApiMethodsSearchPlace.getSearchPlaceListOData(params).jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+
+    }
+
+    @Epic("Сервис Deal")
+    @Feature("Место поиска")
+    @Story("Получение списка мест поиска")
+    @Tag("webui")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка мест поиска для отображения в списке мест поиска с сортировкой по Типу")
+    @Description("Тест проверяет возможность получения списка мест для отображения в списке мест поиска с сортировкой по Типу")
+    @Test
+    public void testGetSearchPlaceListWEBUIWithSortingType(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("contains(tolower(name),'')")
+                .withOrderBy("type asc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonSearchPlaceResponseModel> responseBody = ApiMethodsSearchPlace.getSearchPlaceListOData(params).jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
+
+    }
+
 
 }

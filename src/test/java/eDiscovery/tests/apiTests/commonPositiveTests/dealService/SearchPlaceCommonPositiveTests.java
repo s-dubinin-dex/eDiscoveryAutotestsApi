@@ -15,6 +15,7 @@ import eDiscovery.helpers.enums.SearchPlaceType;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -204,9 +205,10 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     @Epic("Сервис Deal")
     @Feature("Поисковый запрос")
     @Story("Получение места поиска по протоколу oData по id")
+    @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение места поиска по протоколу oData по id")
-    @Description("Тест проверяет возможность получения еста поиска по протоколу oData по id в path param")
+    @Description("Тест проверяет возможность получения места поиска по протоколу oData по id в path param")
     public void testGetSearchPlaceODataByIdInPath(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
