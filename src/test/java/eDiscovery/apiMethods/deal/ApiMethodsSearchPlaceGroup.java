@@ -101,10 +101,16 @@ public class ApiMethodsSearchPlaceGroup extends UrlBase {
 
     @Step("Получение группы мест поиска по id в path param")
     public static Response getSearchPlaceGroupByIdPath(String id){
+        return getSearchPlaceGroupByIdPath(id, new HashMap<>());
+    }
+
+    @Step("Получение группы мест поиска по id в path param")
+    public static Response getSearchPlaceGroupByIdPath(String id, Map<String, String> params){
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
                 .pathParam("id", id)
+                .params(params)
                 .when()
                 .get(ODATA_SEARCH_PLACE_GROUP + "/{id}")
                 .then()
