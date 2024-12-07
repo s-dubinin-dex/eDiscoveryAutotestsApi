@@ -2,6 +2,7 @@ package eDiscovery.tests.apiTests.extendedPositiveTests.dealService;
 
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsFileType;
+import eDiscovery.helpers.OdataParametersBuilder;
 import eDiscovery.models.deal.fileType.FileTypeResponseModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
@@ -30,8 +31,9 @@ public class FileTypesExtendedPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        Map<String, String> parameters= new HashMap<>();
-        parameters.put("$expand", "fileExtensions");
+        Map<String, String> parameters = OdataParametersBuilder.builder()
+                .withExpand("fileExtensions")
+                .build();
 
         List<FileTypeResponseModel> responseBody = ApiMethodsFileType.getFileTypeListOData(parameters).jsonPath().getList("value", FileTypeResponseModel.class);
 
