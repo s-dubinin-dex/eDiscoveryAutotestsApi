@@ -5,6 +5,9 @@ import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiMethodsEncryptionPermission extends UrlBase {
@@ -25,15 +28,21 @@ public class ApiMethodsEncryptionPermission extends UrlBase {
     }
 
     @Step("Получение списка политик шифрования по протоколу odata")
-    public static Response getEncryptionPermissionListOData(){
+    public static Response getEncryptionPermissionListOData(Map<String, String> params){
         SpecificationsServer.setBaseUrl(CLASSIFIER_URL);
 
         return given()
+                .params(params)
                 .when()
                 .get(ODATA_ENCRYPTION_PERMISSION)
                 .then()
                 .extract().response();
 
+    }
+
+    @Step("Получение списка политик шифрования по протоколу odata")
+    public static Response getEncryptionPermissionListOData(){
+        return getEncryptionPermissionListOData(new HashMap<>());
     }
 
     @Step("Получение политики шифрования по id")
