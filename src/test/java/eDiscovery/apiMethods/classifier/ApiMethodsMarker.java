@@ -5,6 +5,9 @@ import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiMethodsMarker extends UrlBase {
@@ -25,15 +28,21 @@ public class ApiMethodsMarker extends UrlBase {
     }
 
     @Step("Получение списка маркеров по протоколу odata")
-    public static Response getMarkerListOData(){
+    public static Response getMarkerListOData(Map<String, String> params){
         SpecificationsServer.setBaseUrl(CLASSIFIER_URL);
 
         return given()
+                .params(params)
                 .when()
                 .get(ODATA_MARKER)
                 .then()
                 .extract().response();
 
+    }
+
+    @Step("Получение списка маркеров по протоколу odata")
+    public static Response getMarkerListOData(){
+        return getMarkerListOData(new HashMap<>());
     }
 
     @Step("Получение маркера по id")
