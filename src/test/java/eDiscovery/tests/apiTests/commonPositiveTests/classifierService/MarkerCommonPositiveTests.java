@@ -8,6 +8,7 @@ import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -44,6 +45,7 @@ public class MarkerCommonPositiveTests extends TestBase {
     @Epic("Сервис Classifier")
     @Feature("Метки")
     @Story("Получение списка меток")
+    @Tag("webui")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка меток")
     @Description("Тест проверяет возможность получения списка меток по протоколу odata")
