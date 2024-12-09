@@ -7,6 +7,9 @@ import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiMethodsProfile extends UrlBase {
@@ -61,15 +64,21 @@ public class ApiMethodsProfile extends UrlBase {
                 .extract().response();
     }
 
-    @Step("Получение профиля категоризации по id")
-    public static Response getProfileById(String id){
+    @Step("Получение списка профилей категоризации по протоколу odata")
+    public static Response getProfileListOData(Map<String, String> params){
         SpecificationsServer.setBaseUrl(CLASSIFIER_URL);
 
         return given()
+                .params(params)
                 .when()
-                .get(ODATA_PROFILE + String.format("(%s)", id))
+                .get(ODATA_PROFILE)
                 .then()
                 .extract().response();
+    }
+
+    @Step("Получение профиля категоризации по id")
+    public static Response getProfileById(String id){
+        return getProfileListOData(new HashMap<>());
     }
 
     @Step("Получение профиля категоризации по id в path param")
