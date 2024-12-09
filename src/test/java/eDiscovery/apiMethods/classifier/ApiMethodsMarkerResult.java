@@ -4,6 +4,9 @@ import eDiscovery.UrlBase;
 import eDiscovery.spec.SpecificationsServer;
 import io.restassured.response.Response;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiMethodsMarkerResult extends UrlBase {
@@ -23,9 +26,14 @@ public class ApiMethodsMarkerResult extends UrlBase {
     }
 
     public static Response getMarkerResultListOData(){
+        return getMarkerResultListOData(new HashMap<>());
+    }
+
+    public static Response getMarkerResultListOData(Map<String,String> params){
         SpecificationsServer.setBaseUrl(CLASSIFIER_URL);
 
         return given()
+                .params(params)
                 .when()
                 .get(ODATA_MARKER_RESULT)
                 .then()
