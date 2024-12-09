@@ -29,7 +29,7 @@ public class SearchQueryClassifierNegativeTestsWithValidDataTests extends TestBa
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создать поисковый запрос с существующим наименованием")
     @Description("Тест проверяет невозможность создания поискового запроса с существующим наименованием")
-    public void testAddSearchQueryWithExistingNameIsImpossible(){
+    public void testAddSearchQueryClassifierWithExistingNameIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         String name = getRandomName();
@@ -57,7 +57,7 @@ public class SearchQueryClassifierNegativeTestsWithValidDataTests extends TestBa
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменить поисковый запрос с несуществующим ID")
     @Description("Тест проверяет невозможность изменить поисковый запрос с несуществующим ID")
-    public void testUpdateSearchQueryWithNotExistsIDIsImpossible(){
+    public void testUpdateSearchQueryClassifierWithNotExistsIDIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec404NotFound());
 
@@ -86,7 +86,7 @@ public class SearchQueryClassifierNegativeTestsWithValidDataTests extends TestBa
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменить name у поискового запроса на существующее")
     @Description("Тест проверяет невозможность изменить name у поискового запроса на существующее")
-    public void testUpdateSearchQueryNameToExistNameIsImpossible(){
+    public void testUpdateSearchQueryClassifierNameToExistNameIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonSearchQueryClassifierResponseModel responseSearchQueryCreationForUpdatingExists = DataGeneratorSearchQueryClassifier.createSearchQueryWithOnlyRequiredParameters();
@@ -114,7 +114,7 @@ public class SearchQueryClassifierNegativeTestsWithValidDataTests extends TestBa
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность удалить поисковый запрос с несуществующим ID")
     @Description("Тест проверяет невозможность удалить поисковый запрос с несуществующим ID")
-    public void testDeleteSearchQueryWithNotExistsIDIsImpossible(){
+    public void testDeleteSearchQueryClassifierWithNotExistsIDIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         String uuid = faker.internet().uuid();

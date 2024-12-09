@@ -34,7 +34,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса без указания тела")
     @Description("Тест проверяет невозможность создания поискового запроса без указания тела")
-    public void testAddSearchQueryWithoutBodyIsImpossible(){
+    public void testAddSearchQueryClassifierWithoutBodyIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -58,7 +58,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с пустым телом")
     @Description("Тест проверяет невозможность создания поискового запроса с пустым телом")
-    public void testAddSearchQueryWithEmptyBodyIsImpossible(){
+    public void testAddSearchQueryClassifierWithEmptyBodyIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -84,7 +84,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с передачей только name")
     @Description("Тест проверяет невозможность создания поискового запроса с передачей только name")
-    public void testAddSearchQueryWithNameOnlyIsImpossible(){
+    public void testAddSearchQueryClassifierWithNameOnlyIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -108,7 +108,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса без передачи name")
     @Description("Тест проверяет невозможность создания поискового запроса без передачи name")
-    public void testAddSearchQueryWithoutNameIsImpossible(){
+    public void testAddSearchQueryClassifierWithoutNameIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -133,7 +133,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с name = null")
     @Description("Тест проверяет невозможность создания поискового запроса с name = null")
-    public void testAddSearchQueryWithNullNameIsImpossible(){
+    public void testAddSearchQueryClassifierWithNullNameIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -159,7 +159,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Description("Тест проверяет невозможность создания поискового запроса с пустым name")
     @ParameterizedTest
     @MethodSource("eDiscovery.data.classifierService.DataGeneratorSearchQueryClassifier#getEmptySearchQueryNames")
-    public void testAddSearchQueryWithInvalidNameIsImpossible(String name){
+    public void testAddSearchQueryClassifierWithInvalidNameIsImpossible(String name){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -183,7 +183,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с длиной name, превышающим допустимую длину")
     @Description("Тест проверяет невозможность создания поискового запроса с длиной name, превышающим допустимую длину")
-    public void testAddSearchQueryWithExceedingNameLengthIsImpossible(){
+    public void testAddSearchQueryClassifierWithExceedingNameLengthIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -210,7 +210,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с передачей только type")
     @Description("Тест проверяет невозможность создания поискового запроса с передачей только type")
-    public void testAddSearchQueryWithTypeOnlyIsImpossible(){
+    public void testAddSearchQueryClassifierWithTypeOnlyIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -237,7 +237,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса без передачи type")
     @Description("Тест проверяет невозможность создания поискового запроса без передачи type")
-    public void testAddSearchQueryWithoutTypeIsImpossible(){
+    public void testAddSearchQueryClassifierWithoutTypeIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -260,7 +260,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с type = null")
     @Description("Тест проверяет невозможность создания поискового запроса с type = null")
-    public void testAddSearchQueryWithNullTypeIsImpossible(){
+    public void testAddSearchQueryClassifierWithNullTypeIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -292,7 +292,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового с несуществующим type")
     @Description("Тест проверяет невозможность создания поискового запроса с несуществующим type")
-    public void testAddSearchQueryWithNotExistingTypeIsImpossible(){
+    public void testAddSearchQueryClassifierWithNotExistingTypeIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -323,7 +323,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса c type = Undefined")
     @Description("Тест проверяет невозможность создания поискового запроса c type = Undefined")
-    public void testAddSearchQueryWithUndefinedTypeIsImpossible(){
+    public void testAddSearchQueryClassifierWithUndefinedTypeIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -347,7 +347,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с передачей только value")
     @Description("Тест проверяет невозможность создания поискового с передачей только value")
-    public void testAddSearchQueryWithValueOnlyIsImpossible(){
+    public void testAddSearchQueryClassifierWithValueOnlyIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -371,7 +371,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса без передачи value")
     @Description("Тест проверяет невозможность создания поискового запроса без передачи value")
-    public void testAddSearchQueryWithoutValueIsImpossible(){
+    public void testAddSearchQueryClassifierWithoutValueIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -396,7 +396,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с value = null")
     @Description("Тест проверяет невозможность создания поискового запроса с value = null")
-    public void testAddSearchQueryWithNullValueIsImpossible(){
+    public void testAddSearchQueryClassifierWithNullValueIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -421,7 +421,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с длиной value, превышающим допустимую длину")
     @Description("Тест проверяет невозможность создания поискового запроса с длиной value, превышающим допустимую длину")
-    public void testAddSearchQueryWithExceedingValueLengthIsImpossible(){
+    public void testAddSearchQueryClassifierWithExceedingValueLengthIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -448,7 +448,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса без указания тела")
     @Description("Тест проверяет невозможность изменения поискового запроса без указания тела")
-    public void testUpdateSearchQueryWithoutBodyIsImpossible(){
+    public void testUpdateSearchQueryClassifierWithoutBodyIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -472,7 +472,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса с пустым телом")
     @Description("Тест проверяет невозможность изменения поискового запроса с пустым телом")
-    public void testUpdateSearchQueryWithEmptyBodyIsImpossible(){
+    public void testUpdateSearchQueryClassifierWithEmptyBodyIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -497,7 +497,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса с передачей только id")
     @Description("Тест проверяет невозможность изменения поискового запроса с передачей только id")
-    public void testUpdateSearchQueryWithIdOnlyIsImpossible(){
+    public void testUpdateSearchQueryClassifierWithIdOnlyIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -523,7 +523,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса без передачи id")
     @Description("Тест проверяет невозможность изменения поискового запроса без передачи id")
-    public void testUpdateSearchQueryWithoutIdIsImpossible(){
+    public void testUpdateSearchQueryClassifierWithoutIdIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec404NotFound());
 
@@ -550,7 +550,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса c id = null")
     @Description("Тест проверяет невозможность изменения поискового запроса c id = null")
-    public void testUpdateSearchQueryWithNullIdIsImpossible(){
+    public void testUpdateSearchQueryClassifierWithNullIdIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -581,7 +581,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса с передачей только name")
     @Description("Тест проверяет невозможность изменения поискового запроса с передачей только name")
-    public void testUpdateSearchQueryWithNameOnlyIsImpossible(){
+    public void testUpdateSearchQueryClassifierClassifierWithNameOnlyIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -606,7 +606,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса без передачи name")
     @Description("Тест проверяет невозможность изменения поискового запроса без передачи name")
-    public void testUpdateSearchQueryWithoutNameImpossible(){
+    public void testUpdateSearchQueryClassifierWithoutNameImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
 
         CommonSearchQueryClassifierResponseModel responseCreation = DataGeneratorSearchQueryClassifier.createBasicSearchQuery();
@@ -635,7 +635,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса с передачей только type")
     @Description("Тест проверяет невозможность изменения поискового запроса с передачей только type")
-    public void testUpdateSearchQueryWithTypeOnlyIsImpossible(){
+    public void testUpdateSearchQueryClassifierWithTypeOnlyIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -661,7 +661,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса без передачи type")
     @Description("Тест проверяет невозможность изменения поискового запроса без передачи type")
-    public void testUpdateSearchQueryWithoutTypeIsImpossible(){
+    public void testUpdateSearchQueryClassifierWithoutTypeIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -685,7 +685,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса с несуществующим type")
     @Description("Тест проверяет невозможность изменения поискового запроса с несуществующим type")
-    public void testUpdateSearchQueryWithNotExistingTypeIsImpossible(){
+    public void testUpdateSearchQueryClassifierWithNotExistingTypeIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -717,7 +717,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса с type = Undefined")
     @Description("Тест проверяет невозможность изменения поискового запроса с type = Undefined")
-    public void testUpdateSearchQueryWithUndefinedTypeIsImpossible(){
+    public void testUpdateSearchQueryClassifierWithUndefinedTypeIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -742,7 +742,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса с передачей только value")
     @Description("Тест проверяет невозможность изменения поискового запроса с передачей только value")
-    public void testUpdateSearchQueryWithValueOnlyIsImpossible(){
+    public void testUpdateSearchQueryClassifierWithValueOnlyIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -767,7 +767,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса без передачи value")
     @Description("Тест проверяет невозможность изменения поискового запроса без передачи value")
-    public void testUpdateSearchQueryWithoutValueIsImpossible(){
+    public void testUpdateSearchQueryClassifierWithoutValueIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -795,7 +795,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность удаления поискового запроса без передачи id")
     @Description("Тест проверяет невозможность удаления поискового запроса без передачи id")
-    public void testDeleteSearchQueryWithoutIdIsImpossible(){
+    public void testDeleteSearchQueryClassifierWithoutIdIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 
@@ -814,7 +814,7 @@ public class SearchQueryClassifierNegativeTestsWithInvalidDataTests extends Test
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность удаления поискового запроса с передачей id, не соответствующем маске uuid")
     @Description("Тест проверяет невозможность удаления поискового запроса c передачей id, не соответствующем маске uuid")
-    public void testDeleteSearchQueryWithIdIsNotUUIDIsImpossible(){
+    public void testDeleteSearchQueryClassifierWithIdIsNotUUIDIsImpossible(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec400BadRequest());
 

@@ -27,7 +27,7 @@ public class FileTypesExtendedPositiveTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка типов файлов по протоколу oData с расширениями")
     @Description("Тест проверяет возможность получения списка типов файлов по протоколу oData с расширениями")
-    public void testGetFileTypesListOdata(){
+    public void testGetFileTypesWithExtensionsListOdata(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 

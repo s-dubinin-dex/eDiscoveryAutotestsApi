@@ -26,7 +26,7 @@ public class EmployeeExtendedPositiveTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка сотрудников для фильтра по сотрудникам")
     @Description("Тест проверяет возможность получения списка сотрудников для фильтра по сотрудникам")
-    public void testGetDealListODataForDealManipulationList(){
+    public void testGetEmployeeListWEBUIForFilterEmployee(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
