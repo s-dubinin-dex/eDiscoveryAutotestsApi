@@ -10,6 +10,7 @@ import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -23,6 +24,7 @@ public class MarkerResultFromDealExtendedPositiveTests extends TestBase {
     @Epic("Сервис Deal")
     @Feature("Результаты маркирования")
     @Story("Получение результатов маркирования из сервиса Deal")
+    @Tag("webui")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение результатов маркирования из сервиса Deal для карточки дела")
     @Description("Тест проверяет возможность получения результатов маркирования из сервиса Deal для карточки дела")
@@ -49,6 +51,7 @@ public class MarkerResultFromDealExtendedPositiveTests extends TestBase {
     @Epic("Сервис Deal")
     @Feature("Результаты маркирования")
     @Story("Получение результатов маркирования из сервиса Deal")
+    @Tag("webui")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение результатов маркирования из сервиса Deal для карточки дела (без фильтров)")
     @Description("Тест проверяет возможность получения результатов маркирования из сервиса Deal для карточки дела (без фильтров)")
