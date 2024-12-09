@@ -13,6 +13,7 @@ import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -132,6 +133,7 @@ public class SearchQueryClassifierCommonPositiveTests extends TestBase {
     @Epic("Сервис Classifier")
     @Feature("Поисковый запрос")
     @Story("Получение списка поисковых запросов")
+    @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка поисковых запросов по протоколу oData")
     @Description("Тест проверяет возможность получения списка поисковых запросов по протоколу oData")
@@ -182,6 +184,7 @@ public class SearchQueryClassifierCommonPositiveTests extends TestBase {
     @Epic("Сервис Classifier")
     @Feature("Поисковый запрос")
     @Story("Получение поискового запроса по протоколу oData по id")
+    @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение поискового запроса по протоколу oData по id")
     @Description("Тест проверяет возможность получения поискового запроса по протоколу oData по id в path param")

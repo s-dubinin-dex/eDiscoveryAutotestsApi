@@ -3,6 +3,7 @@ package eDiscovery.tests.apiTests.extendedPositiveTests.classifierService;
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.classifier.ApiMethodsSearchQueryClassifier;
 import eDiscovery.data.classifierService.DataGeneratorSearchQueryClassifier;
+import eDiscovery.helpers.OdataParametersBuilder;
 import eDiscovery.helpers.enums.SearchQueryType;
 import eDiscovery.models.classifier.searchQuery.AddSearchQueryClassifierRequestModel;
 import eDiscovery.models.classifier.searchQuery.CommonSearchQueryClassifierResponseModel;
@@ -13,6 +14,7 @@ import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,6 +22,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -513,5 +516,120 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
         assertThat(responseBodyWithLimiting.size()).isEqualTo(2);
         assertThat(responseBodyWithLimiting.get(1)).isNotNull();
 
+    }
+
+    @Epic("Сервис Classifier")
+    @Feature("Поисковый запрос")
+    @Story("Получение списка поисковых запросов")
+    @Tag("webui")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Получение списка поисковых запросов для выпадающего списка поисковых запросов")
+    @Description("Тест проверяет возможность получения списка поисковых запросов для выпадающего списка поисковых запросов")
+    @Test
+    public void testGetSearchQueryListForSearchQueriesListWEBUIForFilterSearchQuery() {
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("contains(tolower(name), '')")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonSearchQueryClassifierResponseModel> resultBody = ApiMethodsSearchQueryClassifier.getSearchQueryListOData(params).jsonPath().getList("value", CommonSearchQueryClassifierResponseModel.class);
+    }
+
+    @Epic("Сервис Classifier")
+    @Feature("Поисковый запрос")
+    @Story("Получение списка поисковых запросов")
+    @Tag("webui")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Получение списка поисковых запросов для отображения в списке поисковых запросов")
+    @Description("Тест проверяет возможность получения списка поисковых запросов для отображения в списке поисковых запросов")
+    @Test
+    public void testGetSearchQueryListForSearchQueriesListWEBUI() {
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("contains(tolower(name), '')")
+                .withOrderBy("createdUtc desc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonSearchQueryClassifierResponseModel> resultBody = ApiMethodsSearchQueryClassifier.getSearchQueryListOData(params).jsonPath().getList("value", CommonSearchQueryClassifierResponseModel.class);
+    }
+
+    @ParameterizedTest
+    @Epic("Сервис Classifier")
+    @Feature("Поисковый запрос")
+    @Story("Получение списка поисковых запросов")
+    @Tag("webui")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка поисковых запросов для отображения в списке поисковых запросов с фильтром по типу поискового запроса")
+    @Description("Тест проверяет возможность получения списка поисковых запросов для отображения в списке поисковых запросов с фильтром по типу поискового запроса")
+    @MethodSource("eDiscovery.helpers.enums.SearchQueryType#getValidSearchQueryTypes")
+    public void testGetSearchQueryListForSearchQueriesListWEBUIWithFilterSearchQueryType(String searchQueryType) {
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter(String.format("contains(tolower(name),'') and type eq '%s'", searchQueryType))
+                .withOrderBy("createdUtc desc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonSearchQueryClassifierResponseModel> resultBody = ApiMethodsSearchQueryClassifier.getSearchQueryListOData(params).jsonPath().getList("value", CommonSearchQueryClassifierResponseModel.class);
+    }
+
+    @Epic("Сервис Classifier")
+    @Feature("Поисковый запрос")
+    @Story("Получение списка поисковых запросов")
+    @Tag("webui")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка поисковых запросов для отображения в списке поисковых запросов с сортировкой по Названию")
+    @Description("Тест проверяет возможность получения списка поисковых запросов для отображения в списке поисковых запросов с сортировкой по Названию")
+    @Test
+    public void testGetSearchQueryListForSearchQueriesListWEBUIWithSortingName() {
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("contains(tolower(name), '')")
+                .withOrderBy("name asc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonSearchQueryClassifierResponseModel> resultBody = ApiMethodsSearchQueryClassifier.getSearchQueryListOData(params).jsonPath().getList("value", CommonSearchQueryClassifierResponseModel.class);
+    }
+
+    @Epic("Сервис Classifier")
+    @Feature("Поисковый запрос")
+    @Story("Получение списка поисковых запросов")
+    @Tag("webui")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение списка поисковых запросов для отображения в списке поисковых запросов с сортировкой по Типу")
+    @Description("Тест проверяет возможность получения списка поисковых запросов для отображения в списке поисковых запросов с сортировкой по Типу")
+    @Test
+    public void testGetSearchQueryListForSearchQueriesListWEBUIWithSortingType() {
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("contains(tolower(name), '')")
+                .withOrderBy("type asc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonSearchQueryClassifierResponseModel> resultBody = ApiMethodsSearchQueryClassifier.getSearchQueryListOData(params).jsonPath().getList("value", CommonSearchQueryClassifierResponseModel.class);
     }
 }
