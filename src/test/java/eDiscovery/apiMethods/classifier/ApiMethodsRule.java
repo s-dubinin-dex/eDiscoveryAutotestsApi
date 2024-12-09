@@ -7,6 +7,9 @@ import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiMethodsRule extends UrlBase {
@@ -63,15 +66,22 @@ public class ApiMethodsRule extends UrlBase {
     }
 
     @Step("Получение списка правил категоризации по протоколу odata")
-    public static Response getRuleListOData(){
+    public static Response getRuleListOData(Map<String, String> params){
         SpecificationsServer.setBaseUrl(CLASSIFIER_URL);
 
         return given()
+                .params(params)
                 .when()
                 .get(ODATA_RULE)
                 .then()
                 .extract().response();
     }
+
+    @Step("Получение списка правил категоризации по протоколу odata")
+    public static Response getRuleListOData(){
+        return getRuleListOData(new HashMap<>());
+    }
+
 
     @Step("Получение правила категоризации по id")
     public static Response getRuleById(String id){
@@ -85,15 +95,21 @@ public class ApiMethodsRule extends UrlBase {
     }
 
     @Step("Получение правила категоризации по id в path param")
-    public static Response getRuleByIdPath(String id){
+    public static Response getRuleByIdPath(String id, Map<String, String> params){
         SpecificationsServer.setBaseUrl(CLASSIFIER_URL);
 
         return given()
+                .params(params)
                 .pathParam("id", id)
                 .when()
                 .get(ODATA_RULE + "/{id}")
                 .then()
                 .extract().response();
+    }
+
+    @Step("Получение правила категоризации по id в path param")
+    public static Response getRuleByIdPath(String id){
+        return getRuleByIdPath(id, new HashMap<>());
     }
 
 }
