@@ -53,8 +53,8 @@ public class SearchPlaceGroupExtendedPositiveTests extends TestBase {
     @Story("Получение списка групп мест поиска")
     @Tag("webui")
     @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Получение списка групп мест поиска для фильтра по группе мест поиска")
-    @Description("Тест проверяет возможность получения списка групп мест поиска для фильтра по группе мест поиска")
+    @DisplayName("Получение списка групп мест поиска для выпадающего списка групп мест поиска")
+    @Description("Тест проверяет возможность получения списка групп мест поиска для выпадающего списка групп мест поиска")
     @Test
     public void testGetSearchPlaceGroupListWEBUIForFilterSearchPlaceGroup(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());

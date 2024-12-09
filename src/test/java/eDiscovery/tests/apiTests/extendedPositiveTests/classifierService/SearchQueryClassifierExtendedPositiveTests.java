@@ -526,7 +526,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     @DisplayName("Получение списка поисковых запросов для выпадающего списка поисковых запросов")
     @Description("Тест проверяет возможность получения списка поисковых запросов для выпадающего списка поисковых запросов")
     @Test
-    public void testGetSearchQueryListForSearchQueriesListWEBUIForFilterSearchQuery() {
+    public void testGetSearchQueryClassifierListForSearchQueriesListWEBUIForFilterSearchQuery() {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -548,7 +548,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     @DisplayName("Получение списка поисковых запросов для отображения в списке поисковых запросов")
     @Description("Тест проверяет возможность получения списка поисковых запросов для отображения в списке поисковых запросов")
     @Test
-    public void testGetSearchQueryListForSearchQueriesListWEBUI() {
+    public void testGetSearchQueryClassifierListForSearchQueriesListWEBUI() {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -572,7 +572,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     @DisplayName("Получение списка поисковых запросов для отображения в списке поисковых запросов с фильтром по типу поискового запроса")
     @Description("Тест проверяет возможность получения списка поисковых запросов для отображения в списке поисковых запросов с фильтром по типу поискового запроса")
     @MethodSource("eDiscovery.helpers.enums.SearchQueryType#getValidSearchQueryTypes")
-    public void testGetSearchQueryListForSearchQueriesListWEBUIWithFilterSearchQueryType(String searchQueryType) {
+    public void testGetSearchQueryClassifierListForSearchQueriesListWEBUIWithFilterSearchQueryType(String searchQueryType) {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -595,7 +595,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     @DisplayName("Получение списка поисковых запросов для отображения в списке поисковых запросов с сортировкой по Названию")
     @Description("Тест проверяет возможность получения списка поисковых запросов для отображения в списке поисковых запросов с сортировкой по Названию")
     @Test
-    public void testGetSearchQueryListForSearchQueriesListWEBUIWithSortingName() {
+    public void testGetSearchQueryClassifierListForSearchQueriesListWEBUIWithSortingName() {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -618,7 +618,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     @DisplayName("Получение списка поисковых запросов для отображения в списке поисковых запросов с сортировкой по Типу")
     @Description("Тест проверяет возможность получения списка поисковых запросов для отображения в списке поисковых запросов с сортировкой по Типу")
     @Test
-    public void testGetSearchQueryListForSearchQueriesListWEBUIWithSortingType() {
+    public void testGetSearchQueryClassifierListForSearchQueriesListWEBUIWithSortingType() {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 

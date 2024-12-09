@@ -1191,8 +1191,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Story("Получение списка мест поиска")
     @Tag("webui")
     @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Получение списка мест поиска для фильтра по местам поиска")
-    @Description("Тест проверяет возможность получения списка мест для по местам поиска")
+    @DisplayName("Получение списка мест поиска для выпадающего списка мест поиска")
+    @Description("Тест проверяет возможность получения списка мест для выпадающего списка мест поиска")
     @Test
     public void testGetSearchPlaceListWEBUIForFilterSearchPlace(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());

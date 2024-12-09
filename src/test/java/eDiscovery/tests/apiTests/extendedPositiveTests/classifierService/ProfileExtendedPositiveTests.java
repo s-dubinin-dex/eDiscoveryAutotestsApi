@@ -28,7 +28,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение профиля категоризации по id для карточки профиля")
     @Description("Тест проверяет возможность получения профиля категоризации по id для карточки профиля")
-    public void testGetProfileByIdPath(){
+    public void testGetProfileByIdPathWEBUI(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 

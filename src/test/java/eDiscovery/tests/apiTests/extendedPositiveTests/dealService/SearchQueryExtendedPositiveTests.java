@@ -644,8 +644,8 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     @Story("Получение списка поисковых запросов")
     @Tag("webui")
     @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Получение списка поисковых запросов для фильтра по поисковому запросу")
-    @Description("Тест проверяет возможность получения списка поисковых запросов для фильтра по поисковому запросу")
+    @DisplayName("Получение списка поисковых запросов для выпадающего списка поисковых запросов")
+    @Description("Тест проверяет возможность получения списка поисковых запросов для выпадающего списка поисковых запросов")
     @Test
     public void testGetSearchQueryListForSearchQueriesListWEBUIForFilterSearchQuery() {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
