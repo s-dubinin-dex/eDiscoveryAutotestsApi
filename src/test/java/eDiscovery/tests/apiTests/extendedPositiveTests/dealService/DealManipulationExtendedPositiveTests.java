@@ -34,7 +34,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
     @Feature("Место поиска")
     @Story("Получение списка дел")
     @Tag("webui")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка дел по протоколу oData для страницы списка дел")
     @Description("Тест проверяет возможность получения списка дел по протоколу oData для страницы списка дел")
     public void testGetDealListODataForDealManipulationList(){

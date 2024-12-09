@@ -212,7 +212,7 @@ public class DiscoveredDocumentExtendedPositiveTests extends TestBase {
     @Feature("Обнаруженные документы")
     @Story("Получение списка обнаруженных документов")
     @Tag("webui")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка обнаруженных документов для карточки дела для карточки дела - список Необработанные")
     @Description("Тест проверяет возможность получения списка обнаруженных документов  - список Необработанные")
     public void testGetDiscoveredDocumentForDealCardUnprocessedTab(){
