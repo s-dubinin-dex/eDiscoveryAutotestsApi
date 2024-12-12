@@ -69,7 +69,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
                 .withSkip(0)
                 .build();
 
-        List<CommonProfileResponseModel> responseBody = ApiMethodsProfile.getProfileListOData(params).jsonPath().getList("", CommonProfileResponseModel.class);
+        List<CommonProfileResponseModel> responseBody = ApiMethodsProfile.getProfileListOData(params).jsonPath().getList("value", CommonProfileResponseModel.class);
 
     }
 
@@ -93,7 +93,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
                 .withSkip(0)
                 .build();
 
-        List<CommonProfileResponseModel> responseBody = ApiMethodsProfile.getProfileListOData(params).jsonPath().getList("", CommonProfileResponseModel.class);
+        List<CommonProfileResponseModel> responseBody = ApiMethodsProfile.getProfileListOData(params).jsonPath().getList("value", CommonProfileResponseModel.class);
 
     }
 
@@ -117,7 +117,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
                 .withSkip(0)
                 .build();
 
-        List<CommonProfileResponseModel> responseBody = ApiMethodsProfile.getProfileListOData(params).jsonPath().getList("", CommonProfileResponseModel.class);
+        List<CommonProfileResponseModel> responseBody = ApiMethodsProfile.getProfileListOData(params).jsonPath().getList("value", CommonProfileResponseModel.class);
 
     }
 
@@ -141,7 +141,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
                 .withSkip(0)
                 .build();
 
-        List<CommonProfileResponseModel> responseBody = ApiMethodsProfile.getProfileListOData(params).jsonPath().getList("", CommonProfileResponseModel.class);
+        List<CommonProfileResponseModel> responseBody = ApiMethodsProfile.getProfileListOData(params).jsonPath().getList("value", CommonProfileResponseModel.class);
 
     }
 
@@ -165,7 +165,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
                 .withSkip(0)
                 .build();
 
-        List<CommonProfileResponseModel> responseBody = ApiMethodsProfile.getProfileListOData(params).jsonPath().getList("", CommonProfileResponseModel.class);
+        List<CommonProfileResponseModel> responseBody = ApiMethodsProfile.getProfileListOData(params).jsonPath().getList("value", CommonProfileResponseModel.class);
 
     }
 

@@ -78,7 +78,13 @@ public class ApiMethodsProfile extends UrlBase {
 
     @Step("Получение профиля категоризации по id")
     public static Response getProfileById(String id){
-        return getProfileListOData(new HashMap<>());
+        SpecificationsServer.setBaseUrl(CLASSIFIER_URL);
+
+        return given()
+                                .when()
+                .get(String.format(ODATA_PROFILE + "(%s)", id))
+                .then()
+                .extract().response();
     }
 
     @Step("Получение профиля категоризации по id в path param")
