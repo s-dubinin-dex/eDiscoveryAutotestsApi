@@ -14,7 +14,7 @@ public class CommonMarkerResultResponseModel {
     public String fileName;
     public String innerFilePath;
     public String innerFileName;
-    public String processDescription;
+    public ProcessDescriptionCommonModel processDescription;
     public String errorReason;
     public boolean isStartMarkerFinded;
     public boolean isResultMarkerFinded;

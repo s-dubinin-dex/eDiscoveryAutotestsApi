@@ -3,6 +3,7 @@ package eDiscovery.tests.apiTests.extendedPositiveTests.dealService;
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsMarkerResultFromDeal;
 import eDiscovery.data.dealService.DataGeneratorDealManipulation;
+import eDiscovery.helpers.OdataParametersBuilder;
 import eDiscovery.models.deal.dealManipulation.CommonDealManipulationResponseModel;
 import eDiscovery.models.deal.markerResult.CommonMarkerResultFromDealModel;
 import eDiscovery.spec.RequestSpecifications;
@@ -26,22 +27,19 @@ public class MarkerResultFromDealExtendedPositiveTests extends TestBase {
     @Story("Получение результатов маркирования из сервиса Deal")
     @Tag("webui")
     @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Получение результатов маркирования из сервиса Deal для карточки дела")
-    @Description("Тест проверяет возможность получения результатов маркирования из сервиса Deal для карточки дела")
-    public void testGetMarkerResultListFromDealForDealCard(){
+    @DisplayName("Получение результатов маркирования из сервиса Deal для карточки дела (без фильтров)")
+    @Description("Тест проверяет возможность получения результатов маркирования из сервиса Deal для карточки дела (без фильтров)")
+    public void testGetMarkerResultListFromDealForDealCardWithoutFilters(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonDealManipulationResponseModel dealManipulationResponseModel = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
-
-        Map<String, String> parameters = new HashMap<>();
-        parameters.put("$filter", String.format("((contains(tolower(fileName),'')) or (contains(tolower(filePath),'')) or (contains(tolower(innerFileName),'')) or (contains(tolower(innerFilePath),''))) and externalId eq %s", dealManipulationResponseModel.id));
-        parameters.put("$expand", "startMarker,resultMarker");
-        parameters.put("$orderby", "actionDate desc");
-        parameters.put("$count", "true");
-        parameters.put("$top", "10");
-        parameters.put("$skip", "0");
-
+        Map<String, String> parameters = OdataParametersBuilder.builder()
+                .withExpand("startMarker,resultMarker,startPolicy,resultPolicy")
+                .withOrderBy("actionDate desc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
 
         List<CommonMarkerResultFromDealModel> responseBody = ApiMethodsMarkerResultFromDeal.getMarkerResultListFromDeal(parameters).jsonPath().getList("value", CommonMarkerResultFromDealModel.class);
 
@@ -53,21 +51,60 @@ public class MarkerResultFromDealExtendedPositiveTests extends TestBase {
     @Story("Получение результатов маркирования из сервиса Deal")
     @Tag("webui")
     @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Получение результатов маркирования из сервиса Deal для карточки дела (без фильтров)")
-    @Description("Тест проверяет возможность получения результатов маркирования из сервиса Deal для карточки дела (без фильтров)")
-    public void testGetMarkerResultListFromDealForDealCardWithoutFilters(){
+    @DisplayName("Получение результатов маркирования из сервиса Deal для карточки дела")
+    @Description("Тест проверяет возможность получения результатов маркирования из сервиса Deal для карточки дела")
+    public void testGetMarkerResultListFromDealForDealCard(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        Map<String, String> parameters = new HashMap<>();
-        parameters.put("$expand", "startMarker,resultMarker");
-        parameters.put("$orderby", "actionDate desc");
-        parameters.put("$count", "true");
-        parameters.put("$top", "10");
-        parameters.put("$skip", "0");
+        CommonDealManipulationResponseModel dealManipulationResponseModel = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+
+        Map<String, String> parameters = OdataParametersBuilder.builder()
+                .withFilter(String.format("((contains(tolower(fileName),'')) or (contains(tolower(filePath),'')) or (contains(tolower(innerFileName),'')) or (contains(tolower(innerFilePath),''))) and externalId eq %s", dealManipulationResponseModel.id))
+                .withExpand("startMarker,resultMarker,startPolicy,resultPolicy")
+                .withOrderBy("actionDate desc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
 
         List<CommonMarkerResultFromDealModel> responseBody = ApiMethodsMarkerResultFromDeal.getMarkerResultListFromDeal(parameters).jsonPath().getList("value", CommonMarkerResultFromDealModel.class);
 
     }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Результаты маркирования")
+    @Story("Получение результатов маркирования из сервиса Deal")
+    @Tag("webui")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение результатов маркирования из сервиса Deal для карточки дела с фильтром по периоду")
+    @Description("Тест проверяет возможность получения результатов маркирования из сервиса Deal для карточки дела с фильтром по периоду")
+    public void testGetMarkerResultListFromDealForDealCardWithFilterActionDate(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        CommonDealManipulationResponseModel dealManipulationResponseModel = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+
+        Map<String, String> parameters = OdataParametersBuilder.builder()
+                .withFilter(String.format("((contains(tolower(fileName),'')) or (contains(tolower(filePath),'')) or (contains(tolower(innerFileName),'')) or (contains(tolower(innerFilePath),''))) and externalId eq %s and actionDate ge 2024-12-03T22:00:00.000Z and actionDate le 2024-12-07T21:59:59.999Z", dealManipulationResponseModel.id))
+                .withExpand("startMarker,resultMarker,startPolicy,resultPolicy")
+                .withOrderBy("actionDate desc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonMarkerResultFromDealModel> responseBody = ApiMethodsMarkerResultFromDeal.getMarkerResultListFromDeal(parameters).jsonPath().getList("value", CommonMarkerResultFromDealModel.class);
+
+    }
+
+
+
+
+
+
+
+
 
 }

@@ -368,4 +368,151 @@ public class MarkerResultExtendedPositiveTests extends TestBase {
 
     }
 
+    @Test
+    @Epic("Сервис Classifier")
+    @Feature("Результаты маркирования")
+    @Story("Получение результатов маркирования")
+    @Tag("webui")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение результатов маркирования для отображения в списке с сортировкой по Дате")
+    @Description("Тест проверяет возможность получения результатов маркирования для отображения в списке с сортировкой по Дате")
+    public void testGetMarkerResultListODataWEBUIWithSortingActionDate(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("((contains(tolower(fileName),'')) or (contains(tolower(filePath),'')) or (contains(tolower(innerFileName),'')) or (contains(tolower(innerFilePath),'')))")
+                .withExpand("startMarker,resultMarker,startPolicy,resultPolicy")
+                .withOrderBy("actionDate asc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonMarkerResultResponseModel> responseBody = ApiMethodsMarkerResult.getMarkerResultListOData(params).jsonPath().getList("value", CommonMarkerResultResponseModel.class);
+
+    }
+
+    @Test
+    @Epic("Сервис Classifier")
+    @Feature("Результаты маркирования")
+    @Story("Получение результатов маркирования")
+    @Tag("webui")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение результатов маркирования для отображения в списке с сортировкой по Метка до")
+    @Description("Тест проверяет возможность получения результатов маркирования для отображения в списке с сортировкой по Метка до")
+    public void testGetMarkerResultListODataWEBUIWithSortingStartMarker(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("((contains(tolower(fileName),'')) or (contains(tolower(filePath),'')) or (contains(tolower(innerFileName),'')) or (contains(tolower(innerFilePath),'')))")
+                .withExpand("startMarker,resultMarker,startPolicy,resultPolicy")
+                .withOrderBy("startMarker/name asc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonMarkerResultResponseModel> responseBody = ApiMethodsMarkerResult.getMarkerResultListOData(params).jsonPath().getList("value", CommonMarkerResultResponseModel.class);
+
+    }
+
+    @Test
+    @Epic("Сервис Classifier")
+    @Feature("Результаты маркирования")
+    @Story("Получение результатов маркирования")
+    @Tag("webui")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение результатов маркирования для отображения в списке с сортировкой по Метка после")
+    @Description("Тест проверяет возможность получения результатов маркирования для отображения в списке с сортировкой по Метка после")
+    public void testGetMarkerResultListODataWEBUIWithSortingResultMarker(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("((contains(tolower(fileName),'')) or (contains(tolower(filePath),'')) or (contains(tolower(innerFileName),'')) or (contains(tolower(innerFilePath),'')))")
+                .withExpand("startMarker,resultMarker,startPolicy,resultPolicy")
+                .withOrderBy("resultMarker/name asc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonMarkerResultResponseModel> responseBody = ApiMethodsMarkerResult.getMarkerResultListOData(params).jsonPath().getList("value", CommonMarkerResultResponseModel.class);
+
+    }
+
+    @Test
+    @Epic("Сервис Classifier")
+    @Feature("Результаты маркирования")
+    @Story("Получение результатов маркирования")
+    @Tag("webui")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение результатов маркирования для отображения в списке с сортировкой по Политика до")
+    @Description("Тест проверяет возможность получения результатов маркирования для отображения в списке с сортировкой по Политика до")
+    public void testGetMarkerResultListODataWEBUIWithSortingStartPolicy(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("((contains(tolower(fileName),'')) or (contains(tolower(filePath),'')) or (contains(tolower(innerFileName),'')) or (contains(tolower(innerFilePath),'')))")
+                .withExpand("startMarker,resultMarker,startPolicy,resultPolicy")
+                .withOrderBy("startPolicy/name asc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonMarkerResultResponseModel> responseBody = ApiMethodsMarkerResult.getMarkerResultListOData(params).jsonPath().getList("value", CommonMarkerResultResponseModel.class);
+
+    }
+
+    @Test
+    @Epic("Сервис Classifier")
+    @Feature("Результаты маркирования")
+    @Story("Получение результатов маркирования")
+    @Tag("webui")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение результатов маркирования для отображения в списке с сортировкой по Политика после")
+    @Description("Тест проверяет возможность получения результатов маркирования для отображения в списке с сортировкой по Политика после")
+    public void testGetMarkerResultListODataWEBUIWithSortingResultPolicy(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter("((contains(tolower(fileName),'')) or (contains(tolower(filePath),'')) or (contains(tolower(innerFileName),'')) or (contains(tolower(innerFilePath),'')))")
+                .withExpand("startMarker,resultMarker,startPolicy,resultPolicy")
+                .withOrderBy("resultPolicy/name asc")
+                .withCount(true)
+                .withTop(10)
+                .withSkip(0)
+                .build();
+
+        List<CommonMarkerResultResponseModel> responseBody = ApiMethodsMarkerResult.getMarkerResultListOData(params).jsonPath().getList("value", CommonMarkerResultResponseModel.class);
+
+    }
+
+    @Test
+    @Epic("Сервис Classifier")
+    @Feature("Результаты маркирования")
+    @Story("Получение результатов маркирования")
+    @Tag("webui")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Получение результата маркирования для отображения в карточке итога категоризации")
+    @Description("Тест проверяет возможность получения результата маркирования для отображения в карточке итога категоризации")
+    public void testGetMarkerResultWEBUIForMarkerResultCard(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        CommonMarkerResultResponseModel responseBodyToCheck = ApiMethodsMarkerResult.getMarkerResultListOData().jsonPath().getList("value", CommonMarkerResultResponseModel.class).get(0);
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withExpand("startMarker,resultMarker,startPolicy,resultPolicy,profileUsed($expand=rules($expand=marker,policy),baseMarker,basePolicy)")
+                .build();
+
+        List<CommonMarkerResultResponseModel> responseBody = ApiMethodsMarkerResult.getMarkerResultByIdPath(responseBodyToCheck.id, params).jsonPath().getList("value", CommonMarkerResultResponseModel.class);
+
+    }
+
 }

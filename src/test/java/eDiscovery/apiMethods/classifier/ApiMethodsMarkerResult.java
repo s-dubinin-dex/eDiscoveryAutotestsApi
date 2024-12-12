@@ -14,6 +14,18 @@ public class ApiMethodsMarkerResult extends UrlBase {
     private static final String MARKER_RESULT_MARKER_RESULT = "/MarkerResult/MarkerResult";
     private static final String ODATA_MARKER_RESULT         = "/odata/MarkerResult";
 
+    public static Response getMarkerResultByIdPath(String id, Map<String, String> params){
+        SpecificationsServer.setBaseUrl(CLASSIFIER_URL);
+
+        return given()
+                .params(params)
+                .pathParam("id", id)
+                .when()
+                .get(ODATA_MARKER_RESULT + "/{id}")
+                .then()
+                .extract().response();
+    }
+
     public static Response getMarkerResultList(){
         SpecificationsServer.setBaseUrl(CLASSIFIER_URL);
 
