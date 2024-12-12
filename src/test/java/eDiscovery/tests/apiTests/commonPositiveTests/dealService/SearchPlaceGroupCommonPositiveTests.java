@@ -139,7 +139,7 @@ public class SearchPlaceGroupCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка групп мест поиска")
     @Description("Тест проверяет возможность получения списка групп мест поиска")
-    public void testGetАSearchPlaceGroupList(){
+    public void testGetSearchPlaceGroupList(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -170,7 +170,7 @@ public class SearchPlaceGroupCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка групп мест поиска по протоколу odata")
     @Description("Тест проверяет возможность получения списка групп мест поиска по протоколу odata")
-    public void testGetАSearchPlaceGroupListOData(){
+    public void testGetSearchPlaceGroupListOData(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
