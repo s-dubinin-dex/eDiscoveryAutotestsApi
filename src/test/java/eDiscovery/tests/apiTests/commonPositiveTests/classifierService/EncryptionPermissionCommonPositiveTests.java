@@ -8,6 +8,7 @@ import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -45,6 +46,7 @@ public class EncryptionPermissionCommonPositiveTests extends TestBase {
     @Epic("Сервис Classifier")
     @Feature("Политики шифрования")
     @Story("Получение списка политик шифрования")
+    @Tag("webui")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка политик шифрования")
     @Description("Тест проверяет возможность получения списка политик шифрования по протоколу odata")
