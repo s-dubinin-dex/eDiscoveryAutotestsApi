@@ -9,7 +9,6 @@ import eDiscovery.helpers.admin.PredefinedRoles;
 import eDiscovery.helpers.admin.RoleHelper;
 import eDiscovery.models.admin.emplyee.AddEmployeeRequestModel;
 import eDiscovery.models.admin.emplyee.CommonEmployeeResponseModel;
-import eDiscovery.models.deal.dealManipulation.CommonDealManipulationResponseModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;

@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static eDiscovery.helpers.DataChecker.dateTimeISOPattern;
 import static eDiscovery.helpers.DataChecker.isValidUUID;
@@ -93,7 +94,7 @@ public class SearchPlaceGroupCommonPositiveTests extends TestBase {
 
         assertThat(responseBodyUpdate.id).isEqualTo(responseBodyCreation.id);
         assertThat(responseBodyUpdate.name).isEqualTo(responseBodyCreation.name);
-        assertThat(responseBodyUpdate.searchPlaces).usingRecursiveComparison().ignoringCollectionOrder().comparingOnlyFields("id").isEqualTo(requestBodyUpdate.searchPlaces);
+        assertThat(responseBodyUpdate.searchPlaces.stream().map(CommonSearchPlaceResponseModel::getId).collect(Collectors.toList())).isEqualTo(requestBodyUpdate.searchPlaces);
         assertThat(responseBodyUpdate.description).isEqualTo(responseBodyCreation.description);
         assertThat(responseBodyUpdate.deletedUtc).isNull();
 
