@@ -2,6 +2,7 @@ package eDiscovery.tests;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import org.fusesource.jansi.Ansi;
 
@@ -33,37 +34,32 @@ public class DuplicateMethodFinder {
         // Общий флаг для проекта
         boolean projectHasDuplicates = false;
 
-        // Карта для хранения методов по именам
+        // Карты для хранения методов и классов по именам
         Map<String, List<String>> globalMethodMap = new HashMap<>();
+        Map<String, List<String>> globalClassMap = new HashMap<>();
 
         JavaParser parser = new JavaParser();
         for (File file : javaFiles) {
             try {
                 findMethodsInFile(parser, file, globalMethodMap);
+                findClassesInFile(parser, file, globalClassMap);
             } catch (FileNotFoundException e) {
                 System.err.println("Could not read file: " + file.getAbsolutePath());
             }
         }
 
-        // Проверяем на дубликаты в глобальной карте
-        for (Map.Entry<String, List<String>> entry : globalMethodMap.entrySet()) {
-            if (entry.getValue().size() > 1) {
-                if (!projectHasDuplicates) {
-                    System.err.println("Duplicates were found!");
-                }
-                projectHasDuplicates = true;
-                System.out.println("Method name: " + entry.getKey());
-                entry.getValue().forEach(location -> System.out.println("  - " + location));
-            }
-        }
+        // Проверяем на дубликаты методов
+        projectHasDuplicates |= checkForDuplicates("Methods", globalMethodMap);
+
+        // Проверяем на дубликаты классов
+        projectHasDuplicates |= checkForDuplicates("Classes", globalClassMap);
 
         // Выводим итоговое сообщение для всего проекта
         if (!projectHasDuplicates) {
-            System.out.println(Ansi.ansi().fg(Ansi.Color.GREEN).a("No duplicate methods found in the project.").reset());
+            System.out.println(Ansi.ansi().fg(Ansi.Color.GREEN).a("No duplicates found in the project.").reset());
         } else {
             System.err.println("Duplicates were found!");
         }
-
     }
 
     private static void findJavaFiles(Path directory, List<File> javaFiles) {
@@ -87,5 +83,33 @@ public class DuplicateMethodFinder {
             String location = file.getName() + " - " + method.getDeclarationAsString();
             globalMethodMap.computeIfAbsent(methodName, k -> new ArrayList<>()).add(location);
         });
+    }
+
+    private static void findClassesInFile(JavaParser parser, File file, Map<String, List<String>> globalClassMap) throws FileNotFoundException {
+        CompilationUnit compilationUnit = parser.parse(file).getResult().orElseThrow(() ->
+                new IllegalArgumentException("Failed to parse file: " + file.getAbsolutePath())
+        );
+
+        // Ищем все классы и интерфейсы в файле
+        compilationUnit.findAll(ClassOrInterfaceDeclaration.class).forEach(cls -> {
+            String className = cls.getNameAsString();
+            String location = file.getName() + " - Class: " + className;
+            globalClassMap.computeIfAbsent(className, k -> new ArrayList<>()).add(location);
+        });
+    }
+
+    private static boolean checkForDuplicates(String type, Map<String, List<String>> globalMap) {
+        boolean hasDuplicates = false;
+        for (Map.Entry<String, List<String>> entry : globalMap.entrySet()) {
+            if (entry.getValue().size() > 1) {
+                if (!hasDuplicates) {
+                    System.err.println(type + " duplicates were found!");
+                }
+                hasDuplicates = true;
+                System.out.println(type + " name: " + entry.getKey());
+                entry.getValue().forEach(location -> System.out.println("  - " + location));
+            }
+        }
+        return hasDuplicates;
     }
 }
