@@ -40,6 +40,8 @@ dependencies {
             "org.junit.jupiter:junit-jupiter:$junitVersion",
             "org.junit.jupiter:junit-jupiter-api:$junitVersion",
             'org.postgresql:postgresql:42.7.3',
+            "com.github.javaparser:javaparser-core:3.26.2",
+            "org.fusesource.jansi:jansi:2.4.0"
     )
     testRuntimeOnly(
             'org.slf4j:slf4j-simple:2.0.5',
@@ -64,11 +66,12 @@ tasks.register('copyEnvironmentFile', Copy) {
 
 task testWithEnv(type: Test) {
     // Параметр Gradle, указывающий стенд (dev, test, prod и т.д.)
-    def environment = project.hasProperty('env') ? project.findProperty('env') : 'test'
+//    def environment = project.hasProperty('env') ? project.findProperty('env') : 'test'
 
 //    def environment = 'dev'
 //    def environment = 'test'
-//    def environment = 'local'
+//        def environment = 'stage'
+    def environment = 'local'
 
     // Установка системных свойств для использования во время выполнения тестов
     System.setProperty('BASE_URL',              getProperty(environment as String, 'BASE_URL'))
