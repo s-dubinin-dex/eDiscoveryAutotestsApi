@@ -2,6 +2,7 @@ package eDiscovery.tests.apiTests.commonPositiveTests.adminService;
 
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.admin.ApiMethodsEmployee;
+import eDiscovery.data.adminService.DataGeneratorEmployee;
 import eDiscovery.helpers.admin.RoleHelper;
 import eDiscovery.helpers.admin.PredefinedRoles;
 import eDiscovery.models.admin.emplyee.AddEmployeeRequestModel;
@@ -37,25 +38,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonRoleResponseModel role = RoleHelper.getRoleByName(PredefinedRoles.FULL_WRITE.name);
-
-        AddEmployeeRequestModel requestBody = AddEmployeeRequestModel.builder()
-                .name(getRandomName())
-                .roleId(role.id)
-                .email(faker.internet().emailAddress())
-                .build();
-
-        CommonEmployeeResponseModel responseBody = ApiMethodsEmployee.addEmployee(requestBody).as(CommonEmployeeResponseModel.class);
-
-        // TODO: Здесь и далее вынести проверку успешного создания и проверку каждого атрибута в отдельные тесты для атомарности
-        assertThat(isValidUUID(responseBody.id)).isTrue();
-        assertThat(responseBody.name).isEqualTo(requestBody.name);
-        assertThat(responseBody.roleId).isEqualTo(requestBody.roleId);
-        assertThat(responseBody.email).isEqualTo(requestBody.email);
-        assertThat(responseBody.role).isEqualTo(role.name);
-        assertThat(responseBody.activationDate).isNull();
-//        assertThat(responseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
-        assertThat(responseBody.deletedUtc).isNull();
+        DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters();
     }
 
     @Test
