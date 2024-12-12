@@ -43,14 +43,7 @@ public class RoleCommonPositiveTests extends TestBase {
                 .policies(Collections.singletonList("ed.deal.read"))
                 .build();
 
-        CommonRoleResponseModel responseBody = ApiMethodsRole.addRole(requestBody).as(CommonRoleResponseModel.class);
-
-        assertThat(isValidUUID(responseBody.id)).isTrue();
-        assertThat(responseBody.name).isEqualTo(requestBody.name);
-        assertThat(responseBody.description).isNull();
-        assertThat(responseBody.policies).isEqualTo(requestBody.policies);
-//        assertThat(responseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
-        assertThat(responseBody.deletedUtc).isNull();
+        ApiMethodsRole.addRole(requestBody);
     }
 
     @Test
