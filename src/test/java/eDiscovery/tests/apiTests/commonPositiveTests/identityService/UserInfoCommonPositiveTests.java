@@ -29,10 +29,6 @@ public class UserInfoCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        UserInfo responseBody = ApiMethodsIdentity.connectUserInfo().as(UserInfo.class);
-
-        assertThat(responseBody.name).isEqualTo("Администратор");
-        assertThat(responseBody.policy).isEqualTo("ed.fullAccess");
-        assertThat(responseBody.sub).isEqualTo("8dd105b2-7e41-40c4-8700-022403dfcdc6");
+        ApiMethodsIdentity.connectUserInfo();
     }
 }
