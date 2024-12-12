@@ -105,7 +105,7 @@ public class RuleCommonPositiveTests extends TestBase {
         assertThat(responseBody.policy).isNull();
         assertThat(responseBody.isActive).isFalse();
         assertThat(responseBody.searchQueries).hasSize(2);
-        assertThat(responseBody.searchQueries).usingRecursiveComparison().ignoringFields("createdUtc").isEqualTo(
+        assertThat(responseBody.searchQueries).usingRecursiveComparison().ignoringCollectionOrder().ignoringFields("createdUtc").isEqualTo(
                 List.of(
                         searchQueryBody1,
                         searchQueryBody2

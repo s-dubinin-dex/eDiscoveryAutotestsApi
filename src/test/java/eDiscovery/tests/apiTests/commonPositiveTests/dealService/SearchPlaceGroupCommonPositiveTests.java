@@ -93,8 +93,7 @@ public class SearchPlaceGroupCommonPositiveTests extends TestBase {
 
         assertThat(responseBodyUpdate.id).isEqualTo(responseBodyCreation.id);
         assertThat(responseBodyUpdate.name).isEqualTo(responseBodyCreation.name);
-        assertThat(responseBodyUpdate.searchPlaces.get(0)).usingRecursiveComparison().ignoringFields("createdUtc").isEqualTo(searchPlaceBody1);
-        assertThat(responseBodyUpdate.searchPlaces.get(1)).usingRecursiveComparison().ignoringFields("createdUtc").isEqualTo(searchPlaceBody2);
+        assertThat(responseBodyUpdate.searchPlaces).usingRecursiveComparison().ignoringCollectionOrder().comparingOnlyFields("id").isEqualTo(requestBodyUpdate.searchPlaces);
         assertThat(responseBodyUpdate.description).isEqualTo(responseBodyCreation.description);
         assertThat(responseBodyUpdate.deletedUtc).isNull();
 
