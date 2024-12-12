@@ -1,13 +1,11 @@
 package eDiscovery.models.deal.searchPlaceGroup;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import eDiscovery.models.OdataEntity;
 import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
-
 
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class CommonSearchPlaceGroupResponseModel {
+public class CommonSearchPlaceGroupResponseModel extends OdataEntity {
     public String id;
     public String name;
     public List<CommonSearchPlaceResponseModel> searchPlaces;

@@ -1,9 +1,8 @@
 package eDiscovery.models.classifier.encryptionPermission;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import eDiscovery.models.OdataEntity;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class CommonEncryptionPermissionResponseModel {
+public class CommonEncryptionPermissionResponseModel extends OdataEntity {
     public String id;
     public int policyId;
     public String name;

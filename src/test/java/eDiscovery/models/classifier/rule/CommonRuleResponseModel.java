@@ -1,16 +1,16 @@
 package eDiscovery.models.classifier.rule;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import eDiscovery.models.OdataEntity;
 import eDiscovery.models.classifier.encryptionPermission.CommonEncryptionPermissionResponseModel;
 import eDiscovery.models.classifier.marker.CommonMarkerResponseModel;
 import eDiscovery.models.classifier.searchQuery.CommonSearchQueryClassifierResponseModel;
 
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class CommonRuleResponseModel {
+public class CommonRuleResponseModel extends OdataEntity {
     public String id;
     public String name;
+    public int order;
     public CommonMarkerResponseModel marker;
     public CommonEncryptionPermissionResponseModel policy;
     public boolean isActive;

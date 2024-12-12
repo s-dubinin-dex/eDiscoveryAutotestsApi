@@ -1,10 +1,8 @@
 package eDiscovery.models.classifier.marker;
 
+import eDiscovery.models.OdataEntity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class CommonMarkerResponseModel {
+public class CommonMarkerResponseModel extends OdataEntity {
     public String id;
     public String name;
     public String description;

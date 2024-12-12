@@ -1,9 +1,8 @@
 package eDiscovery.models.deal.searchQuery;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import eDiscovery.models.OdataEntity;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class CommonSearchQueryResponseModel {
+public class CommonSearchQueryResponseModel extends OdataEntity {
     public String name;
     public String type;
     public String id;

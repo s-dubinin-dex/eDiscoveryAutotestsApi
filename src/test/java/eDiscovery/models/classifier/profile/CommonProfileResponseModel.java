@@ -1,13 +1,12 @@
 package eDiscovery.models.classifier.profile;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import eDiscovery.models.OdataEntity;
 import eDiscovery.models.classifier.marker.CommonMarkerResponseModel;
 import eDiscovery.models.classifier.rule.CommonRuleResponseModel;
 
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class CommonProfileResponseModel {
+public class CommonProfileResponseModel extends OdataEntity {
     public String id;
     public String name;
     public boolean canClassifyDocumentsWithMarker;
