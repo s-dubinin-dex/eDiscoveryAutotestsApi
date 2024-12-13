@@ -5,7 +5,9 @@ import eDiscovery.models.admin.role.AddRoleRequestModel;
 import eDiscovery.models.admin.role.UpdateRoleRequestModel;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.Step;
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
 
@@ -16,8 +18,9 @@ public class ApiMethodsRole extends UrlBase {
 
     @Step("Создание роли")
     public static Response addRole(AddRoleRequestModel addRoleRequestModel){
-        SpecificationsServer.setBaseUrl(ADMIN_URL);
+
         return given()
+                .spec(SpecificationsServer.getUrlSpecification(ADMIN_URL))
                 .body(addRoleRequestModel)
                 .when()
                 .post(ROLE)
@@ -28,8 +31,9 @@ public class ApiMethodsRole extends UrlBase {
 
     @Step("Изменение роли")
     public static Response updateRole(UpdateRoleRequestModel updateRoleRequestModel){
-        SpecificationsServer.setBaseUrl(ADMIN_URL);
+        //SpecificationsServer.setBaseUrl(ADMIN_URL);
         return given()
+                .spec(SpecificationsServer.getUrlSpecification(ADMIN_URL))
                 .body(updateRoleRequestModel)
                 .when()
                 .put(ROLE)
@@ -40,8 +44,9 @@ public class ApiMethodsRole extends UrlBase {
 
     @Step("Удаление роли")
     public static Response deleteRole(String id){
-        SpecificationsServer.setBaseUrl(ADMIN_URL);
+        //SpecificationsServer.setBaseUrl(ADMIN_URL);
         return given()
+                .spec(SpecificationsServer.getUrlSpecification(ADMIN_URL))
                 .param("id", id)
                 .when()
                 .delete(ROLE)
@@ -52,7 +57,7 @@ public class ApiMethodsRole extends UrlBase {
 
     @Step("Получение списка полиси")
     public static Response getPolicies(){
-        SpecificationsServer.setBaseUrl(ADMIN_URL);
+        //SpecificationsServer.setBaseUrl(ADMIN_URL);
         return given()
                 .when()
                 .get(ROLE)
@@ -63,7 +68,7 @@ public class ApiMethodsRole extends UrlBase {
 
     @Step("Получение списка ролей")
     public static Response getRolesList(){
-        SpecificationsServer.setBaseUrl(ADMIN_URL);
+        //SpecificationsServer.setBaseUrl(ADMIN_URL);
         return given()
                 .when()
                 .get(ROLE_ROLE)
@@ -74,7 +79,7 @@ public class ApiMethodsRole extends UrlBase {
 
     @Step("Получение списка ролей по протоколу oData")
     public static Response getRolesListOData(){
-        SpecificationsServer.setBaseUrl(ADMIN_URL);
+        //SpecificationsServer.setBaseUrl(ADMIN_URL);
         return given()
                 .when()
                 .get(ODATA_ROLE)
@@ -85,7 +90,7 @@ public class ApiMethodsRole extends UrlBase {
 
     @Step("Получение роли по id")
     public static Response getRoleODataById(String id){
-        SpecificationsServer.setBaseUrl(ADMIN_URL);
+        //SpecificationsServer.setBaseUrl(ADMIN_URL);
         return given()
                 .when()
                 .get(ODATA_ROLE + "(" + id + ")")
@@ -96,7 +101,7 @@ public class ApiMethodsRole extends UrlBase {
 
     @Step("Получение роли по id")
     public static Response getRoleODataByIdPath(String id){
-        SpecificationsServer.setBaseUrl(ADMIN_URL);
+        //SpecificationsServer.setBaseUrl(ADMIN_URL);
         return given()
                 .pathParam("id", id)
                 .when()

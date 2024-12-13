@@ -1,6 +1,7 @@
 package eDiscovery;
 
 import com.github.javafaker.Faker;
+import eDiscovery.spec.SpecificationsServer;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -21,13 +22,11 @@ public class TestBase {
 
     @BeforeEach
     void setUp() {
-        RestAssured.responseSpecification = null;
-        RestAssured.requestSpecification = null;
+        SpecificationsServer.clearSpecifications();
     }
 
     @AfterEach
     void tearDown() {
-        RestAssured.responseSpecification = null;
-        RestAssured.requestSpecification = null;
+        SpecificationsServer.clearSpecifications();
     }
 }
