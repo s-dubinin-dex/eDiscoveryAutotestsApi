@@ -21,6 +21,7 @@ public class ApiMethodsIdentity extends UrlBase {
 //        SpecificationsServer.setBaseUrl(IDENTITY_URL);
         RequestSpecification tokenRequestSpec = new RequestSpecBuilder().setBaseUri(IDENTITY_URL).build();
         return given()
+                .log().all()
                 .spec(tokenRequestSpec)
                 .formParams(authorizationScope)
                 .when()

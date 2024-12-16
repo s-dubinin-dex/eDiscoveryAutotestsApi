@@ -20,6 +20,7 @@ public class ApiMethodsRole extends UrlBase {
     public static Response addRole(AddRoleRequestModel addRoleRequestModel){
 
         return given()
+                .log().all()
                 .spec(SpecificationsServer.getUrlSpecification(ADMIN_URL))
                 .body(addRoleRequestModel)
                 .when()
