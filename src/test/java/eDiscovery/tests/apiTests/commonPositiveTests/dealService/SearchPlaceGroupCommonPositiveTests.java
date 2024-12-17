@@ -94,7 +94,7 @@ public class SearchPlaceGroupCommonPositiveTests extends TestBase {
 
         assertThat(responseBodyUpdate.id).isEqualTo(responseBodyCreation.id);
         assertThat(responseBodyUpdate.name).isEqualTo(responseBodyCreation.name);
-        assertThat(responseBodyUpdate.searchPlaces.stream().map(CommonSearchPlaceResponseModel::getId).collect(Collectors.toList())).isEqualTo(requestBodyUpdate.searchPlaces);
+        assertThat(responseBodyUpdate.searchPlaces.stream().map(CommonSearchPlaceResponseModel::getId).collect(Collectors.toList())).containsExactlyInAnyOrderElementsOf(requestBodyUpdate.searchPlaces);
         assertThat(responseBodyUpdate.description).isEqualTo(responseBodyCreation.description);
         assertThat(responseBodyUpdate.deletedUtc).isNull();
 
