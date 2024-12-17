@@ -38,12 +38,7 @@ public class RoleCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddRoleRequestModel requestBody = AddRoleRequestModel.builder()
-                .name(getRandomName())
-                .policies(Collections.singletonList("ed.deal.read"))
-                .build();
-
-        ApiMethodsRole.addRole(requestBody);
+        DataGeneratorRole.createRoleWithOnlyRequiredParameters();
     }
 
     @Test
