@@ -40,20 +40,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchPlaceRequestModel requestBody = DataGeneratorSearchPlace.getSearchPlaceModelWithOnlyRequiredParameters();
-
-        Response response = ApiMethodsSearchPlace.addSearchPlace(requestBody);
-        CommonSearchPlaceResponseModel responseBody = response.as(CommonSearchPlaceResponseModel.class);
-
-        assertThat(responseBody.categoryType).isEqualTo(SearchPlaceCategoryType.FileShare.name());
-        assertThat(responseBody.type).isEqualTo(SearchPlaceType.SMB.name());
-        assertThat(responseBody.parameters).isEqualTo(null);
-        assertThat(responseBody.excludes).isEmpty();
-        assertThat(responseBody.excludes).isInstanceOf(ArrayList.class);
-        assertThat(isValidUUID(responseBody.id)).isTrue();
-        assertThat(responseBody.name).isEqualTo(requestBody.name);
-        assertThat(responseBody.createdUtc).matches(dateTimeUTCPattern());
-        assertThat(responseBody.deletedUtc).isNull();
+        DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
     }
 
     @Test
