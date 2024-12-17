@@ -17,6 +17,7 @@ import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -28,10 +29,124 @@ import java.util.List;
 import java.util.Map;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
+import static eDiscovery.helpers.DataChecker.dateTimeUTCPattern;
+import static eDiscovery.helpers.DataChecker.isValidUUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Extended positive tests: Deal - SearchQuery")
 public class SearchQueryExtendedPositiveTests extends TestBase {
+
+    @Nested
+    @DisplayName("Проверка заполнения полей Deal - SearchQuery в теле ответа при создании")
+    class CheckSearchQueryCreationResponseFields {
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Создание поискового запроса")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Создание поискового запроса возвращает валидный id")
+        @Description("Тест проверяет, что при создании поискового запроса возвращается валидный id")
+        public void testAddSearchQueryReturnsId(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonSearchQueryResponseModel responseBody = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
+
+            assertThat(isValidUUID(responseBody.id)).isTrue();
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Создание поискового запроса")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Создание поискового запроса возвращает переданный name")
+        @Description("Тест проверяет, что при создании поискового запроса возвращается переданный name")
+        public void testAddSearchQueryReturnsName(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            AddSearchQueryRequestModel requestBody = DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
+
+            CommonSearchQueryResponseModel responseBody = ApiMethodsSearchQuery.addSearchQuery(requestBody).as(CommonSearchQueryResponseModel.class);
+
+            assertThat(responseBody.name).isEqualTo(requestBody.name);
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Создание поискового запроса")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Создание поискового запроса возвращает переданный type")
+        @Description("Тест проверяет, что при создании поискового запроса возвращается переданный type")
+        public void testAddSearchQueryReturnsType(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            AddSearchQueryRequestModel requestBody = DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
+
+            CommonSearchQueryResponseModel responseBody = ApiMethodsSearchQuery.addSearchQuery(requestBody).as(CommonSearchQueryResponseModel.class);
+
+            assertThat(responseBody.type).isEqualTo(requestBody.type);
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Создание поискового запроса")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Создание поискового запроса возвращает переданный value")
+        @Description("Тест проверяет, что при создании поискового запроса возвращается переданный value")
+        public void testAddSearchQueryReturnsValue(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            AddSearchQueryRequestModel requestBody = DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
+
+            CommonSearchQueryResponseModel responseBody = ApiMethodsSearchQuery.addSearchQuery(requestBody).as(CommonSearchQueryResponseModel.class);
+
+            assertThat(responseBody.value).isEqualTo(requestBody.value);
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Создание поискового запроса")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Создание поискового запроса возвращает createdUtc в корректном формате")
+        @Description("Тест проверяет, что при создании поискового запроса возвращается createdUtc в корректном формате")
+        public void testAddSearchQueryReturnsCreatedUtc(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            AddSearchQueryRequestModel requestBody = DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
+
+            CommonSearchQueryResponseModel responseBody = ApiMethodsSearchQuery.addSearchQuery(requestBody).as(CommonSearchQueryResponseModel.class);
+
+            assertThat(responseBody.createdUtc).matches(dateTimeUTCPattern());
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Создание поискового запроса")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Создание поискового запроса возвращает deletedUtc = null")
+        @Description("Тест проверяет, что при создании поискового запроса возвращается deletedUtc = null")
+        public void testAddSearchQueryReturnsDeletedUtc(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            AddSearchQueryRequestModel requestBody = DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
+
+            CommonSearchQueryResponseModel responseBody = ApiMethodsSearchQuery.addSearchQuery(requestBody).as(CommonSearchQueryResponseModel.class);
+
+            assertThat(responseBody.deletedUtc).isNull();
+        }
+
+    }
 
     @Epic("Сервис Deal")
     @Feature("Поисковый запрос")
