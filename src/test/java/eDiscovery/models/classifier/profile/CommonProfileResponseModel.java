@@ -1,6 +1,7 @@
 package eDiscovery.models.classifier.profile;
 
 import eDiscovery.models.OdataEntity;
+import eDiscovery.models.classifier.encryptionPermission.CommonEncryptionPermissionResponseModel;
 import eDiscovery.models.classifier.marker.CommonMarkerResponseModel;
 import eDiscovery.models.classifier.rule.CommonRuleResponseModel;
 
@@ -13,7 +14,7 @@ public class CommonProfileResponseModel extends OdataEntity {
     public boolean considerTagsCriticality;
     public List<CommonRuleResponseModel> rules;
     public CommonMarkerResponseModel baseMarker;
-    public String basePolicy;
+    public CommonEncryptionPermissionResponseModel basePolicy;
     public boolean isDefault;
     public boolean isActive;
     public String markerInfos;
