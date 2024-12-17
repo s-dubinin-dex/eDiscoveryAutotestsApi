@@ -1,9 +1,11 @@
 package eDiscovery.models.deal.searchPlace;
 
 import eDiscovery.models.OdataEntity;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class CommonSearchPlaceResponseModel extends OdataEntity {
     public String name;
     public String categoryType;

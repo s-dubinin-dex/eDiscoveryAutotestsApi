@@ -1,5 +1,6 @@
 package eDiscovery.models.classifier.markerResult;
 
+import eDiscovery.models.classifier.encryptionPermission.CommonEncryptionPermissionResponseModel;
 import eDiscovery.models.classifier.marker.CommonMarkerResponseModel;
 import eDiscovery.models.classifier.profile.CommonProfileResponseModel;
 
@@ -27,7 +28,7 @@ public class CommonMarkerResultResponseModel {
     public boolean isResultPolicyFinded;
     public String externalStartPolicyId;
     public String externalResultPolicyId;
-    public String startPolicy;
-    public String resultPolicy;
+    public CommonEncryptionPermissionResponseModel startPolicy;
+    public CommonEncryptionPermissionResponseModel resultPolicy;
 
 }
