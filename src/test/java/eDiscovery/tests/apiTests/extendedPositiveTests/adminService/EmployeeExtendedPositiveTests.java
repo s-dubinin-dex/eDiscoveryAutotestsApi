@@ -171,8 +171,8 @@ public class EmployeeExtendedPositiveTests extends TestBase {
         @Feature("Пользователь")
         @Story("Создание пользователя")
         @Severity(SeverityLevel.CRITICAL)
-        @DisplayName("При создании пользователя возвращается дата создания в корректном формате")
-        @Description("Тест проверяет, что при создании пользователя возвращается дата создания в корректном формате")
+        @DisplayName("При создании пользователя возвращается createdUtc в корректном формате")
+        @Description("Тест проверяет, что при создании пользователя возвращается createdUtc в корректном формате")
         public void testAddEmployeeReturnsCreatedUtc(){
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
