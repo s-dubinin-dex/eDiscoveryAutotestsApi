@@ -29,6 +29,7 @@ public class ErrorDescription {
     public static final String PARAMETERS_FROM_TO_CANNOT_BE_NULL_SIMULTANEOUSLY         = "Параметры From () и To () одновременно не могут быть null.";
     public static final String TYPE_FIELD_IS_INCORRECT_UNSUPPORTABLE_UNDEFINED_VALUE    = "Указано не верное значение для поля 'Type. Значение 'Undefined' не поддерживается!";
     public static final String INCORRECT_NAME                                           = "Задано не корректное наименование: 'Name'.";
+    public static final String IMPOSSIBLE_MARK_DOCUMENT_WITH_NOT_ACTIVE_PROFILE         = "Невозможно промаркировать документ неактивным профилем (Parameter 'IsActive')";
 
 
     public static final String REQUEST_VALIDATION_ERROR                                 = "Request Validation Error";
@@ -45,6 +46,7 @@ public class ErrorDescription {
     public static final String VALIDATIONS_THE_VALUE_FIELD_IS_REQUIRED                  = "validations.The Value field is required.";
     public static final String VALIDATIONS_THE_FIELD_NAME_MAXIMUM_LENGTH_IS_256         = "validations.The field Name must be a string or array type with a maximum length of '256'.";
     public static final String VALIDATIONS_THE_FIELD_VALUE_MAXIMUM_LENGTH_IS_2000       = "validations.The field Value must be a string or array type with a maximum length of '2000'.";
+    public static final String VALIDATIONS_UNSUPPORTABLE_DOCUMENT_FORMAT_FOR_CATEGORIZATION = "validations.Неподдерживаемый формат документа на категоризацию. Разрешены только файлы с расширениями: .docx,.xlsx,.pptx,.pdf,.odt,.ods,.odp";
 
     public static final String VALIDATIONS_THE_JSON_VALUE_NOT_BE_CONVERTED_TO_GUID              = "validations\\.The JSON value could not be converted to System\\.Guid\\. Path: \\$\\.id \\| LineNumber: \\d+ \\| BytePositionInLine: \\d+\\.";
     public static final String VALIDATIONS_THE_JSON_VALUE_NOT_BE_CONVERTED_TO_SEARCH_QUERY_TYPE = "validations\\.The JSON value could not be converted to Shared\\.SearchEngine\\.Models\\.Parameters\\.SearchQueryType\\. Path: \\$\\.type \\| LineNumber: \\d+ \\| BytePositionInLine: \\d+\\.";
