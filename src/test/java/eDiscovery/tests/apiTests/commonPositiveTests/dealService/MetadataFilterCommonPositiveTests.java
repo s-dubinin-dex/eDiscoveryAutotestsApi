@@ -55,7 +55,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
         assertThat(isValidUUID(responseBody.id)).isTrue();
         assertThat(responseBody.dataSearchType).isEqualTo(requestBody.dataSearchType);
         assertThat(responseBody.name).isEqualTo(requestBody.name);
-
+        assertThat(responseBody.deletedUtc).isNull();
         assertThat(responseBody.attributeValues).usingRecursiveComparison().ignoringFields("name").isEqualTo(requestBody.filterAttributeValues);
 
     }
@@ -89,7 +89,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
         assertThat(isValidUUID(responseBody.id)).isTrue();
         assertThat(responseBody.dataSearchType).isEqualTo(requestBody.dataSearchType);
         assertThat(responseBody.name).isEqualTo(requestBody.name);
-
+        assertThat(responseBody.deletedUtc).isNull();
         assertThat(responseBody.attributeValues).usingRecursiveComparison().ignoringFields("name").isEqualTo(requestBody.filterAttributeValues);
 
     }
@@ -118,7 +118,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
         assertThat(isValidUUID(responseBody.id)).isTrue();
         assertThat(responseBody.dataSearchType).isEqualTo(requestBody.dataSearchType);
         assertThat(responseBody.name).isEqualTo(requestBody.name);
-
+        assertThat(responseBody.deletedUtc).isNull();
         assertThat(responseBody.attributeValues).usingRecursiveComparison().ignoringFields("name").isEqualTo(requestBody.filterAttributeValues);
 
     }
@@ -150,7 +150,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
         assertThat(isValidUUID(responseBody.id)).isTrue();
         assertThat(responseBody.dataSearchType).isEqualTo(requestBody.dataSearchType);
         assertThat(responseBody.name).isEqualTo(requestBody.name);
-
+        assertThat(responseBody.deletedUtc).isNull();
         assertThat(responseBody.attributeValues).usingRecursiveComparison().ignoringFields("name").isEqualTo(requestBody.filterAttributeValues);
 
     }
@@ -182,7 +182,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
         assertThat(isValidUUID(responseBody.id)).isTrue();
         assertThat(responseBody.dataSearchType).isEqualTo(requestBody.dataSearchType);
         assertThat(responseBody.name).isEqualTo(requestBody.name);
-
+        assertThat(responseBody.deletedUtc).isNull();
         assertThat(responseBody.attributeValues).usingRecursiveComparison().ignoringFields("name").isEqualTo(requestBody.filterAttributeValues);
 
     }
@@ -214,7 +214,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
         assertThat(isValidUUID(responseBody.id)).isTrue();
         assertThat(responseBody.dataSearchType).isEqualTo(requestBody.dataSearchType);
         assertThat(responseBody.name).isEqualTo(requestBody.name);
-
+        assertThat(responseBody.deletedUtc).isNull();
         assertThat(responseBody.attributeValues).usingRecursiveComparison().ignoringFields("name").isEqualTo(requestBody.filterAttributeValues);
     }
 
@@ -259,7 +259,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
         assertThat(responseBody.id).isEqualTo(requestBody.id);
         assertThat(responseBody.dataSearchType).isEqualTo(requestBody.dataSearchType);
         assertThat(responseBody.name).isEqualTo(requestBody.name);
-
+        assertThat(responseBody.deletedUtc).isNull();
         assertThat(responseBody.attributeValues).usingRecursiveComparison().ignoringFields("name").isEqualTo(requestBody.filterAttributeValues);
 
     }

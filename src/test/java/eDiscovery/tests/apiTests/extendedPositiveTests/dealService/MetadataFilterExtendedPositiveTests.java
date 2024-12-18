@@ -2,6 +2,7 @@ package eDiscovery.tests.apiTests.extendedPositiveTests.dealService;
 
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsMetadataFilter;
+import eDiscovery.data.dealService.DataGeneratorMetadataFilter;
 import eDiscovery.helpers.MetadataFilterAttributeValues;
 import eDiscovery.helpers.enums.DataSearchType;
 import eDiscovery.helpers.enums.FileTypes;
@@ -16,10 +17,11 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
-import static eDiscovery.helpers.DataChecker.isValidUUID;
+import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Extended positive tests: Deal - MetadataFilter")
@@ -378,6 +380,49 @@ public class MetadataFilterExtendedPositiveTests extends TestBase {
         assertThat(responseBody.name).isEqualTo(requestBody.name);
 
         assertThat(responseBody.attributeValues).usingRecursiveComparison().ignoringCollectionOrder().ignoringFields("name").isEqualTo(requestBody.filterAttributeValues);
+
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Фильтр по метаданным")
+    @Story("Удаление фильтра по метаданным")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("В удалёном фильтре по метаданным возвращается deletedUtc")
+    @Description("Тест проверяет, что в удалёном фильтре по метаданным возвращается deletedUtc")
+    public void tesGetDeleteMetadataFilterByIdReturnsDeletedUtc(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+
+        CommonMetadataFilterResponseBody responseBody = DataGeneratorMetadataFilter.createBasicMetadataFilter();
+        ApiMethodsMetadataFilter.deleteMetadataFilter(responseBody.id);
+
+        CommonMetadataFilterResponseBody responseBodyAfterDeletion = ApiMethodsMetadataFilter.getMetadataFilterByIdPath(responseBody.id).as(CommonMetadataFilterResponseBody.class);
+
+        assertThat(responseBodyAfterDeletion.deletedUtc).matches(dateTimeUTCPattern());
+
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Фильтр по метаданным")
+    @Story("Удаление фильтра по метаданным")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("В удалёном фильтре по метаданным возвращается deletedUtc в списке фильтров метаданных")
+    @Description("Тест проверяет, что в удалёном фильтре по метаданным возвращается deletedUtc в списке фильтров метаданных")
+    public void tesGetDeleteMetadataFilterByIdReturnsDeletedUtcInList(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+
+        CommonMetadataFilterResponseBody responseBody = DataGeneratorMetadataFilter.createBasicMetadataFilter();
+        ApiMethodsMetadataFilter.deleteMetadataFilter(responseBody.id);
+
+        HashMap<String, String> requestParameters = new HashMap<>();
+        requestParameters.put("includeDeleted", "true");
+
+        CommonMetadataFilterResponseBody responseBodyAfterDeletion = ApiMethodsMetadataFilter.getMetadataFilterListOData(requestParameters).jsonPath().getList("value", CommonMetadataFilterResponseBody.class)
+                .stream().filter(el -> el.name.equals(responseBody.name)).findFirst().orElse(null);
+
+        assertThat(responseBodyAfterDeletion).isNotNull();
+        assertThat(responseBodyAfterDeletion.deletedUtc).matches(dateTimeUTCPattern());
 
     }
 

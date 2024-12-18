@@ -7,6 +7,9 @@ import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiMethodsMetadataFilter extends UrlBase {
@@ -64,9 +67,16 @@ public class ApiMethodsMetadataFilter extends UrlBase {
 
     @Step("Получение списка фильтров по метаданным по протоколу odata")
     public static Response getMetadataFilterListOData(){
+
+        return getMetadataFilterListOData(new HashMap<>());
+    }
+
+    @Step("Получение списка фильтров по метаданным по протоколу odata")
+    public static Response getMetadataFilterListOData(Map<String, String> params){
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
+                .params(params)
                 .when()
                 .get(ODATA_METADATA_FILTER)
                 .then()
