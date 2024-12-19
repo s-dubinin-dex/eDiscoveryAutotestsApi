@@ -16,6 +16,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Extended positive tests: Deal - MarkerResultFromDeal")
 public class MarkerResultFromDealExtendedPositiveTests extends TestBase {
@@ -98,12 +101,65 @@ public class MarkerResultFromDealExtendedPositiveTests extends TestBase {
 
     }
 
+    @Issue("ED-750")
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Результаты маркирования")
+    @Story("Получение результатов маркирования из сервиса Deal")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("В результатах маркирования нет записей с externalId = 00000000-0000-0000-0000-000000000000")
+    @Description("Тест проверяет, что в результатах маркирования нет записей с externalId = 00000000-0000-0000-0000-000000000000")
+    public void testGetMarkerResultListFromDealNotContainsZeroExternalId() {
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody(5));
 
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter(String.format("externalId eq %s", new UUID(0L, 0L)))
+                .build();
 
+        List<CommonMarkerResultFromDealModel> responseBodyFiltered = ApiMethodsMarkerResultFromDeal.getMarkerResultListFromDeal().jsonPath().getList("value", CommonMarkerResultFromDealModel.class);
 
+        assertThat(responseBodyFiltered).hasSize(0);
+    }
 
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Результаты маркирования")
+    @Story("Получение результатов маркирования из сервиса Deal")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("В результатах маркирования нет записей с externalDetailId = 00000000-0000-0000-0000-000000000000")
+    @Description("Тест проверяет, что в результатах маркирования нет записей с externalDetailId = 00000000-0000-0000-0000-000000000000")
+    public void testGetMarkerResultListFromDealNotContainsZeroExternalDetailId() {
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody(5));
 
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter(String.format("externalDetailId eq %s", new UUID(0L, 0L)))
+                .build();
 
+        List<CommonMarkerResultFromDealModel> responseBodyFiltered = ApiMethodsMarkerResultFromDeal.getMarkerResultListFromDeal(params).jsonPath().getList("value", CommonMarkerResultFromDealModel.class);
 
+        assertThat(responseBodyFiltered).hasSize(0);
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Результаты маркирования")
+    @Story("Получение результатов маркирования из сервиса Deal")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("В результатах маркирования нет записей с externalObjectId = 00000000-0000-0000-0000-000000000000")
+    @Description("Тест проверяет, что в результатах маркирования нет записей с externalObjectId = 00000000-0000-0000-0000-000000000000")
+    public void testGetMarkerResultListFromDealNotContainsZeroExternalObjectId() {
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody(5));
+
+        Map<String, String> params = OdataParametersBuilder.builder()
+                .withFilter(String.format("externalObjectId eq %s", new UUID(0L, 0L)))
+                .build();
+
+        List<CommonMarkerResultFromDealModel> responseBodyFiltered = ApiMethodsMarkerResultFromDeal.getMarkerResultListFromDeal(params).jsonPath().getList("value", CommonMarkerResultFromDealModel.class);
+
+        assertThat(responseBodyFiltered).hasSize(0);
+    }
 
 }
