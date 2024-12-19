@@ -2,23 +2,268 @@ package eDiscovery.tests.apiTests.extendedPositiveTests.classifierService;
 
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.classifier.ApiMethodsRule;
+import eDiscovery.data.classifierService.DataGeneratorEncryptionPermission;
+import eDiscovery.data.classifierService.DataGeneratorMarker;
+import eDiscovery.data.classifierService.DataGeneratorRule;
+import eDiscovery.data.classifierService.DataGeneratorSearchQueryClassifier;
 import eDiscovery.helpers.OdataParametersBuilder;
+import eDiscovery.models.classifier.encryptionPermission.CommonEncryptionPermissionResponseModel;
+import eDiscovery.models.classifier.marker.CommonMarkerResponseModel;
+import eDiscovery.models.classifier.rule.AddRuleRequestModel;
 import eDiscovery.models.classifier.rule.CommonRuleResponseModel;
+import eDiscovery.models.classifier.searchQuery.CommonSearchQueryClassifierResponseModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import static eDiscovery.data.DataGeneratorCommon.getRandomName;
+import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Extended positive tests: Classifier - Rule")
 public class RuleExtendedPositiveTests extends TestBase {
+
+    @Nested
+    @DisplayName("Проверка заполнения полей Classifier - Rule в теле ответа при создании")
+    class CheckRuleCreationResponseFields{
+
+        @Test
+        @Epic("Сервис Classifier")
+        @Feature("Правило категоризации")
+        @Story("Создание правила категоризации")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Создание правила категоризации возвращает id")
+        @Description("Тест проверяет, что при создании правила возвращается корректный id")
+        public void testAddRuleReturnsId () {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            AddRuleRequestModel requestBody = DataGeneratorRule.getRuleModelWithOnlyRequiredParameters();
+
+            CommonRuleResponseModel responseBody = ApiMethodsRule.addRule(requestBody).as(CommonRuleResponseModel.class);
+
+            assertThat(isValidUUID(responseBody.id)).isTrue();
+        }
+
+        @Test
+        @Epic("Сервис Classifier")
+        @Feature("Правило категоризации")
+        @Story("Создание правила категоризации")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Создание правила категоризации возвращает name")
+        @Description("Тест проверяет, что при создании правила возвращается name, переданный при создании")
+        public void testAddRuleReturnsName () {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            AddRuleRequestModel requestBody = DataGeneratorRule.getRuleModelWithOnlyRequiredParameters();
+
+            CommonRuleResponseModel responseBody = ApiMethodsRule.addRule(requestBody).as(CommonRuleResponseModel.class);
+
+            assertThat(responseBody.name).isEqualTo(requestBody.name);
+        }
+
+        @Test
+        @Epic("Сервис Classifier")
+        @Feature("Правило категоризации")
+        @Story("Создание правила категоризации")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Создание правила категоризации возвращает marker")
+        @Description("Тест проверяет, что при создании правила возвращается marker, переданный при создании")
+        public void testAddRuleReturnsMarker () {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonMarkerResponseModel markerBody = DataGeneratorMarker.getFirstMarker();
+            CommonSearchQueryClassifierResponseModel searchQueryBody = DataGeneratorSearchQueryClassifier.createBasicSearchQuery();
+
+            AddRuleRequestModel requestBody = AddRuleRequestModel.builder()
+                    .name(getRandomName())
+                    .markerId(markerBody.id)
+                    .searchQueries(Collections.singletonList(searchQueryBody.id))
+                    .build();
+
+            CommonRuleResponseModel responseBody = ApiMethodsRule.addRule(requestBody).as(CommonRuleResponseModel.class);
+
+            assertThat(responseBody.marker).usingRecursiveComparison().isEqualTo(markerBody);
+        }
+
+        @Test
+        @Epic("Сервис Classifier")
+        @Feature("Правило категоризации")
+        @Story("Создание правила категоризации")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Создание правила категоризации возвращает policy")
+        @Description("Тест проверяет, что при создании правила возвращается policy, переданный при создании")
+        public void testAddRuleReturnsPolicy () {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonEncryptionPermissionResponseModel policyBody = DataGeneratorEncryptionPermission.getFirstEncryptionPermission();
+
+            AddRuleRequestModel requestBody = DataGeneratorRule.getRuleModelWithOnlyRequiredParameters();
+            requestBody.policyId = policyBody.id;
+
+            CommonRuleResponseModel responseBody = ApiMethodsRule.addRule(requestBody).as(CommonRuleResponseModel.class);
+
+            assertThat(responseBody.policy).usingRecursiveComparison().isEqualTo(policyBody);
+        }
+
+        @Epic("Сервис Classifier")
+        @Feature("Правило категоризации")
+        @Story("Создание правила категоризации")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Создание правила категоризации возвращает isActive = false по умолчанию")
+        @Description("Тест проверяет, что при создании правила возвращается isActive = false по умолчанию")
+        @Test
+        public void testAddRuleReturnsDefaultIsActive () {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            AddRuleRequestModel requestBody = DataGeneratorRule.getRuleModelWithOnlyRequiredParameters();
+
+            CommonRuleResponseModel responseBody = ApiMethodsRule.addRule(requestBody).as(CommonRuleResponseModel.class);
+
+            assertThat(responseBody.isActive).isFalse();
+        }
+
+        @Epic("Сервис Classifier")
+        @Feature("Правило категоризации")
+        @Story("Создание правила категоризации")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Создание правила категоризации возвращает isActive, переданный при создании")
+        @Description("Тест проверяет, что при создании правила возвращается isActive, переданный при создании")
+        @ParameterizedTest
+        @ValueSource(booleans = {true, false})
+        public void testAddRuleReturnsIsActive (boolean isActive) {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            AddRuleRequestModel requestBody = DataGeneratorRule.getRuleModelWithOnlyRequiredParameters();
+            requestBody.isActive = isActive;
+
+            CommonRuleResponseModel responseBody = ApiMethodsRule.addRule(requestBody).as(CommonRuleResponseModel.class);
+
+            assertThat(responseBody.isActive).isEqualTo(isActive);
+        }
+
+        @Test
+        @Epic("Сервис Classifier")
+        @Feature("Правило категоризации")
+        @Story("Создание правила категоризации")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Создание правила категоризации возвращает searchQueries")
+        @Description("Тест проверяет, что при создании правила возвращает searchQueries")
+        public void testAddRuleReturnsSearchQueries () {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonMarkerResponseModel markerBody = DataGeneratorMarker.getFirstMarker();
+            CommonSearchQueryClassifierResponseModel searchQueryBody = DataGeneratorSearchQueryClassifier.createBasicSearchQuery();
+
+            AddRuleRequestModel requestBody = AddRuleRequestModel.builder()
+                    .name(getRandomName())
+                    .markerId(markerBody.id)
+                    .searchQueries(Collections.singletonList(searchQueryBody.id))
+                    .build();
+
+            CommonRuleResponseModel responseBody = ApiMethodsRule.addRule(requestBody).as(CommonRuleResponseModel.class);
+
+            assertThat(responseBody.searchQueries).usingRecursiveComparison().ignoringFields("createdUtc").isEqualTo(Collections.singletonList(searchQueryBody));
+        }
+
+        @Test
+        @Epic("Сервис Classifier")
+        @Feature("Правило категоризации")
+        @Story("Создание правила категоризации")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Создание правила категоризации возвращает пустой profiles для неиспользуемого правила")
+        @Description("Тест проверяет, что при создании правила возвращается пустой profiles для неиспользуемого правила")
+        public void testAddRuleReturnsEmptyProfilesForUnusedRule () {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonRuleResponseModel responseBody = DataGeneratorRule.createRuleWithOnlyRequiredParameters();
+
+            assertThat(responseBody.profiles).hasSize(0);
+        }
+
+        @Test
+        @Epic("Сервис Classifier")
+        @Feature("Правило категоризации")
+        @Story("Создание правила категоризации")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Создание правила категоризации возвращает валидный creatorUserId")
+        @Description("Тест проверяет, что при создании правила возвращается валидный creatorUserId")
+        public void testAddRuleReturnsCreatorUserId () {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonRuleResponseModel responseBody = DataGeneratorRule.createRuleWithOnlyRequiredParameters();
+
+            assertThat(isValidUUID(responseBody.creatorUserId)).isTrue();
+        }
+
+        @Test
+        @Epic("Сервис Classifier")
+        @Feature("Правило категоризации")
+        @Story("Создание правила категоризации")
+        @Severity(SeverityLevel.MINOR)
+        @DisplayName("Создание правила категоризации возвращает creatorUserName")
+        @Description("Тест проверяет, что при создании правила возвращается creatorUserName")
+        public void testAddRuleReturnsCreatorUserName () {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonRuleResponseModel responseBody = DataGeneratorRule.createRuleWithOnlyRequiredParameters();
+
+            assertThat(responseBody.creatorUserName).isEqualTo("Администратор");
+        }
+
+        @Test
+        @Epic("Сервис Classifier")
+        @Feature("Правило категоризации")
+        @Story("Создание правила категоризации")
+        @Severity(SeverityLevel.MINOR)
+        @DisplayName("Создание правила категоризации возвращает createdUtc в корректном формате")
+        @Description("Тест проверяет, что при создании правила возвращается createdUtc в корректном формате")
+        public void testAddRuleReturnsCreatedUtc () {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonRuleResponseModel responseBody = DataGeneratorRule.createRuleWithOnlyRequiredParameters();
+
+            assertThat(responseBody.createdUtc).matches(dateTimeUTCPattern());
+        }
+
+        @Test
+        @Epic("Сервис Classifier")
+        @Feature("Правило категоризации")
+        @Story("Создание правила категоризации")
+        @Severity(SeverityLevel.MINOR)
+        @DisplayName("Создание правила категоризации возвращает deletedUtc = null")
+        @Description("Тест проверяет, что при создании правила возвращается deletedUtc = null")
+        public void testAddRuleReturnsDeletedUtc () {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonRuleResponseModel responseBody = DataGeneratorRule.createRuleWithOnlyRequiredParameters();
+
+            assertThat(responseBody.deletedUtc).isNull();
+        }
+
+    }
 
     @Test
     @Epic("Сервис Classifier")

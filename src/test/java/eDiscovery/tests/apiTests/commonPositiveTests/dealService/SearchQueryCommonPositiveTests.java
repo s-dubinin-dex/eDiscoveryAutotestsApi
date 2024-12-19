@@ -37,17 +37,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchQueryRequestModel requestBody = DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
-        Response response = ApiMethodsSearchQuery.addSearchQuery(requestBody);
-
-        CommonSearchQueryResponseModel responseBody = response.as(CommonSearchQueryResponseModel.class);
-
-        assertThat(responseBody.name).isEqualTo(requestBody.name);
-        assertThat(responseBody.type).isEqualTo(SearchQueryType.Regex.name());
-        assertThat(responseBody.value).isEqualTo(requestBody.value);
-        assertThat(isValidUUID(responseBody.id)).isTrue();
-        assertThat(responseBody.createdUtc).matches(dateTimeUTCPattern());
-        assertThat(responseBody.deletedUtc).isNull();
+        DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
     }
 
     @Test

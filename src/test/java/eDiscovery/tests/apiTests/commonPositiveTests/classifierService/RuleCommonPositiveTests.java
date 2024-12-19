@@ -3,6 +3,7 @@ package eDiscovery.tests.apiTests.commonPositiveTests.classifierService;
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.classifier.ApiMethodsRule;
 import eDiscovery.data.classifierService.DataGeneratorMarker;
+import eDiscovery.data.classifierService.DataGeneratorRule;
 import eDiscovery.data.classifierService.DataGeneratorSearchQueryClassifier;
 import eDiscovery.models.classifier.marker.CommonMarkerResponseModel;
 import eDiscovery.models.classifier.rule.AddRuleRequestModel;
@@ -33,33 +34,11 @@ public class RuleCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Создание правила категоризации")
     @Description("Тест проверяет возможность создания правила категоризации")
-    public void testAddRule(){
+    public void testAddRule() {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonMarkerResponseModel markerBody = DataGeneratorMarker.getFirstMarker();
-        CommonSearchQueryClassifierResponseModel searchQueryBody = DataGeneratorSearchQueryClassifier.createBasicSearchQuery();
-
-        AddRuleRequestModel requestBody = AddRuleRequestModel.builder()
-                .name(getRandomName())
-                .markerId(markerBody.id)
-                .searchQueries(Collections.singletonList(searchQueryBody.id))
-                .build();
-
-        CommonRuleResponseModel responseBody = ApiMethodsRule.addRule(requestBody).as(CommonRuleResponseModel.class);
-
-        assertThat(isValidUUID(responseBody.id)).isTrue();
-        assertThat(responseBody.name).isEqualTo(requestBody.name);
-        assertThat(responseBody.marker).usingRecursiveComparison().isEqualTo(markerBody);
-        assertThat(responseBody.policy).isNull();
-        assertThat(responseBody.isActive).isFalse();
-        assertThat(responseBody.searchQueries).hasSize(1);
-        assertThat(responseBody.searchQueries.get(0)).usingRecursiveComparison().ignoringFields("createdUtc").isEqualTo(searchQueryBody);
-        assertThat(responseBody.profiles).hasSize(0);
-        assertThat(isValidUUID(responseBody.creatorUserId)).isTrue();
-        assertThat(responseBody.creatorUserName).isNull();
-//        assertThat(responseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
-        assertThat(responseBody.deletedUtc).isNull();
+        DataGeneratorRule.createRuleWithOnlyRequiredParameters();
     }
 
     @Test

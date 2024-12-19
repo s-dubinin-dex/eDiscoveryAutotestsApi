@@ -6,7 +6,6 @@ import eDiscovery.models.deal.dealTaskProgress.DealTaskProgressModel;
 import java.util.List;
 
 public class CommonDealManipulationResponseModel extends OdataEntity {
-
     public String id;
     public String name;
     public String dealPriority;

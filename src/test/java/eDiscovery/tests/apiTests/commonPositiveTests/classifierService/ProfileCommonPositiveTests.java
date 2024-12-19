@@ -39,35 +39,14 @@ public class ProfileCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonRuleResponseModel ruleBody = DataGeneratorRule.getFirstRule();
+        CommonRuleResponseModel ruleBody = DataGeneratorRule.createRuleWithOnlyRequiredParameters();
 
         AddProfileRequestModel requestBody = AddProfileRequestModel.builder()
                 .name(getRandomName())
                 .classifierRules(Collections.singletonList(new ClassifierRulesModel(ruleBody.id, 1)))
                 .build();
 
-        CommonProfileResponseModel responseBody = ApiMethodsProfile.addProfile(requestBody).as(CommonProfileResponseModel.class);
-
-        assertThat(isValidUUID(responseBody.id)).isTrue();
-        assertThat(responseBody.name).isEqualTo(requestBody.name);
-        assertThat(responseBody.canClassifyDocumentsWithMarker).isFalse();
-        assertThat(responseBody.considerTagsCriticality).isFalse();
-        assertThat(responseBody.baseMarker).isNull();
-        assertThat(responseBody.basePolicy).isNull();
-        assertThat(responseBody.isDefault).isFalse();
-        assertThat(responseBody.isActive).isFalse();
-        assertThat(responseBody.markerInfos).isNull();
-
-//        assertThat(responseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
-        assertThat(isValidUUID(responseBody.creatorUserId)).isTrue();
-        assertThat(responseBody.creatorUserName).isEqualTo("Администратор");
-
-//        assertThat(responseBody.updatedUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
-        assertThat(isValidUUID(responseBody.editorUserId)).isTrue();
-        assertThat(responseBody.editorUserName).isEqualTo("Администратор");
-
-        assertThat(responseBody.encryptionPermissionInfos).isNull();
-
+        ApiMethodsProfile.addProfile(requestBody).as(CommonProfileResponseModel.class);
     }
 
     @Test
@@ -88,28 +67,7 @@ public class ProfileCommonPositiveTests extends TestBase {
                 .baseMarkerId(markerBody.id)
                 .build();
 
-        CommonProfileResponseModel responseBody = ApiMethodsProfile.addProfile(requestBody).as(CommonProfileResponseModel.class);
-
-        assertThat(isValidUUID(responseBody.id)).isTrue();
-        assertThat(responseBody.name).isEqualTo(requestBody.name);
-        assertThat(responseBody.canClassifyDocumentsWithMarker).isFalse();
-        assertThat(responseBody.considerTagsCriticality).isFalse();
-        assertThat(responseBody.baseMarker).usingRecursiveComparison().isEqualTo(markerBody);
-        assertThat(responseBody.basePolicy).isNull();
-        assertThat(responseBody.isDefault).isFalse();
-        assertThat(responseBody.isActive).isFalse();
-        assertThat(responseBody.markerInfos).isNull();
-
-//        assertThat(responseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
-        assertThat(isValidUUID(responseBody.creatorUserId)).isTrue();
-        assertThat(responseBody.creatorUserName).isEqualTo("Администратор");
-
-//        assertThat(responseBody.updatedUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
-        assertThat(isValidUUID(responseBody.editorUserId)).isTrue();
-        assertThat(responseBody.editorUserName).isEqualTo("Администратор");
-
-        assertThat(responseBody.encryptionPermissionInfos).isNull();
-
+        ApiMethodsProfile.addProfile(requestBody).as(CommonProfileResponseModel.class);
     }
 
     @Test
@@ -123,7 +81,7 @@ public class ProfileCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonRuleResponseModel ruleBody = DataGeneratorRule.getFirstRule();
+        CommonRuleResponseModel ruleBody = DataGeneratorRule.createRuleWithOnlyRequiredParameters();
         CommonMarkerResponseModel markerBody = DataGeneratorMarker.getFirstMarker();
 
         AddProfileRequestModel requestBodyCreation = AddProfileRequestModel.builder()
