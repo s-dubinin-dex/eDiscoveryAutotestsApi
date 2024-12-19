@@ -795,6 +795,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
     }
 
+    @Issue("ED-885")
     @Test
     @Epic("Сервис Deal")
     @Feature("Место поиска")
