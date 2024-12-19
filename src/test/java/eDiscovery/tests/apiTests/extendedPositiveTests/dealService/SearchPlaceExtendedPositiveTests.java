@@ -52,9 +52,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            AddSearchPlaceRequestModel requestBody = DataGeneratorSearchPlace.getSearchPlaceModelWithOnlyRequiredParameters();
-
-            CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
+            CommonSearchPlaceResponseModel responseBody = DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
 
             assertThat(isValidUUID(responseBody.id)).isTrue();
         }
