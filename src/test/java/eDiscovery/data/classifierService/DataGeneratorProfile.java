@@ -22,4 +22,10 @@ public class DataGeneratorProfile {
     public static CommonProfileResponseModel createProfileWithOnlyRequiredParameters(){
         return ApiMethodsProfile.addProfile(getAddProfileRequestModelWithOnlyRequiredParameters()).as(CommonProfileResponseModel.class);
     }
+
+    public static CommonProfileResponseModel createActiveProfileWithOnlyRequiredParameters(){
+        AddProfileRequestModel requestBody = getAddProfileRequestModelWithOnlyRequiredParameters();
+        requestBody.isActive = true;
+        return ApiMethodsProfile.addProfile(requestBody).as(CommonProfileResponseModel.class);
+    }
 }

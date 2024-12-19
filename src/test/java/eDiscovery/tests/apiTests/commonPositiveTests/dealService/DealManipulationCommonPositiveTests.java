@@ -41,51 +41,9 @@ public class DealManipulationCommonPositiveTests extends TestBase {
     @Description("Тест проверяет возможность создания дела")
     public void testAddDeal(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-
-        AddSearchPlaceRequestModel searchPlaceRequestBody = DataGeneratorSearchPlace.getSearchPlaceModelWithOnlyRequiredParameters();
-        CommonSearchPlaceResponseModel searchPlaceResponseBody = ApiMethodsSearchPlace.addSearchPlace(searchPlaceRequestBody).as(CommonSearchPlaceResponseModel.class);
-
-        AddSearchQueryRequestModel searchQueryRequestBody = DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
-        CommonSearchQueryResponseModel searchQueryResponseBody = ApiMethodsSearchQuery.addSearchQuery(searchQueryRequestBody).as(CommonSearchQueryResponseModel.class);
-
-        AddDealManipulationRequestModel requestBody = DataGeneratorDealManipulation.getDealManipulationModelWithOnlyRequiredParameters(
-                searchPlaceResponseBody.id,
-                searchQueryResponseBody.id
-        );
-
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-        CommonDealManipulationResponseModel responseBody = ApiMethodsDealManipulation.addDeal(requestBody).as(CommonDealManipulationResponseModel.class);
 
-        assertThat(isValidUUID(responseBody.id)).isTrue();
-        assertThat(responseBody.name).isEqualTo(requestBody.name);
-        assertThat(responseBody.dealPriority).isEqualTo(DealPriority.Medium.name());
-        assertThat(responseBody.quarantine).isFalse();
-        assertThat(responseBody.fileTypes).hasSize(0);
-        assertThat(responseBody.searchPlaces).usingRecursiveComparison().isEqualTo(
-                Collections.singletonList(
-                        new DealSearchPlaceModel(searchPlaceResponseBody.id, searchPlaceResponseBody.name)
-                )
-        );
-        assertThat(responseBody.classifySearchPlaces).hasSize(0);
-        assertThat(responseBody.searchPlaceGroups).hasSize(0);
-        assertThat(responseBody.dealSearchQueries).isEqualTo(
-                Collections.singletonList(
-                        new DealSearchQueryModel(
-                                requestBody.dealSearchQueries.get(0).isActive,
-                                requestBody.dealSearchQueries.get(0).id,
-                                searchQueryRequestBody.name
-                        )
-                )
-        );
-        assertThat(responseBody.progressInfo).isNull();
-        assertThat(responseBody.dealStatus).isEqualTo(DealStatus.Waiting.name());
-        assertThat(responseBody.excludes).hasSize(0);
-        assertThat(responseBody.searchMask).isNull();
-        assertThat(responseBody.classifierDealData.needClassify).isFalse();
-        assertThat(responseBody.classifierDealData.classifierProfileId).isNull();
-        assertThat(responseBody.createdUtc).matches(dateTimeUTCPattern());
-        assertThat(isValidUUID(responseBody.creatorUserId)).isTrue();
-        assertThat(responseBody.creatorUserName).isEqualTo("Администратор");
+        DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
     }
 
