@@ -37,7 +37,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
     @Nested
     @DisplayName("Проверка заполнения полей Classifier - Profile в теле ответа при создании")
-    class CheckRuleCreationResponseFields{
+    class CheckProfileCreationResponseFields{
 
         @Test
         @Epic("Сервис Classifier")

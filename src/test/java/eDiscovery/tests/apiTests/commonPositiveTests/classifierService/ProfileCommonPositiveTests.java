@@ -81,7 +81,7 @@ public class ProfileCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonRuleResponseModel ruleBody = DataGeneratorRule.getFirstRule();
+        CommonRuleResponseModel ruleBody = DataGeneratorRule.createRuleWithOnlyRequiredParameters();
         CommonMarkerResponseModel markerBody = DataGeneratorMarker.getFirstMarker();
 
         AddProfileRequestModel requestBodyCreation = AddProfileRequestModel.builder()
