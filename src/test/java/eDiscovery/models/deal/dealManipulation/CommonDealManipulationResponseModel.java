@@ -23,4 +23,5 @@ public class CommonDealManipulationResponseModel extends OdataEntityResponseMode
     public String creatorUserName;
     public ClassifierDealData classifierDealData;
     public String deletedUtc;
+
 }

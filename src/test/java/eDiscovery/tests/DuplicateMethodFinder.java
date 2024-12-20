@@ -80,6 +80,11 @@ public class DuplicateMethodFinder {
         // Ищем все методы в файле
         compilationUnit.findAll(MethodDeclaration.class).forEach(method -> {
             String methodName = method.getNameAsString();
+
+            if (methodName.equalsIgnoreCase("setUp")){
+                return;
+            }
+
             String location = file.getName() + " - " + method.getDeclarationAsString();
             globalMethodMap.computeIfAbsent(methodName, k -> new ArrayList<>()).add(location);
         });
