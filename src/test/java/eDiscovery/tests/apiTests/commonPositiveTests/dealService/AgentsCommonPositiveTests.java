@@ -21,10 +21,10 @@ public class AgentsCommonPositiveTests extends TestBase {
     @Epic("Сервис Deal")
     @Feature("Агенты")
     @Story("Получение списка агентов")
-    @Severity(SeverityLevel.NORMAL)
+    @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка агентов")
     @Description("Тест проверяет возможность получения списка агентов")
-    public void testGetAgents(){
+    public void testGetAgentsList(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -32,4 +32,21 @@ public class AgentsCommonPositiveTests extends TestBase {
         assertThat(responseBody).isNotEmpty();
         assertThat(responseBody.get(0)).isNotNull();
     }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Агенты")
+    @Story("Получение списка агентов")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Получение списка агентов по протоколу oData")
+    @Description("Тест проверяет возможность получения списка агентов по протоколу oData")
+    public void testGetAgentsListOData(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        List<CommonAgentsResponseModel> responseBody = ApiMethodsAgents.getAgentsListOdata().jsonPath().getList("value", CommonAgentsResponseModel.class);
+        assertThat(responseBody).isNotEmpty();
+        assertThat(responseBody.get(0)).isNotNull();
+    }
+
 }
