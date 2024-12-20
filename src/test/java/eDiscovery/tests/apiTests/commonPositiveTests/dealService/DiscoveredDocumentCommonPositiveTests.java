@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-@DisplayName("Common positive tests - DiscoveredDocument")
+@DisplayName("Common positive tests: Deal - DiscoveredDocument")
 public class DiscoveredDocumentCommonPositiveTests extends TestBase {
 
     @Test

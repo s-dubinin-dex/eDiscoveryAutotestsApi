@@ -11,13 +11,16 @@ public class ErrorDescription {
     public static final String ERRORS_ENTITY_IN_USE_EXCEPTION_SEARCH_QUERY_INFO         = "errors.EntityInUseException.SearchQueryInfo";
     public static final String ERRORS_ENTITY_NOT_FOUND_EXCEPTION_SEARCH_PLACE_INFO      = "errors.EntityNotFoundException.SearchPlaceInfo";
     public static final String ERRORS_ENTITY_NOT_FOUND_EXCEPTION_SEARCH_QUERY_INFO      = "errors.EntityNotFoundException.SearchQueryInfo";
+    public static final String ERRORS_ENTITY_NOT_FOUND_EXCEPTION_CLASSIFIER_SEARCH_QUERY_INFO = "errors.EntityNotFoundException.ClassifierSearchQueryInfo";
     public static final String ERRORS_VALIDATION_EXCEPTION                              = "errors.ValidationException";
 
+    public static final String CLASSIFIER_SEARCH_QUERY_INFO                             = "ClassifierSearchQueryInfo";
     public static final String SEARCH_PLACE_INFO                                        = "SearchPlaceInfo";
     public static final String SEARCH_QUERY_INFO                                        = "SearchQueryInfo";
 
     public static final String EXCEPTION_ENTITY_NOT_FOUND_SEARCH_PLACE_INFO             = "Exception of type 'Shared.Domain.Exceptions.EntityNotFoundException`1[Deal.Application.Abstraction.Models.Queries.SearchPlaces.SearchPlaceInfo]' was thrown.";
     public static final String EXCEPTION_ENTITY_NOT_FOUND_SEARCH_QUERY_INFO             = "Exception of type 'Shared.Domain.Exceptions.EntityNotFoundException`1[Deal.Application.Abstraction.Models.Queries.SearchQueries.SearchQueryInfo]' was thrown.";
+    public static final String EXCEPTION_ENTITY_NOT_FOUND_CLASSIFIER_SEARCH_QUERY_INFO = "Exception of type 'Shared.Domain.Exceptions.EntityNotFoundException`1[Shared.Classifier.Models.SearchQueries.ClassifierSearchQueryInfo]' was thrown.";
     public static final String EXCEPTION_ENTITY_IN_USE_EXCEPTION_SEARCH_PLACE_INFO      = "Exception of type 'Shared.Domain.Exceptions.EntityInUseException`1[Deal.Application.Abstraction.Models.Queries.SearchPlaces.SearchPlaceInfo]' was thrown.";
     public static final String EXCEPTION_ENTITY_IN_USE_EXCEPTION_SEARCH_QUERY_INFO      = "Exception of type 'Shared.Domain.Exceptions.EntityInUseException`1[Deal.Application.Abstraction.Models.Queries.SearchQueries.SearchQueryInfo]' was thrown.";
 

@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Common positive tests - FileExtension")
+@DisplayName("Common positive tests: Deal - FileExtension")
 public class FileExtensionCommonPositiveTests extends TestBase {
 
     @Test

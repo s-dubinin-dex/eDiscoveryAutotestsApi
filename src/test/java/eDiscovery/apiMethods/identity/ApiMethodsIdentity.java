@@ -27,7 +27,7 @@ public class ApiMethodsIdentity extends UrlBase {
     }
 
     @Step("Получение информации от текущем пользователе")
-    public static Response userInfo(){
+    public static Response connectUserInfo(){
 
         SpecificationsServer.setBaseUrl(IDENTITY_URL);
 

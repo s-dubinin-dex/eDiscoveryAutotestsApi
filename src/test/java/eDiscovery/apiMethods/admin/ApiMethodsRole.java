@@ -10,9 +10,9 @@ import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 
 public class ApiMethodsRole extends UrlBase {
-    private static final String ROLE = "/Role";
-    private static final String ROLE_ROLE = "/Role/Role";
-    private static final String ODATA_ROLE = "/odata/Role";
+    private static final String ROLE        = "/Role";
+    private static final String ROLE_ROLE   = "/Role/Role";
+    private static final String ODATA_ROLE  = "/odata/Role";
 
     @Step("Создание роли")
     public static Response addRole(AddRoleRequestModel addRoleRequestModel){

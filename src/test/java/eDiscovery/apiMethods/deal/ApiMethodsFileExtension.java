@@ -11,8 +11,8 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 
 public class ApiMethodsFileExtension extends UrlBase {
-    public static final String FILE_EXTENSION_FILE_EXTENSION  = "/FileExtension/FileExtension";
-    public static final String ODATA_FILE_EXTENSION            = "/odata/FileExtension";
+    public static final String FILE_EXTENSION_FILE_EXTENSION    = "/FileExtension/FileExtension";
+    public static final String ODATA_FILE_EXTENSION             = "/odata/FileExtension";
 
     @Step("Получение списка расширений")
     public static Response getFileExtensionList(){

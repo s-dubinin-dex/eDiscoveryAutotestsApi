@@ -14,6 +14,8 @@ import java.util.List;
 
 public class MetadataFilterAttributeValues {
 
+    private static final List<FilterAttributeSchemaResponseModel> FILTER_ATTRIBUTE_SCHEMAS = ApiMethodsFilterAttributeSchema.getFilterAttributeSchemaList().jsonPath().getList("", FilterAttributeSchemaResponseModel.class);
+
     @AllArgsConstructor
     private static class MetadataFilterFileSizeModel{
         Integer From;
@@ -110,10 +112,10 @@ public class MetadataFilterAttributeValues {
     }
 
     private static String getAttributeIdByTitle(String title) {
-        List<FilterAttributeSchemaResponseModel> filterAttributeSchemas = ApiMethodsFilterAttributeSchema.getFilterAttributeSchemaList().jsonPath().getList("", FilterAttributeSchemaResponseModel.class);
 
-        FilterAttributeSchemaResponseModel matchedFilterAttributeSchema = filterAttributeSchemas
-                .stream().filter(filterAttributeSchema -> filterAttributeSchema.title.equals(title)).findFirst().orElse(null);
+        FilterAttributeSchemaResponseModel matchedFilterAttributeSchema = FILTER_ATTRIBUTE_SCHEMAS.stream()
+                .filter(filterAttributeSchema -> filterAttributeSchema.title.equals(title))
+                .findFirst().orElse(null);
 
         return (matchedFilterAttributeSchema == null) ? null : matchedFilterAttributeSchema.getId();
     }

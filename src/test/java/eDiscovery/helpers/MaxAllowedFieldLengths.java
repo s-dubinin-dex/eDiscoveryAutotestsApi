@@ -18,4 +18,10 @@ public class MaxAllowedFieldLengths {
     public static final int DEAL_SEARCH_QUERY_NAME = 256;
     public static final int DEAL_SEARCH_QUERY_VALUE = 2000;
 
+     /** <h3>Classifier</h3><br><br>
+     * Search Query
+     */
+
+     public static final int CLASSIFIER_SEARCH_QUERY_NAME = 256;
+     public static final int CLASSIFIER_SEARCH_QUERY_VALUE = 2000;
 }
