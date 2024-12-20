@@ -13,11 +13,10 @@ import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 import static eDiscovery.helpers.DataChecker.*;
@@ -28,6 +27,9 @@ public class AgentActivityExtendedPositiveTests extends TestBase {
 
     private static RegisterAgentResponseModel AGENT_BODY_TO_CHECK;
     private static ActiveTasksRequestsModel ACTIVE_TASK_REQUEST_BODY;
+
+    private static String BEGIN_PERIOD = LocalDate.now().toString();
+    private static String END_PERIOD = LocalDate.now().plusDays(2).toString();
 
     @BeforeAll
     public static void setUp(){
@@ -124,6 +126,74 @@ public class AgentActivityExtendedPositiveTests extends TestBase {
             CommonAgentActivityResponseModel responseBody = ApiMethodsAgentActivity.getAgentActivityListOdata(params).jsonPath().getList("value", CommonAgentActivityResponseModel.class).get(0);
 
             assertThat(responseBody.requestDateTime).matches(dateTimeISOPattern());
+        }
+
+    }
+
+    @Nested
+    @DisplayName("Проверка работы методов с UI для страницы карточки агента")
+    class CheckGetAgentCardUIMethods{
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Активность агентов")
+        @Story("Получение активности агента")
+        @Tag("webui")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка активности агента с фильтром по дате последней активности")
+        @Description("Тест проверяет возможность получения списка активности агента с фильтром по дате последней активности")
+        public void testGetAgentActivityByAgentIdWithFilterRequestDateTime() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withFilter(String.format("agentId eq %s and requestDateTime ge %s and requestDateTime le %s", AGENT_BODY_TO_CHECK.id, BEGIN_PERIOD, END_PERIOD))
+                    .build();
+
+            List<CommonAgentActivityResponseModel> responseBody = ApiMethodsAgentActivity.getAgentActivityListOdata(params).jsonPath().getList("value", CommonAgentActivityResponseModel.class);
+
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Активность агентов")
+        @Story("Получение активности агента")
+        @Tag("webui")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка активности агента с сортировкой по дате последней активности")
+        @Description("Тест проверяет возможность получения списка активности агента с сортировкой по дате последней активности")
+        public void testGetAgentActivityByAgentIdWithSortingRequestDateTime() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withFilter(String.format("agentId eq %s", AGENT_BODY_TO_CHECK.id))
+                    .withOrderBy("requestDateTime")
+                    .build();
+
+            List<CommonAgentActivityResponseModel> responseBody = ApiMethodsAgentActivity.getAgentActivityListOdata(params).jsonPath().getList("value", CommonAgentActivityResponseModel.class);
+
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Активность агентов")
+        @Story("Получение активности агента")
+        @Tag("webui")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка активности агента с сортировкой по ip адресу")
+        @Description("Тест проверяет возможность получения списка активности агента с сортировкой по ip адресу")
+        public void testGetAgentActivityByAgentIdWithSortingIpAddress() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withFilter(String.format("agentId eq %s", AGENT_BODY_TO_CHECK.id))
+                    .withOrderBy("ipAddress")
+                    .build();
+
+            List<CommonAgentActivityResponseModel> responseBody = ApiMethodsAgentActivity.getAgentActivityListOdata(params).jsonPath().getList("value", CommonAgentActivityResponseModel.class);
+
         }
 
     }
