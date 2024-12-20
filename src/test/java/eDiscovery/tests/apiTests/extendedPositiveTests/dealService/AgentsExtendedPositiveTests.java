@@ -406,6 +406,7 @@ public class AgentsExtendedPositiveTests extends TestBase {
             List<CommonAgentsResponseModel> responseBody = ApiMethodsAgents.getAgentsListOdata(params).jsonPath().getList("value" ,CommonAgentsResponseModel.class);
         }
 
+        @Issue("ED-919")
         @Test
         @Epic("Сервис Deal")
         @Feature("Агенты")
@@ -466,6 +467,7 @@ public class AgentsExtendedPositiveTests extends TestBase {
             List<CommonAgentsResponseModel> responseBody = ApiMethodsAgents.getAgentsListOdata(params).jsonPath().getList("value" ,CommonAgentsResponseModel.class);
         }
 
+        @Issue("ED-919")
         @Test
         @Epic("Сервис Deal")
         @Feature("Агенты")
@@ -571,6 +573,7 @@ public class AgentsExtendedPositiveTests extends TestBase {
             List<CommonAgentsResponseModel> responseBody = ApiMethodsAgents.getAgentsListOdata(params).jsonPath().getList("value" ,CommonAgentsResponseModel.class);
         }
 
+        @Issue("ED-919")
         @Test
         @Epic("Сервис Deal")
         @Feature("Агенты")
