@@ -12,6 +12,7 @@ import io.restassured.specification.RequestSpecification;
 
 public class RequestSpecifications extends UrlBase {
     public static RequestSpecification basicRequestSpecification(){
+        RestAssured.requestSpecification = null;
         return RestAssured.
                 given()
                 .filter(CustomAllureListener.withCustomTemplates())
