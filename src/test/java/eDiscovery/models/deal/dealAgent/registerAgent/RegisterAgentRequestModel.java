@@ -1,4 +1,4 @@
-package eDiscovery.models.deal.dealAgent;
+package eDiscovery.models.deal.dealAgent.registerAgent;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;

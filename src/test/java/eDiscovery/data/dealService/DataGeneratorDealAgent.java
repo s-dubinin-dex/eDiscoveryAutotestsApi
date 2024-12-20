@@ -4,8 +4,8 @@ import eDiscovery.apiMethods.deal.ApiMethodsDealAgent;
 import eDiscovery.helpers.enums.HostType;
 import eDiscovery.helpers.enums.SearchPlaceCategoryType;
 import eDiscovery.helpers.enums.SearchPlaceType;
-import eDiscovery.models.deal.dealAgent.RegisterAgentRequestModel;
-import eDiscovery.models.deal.dealAgent.RegisterAgentResponseModel;
+import eDiscovery.models.deal.dealAgent.registerAgent.RegisterAgentRequestModel;
+import eDiscovery.models.deal.dealAgent.registerAgent.RegisterAgentResponseModel;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 

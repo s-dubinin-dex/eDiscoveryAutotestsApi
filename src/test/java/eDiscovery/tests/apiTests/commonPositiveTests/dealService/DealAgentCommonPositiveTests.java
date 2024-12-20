@@ -3,9 +3,10 @@ package eDiscovery.tests.apiTests.commonPositiveTests.dealService;
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsDealAgent;
 import eDiscovery.data.dealService.DataGeneratorDealAgent;
-import eDiscovery.helpers.enums.HostType;
-import eDiscovery.models.deal.dealAgent.RegisterAgentRequestModel;
-import eDiscovery.models.deal.dealAgent.RegisterAgentResponseModel;
+import eDiscovery.models.deal.dealAgent.activeTasks.ActiveTasksRequestsModel;
+import eDiscovery.models.deal.dealAgent.activeTasks.ActiveTasksResponseModel;
+import eDiscovery.models.deal.dealAgent.registerAgent.RegisterAgentRequestModel;
+import eDiscovery.models.deal.dealAgent.registerAgent.RegisterAgentResponseModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
@@ -20,6 +21,35 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Common positive tests: Deal - DealAgent")
 public class DealAgentCommonPositiveTests extends TestBase {
+
+    @Nested
+    @DisplayName("Проверка получения задач агентом")
+    class CheckDealAgentGetActiveTasks{
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Получение задач агентом")
+        @Story("Получение задач агентом")
+        @Severity(SeverityLevel.BLOCKER)
+        @DisplayName("Получение задач агентом")
+        @Description("Тест проверяет возможность получения задач агентом")
+        public void testDealAgentGetsActiveTasks(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithLocalAgentAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            RegisterAgentResponseModel responseAgentCreationBody = DataGeneratorDealAgent.createDealAgentWithOnlyRequiredParametersLocal();
+
+            ActiveTasksRequestsModel activeTasksRequestBody = ActiveTasksRequestsModel.builder().agentId(responseAgentCreationBody.id).build();
+
+            ActiveTasksResponseModel activeTasksResponseBody = ApiMethodsDealAgent.getActiveTasks(activeTasksRequestBody).as(ActiveTasksResponseModel.class);
+
+            assertThat(activeTasksResponseBody.tasksSettings.maxCpuUsagePercentage).isEqualTo(33);
+            assertThat(activeTasksResponseBody.tasksSettings.maxArchiveDepth).isEqualTo(3);
+
+            assertThat(activeTasksResponseBody.tasks).isEmpty();
+        }
+
+    }
 
     @Nested
     @DisplayName("Проверка первичной регистрации агентов")

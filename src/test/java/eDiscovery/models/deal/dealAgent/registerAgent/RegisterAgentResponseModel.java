@@ -1,4 +1,4 @@
-package eDiscovery.models.deal.dealAgent;
+package eDiscovery.models.deal.dealAgent.registerAgent;
 
 public class RegisterAgentResponseModel {
     public String id;
