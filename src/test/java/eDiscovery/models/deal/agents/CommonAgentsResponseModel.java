@@ -1,8 +1,9 @@
 package eDiscovery.models.deal.agents;
 
 import eDiscovery.models.deal.agentActivity.CommonAgentActivityResponseModel;
+import eDiscovery.models.odata.OdataEntityResponseModel;
 
-public class CommonAgentsResponseModel {
+public class CommonAgentsResponseModel extends OdataEntityResponseModel {
 
     public String id;
     public String userName;
