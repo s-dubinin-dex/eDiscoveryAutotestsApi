@@ -66,12 +66,12 @@ tasks.register('copyEnvironmentFile', Copy) {
 
 task testWithEnv(type: Test) {
     // Параметр Gradle, указывающий стенд (dev, test, prod и т.д.)
-    def environment = project.hasProperty('env') ? project.findProperty('env') : 'test'
+//    def environment = project.hasProperty('env') ? project.findProperty('env') : 'test'
 
 //    def environment = 'dev'
 //    def environment = 'test'
 //    def environment = 'stage'
-//    def environment = 'local'
+    def environment = 'local'
 //    def environment = 'stage'
 
     // Установка системных свойств для использования во время выполнения тестов

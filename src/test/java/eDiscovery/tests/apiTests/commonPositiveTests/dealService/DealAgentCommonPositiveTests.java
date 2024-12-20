@@ -27,6 +27,7 @@ public class DealAgentCommonPositiveTests extends TestBase {
     @DisplayName("Регистрация локального агента")
     @Description("Тест проверяет возможность первичной регистрации локального агента")
 //    Добавить тесты на отправку регистрации агента с существующим id или существующим machineName
+    // Добавить тесты на регистрацию агента + запрос задач и проверить что записалась agent Activity
     public void testLocalAgentInitialRegistration(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithLocalAgentAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());

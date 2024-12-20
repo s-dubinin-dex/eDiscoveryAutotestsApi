@@ -23,4 +23,7 @@ public class CommonDealManipulationResponseModel extends OdataEntity {
     public String creatorUserName;
     public ClassifierDealData classifierDealData;
     public String deletedUtc;
+    public String needClassify;
+    public String classifierProfileId;
+
 }
