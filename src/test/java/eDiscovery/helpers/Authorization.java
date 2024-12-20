@@ -12,6 +12,6 @@ public class Authorization {
     }
 
     public static UserInfo getCurrentUserInfo(){
-        return ApiMethodsIdentity.userInfo().as(UserInfo.class);
+        return ApiMethodsIdentity.connectUserInfo().as(UserInfo.class);
     }
 }

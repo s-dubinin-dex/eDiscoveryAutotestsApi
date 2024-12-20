@@ -1,11 +1,23 @@
 package eDiscovery.helpers.enums;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum DealStatus {
     Undefined,
     Waiting,
     Running,
     Stopped,
-    Closed
-    // TODO: добавить конструктор для хранения порядкового номера (в инт) и передачи в тесты
-    // В тестах проверять передачу как текстом, так и числом, или через JSONObject, можно написать в теле теста метод, генерирующий json, а в аннотации теста - раннер (метод соурс на метод, возвращающий все значения из енум)
+    Closed;
+
+    public static List<DealStatus> getValidDealStatuses(){
+        return Arrays.stream(DealStatus.values()).filter(dealStatus -> !getInvalidDealStatuses().contains(dealStatus)).collect(Collectors.toList());
+    }
+
+    public static List<DealStatus> getInvalidDealStatuses(){
+        return Collections.singletonList(DealStatus.Undefined);
+    }
+
 }

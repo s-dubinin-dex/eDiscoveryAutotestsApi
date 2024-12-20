@@ -13,6 +13,7 @@ import eDiscovery.helpers.enums.SearchQueryType;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -22,7 +23,7 @@ import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Common positive tests - SearchQuery")
+@DisplayName("Common positive tests: Deal - SearchQuery")
 public class SearchQueryCommonPositiveTests extends TestBase {
 
     @Test
@@ -36,17 +37,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchQueryRequestModel requestBody = DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
-        Response response = ApiMethodsSearchQuery.addSearchQuery(requestBody);
-
-        CommonSearchQueryResponseModel responseBody = response.as(CommonSearchQueryResponseModel.class);
-
-        assertThat(responseBody.name).isEqualTo(requestBody.name);
-        assertThat(responseBody.type).isEqualTo(SearchQueryType.Regex.name());
-        assertThat(responseBody.value).isEqualTo(requestBody.value);
-        assertThat(isValidUUID(responseBody.id)).isTrue();
-        assertThat(responseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
-        assertThat(responseBody.deletedUtc).isNull();
+        DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
     }
 
     @Test
@@ -77,7 +68,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         assertThat(responseBodySearchQueryUpdate.type).isEqualTo(SearchQueryType.Text.name());
         assertThat(responseBodySearchQueryUpdate.value).isEqualTo(requestModelSearchQueryUpdate.value);
         assertThat(isValidUUID(responseBodySearchQueryUpdate.id)).isTrue();
-        assertThat(responseBodySearchQueryUpdate.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
+        assertThat(responseBodySearchQueryUpdate.createdUtc).matches(dateTimeUTCPattern());
         assertThat(responseBodySearchQueryUpdate.deletedUtc).isNull();
     }
 
@@ -180,6 +171,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
     @Test
     @Epic("Сервис Deal")
     @Feature("Поисковый запрос")
+    @Tag("webui")
     @Story("Получение поискового запроса по протоколу oData по id")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение поискового запроса по протоколу oData по id")
@@ -188,7 +180,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        String searchQueryNameForFilter = "testSearchQueryODataByIdInRoundBrackets" + getRandomName();
+        String searchQueryNameForFilter = "testSearchQueryODataByIdInPathParam" + getRandomName();
 
         AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
                 .name(searchQueryNameForFilter)

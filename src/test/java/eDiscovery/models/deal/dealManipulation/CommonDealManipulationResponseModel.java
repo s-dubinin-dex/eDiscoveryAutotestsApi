@@ -1,13 +1,11 @@
 package eDiscovery.models.deal.dealManipulation;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import eDiscovery.models.OdataEntity;
 import eDiscovery.models.deal.dealTaskProgress.DealTaskProgressModel;
 
 import java.util.List;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class CommonDealManipulationResponseModel {
-
+public class CommonDealManipulationResponseModel extends OdataEntity {
     public String id;
     public String name;
     public String dealPriority;
@@ -24,4 +22,5 @@ public class CommonDealManipulationResponseModel {
     public String creatorUserId;
     public String creatorUserName;
     public ClassifierDealData classifierDealData;
+    public String deletedUtc;
 }

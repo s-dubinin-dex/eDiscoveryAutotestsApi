@@ -16,7 +16,7 @@ import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.DataChecker.isValidUUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Common positive tests - DealAgent")
+@DisplayName("Common positive tests: Deal - DealAgent")
 public class DealAgentCommonPositiveTests extends TestBase {
 
     @Test
@@ -26,6 +26,7 @@ public class DealAgentCommonPositiveTests extends TestBase {
     @Severity(SeverityLevel.BLOCKER)
     @DisplayName("Регистрация локального агента")
     @Description("Тест проверяет возможность первичной регистрации локального агента")
+//    Добавить тесты на отправку регистрации агента с существующим id или существующим machineName
     public void testLocalAgentInitialRegistration(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithLocalAgentAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());

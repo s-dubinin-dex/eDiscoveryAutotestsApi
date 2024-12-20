@@ -1,9 +1,8 @@
 package eDiscovery.models.admin.emplyee;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import eDiscovery.models.OdataEntity;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class CommonEmployeeResponseModel {
+public class CommonEmployeeResponseModel extends OdataEntity {
     public String id;
     public String name;
     public String roleId;

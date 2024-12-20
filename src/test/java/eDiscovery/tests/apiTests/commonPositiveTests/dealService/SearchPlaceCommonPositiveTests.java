@@ -15,6 +15,7 @@ import eDiscovery.helpers.enums.SearchPlaceType;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Common positive tests - SearchPlace")
+@DisplayName("Common positive tests: Deal - SearchPlace")
 public class SearchPlaceCommonPositiveTests extends TestBase {
 
     @Test
@@ -39,20 +40,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchPlaceRequestModel requestBody = DataGeneratorSearchPlace.getSearchPlaceModelWithOnlyRequiredParameters();
-
-        Response response = ApiMethodsSearchPlace.addSearchPlace(requestBody);
-        CommonSearchPlaceResponseModel responseBody = response.as(CommonSearchPlaceResponseModel.class);
-
-        assertThat(responseBody.categoryType).isEqualTo(SearchPlaceCategoryType.FileShare.name());
-        assertThat(responseBody.type).isEqualTo(SearchPlaceType.SMB.name());
-        assertThat(responseBody.parameters).isEqualTo(null);
-        assertThat(responseBody.excludes).isEmpty();
-        assertThat(responseBody.excludes).isInstanceOf(ArrayList.class);
-        assertThat(isValidUUID(responseBody.id)).isTrue();
-        assertThat(responseBody.name).isEqualTo(requestBody.name);
-        assertThat(responseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
-        assertThat(responseBody.deletedUtc).isNull();
+        DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
     }
 
     @Test
@@ -87,7 +75,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         assertThat(responseBodySearchPlaceUpdate.excludes).isInstanceOf(ArrayList.class);
         assertThat(isValidUUID(responseBodySearchPlaceUpdate.id)).isTrue();
         assertThat(responseBodySearchPlaceUpdate.name).isEqualTo(requestBodySearchPlaceUpdate.name);
-        assertThat(responseBodySearchPlaceUpdate.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
+        assertThat(responseBodySearchPlaceUpdate.createdUtc).matches(dateTimeUTCPattern());
         assertThat(responseBodySearchPlaceUpdate.deletedUtc).isNull();
     }
 
@@ -204,9 +192,10 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     @Epic("Сервис Deal")
     @Feature("Поисковый запрос")
     @Story("Получение места поиска по протоколу oData по id")
+    @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение места поиска по протоколу oData по id")
-    @Description("Тест проверяет возможность получения еста поиска по протоколу oData по id в path param")
+    @Description("Тест проверяет возможность получения места поиска по протоколу oData по id в path param")
     public void testGetSearchPlaceODataByIdInPath(){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());

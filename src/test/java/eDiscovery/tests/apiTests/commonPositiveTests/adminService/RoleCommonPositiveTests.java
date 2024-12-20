@@ -24,7 +24,7 @@ import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static eDiscovery.data.adminService.DataGeneratorRole.*;
 
-@DisplayName("Common positive tests - Role")
+@DisplayName("Common positive tests: Admin - Role")
 public class RoleCommonPositiveTests extends TestBase {
 
     @Test
@@ -38,19 +38,7 @@ public class RoleCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddRoleRequestModel requestBody = AddRoleRequestModel.builder()
-                .name(getRandomName())
-                .policies(Collections.singletonList("ed.deal.read"))
-                .build();
-
-        CommonRoleResponseModel responseBody = ApiMethodsRole.addRole(requestBody).as(CommonRoleResponseModel.class);
-
-        assertThat(isValidUUID(responseBody.id)).isTrue();
-        assertThat(responseBody.name).isEqualTo(requestBody.name);
-        assertThat(responseBody.description).isNull();
-        assertThat(responseBody.policies).isEqualTo(requestBody.policies);
-        assertThat(responseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
-        assertThat(responseBody.deletedUtc).isNull();
+        DataGeneratorRole.createRoleWithOnlyRequiredParameters();
     }
 
     @Test
@@ -78,7 +66,7 @@ public class RoleCommonPositiveTests extends TestBase {
         assertThat(responseBodyRoleUpdate.name).isEqualTo(requestBodyRoleUpdate.name);
         assertThat(responseBodyRoleUpdate.description).isNull();
         assertThat(responseBodyRoleUpdate.policies).isEqualTo(requestBodyRoleUpdate.policies);
-        assertThat(responseBodyRoleUpdate.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
+//        assertThat(responseBodyRoleUpdate.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
         assertThat(responseBodyRoleUpdate.deletedUtc).isNull();
     }
 

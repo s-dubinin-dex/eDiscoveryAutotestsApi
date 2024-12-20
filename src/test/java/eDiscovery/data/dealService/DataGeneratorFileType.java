@@ -1,5 +1,6 @@
 package eDiscovery.data.dealService;
 
+import eDiscovery.apiMethods.deal.ApiMethodsFileType;
 import eDiscovery.helpers.enums.FileExtensions;
 import eDiscovery.helpers.enums.FileTypes;
 import eDiscovery.models.deal.fileExtensions.FileExtensionResponseModel;
@@ -75,5 +76,13 @@ public class DataGeneratorFileType {
                 )
         );
     }
+
+    public static FileTypeResponseModel getFileTypeIdByFileType(FileTypes fileType){
+
+        List<FileTypeResponseModel> fileTypes = ApiMethodsFileType.getFileTypeListOData().jsonPath().getList("value", FileTypeResponseModel.class);
+        return fileTypes.stream().filter(e -> e.name.equals(fileType.name())).findFirst().orElse(null);
+
+    }
+
 
 }

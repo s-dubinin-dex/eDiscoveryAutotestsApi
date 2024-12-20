@@ -1,10 +1,9 @@
 package eDiscovery.models.deal.dealProgress;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import eDiscovery.models.OdataEntity;
 import eDiscovery.models.deal.dealTaskProgress.DealTaskProgressModel;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class DealProgressModel {
+public class DealProgressModel extends OdataEntity {
     public String id;
     public DealTaskProgressModel progressInfo;
 }

@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Common positive tests - DealStatusHistory")
+@DisplayName("Common positive tests: Deal - DealStatusHistory")
 public class DealStatusHistoryCommonPositiveTests extends TestBase {
 
     @Test
