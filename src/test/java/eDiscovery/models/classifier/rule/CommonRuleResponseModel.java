@@ -1,13 +1,13 @@
 package eDiscovery.models.classifier.rule;
 
-import eDiscovery.models.OdataEntity;
+import eDiscovery.models.odata.OdataEntityResponseModel;
 import eDiscovery.models.classifier.encryptionPermission.CommonEncryptionPermissionResponseModel;
 import eDiscovery.models.classifier.marker.CommonMarkerResponseModel;
 import eDiscovery.models.classifier.searchQuery.CommonSearchQueryClassifierResponseModel;
 
 import java.util.List;
 
-public class CommonRuleResponseModel extends OdataEntity {
+public class CommonRuleResponseModel extends OdataEntityResponseModel {
     public String id;
     public String name;
     public int order;

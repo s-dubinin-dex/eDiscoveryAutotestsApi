@@ -1,11 +1,11 @@
 package eDiscovery.models.deal.searchPlaceGroup;
 
-import eDiscovery.models.OdataEntity;
+import eDiscovery.models.odata.OdataEntityResponseModel;
 import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
 
 import java.util.List;
 
-public class CommonSearchPlaceGroupResponseModel extends OdataEntity {
+public class CommonSearchPlaceGroupResponseModel extends OdataEntityResponseModel {
     public String id;
     public String name;
     public List<CommonSearchPlaceResponseModel> searchPlaces;

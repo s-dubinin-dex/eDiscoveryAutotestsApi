@@ -1,8 +1,8 @@
 package eDiscovery.models.admin.emplyee;
 
-import eDiscovery.models.OdataEntity;
+import eDiscovery.models.odata.OdataEntityResponseModel;
 
-public class CommonEmployeeResponseModel extends OdataEntity {
+public class CommonEmployeeResponseModel extends OdataEntityResponseModel {
     public String id;
     public String name;
     public String roleId;

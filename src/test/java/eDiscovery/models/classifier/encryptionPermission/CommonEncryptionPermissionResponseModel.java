@@ -1,8 +1,8 @@
 package eDiscovery.models.classifier.encryptionPermission;
 
-import eDiscovery.models.OdataEntity;
+import eDiscovery.models.odata.OdataEntityResponseModel;
 
-public class CommonEncryptionPermissionResponseModel extends OdataEntity {
+public class CommonEncryptionPermissionResponseModel extends OdataEntityResponseModel {
     public String id;
     public int policyId;
     public String name;

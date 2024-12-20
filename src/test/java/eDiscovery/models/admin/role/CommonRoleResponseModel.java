@@ -1,10 +1,10 @@
 package eDiscovery.models.admin.role;
 
-import eDiscovery.models.OdataEntity;
+import eDiscovery.models.odata.OdataEntityResponseModel;
 
 import java.util.List;
 
-public class CommonRoleResponseModel extends OdataEntity {
+public class CommonRoleResponseModel extends OdataEntityResponseModel {
     public String id;
     public String name;
     public List<String> policies;

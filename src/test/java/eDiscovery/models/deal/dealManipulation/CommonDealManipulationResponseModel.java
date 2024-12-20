@@ -1,11 +1,11 @@
 package eDiscovery.models.deal.dealManipulation;
 
-import eDiscovery.models.OdataEntity;
+import eDiscovery.models.odata.OdataEntityResponseModel;
 import eDiscovery.models.deal.dealTaskProgress.DealTaskProgressModel;
 
 import java.util.List;
 
-public class CommonDealManipulationResponseModel extends OdataEntity {
+public class CommonDealManipulationResponseModel extends OdataEntityResponseModel {
     public String id;
     public String name;
     public String dealPriority;
