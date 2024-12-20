@@ -11,8 +11,6 @@ public class AddDealManipulationRequestModel {
     public String name;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public String dealPriority;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    public List<String> fileTypes;
     @JsonInclude()
     public List<String> searchPlaces;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -22,11 +20,11 @@ public class AddDealManipulationRequestModel {
     @JsonInclude()
     public List<DealSearchQueryModel> dealSearchQueries;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public String searchMask;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<String> excludes;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public boolean quarantine;
     @JsonInclude()
     public ClassifierDealData classifierDealData;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String metadataFilterId;
 }

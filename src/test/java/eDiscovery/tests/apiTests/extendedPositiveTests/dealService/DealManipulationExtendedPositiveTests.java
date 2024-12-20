@@ -7,9 +7,8 @@ import eDiscovery.data.dealService.*;
 import eDiscovery.helpers.OdataParametersBuilder;
 import eDiscovery.helpers.enums.DealPriority;
 import eDiscovery.helpers.enums.DealStatus;
-import eDiscovery.helpers.enums.FileTypes;
 import eDiscovery.models.deal.dealManipulation.*;
-import eDiscovery.models.deal.fileType.FileTypeResponseModel;
+import eDiscovery.models.deal.metadataFilter.CommonMetadataFilterResponseBody;
 import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
 import eDiscovery.models.deal.searchPlaceGroup.CommonSearchPlaceGroupResponseModel;
 import eDiscovery.models.deal.searchQuery.CommonSearchQueryResponseModel;
@@ -17,7 +16,6 @@ import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
-import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
@@ -112,20 +110,20 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
         @Feature("Дело")
         @Story("Создание дела")
         @Severity(SeverityLevel.NORMAL)
-        @DisplayName("Создание дела возвращает fileTypes")
-        @Description("Тест проверяет, что при создании дела возвращается fileTypes")
+        @DisplayName("Создание дела возвращает metadataFilterId")
+        @Description("Тест проверяет, что при создании дела возвращается metadataFilterId")
         public void testAddDealReturnsFileTypes(){
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            FileTypeResponseModel fileType = DataGeneratorFileType.getFileTypeIdByFileType(FileTypes.Document);
+            CommonMetadataFilterResponseBody metadataFilter = DataGeneratorMetadataFilter.createBasicMetadataFilter();
 
             AddDealManipulationRequestModel requestBody = DataGeneratorDealManipulation.getDealManipulationModelWithOnlyRequiredParameters();
-            requestBody.fileTypes = Collections.singletonList(fileType.id);
+            requestBody.metadataFilterId = metadataFilter.id;
 
             CommonDealManipulationResponseModel responseBody = ApiMethodsDealManipulation.addDeal(requestBody).as(CommonDealManipulationResponseModel.class);
 
-            assertThat(responseBody.fileTypes).isEqualTo(Collections.singletonList(fileType.id));
+            assertThat(responseBody.metadataFilter).usingRecursiveComparison().isEqualTo(metadataFilter);
         }
 
         @Test
@@ -269,27 +267,6 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
             CommonDealManipulationResponseModel responseBody = ApiMethodsDealManipulation.addDeal(requestBody).as(CommonDealManipulationResponseModel.class);
 
             assertThat(responseBody.excludes).isEqualTo(excludes);
-        }
-
-        @Test
-        @Epic("Сервис Deal")
-        @Feature("Дело")
-        @Story("Создание дела")
-        @Severity(SeverityLevel.NORMAL)
-        @DisplayName("Создание дела возвращает searchMask")
-        @Description("Тест проверяет, что при создании дела возвращается searchMask")
-        public void testAddDealReturnsSearchMask(){
-            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-
-            String searchMask = getRandomName();
-
-            AddDealManipulationRequestModel requestBody = DataGeneratorDealManipulation.getDealManipulationModelWithOnlyRequiredParameters();
-            requestBody.searchMask = searchMask;
-
-            CommonDealManipulationResponseModel responseBody = ApiMethodsDealManipulation.addDeal(requestBody).as(CommonDealManipulationResponseModel.class);
-
-            assertThat(responseBody.searchMask).isEqualTo(searchMask);
         }
 
         @Test
