@@ -11,11 +11,13 @@ public class RegisterAgentRequestModel {
     public String userName;
     @JsonInclude()
     public String machineName;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude()
     public String osVersion;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude()
+    public String agentVersion;
+    @JsonInclude()
     public String categoryType;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude()
     public String type;
     @JsonInclude()
     public String hostType;

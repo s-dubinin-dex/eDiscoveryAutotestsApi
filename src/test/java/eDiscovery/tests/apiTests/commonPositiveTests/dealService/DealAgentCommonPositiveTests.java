@@ -2,6 +2,7 @@ package eDiscovery.tests.apiTests.commonPositiveTests.dealService;
 
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsDealAgent;
+import eDiscovery.data.dealService.DataGeneratorDealAgent;
 import eDiscovery.helpers.enums.HostType;
 import eDiscovery.models.deal.dealAgent.RegisterAgentRequestModel;
 import eDiscovery.models.deal.dealAgent.RegisterAgentResponseModel;
@@ -10,6 +11,7 @@ import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
@@ -19,57 +21,61 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Common positive tests: Deal - DealAgent")
 public class DealAgentCommonPositiveTests extends TestBase {
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Регистрация / Авторизация поисковых агентов")
-    @Story("Регистрация агентов")
-    @Severity(SeverityLevel.BLOCKER)
-    @DisplayName("Регистрация локального агента")
-    @Description("Тест проверяет возможность первичной регистрации локального агента")
-//    Добавить тесты на отправку регистрации агента с существующим id или существующим machineName
-    // Добавить тесты на регистрацию агента + запрос задач и проверить что записалась agent Activity
-    public void testLocalAgentInitialRegistration(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithLocalAgentAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+    @Nested
+    @DisplayName("Проверка первичной регистрации агентов")
+    class CheckDealAgentInitialRegistration{
 
-        RegisterAgentRequestModel requestBody = RegisterAgentRequestModel.builder()
-                .userName(getRandomName())
-                .machineName(getRandomName())
-                .hostType(HostType.Local.name())
-                .build();
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Регистрация агента")
+        @Story("Регистрация агента")
+        @Severity(SeverityLevel.BLOCKER)
+        @DisplayName("Первичная регистрация локального агента")
+        @Description("Тест проверяет возможность первичной регистрации локального агента")
+        public void testLocalAgentInitialRegistration(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithLocalAgentAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        RegisterAgentResponseModel responseBody = ApiMethodsDealAgent.registerAgent(requestBody).as(RegisterAgentResponseModel.class);
+            RegisterAgentRequestModel requestBody = DataGeneratorDealAgent.getDealAgentModelWithOnlyRequiredParametersLocal();
 
-        assertThat(isValidUUID(responseBody.id)).isTrue();
-        assertThat(responseBody.userName).isEqualTo(requestBody.userName);
-        assertThat(responseBody.machineName).isEqualTo(requestBody.machineName);
-        assertThat(responseBody.osVersion).isNull();
-        assertThat(isValidUUID(responseBody.searchPlaceId)).isTrue();
+            RegisterAgentResponseModel responseBody = ApiMethodsDealAgent.registerAgent(requestBody).as(RegisterAgentResponseModel.class);
+
+            assertThat(isValidUUID(responseBody.id)).isTrue();
+            assertThat(responseBody.userName).isEqualTo(requestBody.userName);
+            assertThat(responseBody.machineName).isEqualTo(requestBody.machineName);
+            assertThat(responseBody.agentType).isEqualTo(requestBody.hostType);
+            assertThat(responseBody.osVersion).isEqualTo(requestBody.osVersion);
+            assertThat(responseBody.agentVersion).isEqualTo(requestBody.agentVersion);
+            assertThat(isValidUUID(responseBody.searchPlaceId)).isTrue();
+            assertThat(responseBody.lastActivity).isNull();
+        }
+
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Регистрация агента")
+        @Story("Регистрация агента")
+        @Severity(SeverityLevel.BLOCKER)
+        @DisplayName("Первичная регистрация облачного агента")
+        @Description("Тест проверяет возможность первичной регистрации облачного агента")
+        public void testCloudAgentInitialRegistration(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithCloudAgentAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            RegisterAgentRequestModel requestBody = DataGeneratorDealAgent.getDealAgentModelWithOnlyRequiredParametersCloud();
+
+            RegisterAgentResponseModel responseBody = ApiMethodsDealAgent.registerAgent(requestBody).as(RegisterAgentResponseModel.class);
+
+            assertThat(isValidUUID(responseBody.id)).isTrue();
+            assertThat(responseBody.userName).matches("Cloud_Agent _.*");
+            assertThat(responseBody.machineName).isEqualTo(requestBody.machineName);
+            assertThat(responseBody.agentType).isEqualTo(requestBody.hostType);
+            assertThat(responseBody.osVersion).isEqualTo(requestBody.osVersion);
+            assertThat(responseBody.agentVersion).isEqualTo(requestBody.agentVersion);
+            assertThat(responseBody.searchPlaceId).isNull();
+            assertThat(responseBody.lastActivity).isNull();
+        }
+
     }
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Регистрация / Авторизация поисковых агентов")
-    @Story("Регистрация агентов")
-    @Severity(SeverityLevel.BLOCKER)
-    @DisplayName("Регистрация облачного агента")
-    @Description("Тест проверяет возможность первичной регистрации облачного агента")
-    public void testCloudAgentInitialRegistration(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithCloudAgentAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-
-        RegisterAgentRequestModel requestBody = RegisterAgentRequestModel.builder()
-                .userName(getRandomName())
-                .machineName(getRandomName())
-                .hostType(HostType.Cloud.name())
-                .build();
-
-        RegisterAgentResponseModel responseBody = ApiMethodsDealAgent.registerAgent(requestBody).as(RegisterAgentResponseModel.class);
-
-        assertThat(isValidUUID(responseBody.id)).isTrue();
-        assertThat(responseBody.userName).matches("Cloud_Agent _.*");
-        assertThat(responseBody.machineName).isEqualTo("Cloud");
-        assertThat(responseBody.osVersion).isNull();
-        assertThat(responseBody.searchPlaceId).isNull();
-    }
 }
