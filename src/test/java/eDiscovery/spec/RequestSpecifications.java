@@ -39,4 +39,10 @@ public class RequestSpecifications extends UrlBase {
         return basicRequestSpecificationWithoutAuthorization()
                 .auth().oauth2(Authorization.getAccessToken(AuthorizationScope.getCloudAgentClientScope()));
     }
+
+    public static RequestSpecification multipartRequestSpecificationWithAdminAuthorization(){
+        return basicRequestSpecification()
+                .contentType(ContentType.MULTIPART)
+                .auth().oauth2(Authorization.getAccessToken(AuthorizationScope.getAdminClientScope()));
+    }
 }

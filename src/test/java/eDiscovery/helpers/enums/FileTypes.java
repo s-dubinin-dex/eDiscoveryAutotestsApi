@@ -20,7 +20,10 @@ public enum FileTypes {
     }
 
     public static List<FileTypes> getFileTypesAvailableForDiscoveredDocumentFilter(){
-        return Arrays.stream(FileTypes.values()).filter(fileType -> fileType != FileTypes.Archives).collect(Collectors.toList());
+        return Arrays.stream(FileTypes.values())
+                .filter(fileType -> fileType != FileTypes.Archives)
+                .collect(Collectors.toList()
+                );
     }
 
 }

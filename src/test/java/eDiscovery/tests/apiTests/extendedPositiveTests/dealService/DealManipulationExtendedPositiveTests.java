@@ -17,6 +17,7 @@ import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
@@ -899,7 +900,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
         assertThat(responseBody.name).isEqualTo(responseBodyCreation.name);
         assertThat(responseBody.dealPriority).isEqualTo(responseBodyCreation.dealPriority);
         assertThat(responseBody.quarantine).isEqualTo(responseBodyCreation.quarantine);
-//        assertThat(responseBody.fileTypes).isEqualTo(responseBodyCreation.fileTypes);
+        assertThat(responseBody.metadataFilter).isEqualTo(responseBodyCreation.metadataFilter);
         assertThat(responseBody.searchPlaces).usingRecursiveComparison().isEqualTo(
                 Collections.singletonList(
                         new DealSearchPlaceModel(responseBodyCreation.searchPlaces.get(0).id, responseBodyCreation.searchPlaces.get(0).name)
@@ -919,7 +920,6 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
         assertThat(responseBody.progressInfo).isEqualTo(responseBodyCreation.progressInfo);
         assertThat(responseBody.dealStatus).isEqualTo(responseBodyCreation.dealStatus);
         assertThat(responseBody.excludes).isEqualTo(responseBodyCreation.excludes);
-        assertThat(responseBody.searchMask).isEqualTo(responseBodyCreation.searchMask);
         assertThat(responseBody.classifierDealData.needClassify).isEqualTo(responseBodyCreation.classifierDealData.needClassify);
         assertThat(responseBody.classifierDealData.classifierProfileId).isEqualTo(responseBodyCreation.classifierDealData.classifierProfileId);
         assertThat(responseBody.createdUtc).matches(dateTimeISOPattern());

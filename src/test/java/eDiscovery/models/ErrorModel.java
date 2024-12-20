@@ -24,6 +24,7 @@ public class ErrorModel {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class ErrorModelErrors{
         public ArrayList<ErrorModelDetail> editEntity;
+        public ArrayList<ErrorModelDetail> file;
         public ArrayList<ErrorModelDetail> id;
         public ArrayList<ErrorModelDetail> name;
         public ArrayList<ErrorModelDetail> newEntity;

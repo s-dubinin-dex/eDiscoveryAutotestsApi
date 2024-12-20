@@ -10,5 +10,9 @@ public class DiscoveredDocumentModel {
     public String innerFilePath;
     public String innerFileName;
     public String searchProblemReason;
+    public String documentAuthor;
+    public String documentCreatedUtc;
+    public String documentUpdatedUtc;
+    public int documentSize;
     public String searchPlace;
 }
