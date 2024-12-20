@@ -1,5 +1,7 @@
 package eDiscovery.helpers;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.UUID;
 
 public class DataChecker {
@@ -22,6 +24,15 @@ public class DataChecker {
             return true;
         }
         catch (IllegalArgumentException e){
+            return false;
+        }
+    }
+
+    public static boolean isValidIPAddress(String ip){
+        try {
+            InetAddress inetAddress = InetAddress.getByName(ip);
+            return inetAddress.getHostAddress().equals(ip);
+        } catch (UnknownHostException e){
             return false;
         }
     }
