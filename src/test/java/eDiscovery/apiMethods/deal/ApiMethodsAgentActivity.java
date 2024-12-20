@@ -4,6 +4,9 @@ import eDiscovery.UrlBase;
 import eDiscovery.spec.SpecificationsServer;
 import io.restassured.response.Response;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiMethodsAgentActivity extends UrlBase {
@@ -23,9 +26,14 @@ public class ApiMethodsAgentActivity extends UrlBase {
     }
 
     public static Response getAgentActivityListOdata(){
+        return getAgentActivityListOdata(new HashMap<>());
+    }
+
+    public static Response getAgentActivityListOdata(Map<String, String> params){
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
+                .params(params)
                 .when()
                 .get(ODATA_AGENT_ACTIVITY)
                 .then()

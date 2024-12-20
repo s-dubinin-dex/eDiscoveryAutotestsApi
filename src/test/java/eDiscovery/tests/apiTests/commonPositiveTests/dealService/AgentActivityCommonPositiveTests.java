@@ -10,8 +10,6 @@ import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 @DisplayName("Common positive tests: Deal - AgentActivity")
 public class AgentActivityCommonPositiveTests extends TestBase {
 
@@ -26,7 +24,7 @@ public class AgentActivityCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        List<CommonAgentActivityResponseModel> responseBody = ApiMethodsAgentActivity.getAgentActivityList().jsonPath().getList("", CommonAgentActivityResponseModel.class);
+        ApiMethodsAgentActivity.getAgentActivityList().jsonPath().getList("", CommonAgentActivityResponseModel.class);
     }
 
     @Test
@@ -40,7 +38,7 @@ public class AgentActivityCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        List<CommonAgentActivityResponseModel> responseBody = ApiMethodsAgentActivity.getAgentActivityListOdata().jsonPath().getList("value", CommonAgentActivityResponseModel.class);
+        ApiMethodsAgentActivity.getAgentActivityListOdata().jsonPath().getList("value", CommonAgentActivityResponseModel.class);
     }
 
 }

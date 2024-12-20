@@ -11,4 +11,6 @@ public class ActiveTasksRequestsModel {
     public String idPlace;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public String issueType;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    public String ipAddress;
 }
