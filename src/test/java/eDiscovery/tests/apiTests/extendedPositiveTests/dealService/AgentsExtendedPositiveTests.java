@@ -383,7 +383,7 @@ public class AgentsExtendedPositiveTests extends TestBase {
     }
 
     @Nested
-    @DisplayName("Проверка работы методов с UI для страницы Agent")
+    @DisplayName("Проверка работы методов с UI для страницы списка агентов")
     class CheckGetAgentListUIMethods{
 
         @Test
