@@ -24,9 +24,14 @@ public class ApiMethodsAgents extends UrlBase {
                 .extract().response();
     }
     public static Response getAgentsListOdata(){
+        return getAgentsListOdata(new HashMap<>());
+    }
+
+    public static Response getAgentsListOdata(Map<String, String> params){
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
         return given()
+                .params(params)
                 .when()
                 .get(ODATA_AGENTS)
                 .then()

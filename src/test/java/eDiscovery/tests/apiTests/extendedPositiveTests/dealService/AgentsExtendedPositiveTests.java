@@ -13,11 +13,10 @@ import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 import static eDiscovery.helpers.DataChecker.*;
@@ -28,6 +27,10 @@ public class AgentsExtendedPositiveTests extends TestBase {
 
     private static RegisterAgentResponseModel AGENT_BODY_TO_CHECK;
     private static ActiveTasksRequestsModel ACTIVE_TASK_REQUEST_BODY;
+
+    private static String BEGIN_PERIOD = LocalDate.now().toString();
+    private static String END_PERIOD = LocalDate.now().plusDays(2).toString();
+
 
     @BeforeAll
     public static void setUp(){
@@ -375,6 +378,218 @@ public class AgentsExtendedPositiveTests extends TestBase {
             CommonAgentsResponseModel responseBody = ApiMethodsAgents.getAgentByIdPath(AGENT_BODY_TO_CHECK.id, params).as(CommonAgentsResponseModel.class);
 
             assertThat(responseBody.lastActivity.requestDateTime).matches(dateTimeISOPattern());
+        }
+
+    }
+
+    @Nested
+    @DisplayName("Проверка работы методов с UI для страницы Agent")
+    class CheckGetAgentListUIMethods{
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Агенты")
+        @Story("Получение списка агентов")
+        @Tag("webui")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка агентов для отображения в списке")
+        @Description("Тест проверяет возможность получения списка агентов для отображения в списке")
+        public void testGetAgentListForWebUi(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withFilter("((contains(tolower(userName),'')) or (contains(tolower(machineName),'')))")
+                    .withExpand("lastActivity")
+                    .build();
+
+            List<CommonAgentsResponseModel> responseBody = ApiMethodsAgents.getAgentsListOdata(params).jsonPath().getList("value" ,CommonAgentsResponseModel.class);
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Агенты")
+        @Story("Получение списка агентов")
+        @Tag("webui")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка агентов для отображения в списке с фильтром по периоду регистрации")
+        @Description("Тест проверяет возможность получения списка агентов для отображения в списке с фильтром по периоду регистрации")
+        public void testGetAgentListForWebUiWithFilterCreatedUtc(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withFilter(String.format("((contains(tolower(userName),'')) or (contains(tolower(machineName),''))) and createdUtc ge %s and createdUtc le %s", BEGIN_PERIOD, END_PERIOD))
+                    .withExpand("lastActivity")
+                    .build();
+
+            List<CommonAgentsResponseModel> responseBody = ApiMethodsAgents.getAgentsListOdata(params).jsonPath().getList("value" ,CommonAgentsResponseModel.class);
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Агенты")
+        @Story("Получение списка агентов")
+        @Tag("webui")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка агентов для отображения в списке с фильтром по периоду последней активности")
+        @Description("Тест проверяет возможность получения списка агентов для отображения в списке с фильтром по периоду последней активности")
+        public void testGetAgentListForWebUiWithFilterRequestDateTime(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withFilter(String.format("((contains(tolower(userName),'')) or (contains(tolower(machineName),''))) and lastActivity/requestDateTime ge %s and lastActivity/requestDateTime le %s", BEGIN_PERIOD, END_PERIOD))
+                    .withExpand("lastActivity")
+                    .build();
+
+            List<CommonAgentsResponseModel> responseBody = ApiMethodsAgents.getAgentsListOdata(params).jsonPath().getList("value" ,CommonAgentsResponseModel.class);
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Агенты")
+        @Story("Получение списка агентов")
+        @Tag("webui")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка агентов для отображения в списке с фильтром по типу агента")
+        @Description("Тест проверяет возможность получения списка агентов для отображения в списке с фильтром по типу агента")
+        public void testGetAgentListForWebUiWithFilterAgentType(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withFilter("((contains(tolower(userName),'')) or (contains(tolower(machineName),''))) and agentType eq 'Local'")
+                    .withExpand("lastActivity")
+                    .build();
+
+            List<CommonAgentsResponseModel> responseBody = ApiMethodsAgents.getAgentsListOdata(params).jsonPath().getList("value" ,CommonAgentsResponseModel.class);
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Агенты")
+        @Story("Получение списка агентов")
+        @Tag("webui")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка агентов для отображения в списке с сортировкой по дате регистрации")
+        @Description("Тест проверяет возможность получения списка агентов для отображения в списке с сортировкой по дате регистрации")
+        public void testGetAgentListForWebUiWithSortingCreatedUtc(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withFilter("((contains(tolower(userName),'')) or (contains(tolower(machineName),'')))")
+                    .withOrderBy("createdUtc ASC")
+                    .withExpand("lastActivity")
+                    .build();
+
+            List<CommonAgentsResponseModel> responseBody = ApiMethodsAgents.getAgentsListOdata(params).jsonPath().getList("value" ,CommonAgentsResponseModel.class);
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Агенты")
+        @Story("Получение списка агентов")
+        @Tag("webui")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка агентов для отображения в списке с сортировкой по имени машины")
+        @Description("Тест проверяет возможность получения списка агентов для отображения в списке с сортировкой по имени машины")
+        public void testGetAgentListForWebUiWithSortingMachineName(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withFilter("((contains(tolower(userName),'')) or (contains(tolower(machineName),'')))")
+                    .withOrderBy("machineName ASC")
+                    .withExpand("lastActivity")
+                    .build();
+
+            List<CommonAgentsResponseModel> responseBody = ApiMethodsAgents.getAgentsListOdata(params).jsonPath().getList("value" ,CommonAgentsResponseModel.class);
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Агенты")
+        @Story("Получение списка агентов")
+        @Tag("webui")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка агентов для отображения в списке с сортировкой по последней активности")
+        @Description("Тест проверяет возможность получения списка агентов для отображения в списке с сортировкой по последней активности")
+        public void testGetAgentListForWebUiWithSortingRequestDateTime(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withFilter("((contains(tolower(userName),'')) or (contains(tolower(machineName),'')))")
+                    .withOrderBy("lastActivity/requestDateTime ASC")
+                    .withExpand("lastActivity")
+                    .build();
+
+            List<CommonAgentsResponseModel> responseBody = ApiMethodsAgents.getAgentsListOdata(params).jsonPath().getList("value" ,CommonAgentsResponseModel.class);
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Агенты")
+        @Story("Получение списка агентов")
+        @Tag("webui")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка агентов для отображения в списке с сортировкой по операционной системе")
+        @Description("Тест проверяет возможность получения списка агентов для отображения в списке с сортировкой по операционной системе")
+        public void testGetAgentListForWebUiWithSortingOsVersion(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withFilter("((contains(tolower(userName),'')) or (contains(tolower(machineName),'')))")
+                    .withOrderBy("osVersion ASC")
+                    .withExpand("lastActivity")
+                    .build();
+
+            List<CommonAgentsResponseModel> responseBody = ApiMethodsAgents.getAgentsListOdata(params).jsonPath().getList("value" ,CommonAgentsResponseModel.class);
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Агенты")
+        @Story("Получение списка агентов")
+        @Tag("webui")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка агентов для отображения в списке с сортировкой по типу агента")
+        @Description("Тест проверяет возможность получения списка агентов для отображения в списке с сортировкой по типу агента")
+        public void testGetAgentListForWebUiWithSortingАgentType(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withFilter("((contains(tolower(userName),'')) or (contains(tolower(machineName),'')))")
+                    .withOrderBy("agentType ASC")
+                    .withExpand("lastActivity")
+                    .build();
+
+            List<CommonAgentsResponseModel> responseBody = ApiMethodsAgents.getAgentsListOdata(params).jsonPath().getList("value" ,CommonAgentsResponseModel.class);
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Агенты")
+        @Story("Получение списка агентов")
+        @Tag("webui")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка агентов для отображения в списке с сортировкой по версии агента")
+        @Description("Тест проверяет возможность получения списка агентов для отображения в списке с сортировкой по версии агента")
+        public void testGetAgentListForWebUiWithSortingAgentVersion(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withFilter("((contains(tolower(userName),'')) or (contains(tolower(machineName),'')))")
+                    .withOrderBy("agentVersion ASC")
+                    .withExpand("lastActivity")
+                    .build();
+
+            List<CommonAgentsResponseModel> responseBody = ApiMethodsAgents.getAgentsListOdata(params).jsonPath().getList("value" ,CommonAgentsResponseModel.class);
         }
 
     }
