@@ -1,8 +1,8 @@
 package eDiscovery.models.deal.searchQuery;
 
-import eDiscovery.models.OdataEntity;
+import eDiscovery.models.odata.OdataEntityResponseModel;
 
-public class CommonSearchQueryResponseModel extends OdataEntity {
+public class CommonSearchQueryResponseModel extends OdataEntityResponseModel {
     public String name;
     public String type;
     public String id;

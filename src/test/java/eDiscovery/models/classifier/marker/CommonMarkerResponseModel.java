@@ -1,8 +1,8 @@
 package eDiscovery.models.classifier.marker;
 
-import eDiscovery.models.OdataEntity;
+import eDiscovery.models.odata.OdataEntityResponseModel;
 
-public class CommonMarkerResponseModel extends OdataEntity {
+public class CommonMarkerResponseModel extends OdataEntityResponseModel {
     public String id;
     public String name;
     public String description;

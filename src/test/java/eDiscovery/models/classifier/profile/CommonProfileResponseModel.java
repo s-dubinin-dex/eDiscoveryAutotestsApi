@@ -1,13 +1,13 @@
 package eDiscovery.models.classifier.profile;
 
-import eDiscovery.models.OdataEntity;
+import eDiscovery.models.odata.OdataEntityResponseModel;
 import eDiscovery.models.classifier.encryptionPermission.CommonEncryptionPermissionResponseModel;
 import eDiscovery.models.classifier.marker.CommonMarkerResponseModel;
 import eDiscovery.models.classifier.rule.CommonRuleResponseModel;
 
 import java.util.List;
 
-public class CommonProfileResponseModel extends OdataEntity {
+public class CommonProfileResponseModel extends OdataEntityResponseModel {
     public String id;
     public String name;
     public boolean canClassifyDocumentsWithMarker;
