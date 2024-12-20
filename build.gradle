@@ -72,6 +72,7 @@ task testWithEnv(type: Test) {
 //    def environment = 'test'
 //    def environment = 'stage'
 //    def environment = 'local'
+//    def environment = 'stage'
 
     // Установка системных свойств для использования во время выполнения тестов
     System.setProperty('BASE_URL',              getProperty(environment as String, 'BASE_URL'))
