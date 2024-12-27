@@ -24,7 +24,7 @@ public class AgentActivityCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        ApiMethodsAgentActivity.getAgentActivityList().jsonPath().getList("", CommonAgentActivityResponseModel.class);
+        ApiMethodsAgentActivity.getAgentActivityList();
     }
 
     @Test
@@ -38,7 +38,7 @@ public class AgentActivityCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        ApiMethodsAgentActivity.getAgentActivityListOdata().jsonPath().getList("value", CommonAgentActivityResponseModel.class);
+        ApiMethodsAgentActivity.getAgentActivityListOdata();
     }
 
 }

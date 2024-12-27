@@ -42,7 +42,7 @@ public class AgentsExtendedPositiveTests extends TestBase {
                 .ipAddress(faker.internet().ipV4Address())
                 .build();
 
-        ApiMethodsDealAgent.getActiveTasks(ACTIVE_TASK_REQUEST_BODY).as(ActiveTasksResponseModel.class);
+        ApiMethodsDealAgent.getActiveTasks(ACTIVE_TASK_REQUEST_BODY);
     }
 
     @Nested

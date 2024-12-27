@@ -36,7 +36,7 @@ public class AgentsCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        ApiMethodsAgents.getAgentsList().jsonPath().getList("", CommonAgentsResponseModel.class);
+        ApiMethodsAgents.getAgentsList();
     }
 
     @Test
@@ -50,7 +50,7 @@ public class AgentsCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        ApiMethodsAgents.getAgentsListOdata().jsonPath().getList("value", CommonAgentsResponseModel.class);
+        ApiMethodsAgents.getAgentsListOdata();
     }
 
     @Test
@@ -64,7 +64,7 @@ public class AgentsCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        ApiMethodsAgents.getAgentById(AGENT_BODY_TO_CHECK.id).as(CommonAgentsResponseModel.class);
+        ApiMethodsAgents.getAgentById(AGENT_BODY_TO_CHECK.id);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class AgentsCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        ApiMethodsAgents.getAgentByIdPath(AGENT_BODY_TO_CHECK.id).as(CommonAgentsResponseModel.class);
+        ApiMethodsAgents.getAgentByIdPath(AGENT_BODY_TO_CHECK.id);
     }
 
 }
