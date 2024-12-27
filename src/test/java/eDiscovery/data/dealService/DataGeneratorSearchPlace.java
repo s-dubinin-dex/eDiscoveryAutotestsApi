@@ -98,11 +98,11 @@ public class DataGeneratorSearchPlace {
         return result;
     }
 
-    public static List<String> getValidSearchPlaceCategoryTypes(){
+    public static List<SearchPlaceCategoryType> getValidSearchPlaceCategoryTypes(){
         return SearchPlaceCategoryType.getValidSearchPlaceCategoryTypes();
     }
 
-    public static List<String> getValidSearchPlaceTypes(){
+    public static List<SearchPlaceType> getValidSearchPlaceTypes(){
         return SearchPlaceType.getValidSearchPlaceTypes();
     }
 

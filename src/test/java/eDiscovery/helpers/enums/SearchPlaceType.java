@@ -1,8 +1,9 @@
 package eDiscovery.helpers.enums;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum SearchPlaceType {
     Undefined,
@@ -11,20 +12,16 @@ public enum SearchPlaceType {
     NFS,
     LOCAL;
 
-    public static List<String> getValidSearchPlaceTypes(){
-        List<String> result = new ArrayList<>();
+    public static List<SearchPlaceType> getValidSearchPlaceTypes(){
 
-        for (SearchPlaceType entity: SearchPlaceType.values()){
-            if (entity.equals(SearchPlaceType.Undefined)){
-                continue;
-            }
-            result.add(entity.name());
-        }
-        return result;
+        return Arrays.stream(SearchPlaceType.values())
+                .filter(searchPlaceType -> !getInvalidSearchPlaceTypes().contains(searchPlaceType))
+                .collect(Collectors.toList());
+
     }
 
-    public static List<String> getInvalidSearchPlaceTypes(){
-        return Collections.singletonList(SearchPlaceCategoryType.Undefined.name());
+    public static List<SearchPlaceType> getInvalidSearchPlaceTypes(){
+        return Collections.singletonList(SearchPlaceType.Undefined);
     }
 
 

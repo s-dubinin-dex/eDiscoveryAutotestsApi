@@ -264,19 +264,19 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность создания места поиска c различными c различными categoryType")
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceCategoryTypes")
-    public void testAddSearchPlaceWithDifferentValidCategoryTypes(String categoryType){
+    public void testAddSearchPlaceWithDifferentValidCategoryTypes(SearchPlaceCategoryType categoryType){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
-                .categoryType(categoryType)
+                .categoryType(categoryType.name())
                 .type(SearchPlaceType.FTP.name())
                 .build();
 
         CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
 
-        assertThat(responseBody.categoryType).isEqualTo(categoryType);
+        assertThat(responseBody.categoryType).isEqualTo(categoryType.name());
     }
 // TODO: Добавить проверку создания ARM + Local и FileShare + SMB
 
@@ -288,19 +288,19 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность создания места поиска c различными c type")
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceTypes")
-    public void testAddSearchPlaceWithDifferentValidTypes(String type){
+    public void testAddSearchPlaceWithDifferentValidTypes(SearchPlaceType type){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
                 .name(getRandomName())
                 .categoryType(SearchPlaceCategoryType.Workspace.name())
-                .type(type)
+                .type(type.name())
                 .build();
 
         CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
 
-        assertThat(responseBody.type).isEqualTo(type);
+        assertThat(responseBody.type).isEqualTo(type.name());
     }
 
     @Epic("Сервис Deal")
@@ -515,7 +515,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность изменения categoryType в месте поиска с categoryType = FileShare, если место поиска не используется в деле")
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceCategoryTypes")
-    public void testUpdateSearchPlaceCategoryTypeInFileShareWithoutDeal(String categoryType){
+    public void testUpdateSearchPlaceCategoryTypeInFileShareWithoutDeal(SearchPlaceCategoryType categoryType){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -523,7 +523,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         UpdateSearchPlaceRequestModel requestSearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
                 .name(responseBodySearchPlaceCreation.name)
-                .categoryType(categoryType)
+                .categoryType(categoryType.name())
                 .type(responseBodySearchPlaceCreation.type)
                 .parameters(responseBodySearchPlaceCreation.parameters)
                 .excludes(responseBodySearchPlaceCreation.excludes)
@@ -532,7 +532,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestSearchPlaceUpdate).as(CommonSearchPlaceResponseModel.class);
 
-        assertThat(responseBodySearchPlaceUpdate.categoryType).isEqualTo(categoryType);
+        assertThat(responseBodySearchPlaceUpdate.categoryType).isEqualTo(categoryType.name());
     }
 
     @Epic("Сервис Deal")
@@ -543,7 +543,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность изменения type в месте поиска с categoryType = FileShare, если место поиска не используется в деле")
     @ParameterizedTest
     @MethodSource("eDiscovery.data.dealService.DataGeneratorSearchPlace#getValidSearchPlaceTypes")
-    public void testUpdateSearchPlaceTypeInFileShareWithoutDeal(String type){
+    public void testUpdateSearchPlaceTypeInFileShareWithoutDeal(SearchPlaceType type){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -552,7 +552,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         UpdateSearchPlaceRequestModel requestSearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
                 .name(responseBodySearchPlaceCreation.name)
                 .categoryType(responseBodySearchPlaceCreation.categoryType)
-                .type(type)
+                .type(type.name())
                 .parameters(responseBodySearchPlaceCreation.parameters)
                 .excludes(responseBodySearchPlaceCreation.excludes)
                 .id(responseBodySearchPlaceCreation.id)
@@ -560,7 +560,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestSearchPlaceUpdate).as(CommonSearchPlaceResponseModel.class);
 
-        assertThat(responseBodySearchPlaceUpdate.type).isEqualTo(type);
+        assertThat(responseBodySearchPlaceUpdate.type).isEqualTo(type.name());
     }
 
     @Epic("Сервис Deal")
@@ -1414,12 +1414,12 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность получения списка мест для отображения в списке мест поиска с фильтром по Категории места поиска")
     @ParameterizedTest
     @MethodSource("eDiscovery.helpers.enums.SearchPlaceCategoryType#getValidSearchPlaceCategoryTypes")
-    public void testGetSearchPlaceListWEBUIWithFilterSearchPlaceCategoryType(String searchPlaceCategoryType){
+    public void testGetSearchPlaceListWEBUIWithFilterSearchPlaceCategoryType(SearchPlaceCategoryType searchPlaceCategoryType){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         Map<String, String> params = OdataParametersBuilder.builder()
-                .withFilter(String.format("contains(tolower(name),'') and categoryType eq '%s'", searchPlaceCategoryType))
+                .withFilter(String.format("contains(tolower(name),'') and categoryType eq '%s'", searchPlaceCategoryType.name()))
                 .withOrderBy("createdUtc desc")
                 .withCount(true)
                 .withTop(10)
@@ -1439,12 +1439,12 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность получения списка мест для отображения в списке мест поиска с фильтром по Типу места поиска")
     @ParameterizedTest
     @MethodSource("eDiscovery.helpers.enums.SearchPlaceType#getValidSearchPlaceTypes")
-    public void testGetSearchPlaceListWEBUIWithFilterSearchPlaceType(String searchPlaceType){
+    public void testGetSearchPlaceListWEBUIWithFilterSearchPlaceType(SearchPlaceType searchPlaceType){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         Map<String, String> params = OdataParametersBuilder.builder()
-                .withFilter(String.format("contains(tolower(name),'') and type eq '%s'", searchPlaceType))
+                .withFilter(String.format("contains(tolower(name),'') and type eq '%s'", searchPlaceType.name()))
                 .withOrderBy("createdUtc desc")
                 .withCount(true)
                 .withTop(10)

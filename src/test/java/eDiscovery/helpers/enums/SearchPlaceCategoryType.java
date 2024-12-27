@@ -1,28 +1,24 @@
 package eDiscovery.helpers.enums;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum SearchPlaceCategoryType {
     Undefined,
     Workspace,
     FileShare;
 
-    public static List<String> getValidSearchPlaceCategoryTypes(){
+    public static List<SearchPlaceCategoryType> getValidSearchPlaceCategoryTypes(){
 
-        List<String> result = new ArrayList<>();
+        return Arrays.stream(SearchPlaceCategoryType.values())
+                .filter(searchPlaceCategoryType -> !getInvalidSearchPlaceCategoryTypes().contains(searchPlaceCategoryType))
+                .collect(Collectors.toList());
 
-        for (SearchPlaceCategoryType entity: SearchPlaceCategoryType.values()){
-            if (entity.equals(SearchPlaceCategoryType.Undefined)){
-                continue;
-            }
-            result.add(entity.name());
-        }
-        return result;
     }
 
-    public static List<String> getInvalidSearchPlaceCategoryTypes(){
-        return Collections.singletonList(SearchPlaceCategoryType.Undefined.name());
+    public static List<SearchPlaceCategoryType> getInvalidSearchPlaceCategoryTypes(){
+        return Collections.singletonList(SearchPlaceCategoryType.Undefined);
     }
 }
