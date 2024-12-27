@@ -57,7 +57,7 @@ public class DataGeneratorSearchQuery {
         return result;
     }
 
-    public static List<String> getValidSearchQueryTypes(){
+    public static List<SearchQueryType> getValidSearchQueryTypes(){
         return SearchQueryType.getValidSearchQueryTypes();
     }
 
@@ -83,7 +83,7 @@ public class DataGeneratorSearchQuery {
         return DataGeneratorCommon.getRandomName(257);
     }
 
-    public static List<String> getInvalidSearchQueryTypes(){
+    public static List<SearchQueryType> getInvalidSearchQueryTypes(){
         return SearchQueryType.getInvalidSearchQueryTypes();
     }
 

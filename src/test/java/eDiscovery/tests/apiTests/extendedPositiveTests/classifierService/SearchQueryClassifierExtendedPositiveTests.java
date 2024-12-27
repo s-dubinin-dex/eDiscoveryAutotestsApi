@@ -62,19 +62,19 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность создания поискового запроса c различными type")
     @ParameterizedTest
     @MethodSource("eDiscovery.data.classifierService.DataGeneratorSearchQueryClassifier#getValidSearchQueryTypes")
-    public void testAddSearchQueryClassifierWithDifferentValidTypes(String type){
+    public void testAddSearchQueryClassifierWithDifferentValidTypes(SearchQueryType type){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         AddSearchQueryClassifierRequestModel requestBody = AddSearchQueryClassifierRequestModel.builder()
                 .name(getRandomName())
-                .type(type)
+                .type(type.name())
                 .value("abc")
                 .build();
 
         CommonSearchQueryClassifierResponseModel responseBody = ApiMethodsSearchQueryClassifier.addSearchQuery(requestBody).as(CommonSearchQueryClassifierResponseModel.class);
 
-        assertThat(responseBody.type).isEqualTo(type);
+        assertThat(responseBody.type).isEqualTo(type.name());
     }
 
     @Epic("Сервис Classifier")
@@ -134,7 +134,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     @Description("Тест проверяет возможность изменения type в поисковом запросе")
     @ParameterizedTest
     @MethodSource("eDiscovery.data.classifierService.DataGeneratorSearchQueryClassifier#getValidSearchQueryTypes")
-    public void testUpdateSearchQueryClassifierWithDifferentValidTypes(String type){
+    public void testUpdateSearchQueryClassifierWithDifferentValidTypes(SearchQueryType type){
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -143,13 +143,13 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
         UpdateSearchQueryClassifierRequestModel requestBody = UpdateSearchQueryClassifierRequestModel.builder()
                 .id(responseSearchQueryCreation.id)
                 .name(responseSearchQueryCreation.name)
-                .type(type)
+                .type(type.name())
                 .value("abc")
                 .build();
 
         CommonSearchQueryClassifierResponseModel responseBody = ApiMethodsSearchQueryClassifier.updateSearchQuery(requestBody).as(CommonSearchQueryClassifierResponseModel.class);
 
-        assertThat(responseBody.type).isEqualTo(type);
+        assertThat(responseBody.type).isEqualTo(type.name());
     }
 
     @Epic("Сервис Classifier")
@@ -572,12 +572,12 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     @DisplayName("Получение списка поисковых запросов для отображения в списке поисковых запросов с фильтром по типу поискового запроса")
     @Description("Тест проверяет возможность получения списка поисковых запросов для отображения в списке поисковых запросов с фильтром по типу поискового запроса")
     @MethodSource("eDiscovery.helpers.enums.SearchQueryType#getValidSearchQueryTypes")
-    public void testGetSearchQueryClassifierListForSearchQueriesListWEBUIWithFilterSearchQueryType(String searchQueryType) {
+    public void testGetSearchQueryClassifierListForSearchQueriesListWEBUIWithFilterSearchQueryType(SearchQueryType searchQueryType) {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
         Map<String, String> params = OdataParametersBuilder.builder()
-                .withFilter(String.format("contains(tolower(name),'') and type eq '%s'", searchQueryType))
+                .withFilter(String.format("contains(tolower(name),'') and type eq '%s'", searchQueryType.name()))
                 .withOrderBy("createdUtc desc")
                 .withCount(true)
                 .withTop(10)

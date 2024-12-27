@@ -1,27 +1,23 @@
 package eDiscovery.helpers.enums;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum SearchQueryType {
     Undefined,
     Text,
     Regex;
 
-    public static List<String> getValidSearchQueryTypes(){
-        List<String> result = new ArrayList<>();
+    public static List<SearchQueryType> getValidSearchQueryTypes(){
 
-        for (SearchQueryType entity: SearchQueryType.values()){
-            if (entity.equals(SearchQueryType.Undefined)){
-                continue;
-            }
-            result.add(entity.name());
-        }
-        return result;
+        return Arrays.stream(SearchQueryType.values())
+                .filter(searchQueryType -> !getInvalidSearchQueryTypes().contains(searchQueryType))
+                .collect(Collectors.toList());
     }
 
-    public static List<String> getInvalidSearchQueryTypes(){
-        return Collections.singletonList(SearchQueryType.Undefined.name());
+    public static List<SearchQueryType> getInvalidSearchQueryTypes(){
+        return Collections.singletonList(SearchQueryType.Undefined);
     }
 }
