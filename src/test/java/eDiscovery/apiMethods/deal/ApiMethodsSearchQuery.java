@@ -11,6 +11,7 @@ import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -157,6 +158,11 @@ public class ApiMethodsSearchQuery extends UrlBase {
                 .then()
                 .extract().response();
 
+    }
+
+    @Step("Получение списка поисковых запросов по протоколу oData")
+    public static Response getSearchQueryListOData(){
+        return getSearchQueryListOData(new HashMap<>());
     }
 
     @Step("Получение списка поисковых запросов по протоколу oData")
