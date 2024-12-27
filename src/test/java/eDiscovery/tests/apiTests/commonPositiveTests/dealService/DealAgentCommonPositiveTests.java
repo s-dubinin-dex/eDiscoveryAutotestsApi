@@ -39,7 +39,10 @@ public class DealAgentCommonPositiveTests extends TestBase {
 
             CommonAgentsResponseModel responseAgentCreationBody = DataGeneratorDealAgent.createDealAgentWithOnlyRequiredParametersLocal();
 
-            ActiveTasksRequestsModel activeTasksRequestBody = ActiveTasksRequestsModel.builder().agentId(responseAgentCreationBody.id).build();
+            ActiveTasksRequestsModel activeTasksRequestBody = ActiveTasksRequestsModel.builder()
+                    .agentId(responseAgentCreationBody.id)
+                    .idPlace(responseAgentCreationBody.searchPlace.id)
+                    .build();
 
             ActiveTasksResponseModel activeTasksResponseBody = ApiMethodsDealAgent.getActiveTasks(activeTasksRequestBody).as(ActiveTasksResponseModel.class);
 
