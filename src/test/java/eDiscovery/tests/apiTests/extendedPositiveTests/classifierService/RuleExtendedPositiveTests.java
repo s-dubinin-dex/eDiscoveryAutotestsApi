@@ -212,6 +212,7 @@ public class RuleExtendedPositiveTests extends TestBase {
             assertThat(isValidUUID(responseBody.creatorUserId)).isTrue();
         }
 
+        @Issue("ED-915")
         @Test
         @Epic("Сервис Classifier")
         @Feature("Правило категоризации")
