@@ -166,9 +166,9 @@ public class AgentsExtendedPositiveTests extends TestBase {
         @Feature("Агенты")
         @Story("Получение списка агентов")
         @Severity(SeverityLevel.NORMAL)
-        @DisplayName("Получение списка агентов возвращает searchPlaceId")
-        @Description("Тест проверяет, что получение списка агентов возвращает searchPlaceId")
-        public void testGetAgentListReturnsSearchPlaceId(){
+        @DisplayName("Получение списка агентов возвращает agentVersionString")
+        @Description("Тест проверяет, что получение списка агентов возвращает agentVersionString")
+        public void testGetAgentListReturnsAgentVersionString(){
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
@@ -177,7 +177,50 @@ public class AgentsExtendedPositiveTests extends TestBase {
                     .filter(e -> e.id.equals(AGENT_BODY_TO_CHECK.id))
                     .findFirst().orElse(null);
 
-            assertThat(responseBody.searchPlaceId).isEqualTo(AGENT_BODY_TO_CHECK.searchPlaceId);
+            assertThat(responseBody.agentVersionString).isEqualTo(AGENT_BODY_TO_CHECK.agentVersionString);
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Агенты")
+        @Story("Получение списка агентов")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка агентов возвращает searchPlace")
+        @Description("Тест проверяет, что получение списка агентов возвращает searchPlace")
+        public void testGetAgentListReturnsSearchPlace(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withExpand("lastActivity,searchPlace")
+                    .build();
+
+            CommonAgentsResponseModel responseBody = ApiMethodsAgents.getAgentsListOdata(params).jsonPath().getList("value", CommonAgentsResponseModel.class)
+                    .stream()
+                    .filter(e -> e.id.equals(AGENT_BODY_TO_CHECK.id))
+                    .findFirst().orElse(null);
+
+            assertThat(responseBody.searchPlace).isNotNull();
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Агенты")
+        @Story("Получение списка агентов")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка агентов возвращает createdUtc")
+        @Description("Тест проверяет, что получение списка агентов возвращает createdUtc")
+        public void testGetAgentListReturnsCreatedUtc(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonAgentsResponseModel responseBody = ApiMethodsAgents.getAgentsListOdata().jsonPath().getList("value", CommonAgentsResponseModel.class)
+                    .stream()
+                    .filter(e -> e.id.equals(AGENT_BODY_TO_CHECK.id))
+                    .findFirst().orElse(null);
+
+            assertThat(responseBody.createdUtc).isNotBlank();
+            assertThat(responseBody.createdUtc).matches(dateTimeISOPattern());
         }
 
     }
@@ -287,15 +330,52 @@ public class AgentsExtendedPositiveTests extends TestBase {
         @Feature("Агенты")
         @Story("Получение списка агентов")
         @Severity(SeverityLevel.NORMAL)
-        @DisplayName("Получение агента по id возвращает searchPlaceId")
-        @Description("Тест проверяет, что получение агента по id возвращает searchPlaceId")
-        public void testGetAgentByIdReturnsSearchPlaceId(){
+        @DisplayName("Получение агента по id возвращает agentVersionString")
+        @Description("Тест проверяет, что получение агента по id возвращает agentVersionString")
+        public void testGetAgentByIdReturnsAgentVersionString(){
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
             CommonAgentsResponseModel responseBody = ApiMethodsAgents.getAgentByIdPath(AGENT_BODY_TO_CHECK.id).as(CommonAgentsResponseModel.class);
 
-            assertThat(responseBody.searchPlaceId).isEqualTo(AGENT_BODY_TO_CHECK.searchPlaceId);
+            assertThat(responseBody.agentVersionString).isEqualTo(AGENT_BODY_TO_CHECK.agentVersionString);
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Агенты")
+        @Story("Получение списка агентов")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение агента по id возвращает searchPlace")
+        @Description("Тест проверяет, что получение агента по id возвращает searchPlace")
+        public void testGetAgentByIdReturnsSearchPlace(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withExpand("lastActivity,searchPlace")
+                    .build();
+
+            CommonAgentsResponseModel responseBody = ApiMethodsAgents.getAgentByIdPath(AGENT_BODY_TO_CHECK.id, params).as(CommonAgentsResponseModel.class);
+
+            assertThat(responseBody.searchPlace).isNotNull();
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Агенты")
+        @Story("Получение списка агентов")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение агента по id возвращает createdUtc")
+        @Description("Тест проверяет, что получение агента по id возвращает createdUtc")
+        public void testGetAgentByIdReturnsCreatedUtc(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonAgentsResponseModel responseBody = ApiMethodsAgents.getAgentByIdPath(AGENT_BODY_TO_CHECK.id).as(CommonAgentsResponseModel.class);
+
+            assertThat(responseBody.createdUtc).isNotBlank();
+            assertThat(responseBody.createdUtc).matches(dateTimeISOPattern());
         }
 
         @Test
