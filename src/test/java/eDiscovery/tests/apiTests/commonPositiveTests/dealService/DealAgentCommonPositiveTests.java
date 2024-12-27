@@ -75,8 +75,9 @@ public class DealAgentCommonPositiveTests extends TestBase {
             assertThat(responseBody.machineName).isEqualTo(requestBody.machineName);
             assertThat(responseBody.agentType).isEqualTo(requestBody.hostType);
             assertThat(responseBody.osVersion).isEqualTo(requestBody.osVersion);
-            assertThat(responseBody.agentVersion).isEqualTo(requestBody.agentVersion);
-            assertThat(isValidUUID(responseBody.searchPlaceId)).isTrue();
+            assertThat(responseBody.agentVersion).isEqualTo(300);
+            assertThat(responseBody.agentVersionString).isEqualTo(requestBody.agentVersion);
+            assertThat(isValidUUID(responseBody.searchPlace.id)).isTrue();
             assertThat(responseBody.lastActivity).isNull();
         }
 
@@ -101,8 +102,9 @@ public class DealAgentCommonPositiveTests extends TestBase {
             assertThat(responseBody.machineName).isEqualTo(requestBody.machineName);
             assertThat(responseBody.agentType).isEqualTo(requestBody.hostType);
             assertThat(responseBody.osVersion).isEqualTo(requestBody.osVersion);
-            assertThat(responseBody.agentVersion).isEqualTo(requestBody.agentVersion);
-            assertThat(responseBody.searchPlaceId).isNull();
+            assertThat(responseBody.agentVersion).isEqualTo(300);
+            assertThat(responseBody.agentVersionString).isEqualTo(requestBody.agentVersion);
+            assertThat(responseBody.searchPlace).isNull();
             assertThat(responseBody.lastActivity).isNull();
         }
 
