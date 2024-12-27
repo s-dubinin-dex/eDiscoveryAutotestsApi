@@ -141,4 +141,22 @@ public class ClassifyDocumentExtendedPositiveTests extends TestBase {
 
         ApiMethodsClassifyDocument.classifyDocument(params);
     }
+
+    @Test
+    @Epic("Сервис Classifier")
+    @Feature("Категоризация")
+    @Story("Внешнее API категоризации")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Категоризация документа через внешнее API категоризации без передачи профиля категоризации (должен использоваться профиль по умолчанию)")
+    @Description("Тест проверяет возможность категоризировать документ через внешнее API категоризации без передачи профиля категоризации (должен использоваться профиль по умолчанию)")
+    public void testClassifyDocxDocumentWithDefaultProfile() {
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.multipartRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200BinaryBody());
+
+        Map<String, Object> params = ClassifyDocumentRequestBuilder.builder()
+                .withFile(new File("src/test/resources/testDocuments/categorization/differentFileExtensions/1. Microsoft Word.docx"))
+                .build();
+
+        ApiMethodsClassifyDocument.classifyDocument(params);
+    }
 }
