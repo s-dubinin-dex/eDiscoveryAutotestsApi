@@ -2,11 +2,14 @@ package eDiscovery.tests.apiTests.extendedPositiveTests.classifierService;
 
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.classifier.ApiMethodsClassifyDocument;
+import eDiscovery.data.classifierService.DataGeneratorProfile;
 import eDiscovery.models.classifier.classifyDocument.ClassifyDocumentRequestBuilder;
+import eDiscovery.models.classifier.profile.CommonProfileResponseModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +18,15 @@ import java.util.Map;
 
 @DisplayName("Extended positive tests: Classifier - ClassifyDocument")
 public class ClassifyDocumentExtendedPositiveTests extends TestBase {
+
+    private static CommonProfileResponseModel ACTIVE_PROFILE;
+
+    @BeforeAll
+    public static void setUp(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+
+        ACTIVE_PROFILE = DataGeneratorProfile.createActiveProfileWithOnlyRequiredParameters();
+    }
 
     @Test
     @Epic("Сервис Classifier")
@@ -28,7 +40,7 @@ public class ClassifyDocumentExtendedPositiveTests extends TestBase {
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200BinaryBody());
 
         Map<String, Object> params = ClassifyDocumentRequestBuilder.builder()
-                .withProfileId("8e9b11ea-086d-49a4-8d93-538f4942cd38")
+                .withProfileId(ACTIVE_PROFILE.id)
                 .withFile(new File("src/test/resources/testDocuments/categorization/differentFileExtensions/2. Microsoft Excel.xlsx"))
                 .build();
 
@@ -47,7 +59,7 @@ public class ClassifyDocumentExtendedPositiveTests extends TestBase {
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200BinaryBody());
 
         Map<String, Object> params = ClassifyDocumentRequestBuilder.builder()
-                .withProfileId("8e9b11ea-086d-49a4-8d93-538f4942cd38")
+                .withProfileId(ACTIVE_PROFILE.id)
                 .withFile(new File("src/test/resources/testDocuments/categorization/differentFileExtensions/3. Презентация Microsoft PowerPoint.pptx"))
                 .build();
 
@@ -66,7 +78,7 @@ public class ClassifyDocumentExtendedPositiveTests extends TestBase {
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200BinaryBody());
 
         Map<String, Object> params = ClassifyDocumentRequestBuilder.builder()
-                .withProfileId("8e9b11ea-086d-49a4-8d93-538f4942cd38")
+                .withProfileId(ACTIVE_PROFILE.id)
                 .withFile(new File("src/test/resources/testDocuments/categorization/differentFileExtensions/4. Текстовый документ OpenDocument.odt"))
                 .build();
 
@@ -85,7 +97,7 @@ public class ClassifyDocumentExtendedPositiveTests extends TestBase {
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200BinaryBody());
 
         Map<String, Object> params = ClassifyDocumentRequestBuilder.builder()
-                .withProfileId("8e9b11ea-086d-49a4-8d93-538f4942cd38")
+                .withProfileId(ACTIVE_PROFILE.id)
                 .withFile(new File("src/test/resources/testDocuments/categorization/differentFileExtensions/5. Электронная таблица OpenDocument.ods"))
                 .build();
 
@@ -104,7 +116,7 @@ public class ClassifyDocumentExtendedPositiveTests extends TestBase {
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200BinaryBody());
 
         Map<String, Object> params = ClassifyDocumentRequestBuilder.builder()
-                .withProfileId("8e9b11ea-086d-49a4-8d93-538f4942cd38")
+                .withProfileId(ACTIVE_PROFILE.id)
                 .withFile(new File("src/test/resources/testDocuments/categorization/differentFileExtensions/6. Презентация OpenDocument.odp"))
                 .build();
 
@@ -123,7 +135,7 @@ public class ClassifyDocumentExtendedPositiveTests extends TestBase {
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200BinaryBody());
 
         Map<String, Object> params = ClassifyDocumentRequestBuilder.builder()
-                .withProfileId("8e9b11ea-086d-49a4-8d93-538f4942cd38")
+                .withProfileId(ACTIVE_PROFILE.id)
                 .withFile(new File("src/test/resources/testDocuments/categorization/differentFileExtensions/7. PDF.pdf"))
                 .build();
 
