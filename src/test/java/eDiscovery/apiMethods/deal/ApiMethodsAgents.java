@@ -11,8 +11,19 @@ import static io.restassured.RestAssured.given;
 
 public class ApiMethodsAgents extends UrlBase {
 
-    private static final String AGENTS_AGENTS   = "/Agents/Agents";
-    private static final String ODATA_AGENTS    = "/odata/Agents";
+    private static final String AGENTS_UNIQUE_VERSIONS  = "/Agents/UniqueVersions";
+    private static final String AGENTS_AGENTS           = "/Agents/Agents";
+    private static final String ODATA_AGENTS            = "/odata/Agents";
+
+    public static Response getUniqueAgentVersions(){
+        SpecificationsServer.setBaseUrl(DEAL_URL);
+
+        return given()
+                .when()
+                .get(AGENTS_UNIQUE_VERSIONS)
+                .then()
+                .extract().response();
+    }
 
     public static Response getAgentsList(){
         SpecificationsServer.setBaseUrl(DEAL_URL);
@@ -23,6 +34,7 @@ public class ApiMethodsAgents extends UrlBase {
                 .then()
                 .extract().response();
     }
+
     public static Response getAgentsListOdata(){
         return getAgentsListOdata(new HashMap<>());
     }

@@ -28,6 +28,20 @@ public class AgentsCommonPositiveTests extends TestBase {
     @Epic("Сервис Deal")
     @Feature("Агенты")
     @Story("Получение списка агентов")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Получение количества агентов, сгруппированных по версии ОС и версии агента")
+    @Description("Тест проверяет возможность получения количества агентов, сгруппированных по версии ОС и версии агента")
+    public void testGetUniqueAgentVersionsList(){
+        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+        ApiMethodsAgents.getUniqueAgentVersions();
+    }
+
+    @Test
+    @Epic("Сервис Deal")
+    @Feature("Агенты")
+    @Story("Получение списка агентов")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка агентов")
     @Description("Тест проверяет возможность получения списка агентов")
