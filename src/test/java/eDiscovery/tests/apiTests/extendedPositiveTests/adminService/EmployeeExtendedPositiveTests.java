@@ -13,10 +13,7 @@ import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import java.util.List;
 import java.util.Map;
@@ -181,7 +178,7 @@ public class EmployeeExtendedPositiveTests extends TestBase {
 
             CommonEmployeeResponseModel responseBody = ApiMethodsEmployee.addEmployee(requestBody).as(CommonEmployeeResponseModel.class);
 
-            assertThat(responseBody.createdUtc).matches(DataChecker.dateTimeUTCPattern());
+            assertThat(responseBody.createdUtc).matches(DataChecker.dateTimeCommonPattern());
         }
 
         @Test

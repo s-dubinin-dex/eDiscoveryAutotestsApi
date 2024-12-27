@@ -111,7 +111,7 @@ public class RoleExtendedPositiveTests extends TestBase {
 
             CommonRoleResponseModel responseBody = ApiMethodsRole.addRole(requestBody).as(CommonRoleResponseModel.class);
 
-            assertThat(responseBody.createdUtc).matches(DataChecker.dateTimeUTCPattern());
+            assertThat(responseBody.createdUtc).matches(DataChecker.dateTimeCommonPattern());
         }
 
         @Test

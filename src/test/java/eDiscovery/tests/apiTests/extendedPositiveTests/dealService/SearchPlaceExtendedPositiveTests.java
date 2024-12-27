@@ -19,10 +19,7 @@ import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -30,8 +27,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.*;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
-import static eDiscovery.helpers.DataChecker.dateTimeUTCPattern;
-import static eDiscovery.helpers.DataChecker.isValidUUID;
+import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Extended positive tests: Deal - SearchPlace")
@@ -212,7 +208,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
             CommonSearchPlaceResponseModel responseBody = DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
 
-            assertThat(responseBody.createdUtc).matches(dateTimeUTCPattern());
+            assertThat(responseBody.createdUtc).matches(dateTimeCommonPattern());
         }
 
         @Test

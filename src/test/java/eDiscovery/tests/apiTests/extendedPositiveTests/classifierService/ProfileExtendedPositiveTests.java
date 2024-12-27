@@ -17,10 +17,7 @@ import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -286,7 +283,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
             CommonProfileResponseModel responseBody = DataGeneratorProfile.createProfileWithOnlyRequiredParameters();
-            assertThat(responseBody.createdUtc).matches(dateTimeUTCPattern());
+            assertThat(responseBody.createdUtc).matches(dateTimeCommonPattern());
         }
 
         @Test
@@ -331,7 +328,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
             CommonProfileResponseModel responseBody = DataGeneratorProfile.createProfileWithOnlyRequiredParameters();
-            assertThat(responseBody.updatedUtc).matches(dateTimeUTCPattern());
+            assertThat(responseBody.updatedUtc).matches(dateTimeCommonPattern());
         }
 
         @Test

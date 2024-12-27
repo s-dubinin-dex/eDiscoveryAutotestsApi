@@ -75,7 +75,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         assertThat(responseBodySearchPlaceUpdate.excludes).isInstanceOf(ArrayList.class);
         assertThat(isValidUUID(responseBodySearchPlaceUpdate.id)).isTrue();
         assertThat(responseBodySearchPlaceUpdate.name).isEqualTo(requestBodySearchPlaceUpdate.name);
-        assertThat(responseBodySearchPlaceUpdate.createdUtc).matches(dateTimeUTCPattern());
+        assertThat(responseBodySearchPlaceUpdate.createdUtc).matches(dateTimeCommonPattern());
         assertThat(responseBodySearchPlaceUpdate.deletedUtc).isNull();
     }
 

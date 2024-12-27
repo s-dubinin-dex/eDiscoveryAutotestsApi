@@ -398,7 +398,7 @@ public class MetadataFilterExtendedPositiveTests extends TestBase {
 
         CommonMetadataFilterResponseBody responseBodyAfterDeletion = ApiMethodsMetadataFilter.getMetadataFilterByIdPath(responseBody.id).as(CommonMetadataFilterResponseBody.class);
 
-        assertThat(responseBodyAfterDeletion.deletedUtc).matches(dateTimeUTCPattern());
+        assertThat(responseBodyAfterDeletion.deletedUtc).matches(dateTimeCommonPattern());
 
     }
 
@@ -422,7 +422,7 @@ public class MetadataFilterExtendedPositiveTests extends TestBase {
                 .stream().filter(el -> el.name.equals(responseBody.name)).findFirst().orElse(null);
 
         assertThat(responseBodyAfterDeletion).isNotNull();
-        assertThat(responseBodyAfterDeletion.deletedUtc).matches(dateTimeUTCPattern());
+        assertThat(responseBodyAfterDeletion.deletedUtc).matches(dateTimeCommonPattern());
 
     }
 

@@ -21,7 +21,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
-import static eDiscovery.helpers.DataChecker.dateTimeYYYYMMDDHHmmssPattern;
 import static eDiscovery.helpers.DataChecker.isValidUUID;
 import static org.assertj.core.api.Assertions.assertThat;
 

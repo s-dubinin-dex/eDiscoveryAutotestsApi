@@ -6,6 +6,10 @@ import java.util.UUID;
 
 public class DataChecker {
 
+    public static String dateTimeCommonPattern(){
+        return "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}";
+    }
+
     public static String dateTimeYYYYMMDDHHmmssPattern(){
         return "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}$";
     }

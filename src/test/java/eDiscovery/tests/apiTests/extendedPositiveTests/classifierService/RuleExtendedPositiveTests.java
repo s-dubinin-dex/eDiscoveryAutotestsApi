@@ -16,10 +16,7 @@ import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -244,7 +241,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
             CommonRuleResponseModel responseBody = DataGeneratorRule.createRuleWithOnlyRequiredParameters();
 
-            assertThat(responseBody.createdUtc).matches(dateTimeUTCPattern());
+            assertThat(responseBody.createdUtc).matches(dateTimeCommonPattern());
         }
 
         @Test

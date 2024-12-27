@@ -68,7 +68,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         assertThat(responseBodySearchQueryUpdate.type).isEqualTo(SearchQueryType.Text.name());
         assertThat(responseBodySearchQueryUpdate.value).isEqualTo(requestModelSearchQueryUpdate.value);
         assertThat(isValidUUID(responseBodySearchQueryUpdate.id)).isTrue();
-        assertThat(responseBodySearchQueryUpdate.createdUtc).matches(dateTimeUTCPattern());
+        assertThat(responseBodySearchQueryUpdate.createdUtc).matches(dateTimeCommonPattern());
         assertThat(responseBodySearchQueryUpdate.deletedUtc).isNull();
     }
 
