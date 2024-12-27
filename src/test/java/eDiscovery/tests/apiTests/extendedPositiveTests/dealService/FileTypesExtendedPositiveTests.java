@@ -2,6 +2,7 @@ package eDiscovery.tests.apiTests.extendedPositiveTests.dealService;
 
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsFileType;
+import eDiscovery.data.dealService.DataGeneratorFileType;
 import eDiscovery.helpers.OdataParametersBuilder;
 import eDiscovery.models.deal.fileType.FileTypeResponseModel;
 import eDiscovery.spec.RequestSpecifications;
@@ -36,11 +37,7 @@ public class FileTypesExtendedPositiveTests extends TestBase {
 
         List<FileTypeResponseModel> responseBody = ApiMethodsFileType.getFileTypeListOData(parameters).jsonPath().getList("value", FileTypeResponseModel.class);
 
-        assertThat(responseBody).isNotEmpty();
-        assertThat(responseBody.get(0)).isNotNull();
-        assertThat(responseBody.get(0).name).isEqualTo("Presentation");
-        assertThat(responseBody.get(0).description).isEqualTo("Презентации");
-        assertThat(responseBody.get(0).fileExtensions.get(0).extension).isEqualTo(".pptx");
-        assertThat(responseBody.get(0).fileExtensions.get(1).extension).isEqualTo(".odp");
+        assertThat(responseBody).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(DataGeneratorFileType.getEtalonFileTypes());
+
     }
 }

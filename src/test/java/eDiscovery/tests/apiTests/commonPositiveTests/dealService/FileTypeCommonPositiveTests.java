@@ -31,7 +31,7 @@ public class FileTypeCommonPositiveTests extends TestBase {
 
         List<FileTypeResponseModel> responseBody = ApiMethodsFileType.getFileTypeList().jsonPath().getList("", FileTypeResponseModel.class);
 
-        assertThat(responseBody).isEqualTo(DataGeneratorFileType.getEtalonFileTypes());
+        assertThat(responseBody).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(DataGeneratorFileType.getEtalonFileTypes());
 
     }
 

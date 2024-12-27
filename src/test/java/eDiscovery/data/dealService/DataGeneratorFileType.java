@@ -46,7 +46,10 @@ public class DataGeneratorFileType {
                         FileTypes.Text.name(),
                         FileTypes.Text.description,
                         List.of(
-                                new FileExtensionResponseModel("311b7edf-5a6c-4fc5-9d37-d343d8cc7180", FileExtensions.TXT.extension, null)
+                                new FileExtensionResponseModel("311b7edf-5a6c-4fc5-9d37-d343d8cc7180", FileExtensions.TXT.extension, null),
+                                new FileExtensionResponseModel("26fa2968-f478-4313-886f-8ce50ae8f2cb", FileExtensions.XML.extension, null),
+                                new FileExtensionResponseModel("f0c5959a-9d1b-4dae-aaa6-62c42d9e49db", FileExtensions.HTM.extension, null),
+                                new FileExtensionResponseModel("e3cb6511-ead3-45a3-bd2e-eef0b288c6bf", FileExtensions.HTML.extension, null)
                         )
                 ),
                 new FileTypeResponseModel(
