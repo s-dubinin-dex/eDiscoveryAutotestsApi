@@ -4,15 +4,15 @@ import eDiscovery.apiMethods.deal.ApiMethodsDealAgent;
 import eDiscovery.helpers.enums.HostType;
 import eDiscovery.helpers.enums.SearchPlaceCategoryType;
 import eDiscovery.helpers.enums.SearchPlaceType;
+import eDiscovery.models.deal.agents.CommonAgentsResponseModel;
 import eDiscovery.models.deal.dealAgent.registerAgent.RegisterAgentRequestModel;
-import eDiscovery.models.deal.dealAgent.registerAgent.RegisterAgentResponseModel;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 
 public class DataGeneratorDealAgent {
 
-    public static RegisterAgentResponseModel createDealAgentWithOnlyRequiredParametersLocal(){
-        return ApiMethodsDealAgent.registerAgent(getDealAgentModelWithOnlyRequiredParametersLocal()).as(RegisterAgentResponseModel.class);
+    public static CommonAgentsResponseModel createDealAgentWithOnlyRequiredParametersLocal(){
+        return ApiMethodsDealAgent.registerAgent(getDealAgentModelWithOnlyRequiredParametersLocal()).as(CommonAgentsResponseModel.class);
     }
 
     public static RegisterAgentRequestModel getDealAgentModelWithOnlyRequiredParametersLocal(){
@@ -23,8 +23,8 @@ public class DataGeneratorDealAgent {
         return requestModel;
     }
 
-    public static RegisterAgentResponseModel createDealAgentWithOnlyRequiredParametersCloud(){
-        return ApiMethodsDealAgent.registerAgent(getDealAgentModelWithOnlyRequiredParametersCloud()).as(RegisterAgentResponseModel.class);
+    public static CommonAgentsResponseModel createDealAgentWithOnlyRequiredParametersCloud(){
+        return ApiMethodsDealAgent.registerAgent(getDealAgentModelWithOnlyRequiredParametersCloud()).as(CommonAgentsResponseModel.class);
     }
 
     public static RegisterAgentRequestModel getDealAgentModelWithOnlyRequiredParametersCloud(){

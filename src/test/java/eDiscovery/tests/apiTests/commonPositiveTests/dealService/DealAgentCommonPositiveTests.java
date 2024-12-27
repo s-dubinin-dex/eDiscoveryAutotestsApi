@@ -3,10 +3,10 @@ package eDiscovery.tests.apiTests.commonPositiveTests.dealService;
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsDealAgent;
 import eDiscovery.data.dealService.DataGeneratorDealAgent;
+import eDiscovery.models.deal.agents.CommonAgentsResponseModel;
 import eDiscovery.models.deal.dealAgent.activeTasks.ActiveTasksRequestsModel;
 import eDiscovery.models.deal.dealAgent.activeTasks.ActiveTasksResponseModel;
 import eDiscovery.models.deal.dealAgent.registerAgent.RegisterAgentRequestModel;
-import eDiscovery.models.deal.dealAgent.registerAgent.RegisterAgentResponseModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
@@ -37,7 +37,7 @@ public class DealAgentCommonPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithLocalAgentAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            RegisterAgentResponseModel responseAgentCreationBody = DataGeneratorDealAgent.createDealAgentWithOnlyRequiredParametersLocal();
+            CommonAgentsResponseModel responseAgentCreationBody = DataGeneratorDealAgent.createDealAgentWithOnlyRequiredParametersLocal();
 
             ActiveTasksRequestsModel activeTasksRequestBody = ActiveTasksRequestsModel.builder().agentId(responseAgentCreationBody.id).build();
 
@@ -68,7 +68,7 @@ public class DealAgentCommonPositiveTests extends TestBase {
 
             RegisterAgentRequestModel requestBody = DataGeneratorDealAgent.getDealAgentModelWithOnlyRequiredParametersLocal();
 
-            RegisterAgentResponseModel responseBody = ApiMethodsDealAgent.registerAgent(requestBody).as(RegisterAgentResponseModel.class);
+            CommonAgentsResponseModel responseBody = ApiMethodsDealAgent.registerAgent(requestBody).as(CommonAgentsResponseModel.class);
 
             assertThat(isValidUUID(responseBody.id)).isTrue();
             assertThat(responseBody.userName).isEqualTo(requestBody.userName);
@@ -94,7 +94,7 @@ public class DealAgentCommonPositiveTests extends TestBase {
 
             RegisterAgentRequestModel requestBody = DataGeneratorDealAgent.getDealAgentModelWithOnlyRequiredParametersCloud();
 
-            RegisterAgentResponseModel responseBody = ApiMethodsDealAgent.registerAgent(requestBody).as(RegisterAgentResponseModel.class);
+            CommonAgentsResponseModel responseBody = ApiMethodsDealAgent.registerAgent(requestBody).as(CommonAgentsResponseModel.class);
 
             assertThat(isValidUUID(responseBody.id)).isTrue();
             assertThat(responseBody.userName).matches("Cloud_Agent _.*");

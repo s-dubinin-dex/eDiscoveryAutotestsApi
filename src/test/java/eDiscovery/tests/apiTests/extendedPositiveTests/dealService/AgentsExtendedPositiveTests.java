@@ -7,8 +7,6 @@ import eDiscovery.data.dealService.DataGeneratorDealAgent;
 import eDiscovery.helpers.OdataParametersBuilder;
 import eDiscovery.models.deal.agents.CommonAgentsResponseModel;
 import eDiscovery.models.deal.dealAgent.activeTasks.ActiveTasksRequestsModel;
-import eDiscovery.models.deal.dealAgent.activeTasks.ActiveTasksResponseModel;
-import eDiscovery.models.deal.dealAgent.registerAgent.RegisterAgentResponseModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
@@ -25,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DisplayName("Extended positive tests: Deal - Agents")
 public class AgentsExtendedPositiveTests extends TestBase {
 
-    private static RegisterAgentResponseModel AGENT_BODY_TO_CHECK;
+    private static CommonAgentsResponseModel AGENT_BODY_TO_CHECK;
     private static ActiveTasksRequestsModel ACTIVE_TASK_REQUEST_BODY;
 
     private static String BEGIN_PERIOD = LocalDate.now().toString();

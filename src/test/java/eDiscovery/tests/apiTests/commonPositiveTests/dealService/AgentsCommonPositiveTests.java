@@ -4,7 +4,6 @@ import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsAgents;
 import eDiscovery.data.dealService.DataGeneratorDealAgent;
 import eDiscovery.models.deal.agents.CommonAgentsResponseModel;
-import eDiscovery.models.deal.dealAgent.registerAgent.RegisterAgentResponseModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
@@ -16,7 +15,7 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Common positive tests: Deal - Agents")
 public class AgentsCommonPositiveTests extends TestBase {
 
-    private static RegisterAgentResponseModel AGENT_BODY_TO_CHECK;
+    private static CommonAgentsResponseModel AGENT_BODY_TO_CHECK;
 
     @BeforeAll
     public static void setUp(){
