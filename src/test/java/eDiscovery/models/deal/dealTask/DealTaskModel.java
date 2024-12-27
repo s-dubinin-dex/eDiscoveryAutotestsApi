@@ -8,6 +8,7 @@ public class DealTaskModel {
     public String id;
     public String dealPriority;
     public String taskType;
+    public String agentId;
     public String dealId;
     public String dealName;
     public CommonSearchPlaceResponseModel searchPlace;

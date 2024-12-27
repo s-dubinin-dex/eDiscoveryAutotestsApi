@@ -4,5 +4,5 @@ import java.util.List;
 
 public class ActiveTasksResponseModel {
     public TaskSettingsResponseModel tasksSettings;
-    public List<TasksResponseModel> tasks;
+    public List<DealAgentTaskModel> tasks;
 }
