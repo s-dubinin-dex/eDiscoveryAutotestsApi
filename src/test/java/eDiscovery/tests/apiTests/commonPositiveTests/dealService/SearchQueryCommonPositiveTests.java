@@ -37,7 +37,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
         SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
+        DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
     }
 
     @Test
@@ -53,19 +53,14 @@ public class SearchQueryCommonPositiveTests extends TestBase {
 
         CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        UpdateSearchQueryRequestModel requestModelSearchQueryUpdate = UpdateSearchQueryRequestModel.builder()
-                .name(getRandomName())
-                .type(SearchQueryType.Text.name())
-                .value("\\d{11}")
-                .id(responseBodySearchQueryCreation.id)
-                .build();
+        UpdateSearchQueryRequestModel requestModelSearchQueryUpdate = new UpdateSearchQueryRequestModel(responseBodySearchQueryCreation);
 
         Response responseSearchQueryUpdate = ApiMethodsSearchQuery.updateSearchQuery(requestModelSearchQueryUpdate);
 
         CommonSearchQueryResponseModel responseBodySearchQueryUpdate = responseSearchQueryUpdate.as(CommonSearchQueryResponseModel.class);
 
         assertThat(responseBodySearchQueryUpdate.name).isEqualTo(requestModelSearchQueryUpdate.name);
-        assertThat(responseBodySearchQueryUpdate.type).isEqualTo(SearchQueryType.Text.name());
+        assertThat(responseBodySearchQueryUpdate.type).isEqualTo(requestModelSearchQueryUpdate.type);
         assertThat(responseBodySearchQueryUpdate.value).isEqualTo(requestModelSearchQueryUpdate.value);
         assertThat(isValidUUID(responseBodySearchQueryUpdate.id)).isTrue();
         assertThat(responseBodySearchQueryUpdate.createdUtc).matches(dateTimeCommonPattern());

@@ -1,11 +1,12 @@
 package eDiscovery.models.deal.searchQuery;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 
 @Builder
+@AllArgsConstructor
 public class UpdateSearchQueryRequestModel {
-    //TODO: Подумать, как сделать конструктор копирования. Сделать констраутор, который принимает объект AddSearchQuery, а возвращается UpdateSearchQuery
     @JsonInclude()
     public String name;
     @JsonInclude()
@@ -14,4 +15,13 @@ public class UpdateSearchQueryRequestModel {
     public String value;
     @JsonInclude()
     public String id;
+
+    public UpdateSearchQueryRequestModel(CommonSearchQueryResponseModel creationResponseBody){
+        this(
+                creationResponseBody.name,
+                creationResponseBody.type,
+                creationResponseBody.value,
+                creationResponseBody.id
+        );
+    }
 }
