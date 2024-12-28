@@ -7,6 +7,9 @@ import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class ApiMethodsRole extends UrlBase {
@@ -75,7 +78,15 @@ public class ApiMethodsRole extends UrlBase {
     @Step("Получение списка ролей по протоколу oData")
     public static Response getRolesListOData(){
         SpecificationsServer.setBaseUrl(ADMIN_URL);
+        return getRolesListOData(new HashMap<>());
+
+    }
+
+    @Step("Получение списка ролей по протоколу oData")
+    public static Response getRolesListOData(Map<String, String> params){
+        SpecificationsServer.setBaseUrl(ADMIN_URL);
         return given()
+                .params(params)
                 .when()
                 .get(ODATA_ROLE)
                 .then()

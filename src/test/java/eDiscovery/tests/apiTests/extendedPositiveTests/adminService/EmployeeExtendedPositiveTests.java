@@ -3,12 +3,10 @@ package eDiscovery.tests.apiTests.extendedPositiveTests.adminService;
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.admin.ApiMethodsEmployee;
 import eDiscovery.data.adminService.DataGeneratorEmployee;
-import eDiscovery.helpers.DataChecker;
 import eDiscovery.helpers.OdataParametersBuilder;
 import eDiscovery.helpers.admin.PredefinedRoles;
-import eDiscovery.helpers.admin.RoleHelper;
-import eDiscovery.models.admin.emplyee.AddEmployeeRequestModel;
 import eDiscovery.models.admin.emplyee.CommonEmployeeResponseModel;
+import eDiscovery.models.odata.OdataListResponseModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
@@ -18,185 +16,282 @@ import org.junit.jupiter.api.*;
 import java.util.List;
 import java.util.Map;
 
-import static eDiscovery.data.DataGeneratorCommon.getRandomName;
-import static eDiscovery.helpers.DataChecker.isValidUUID;
+import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-@DisplayName("Extended positive tests: Admin - Employee")
+@DisplayName("Admin - Employee: Расширенные позитивные тесты")
 public class EmployeeExtendedPositiveTests extends TestBase {
 
-    @Test
-    @Epic("Сервис Admin")
-    @Feature("Пользователь")
-    @Story("Получение списка пользователей")
-    @Tag("webui")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Получение списка сотрудников для выпадающего списка сотрудников")
-    @Description("Тест проверяет возможность получения списка сотрудников для выпадающего списка сотрудников")
-    public void testGetEmployeeListWEBUIForFilterEmployee(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+    @Nested
+    @DisplayName("Admin - Employee: Проверка odata параметров при получении списка пользователей")
+    class CheckGetEmployeeListOdataParameters{
 
-        Map<String, String> parameters = OdataParametersBuilder.builder()
-                .withFilter("contains(tolower(name),'')")
-                .withCount(true)
-                .withTop(10)
-                .withSkip(0)
-                .build();
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Получение списка пользователей")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка пользователей с фильтрацией по полю name")
+        @Description("Тест проверяет возможность получения списка пользователей с фильтрацией по полю name")
+        public void testGetEmployeeListWithFilterName(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        List<CommonEmployeeResponseModel> responseBody = ApiMethodsEmployee.getEmployeeListOData(parameters).jsonPath().getList("value", CommonEmployeeResponseModel.class);
+            Map<String, String> parameters = OdataParametersBuilder.builder()
+                    .withFilter("contains(tolower(name),'')")
+                    .build();
+
+            ApiMethodsEmployee.getEmployeeListOData(parameters);
+        }
+
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Получение списка пользователей")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка пользователей с фильтрацией по роли пользователя")
+        @Description("Тест проверяет возможность получения списка пользователей с фильтрацией по роли пользователя")
+        public void testGetEmployeeListWithFilterRole(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> parameters = OdataParametersBuilder.builder()
+                    .withFilter(String.format("role eq '%s'", PredefinedRoles.FULL_WRITE.name))
+                    .build();
+
+            ApiMethodsEmployee.getEmployeeListOData(parameters);
+        }
+
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Получение списка пользователей")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка пользователей с сортировкой по дате создания")
+        @Description("Тест проверяет возможность получения списка пользователей с сортировкой по дате создания")
+        public void testGetEmployeeListWithSortingCreatedUtc(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> parameters = OdataParametersBuilder.builder()
+                    .withOrderBy("createdUtc desc")
+                    .build();
+
+            ApiMethodsEmployee.getEmployeeListOData(parameters);
+        }
+
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Получение списка пользователей")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка пользователей с сортировкой по ФИО")
+        @Description("Тест проверяет возможность получения списка пользователей с сортировкой по ФИО")
+        public void testGetEmployeeListWithSortingName(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> parameters = OdataParametersBuilder.builder()
+                    .withOrderBy("name asc")
+                    .build();
+
+            ApiMethodsEmployee.getEmployeeListOData(parameters);
+        }
+
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Получение списка пользователей")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка пользователей с сортировкой по роли пользователя")
+        @Description("Тест проверяет возможность получения списка пользователей с сортировкой по роли пользователя")
+        public void testGetEmployeeListWithSortingRole(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> parameters = OdataParametersBuilder.builder()
+                    .withOrderBy("role asc")
+                    .build();
+
+            ApiMethodsEmployee.getEmployeeListOData(parameters);
+        }
+
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Получение списка пользователей")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка пользователей с сортировкой по email")
+        @Description("Тест проверяет возможность получения списка пользователей с сортировкой по роли email")
+        public void testGetEmployeeListWithSortingEmail(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> parameters = OdataParametersBuilder.builder()
+                    .withOrderBy("email asc")
+                    .build();
+
+            ApiMethodsEmployee.getEmployeeListOData(parameters);
+        }
+
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Получение списка пользователей")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка пользователей с подсчётом количества результатов")
+        @Description("Тест проверяет возможность получения списка пользователей с подсчётом количества результатов")
+        public void testGetEmployeeListWithCount(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> parameters = OdataParametersBuilder.builder()
+                    .withCount(true)
+                    .build();
+
+            OdataListResponseModel responseBodyWithCount = ApiMethodsEmployee.getEmployeeListOData(parameters).as(OdataListResponseModel.class);
+
+            assertThat(responseBodyWithCount).isNotNull();
+        }
+
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Получение списка пользователей")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка пользователей с ограничением количества результатов = 100")
+        @Description("Тест проверяет возможность получения списка пользователей с ограничением количества результатов = 100")
+        public void testGetEmployeeListWithTop100(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> parameters = OdataParametersBuilder.builder()
+                    .withTop(100)
+                    .build();
+
+            ApiMethodsEmployee.getEmployeeListOData(parameters);
+        }
+
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Получение списка пользователей")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка пользователей с пропуском первых 10 результатов")
+        @Description("Тест проверяет возможность получения списка пользователей с пропуском первых 10 результатов")
+        public void testGetEmployeeListWithSkip10(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            Map<String, String> parameters = OdataParametersBuilder.builder()
+                    .withSkip(10)
+                    .build();
+
+            ApiMethodsEmployee.getEmployeeListOData(parameters);
+        }
+
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Получение списка пользователей")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка пользователей включая удалённых пользователей")
+        @Description("Тест проверяет возможность получения списка пользователей включая удалённых пользователей")
+        public void testGetEmployeeListWithIncludeDeleted(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonEmployeeResponseModel employeeForDeletion = DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters().as(CommonEmployeeResponseModel.class);
+
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
+            ApiMethodsEmployee.deleteEmployee(employeeForDeletion.id);
+
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+
+            Map<String, String> parameters = OdataParametersBuilder.builder()
+                    .withIncludeDeleted(true)
+                    .build();
+
+            List<CommonEmployeeResponseModel> employeeListWithoutDeleted = ApiMethodsEmployee.getEmployeeListOData().jsonPath().getList("value", CommonEmployeeResponseModel.class);
+            List<CommonEmployeeResponseModel> employeeListWithDeleted = ApiMethodsEmployee.getEmployeeListOData(parameters).jsonPath().getList("value", CommonEmployeeResponseModel.class);
+
+            assertThat(employeeListWithoutDeleted.stream().filter(employee -> employee.id.equals(employeeForDeletion.id))).hasSize(0);
+            assertThat(employeeListWithDeleted.stream().filter(employee -> employee.id.equals(employeeForDeletion.id))).hasSize(1);
+        }
+
     }
 
     @Nested
-    @DisplayName("Проверка заполнения полей Admin - Employee в теле ответа при создании")
-    class CheckEmployeeCreationResponseFields{
+    @DisplayName("Admin - Employee: Проверка полей удалённого пользователя в списке")
+    class CheckDeletedEmployeeInList{
 
         @Test
         @Epic("Сервис Admin")
         @Feature("Пользователь")
-        @Story("Создание пользователя")
-        @Severity(SeverityLevel.CRITICAL)
-        @DisplayName("При создании пользователя возвращается корректный id")
-        @Description("Тест проверяет, что при создании пользователя возвращается корректный id")
-        public void testAddEmployeeReturnsValidId(){
+        @Story("Получение списка пользователей")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей в теле ответа при получении списка пользователей по удалённому пользователю")
+        @Description("Тест проверяет поля в теле ответа при получении списка пользователей по удалённому пользователю")
+        public void testGetDeletedEmployeeWithOnlyRequiredParametersFromListOdataCheckResponseBody(){
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonEmployeeResponseModel responseBody = DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters().as(CommonEmployeeResponseModel.class);
+            CommonEmployeeResponseModel employeeForDeletion = DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters().as(CommonEmployeeResponseModel.class);
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
+            ApiMethodsEmployee.deleteEmployee(employeeForDeletion.id);
 
-            assertThat(isValidUUID(responseBody.id)).isTrue();
-        }
-
-        @Test
-        @Epic("Сервис Admin")
-        @Feature("Пользователь")
-        @Story("Создание пользователя")
-        @Severity(SeverityLevel.CRITICAL)
-        @DisplayName("При создании пользователя возвращается name, переданный при создании")
-        @Description("Тест проверяет, что при создании пользователя возвращается name, переданный при создании")
-        public void testAddEmployeeReturnsName(){
-            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-
-            AddEmployeeRequestModel requestBody = DataGeneratorEmployee.getAddEmployeeModelWithOnlyRequiredParameters();
-
-            CommonEmployeeResponseModel responseBody = ApiMethodsEmployee.addEmployee(requestBody).as(CommonEmployeeResponseModel.class);
-
-            assertThat(responseBody.name).isEqualTo(requestBody.name);
-        }
-
-        @Test
-        @Epic("Сервис Admin")
-        @Feature("Пользователь")
-        @Story("Создание пользователя")
-        @Severity(SeverityLevel.CRITICAL)
-        @DisplayName("При создании пользователя возвращается roleId, переданный при создании")
-        @Description("Тест проверяет, что при создании пользователя возвращается roleId, переданный при создании")
-        public void testAddEmployeeReturnsRoleId(){
-            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-
-            AddEmployeeRequestModel requestBody = DataGeneratorEmployee.getAddEmployeeModelWithOnlyRequiredParameters();
-
-            CommonEmployeeResponseModel responseBody = ApiMethodsEmployee.addEmployee(requestBody).as(CommonEmployeeResponseModel.class);
-
-            assertThat(responseBody.roleId).isEqualTo(requestBody.roleId);
-        }
-
-        @Test
-        @Epic("Сервис Admin")
-        @Feature("Пользователь")
-        @Story("Создание пользователя")
-        @Severity(SeverityLevel.CRITICAL)
-        @DisplayName("При создании пользователя возвращается email, переданный при создании")
-        @Description("Тест проверяет, что при создании пользователя возвращается email, переданный при создании")
-        public void testAddEmployeeReturnsEmail(){
-            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-
-            AddEmployeeRequestModel requestBody = DataGeneratorEmployee.getAddEmployeeModelWithOnlyRequiredParameters();
-
-            CommonEmployeeResponseModel responseBody = ApiMethodsEmployee.addEmployee(requestBody).as(CommonEmployeeResponseModel.class);
-
-            assertThat(responseBody.email).isEqualTo(requestBody.email);
-        }
-
-        @Test
-        @Epic("Сервис Admin")
-        @Feature("Пользователь")
-        @Story("Создание пользователя")
-        @Severity(SeverityLevel.CRITICAL)
-        @DisplayName("При создании пользователя возвращается название переданной роли")
-        @Description("Тест проверяет, что при создании пользователя возвращается название переданной роли")
-        public void testAddEmployeeReturnsRole(){
-            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-
-            PredefinedRoles role = PredefinedRoles.FULL_WRITE;
-
-            AddEmployeeRequestModel requestBody = AddEmployeeRequestModel.builder()
-                    .name(getRandomName())
-                    .roleId(RoleHelper.getRoleByName(role.name).id)
-                    .email(faker.internet().emailAddress())
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withIncludeDeleted(true)
                     .build();
 
-            CommonEmployeeResponseModel responseBody = ApiMethodsEmployee.addEmployee(requestBody).as(CommonEmployeeResponseModel.class);
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+            CommonEmployeeResponseModel deletedEmployeeResponseBody = ApiMethodsEmployee.getEmployeeListOData(params).jsonPath().getList("value", CommonEmployeeResponseModel.class).stream()
+                    .filter(element -> element.id.equals(employeeForDeletion.id))
+                    .findFirst().orElse(null);
 
-            assertThat(responseBody.role).isEqualTo(role.name);
+            assertThat(deletedEmployeeResponseBody).isNotNull();
+
+            assertAll(
+                    () -> assertThat(deletedEmployeeResponseBody.id).isEqualTo(employeeForDeletion.id),
+                    () -> assertThat(deletedEmployeeResponseBody.name).isEqualTo(employeeForDeletion.name),
+                    () -> assertThat(deletedEmployeeResponseBody.roleId).isEqualTo(employeeForDeletion.roleId),
+                    () -> assertThat(deletedEmployeeResponseBody.email).isEqualTo(String.format("%s.deleted#%s", employeeForDeletion.id, employeeForDeletion.email)),
+                    () -> assertThat(deletedEmployeeResponseBody.role).isEqualTo(employeeForDeletion.role),
+                    () -> assertThat(deletedEmployeeResponseBody.activationDate).isNull(),
+                    () -> assertThat(deletedEmployeeResponseBody.createdUtc).matches(dateTimeCommonPattern()),
+                    () -> assertThat(deletedEmployeeResponseBody.deletedUtc).matches(dateTimeCommonPattern())
+            );
+
         }
+
+    }
+
+    @Nested
+    @DisplayName("Admin - Employee: Проверка работы методов, используемых на UI")
+    class CheckEmployeeUIMethods{
 
         @Test
         @Epic("Сервис Admin")
         @Feature("Пользователь")
-        @Story("Создание пользователя")
-        @Severity(SeverityLevel.CRITICAL)
-        @DisplayName("При создании пользователя activation date = null")
-        @Description("Тест проверяет, что при создании пользователя activation date = null")
-        public void testAddEmployeeReturnsNullActivationDate(){
+        @Story("Получение списка пользователей")
+        @Tag("webui")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка пользователей для выпадающего списка пользователей")
+        @Description("Тест проверяет возможность получения списка пользователей для выпадающего списка пользователей")
+        public void testGetEmployeeListWEBUIForFilterEmployee(){
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            AddEmployeeRequestModel requestBody = DataGeneratorEmployee.getAddEmployeeModelWithOnlyRequiredParameters();
+            Map<String, String> parameters = OdataParametersBuilder.builder()
+                    .withFilter("contains(tolower(name),'')")
+                    .withCount(true)
+                    .withTop(10)
+                    .withSkip(0)
+                    .build();
 
-            CommonEmployeeResponseModel responseBody = ApiMethodsEmployee.addEmployee(requestBody).as(CommonEmployeeResponseModel.class);
-
-            assertThat(responseBody.activationDate).isNull();
-        }
-
-        @Test
-        @Epic("Сервис Admin")
-        @Feature("Пользователь")
-        @Story("Создание пользователя")
-        @Severity(SeverityLevel.CRITICAL)
-        @DisplayName("При создании пользователя возвращается createdUtc в корректном формате")
-        @Description("Тест проверяет, что при создании пользователя возвращается createdUtc в корректном формате")
-        public void testAddEmployeeReturnsCreatedUtc(){
-            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-
-            AddEmployeeRequestModel requestBody = DataGeneratorEmployee.getAddEmployeeModelWithOnlyRequiredParameters();
-
-            CommonEmployeeResponseModel responseBody = ApiMethodsEmployee.addEmployee(requestBody).as(CommonEmployeeResponseModel.class);
-
-            assertThat(responseBody.createdUtc).matches(DataChecker.dateTimeCommonPattern());
-        }
-
-        @Test
-        @Epic("Сервис Admin")
-        @Feature("Пользователь")
-        @Story("Создание пользователя")
-        @Severity(SeverityLevel.CRITICAL)
-        @DisplayName("При создании пользователя deletedUtc = null")
-        @Description("Тест проверяет, что при создании пользователя deletedUtc = null")
-        public void testAddEmployeeReturnsNullDeletedUtc(){
-            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-
-            AddEmployeeRequestModel requestBody = DataGeneratorEmployee.getAddEmployeeModelWithOnlyRequiredParameters();
-
-            CommonEmployeeResponseModel responseBody = ApiMethodsEmployee.addEmployee(requestBody).as(CommonEmployeeResponseModel.class);
-
-            assertThat(responseBody.deletedUtc).isNull();
+            List<CommonEmployeeResponseModel> responseBody = ApiMethodsEmployee.getEmployeeListOData(parameters).jsonPath().getList("value", CommonEmployeeResponseModel.class);
         }
 
     }

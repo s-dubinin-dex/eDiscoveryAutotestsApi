@@ -2,257 +2,326 @@ package eDiscovery.tests.apiTests.commonPositiveTests.adminService;
 
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.admin.ApiMethodsEmployee;
+import eDiscovery.data.DataGeneratorCommon;
 import eDiscovery.data.adminService.DataGeneratorEmployee;
-import eDiscovery.helpers.admin.RoleHelper;
+import eDiscovery.helpers.DataChecker;
 import eDiscovery.helpers.admin.PredefinedRoles;
+import eDiscovery.helpers.admin.RoleHelper;
 import eDiscovery.models.admin.emplyee.AddEmployeeRequestModel;
 import eDiscovery.models.admin.emplyee.CommonEmployeeResponseModel;
 import eDiscovery.models.admin.emplyee.UpdateEmployeeRequestModel;
-import eDiscovery.models.admin.role.CommonRoleResponseModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
-import io.restassured.response.Response;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
-import java.util.List;
-
-import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-@DisplayName("Common positive tests: Admin - Employee")
+@DisplayName("Admin - Employee: Основные позитивные тесты")
 public class EmployeeCommonPositiveTests extends TestBase {
 
-    @Test
-    @Epic("Сервис Admin")
-    @Feature("Пользователь")
-    @Story("Создание пользователя")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Создание пользователя")
-    @Description("Тест проверяет возможность создания пользователя")
-    public void testAddEmployee(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+    @Nested
+    @DisplayName("Admin - Employee: Базовая проверка CRUD")
+    class CheckBaseCRUDAdminEmployee{
 
-        DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters();
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Создание пользователя")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Создание пользователя")
+        @Description("Тест проверяет возможность создания пользователя")
+        public void testAddEmployee(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters();
+        }
+
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Изменение пользователя")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Изменение пользователя")
+        @Description("Тест проверяет возможность изменения пользователя")
+        public void testUpdateEmployee(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonEmployeeResponseModel responseBodyEmployeeCreation = DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters().as(CommonEmployeeResponseModel.class);
+
+            UpdateEmployeeRequestModel requestBodyForUpdate = new UpdateEmployeeRequestModel(responseBodyEmployeeCreation);
+
+            ApiMethodsEmployee.updateEmployee(requestBodyForUpdate);
+        }
+
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Удаление пользователя")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Удаление пользователя")
+        @Description("Тест проверяет возможность удаления пользователя")
+        public void testDeleteEmployee(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonEmployeeResponseModel responseBodyEmployeeCreation = DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters().as(CommonEmployeeResponseModel.class);
+
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
+            ApiMethodsEmployee.deleteEmployee(responseBodyEmployeeCreation.id);
+        }
+
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Генерация приглашения")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Генерация приглашения")
+        @Description("Тест проверяет возможность генерации нового приглашения с новым токеном активации")
+        public void testUpdateEmployeeInvitation(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonEmployeeResponseModel responseBodyEmployeeCreation = DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters().as(CommonEmployeeResponseModel.class);
+
+            ApiMethodsEmployee.updateInvitation(responseBodyEmployeeCreation.id);
+        }
+
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Получение списка пользователей")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Получение списка пользователей")
+        @Description("Тест проверяет возможность получения списка пользователей")
+        public void testGetEmployeeList(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            ApiMethodsEmployee.getEmployeeList();
+        }
+
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Получение списка пользователей")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Получение списка пользователей по протоколу odata")
+        @Description("Тест проверяет возможность получения списка пользователей по протоколу odata")
+        public void testGetEmployeeListOData(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            ApiMethodsEmployee.getEmployeeListOData();
+        }
+
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Получение пользователя по id")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Получение пользователя по протоколу oData по id в скобках")
+        @Description("Тест проверяет возможность получения пользователя по протоколу oData по id в скобках")
+        public void testGetEmployeeById(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonEmployeeResponseModel responseBodyEmployeeCreation = DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters().as(CommonEmployeeResponseModel.class);
+
+            ApiMethodsEmployee.getEmployeeById(responseBodyEmployeeCreation.id);
+        }
+
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Получение пользователя по id")
+        @Tag("webui")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Получение пользователя по протоколу oData по id в path param")
+        @Description("Тест проверяет возможность получения пользователя по протоколу oData по id в path param")
+        public void testGetEmployeeByIdPath(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonEmployeeResponseModel responseBodyEmployeeCreation = DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters().as(CommonEmployeeResponseModel.class);
+
+            ApiMethodsEmployee.getEmployeeByIdPath(responseBodyEmployeeCreation.id);
+        }
+
     }
 
-    @Test
-    @Epic("Сервис Admin")
-    @Feature("Пользователь")
-    @Story("Изменение пользователя")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Изменение пользователя")
-    @Description("Тест проверяет возможность изменения пользователя")
-    public void testUpdateEmployee(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+    @Nested
+    @DisplayName("Admin - Employee: Проверка тела ответа при создании пользователя с обязательными параметрами")
+    class CheckEmployeeCreationWithOnlyRequiredParametersResponseBody{
 
-        CommonRoleResponseModel roleForCreation = RoleHelper.getRoleByName(PredefinedRoles.FULL_WRITE.name);
-        CommonRoleResponseModel roleForUpdate = RoleHelper.getRoleByName(PredefinedRoles.FULL_READ.name);
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Создание пользователя")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Проверка полей тела ответа при создании пользователя с обязательными полями")
+        @Description("Тест проверяет поля в теле ответа прии создании пользователя с обязательными полями")
+        public void testAddEmployeeWithOnlyRequiredParametersCheckResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddEmployeeRequestModel requestBodyEmployeeCreation = AddEmployeeRequestModel.builder()
-                .name(getRandomName())
-                .roleId(roleForCreation.id)
-                .email(faker.internet().emailAddress())
-                .build();
+            AddEmployeeRequestModel employeeCreationRequestBody = DataGeneratorEmployee.getAddEmployeeModelWithOnlyRequiredParameters();
+            CommonEmployeeResponseModel employeeCreationResponseBody = ApiMethodsEmployee.addEmployee(employeeCreationRequestBody).as(CommonEmployeeResponseModel.class);
 
-        CommonEmployeeResponseModel responseBodyEmployeeCreation = ApiMethodsEmployee.addEmployee(requestBodyEmployeeCreation).as(CommonEmployeeResponseModel.class);
-
-        UpdateEmployeeRequestModel requestBodyForUpdate = UpdateEmployeeRequestModel.builder()
-                .id(responseBodyEmployeeCreation.id)
-                .name(getRandomName())
-                .roleId(roleForUpdate.id)
-                .build();
-
-        CommonEmployeeResponseModel responseBodyEmployeeUpdate = ApiMethodsEmployee.updateEmployee(requestBodyForUpdate).as(CommonEmployeeResponseModel.class);
-
-        assertThat(responseBodyEmployeeUpdate.id).isEqualTo(requestBodyForUpdate.id);
-        assertThat(responseBodyEmployeeUpdate.name).isEqualTo(requestBodyForUpdate.name);
-        assertThat(responseBodyEmployeeUpdate.roleId).isEqualTo(requestBodyForUpdate.roleId);
-        assertThat(responseBodyEmployeeUpdate.email).isEqualTo(requestBodyEmployeeCreation.email);
-        assertThat(responseBodyEmployeeUpdate.role).isEqualTo(roleForUpdate.name);
-        assertThat(responseBodyEmployeeUpdate.activationDate).isNull();
-//        assertThat(responseBodyEmployeeUpdate.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
-        assertThat(responseBodyEmployeeUpdate.deletedUtc).isNull();
+            assertAll(
+                    () -> assertThat(isValidUUID(employeeCreationResponseBody.id)).isTrue(),
+                    () -> assertThat(employeeCreationResponseBody.name).isEqualTo(employeeCreationRequestBody.name),
+                    () -> assertThat(employeeCreationResponseBody.roleId).isEqualTo(employeeCreationRequestBody.roleId),
+                    () -> assertThat(employeeCreationResponseBody.email).isEqualTo(employeeCreationRequestBody.email),
+                    () -> assertThat(employeeCreationResponseBody.role).isEqualTo(PredefinedRoles.FULL_WRITE.name),
+                    () -> assertThat(employeeCreationResponseBody.activationDate).isNull(),
+                    () -> assertThat(employeeCreationResponseBody.createdUtc).matches(DataChecker.dateTimeCommonPattern()),
+                    () -> assertThat(employeeCreationResponseBody.deletedUtc).isNull()
+            );
+        }
     }
 
-    @Test
-    @Epic("Сервис Admin")
-    @Feature("Пользователь")
-    @Story("Удаление пользователя")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Удаление пользователя")
-    @Description("Тест проверяет возможность удаления пользователя")
-    public void testDeleteEmployee(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+    @Nested
+    @DisplayName("Admin - Employee: Проверка тела ответа при изменении пользователя с обязательными параметрами")
+    class CheckEmployeeUpdateWithOnlyRequiredParametersResponseBody{
 
-        CommonRoleResponseModel roleForCreation = RoleHelper.getRoleByName(PredefinedRoles.FULL_WRITE.name);
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Изменение пользователя")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Проверка полей тела ответа при изменении пользователя с обязательными полями")
+        @Description("Тест проверяет поля в теле ответа при изменении пользователя с обязательными полями")
+        public void testUpdateEmployeeWithOnlyRequiredParametersCheckResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddEmployeeRequestModel requestBodyEmployeeCreation = AddEmployeeRequestModel.builder()
-                .name(getRandomName())
-                .roleId(roleForCreation.id)
-                .email(faker.internet().emailAddress())
-                .build();
+            CommonEmployeeResponseModel employeeCreationForUpdateResponseBody = DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters().as(CommonEmployeeResponseModel.class);
+            UpdateEmployeeRequestModel updateEmployeeRequestBody = new UpdateEmployeeRequestModel(employeeCreationForUpdateResponseBody);
 
-        CommonEmployeeResponseModel responseBodyEmployeeCreation = ApiMethodsEmployee.addEmployee(requestBodyEmployeeCreation).as(CommonEmployeeResponseModel.class);
+            updateEmployeeRequestBody.name = DataGeneratorCommon.getRandomName();
+            updateEmployeeRequestBody.roleId = RoleHelper.getRoleByName(PredefinedRoles.FULL_READ.name).id;
 
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
-        ApiMethodsEmployee.deleteEmployee(responseBodyEmployeeCreation.id);
+            CommonEmployeeResponseModel employeeUpdateResponseBody = ApiMethodsEmployee.updateEmployee(updateEmployeeRequestBody).as(CommonEmployeeResponseModel.class);
 
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-        CommonEmployeeResponseModel responseBodyEmployeeAfterDeletion = ApiMethodsEmployee.getEmployeeByIdPath(responseBodyEmployeeCreation.id).as(CommonEmployeeResponseModel.class);
-
-        assertThat(responseBodyEmployeeAfterDeletion.id).isEqualTo(responseBodyEmployeeCreation.id);
-        assertThat(responseBodyEmployeeAfterDeletion.name).isEqualTo(responseBodyEmployeeCreation.name);
-        assertThat(responseBodyEmployeeAfterDeletion.roleId).isEqualTo(responseBodyEmployeeCreation.roleId);
-        assertThat(responseBodyEmployeeAfterDeletion.email).isEqualTo(responseBodyEmployeeCreation.id + ".deleted#" + requestBodyEmployeeCreation.email);
-        assertThat(responseBodyEmployeeAfterDeletion.role).isEqualTo(RoleHelper.getRoleById(requestBodyEmployeeCreation.roleId).name);
-        assertThat(responseBodyEmployeeAfterDeletion.activationDate).isNull();
-        assertThat(responseBodyEmployeeAfterDeletion.createdUtc).matches(dateTimeISOPattern());
-        assertThat(responseBodyEmployeeAfterDeletion.deletedUtc).matches(dateTimeISOPattern());
+            assertAll(
+                    () -> assertThat(employeeUpdateResponseBody.id).isEqualTo(updateEmployeeRequestBody.id),
+                    () -> assertThat(employeeUpdateResponseBody.name).isEqualTo(updateEmployeeRequestBody.name),
+                    () -> assertThat(employeeUpdateResponseBody.roleId).isEqualTo(updateEmployeeRequestBody.roleId),
+                    () -> assertThat(employeeUpdateResponseBody.email).isEqualTo(employeeCreationForUpdateResponseBody.email),
+                    () -> assertThat(employeeUpdateResponseBody.role).isEqualTo(PredefinedRoles.FULL_WRITE.name),
+                    () -> assertThat(employeeUpdateResponseBody.activationDate).isNull(),
+                    () -> assertThat(employeeUpdateResponseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern()),
+                    () -> assertThat(employeeUpdateResponseBody.deletedUtc).isNull()
+            );
+        }
     }
 
-    @Test
-    @Epic("Сервис Admin")
-    @Feature("Пользователь")
-    @Story("Генерация приглашения")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Генерация приглашения")
-    @Description("Тест проверяет возможность генерации нового приглашения с новым токеном активации")
-    public void testUpdateEmployeeInvitation(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+    @Nested
+    @DisplayName("Admin - Employee: Проверка тела ответа при получении пользователя с обязательными параметрами из списка пользователя")
+    class CheckGetEmployeeWithOnlyRequiredParametersFromListOdataResponseBody{
 
-        CommonRoleResponseModel roleForCreation = RoleHelper.getRoleByName(PredefinedRoles.FULL_WRITE.name);
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Получение списка пользователей")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Проверка полей тела ответа при получении списка пользователей")
+        @Description("Тест проверяет поля в теле ответа при получении списка пользователей")
+        public void testGetEmployeeWithOnlyRequiredParametersFromListOdataCheckResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddEmployeeRequestModel requestBodyEmployeeCreation = AddEmployeeRequestModel.builder()
-                .name(getRandomName())
-                .roleId(roleForCreation.id)
-                .email(faker.internet().emailAddress())
-                .build();
+            AddEmployeeRequestModel employeeCreationRequestBody = DataGeneratorEmployee.getAddEmployeeModelWithOnlyRequiredParameters();
+            CommonEmployeeResponseModel employeeCreationResponseBody = ApiMethodsEmployee.addEmployee(employeeCreationRequestBody).as(CommonEmployeeResponseModel.class);
+            CommonEmployeeResponseModel employeeFromOdataList = ApiMethodsEmployee.getEmployeeListOData().jsonPath().getList("value", CommonEmployeeResponseModel.class).stream()
+                    .filter(element -> element.id.equals(employeeCreationResponseBody.id))
+                    .findFirst().orElse(null);
 
-        CommonEmployeeResponseModel responseBodyEmployeeCreation = ApiMethodsEmployee.addEmployee(requestBodyEmployeeCreation).as(CommonEmployeeResponseModel.class);
+            assertThat(employeeFromOdataList).isNotNull();
 
-        CommonEmployeeResponseModel responseBodyEmployeeAfterUpdateInvitation = ApiMethodsEmployee.updateInvitation(responseBodyEmployeeCreation.id).as(CommonEmployeeResponseModel.class);
-
-        assertThat(responseBodyEmployeeAfterUpdateInvitation.id).isEqualTo(responseBodyEmployeeCreation.id);
-        assertThat(responseBodyEmployeeAfterUpdateInvitation.name).isEqualTo(responseBodyEmployeeCreation.name);
-        assertThat(responseBodyEmployeeAfterUpdateInvitation.roleId).isEqualTo(responseBodyEmployeeCreation.roleId);
-        assertThat(responseBodyEmployeeAfterUpdateInvitation.email).isEqualTo(responseBodyEmployeeCreation.email);
-        assertThat(responseBodyEmployeeAfterUpdateInvitation.role).isEqualTo(roleForCreation.name);
-        assertThat(responseBodyEmployeeAfterUpdateInvitation.activationDate).isNull();
-//        assertThat(responseBodyEmployeeAfterUpdateInvitation.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern());
-        assertThat(responseBodyEmployeeAfterUpdateInvitation.deletedUtc).isNull();
+            assertAll(
+                    () -> assertThat(employeeFromOdataList.id).isEqualTo(employeeCreationResponseBody.id),
+                    () -> assertThat(employeeFromOdataList.name).isEqualTo(employeeCreationResponseBody.name),
+                    () -> assertThat(employeeFromOdataList.roleId).isEqualTo(employeeCreationResponseBody.roleId),
+                    () -> assertThat(employeeFromOdataList.email).isEqualTo(employeeCreationResponseBody.email),
+                    () -> assertThat(employeeFromOdataList.role).isEqualTo(employeeCreationResponseBody.role),
+                    () -> assertThat(employeeFromOdataList.activationDate).isEqualTo(employeeCreationResponseBody.activationDate),
+                    () -> assertThat(employeeFromOdataList.createdUtc).matches(DataChecker.dateTimeCommonPattern()),
+                    () -> assertThat(employeeFromOdataList.deletedUtc).isEqualTo(employeeCreationResponseBody.deletedUtc)
+            );
+        }
     }
 
-    @Test
-    @Epic("Сервис Admin")
-    @Feature("Пользователь")
-    @Story("Получение списка пользователей")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Получение списка пользователей")
-    @Description("Тест проверяет возможность получения списка пользователей")
-    public void testGetEmployeeList(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+    @Nested
+    @DisplayName("Admin - Employee: Проверка тела ответа при получении пользователя с обязательными полями по id")
+    class CheckGetEmployeeWithOnlyRequiredParametersByIdPathResponseBody{
 
-        Response response = ApiMethodsEmployee.getEmployeeList();
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Получение пользователя по id")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Проверка полей тела ответа при получении пользователя по id")
+        @Description("Тест проверяет поля в теле ответа при получении пользователя по id")
+        public void testGetEmployeeWithOnlyRequiredParametersByIdPathCheckResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        List<CommonEmployeeResponseModel> responseBody = response.jsonPath().getList("", CommonEmployeeResponseModel.class);
-        assertThat(responseBody).isNotEmpty();
-        assertThat(responseBody.get(0)).isNotNull();
-        //TODO: Здесь и везде дальше проверять, что в ответе валидные данные с непустыми полями
+            AddEmployeeRequestModel employeeCreationRequestBody = DataGeneratorEmployee.getAddEmployeeModelWithOnlyRequiredParameters();
+            CommonEmployeeResponseModel employeeCreationResponseBody = ApiMethodsEmployee.addEmployee(employeeCreationRequestBody).as(CommonEmployeeResponseModel.class);
+            CommonEmployeeResponseModel employeeByIdPath = ApiMethodsEmployee.getEmployeeByIdPath(employeeCreationResponseBody.id).as(CommonEmployeeResponseModel.class);
+
+            assertAll(
+                    () -> assertThat(employeeByIdPath.id).isEqualTo(employeeCreationResponseBody.id),
+                    () -> assertThat(employeeByIdPath.name).isEqualTo(employeeCreationResponseBody.name),
+                    () -> assertThat(employeeByIdPath.roleId).isEqualTo(employeeCreationResponseBody.roleId),
+                    () -> assertThat(employeeByIdPath.email).isEqualTo(employeeCreationResponseBody.email),
+                    () -> assertThat(employeeByIdPath.role).isEqualTo(employeeCreationResponseBody.role),
+                    () -> assertThat(employeeByIdPath.activationDate).isEqualTo(employeeCreationResponseBody.activationDate),
+                    () -> assertThat(employeeByIdPath.createdUtc).matches(DataChecker.dateTimeCommonPattern()),
+                    () -> assertThat(employeeByIdPath.deletedUtc).isEqualTo(employeeCreationResponseBody.deletedUtc)
+            );
+        }
     }
 
-    @Test
-    @Epic("Сервис Admin")
-    @Feature("Пользователь")
-    @Story("Получение списка пользователей")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Получение списка пользователей по протоколу odata")
-    @Description("Тест проверяет возможность получения списка пользователей по протоколу odata")
-    public void testGetEmployeeListOData(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+    @Nested
+    @DisplayName("Admin - Employee: Проверка полей ответа при генерации приглашения")
+    class CheckUpdateEmployeeInvitationResponseBody{
 
-        Response response = ApiMethodsEmployee.getEmployeeListOData();
+        @Test
+        @Epic("Сервис Admin")
+        @Feature("Пользователь")
+        @Story("Генерация приглашения")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при генерации приглашения")
+        @Description("Тест проверяет поля в теле ответа при генерации приглашения")
+        public void testUpdateEmployeeInvitationCheckResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        List<CommonEmployeeResponseModel> responseBody = response.jsonPath().getList("value", CommonEmployeeResponseModel.class);
-        assertThat(responseBody).isNotEmpty();
-        assertThat(responseBody.get(0)).isNotNull();
-        //TODO: Здесь и везде дальше проверять, что в ответе валидные данные с непустыми полями
-    }
+            AddEmployeeRequestModel employeeCreationRequestBody = DataGeneratorEmployee.getAddEmployeeModelWithOnlyRequiredParameters();
+            CommonEmployeeResponseModel employeeCreationResponseBody = ApiMethodsEmployee.addEmployee(employeeCreationRequestBody).as(CommonEmployeeResponseModel.class);
+            CommonEmployeeResponseModel employeeInvitationResponseBody = ApiMethodsEmployee.updateInvitation(employeeCreationResponseBody.id).as(CommonEmployeeResponseModel.class);
 
-    @Test
-    @Epic("Сервис Admin")
-    @Feature("Пользователь")
-    @Story("Получение пользователя по id")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Получение пользователя по протоколу oData по id в скобках")
-    @Description("Тест проверяет возможность получения пользователя по протоколу oData по id в скобках")
-    public void testGetEmployeeById(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+            assertAll(
+                    () -> assertThat(employeeInvitationResponseBody.id).isEqualTo(employeeCreationResponseBody.id),
+                    () -> assertThat(employeeInvitationResponseBody.name).isEqualTo(employeeCreationResponseBody.name),
+                    () -> assertThat(employeeInvitationResponseBody.roleId).isEqualTo(employeeCreationResponseBody.roleId),
+                    () -> assertThat(employeeInvitationResponseBody.email).isEqualTo(employeeCreationResponseBody.email),
+                    () -> assertThat(employeeInvitationResponseBody.role).isEqualTo(employeeCreationResponseBody.role),
+                    () -> assertThat(employeeInvitationResponseBody.activationDate).isNull(),
+                    () -> assertThat(employeeInvitationResponseBody.createdUtc).matches(dateTimeCommonPattern()),
+                    () -> assertThat(employeeInvitationResponseBody.deletedUtc).isNull()
+            );
 
-        CommonRoleResponseModel role = RoleHelper.getRoleByName(PredefinedRoles.FULL_WRITE.name);
+        }
 
-        AddEmployeeRequestModel requestBody = AddEmployeeRequestModel.builder()
-                .name(getRandomName())
-                .roleId(role.id)
-                .email(faker.internet().emailAddress())
-                .build();
-
-        CommonEmployeeResponseModel responseBodyCreation = ApiMethodsEmployee.addEmployee(requestBody).as(CommonEmployeeResponseModel.class);
-
-        CommonEmployeeResponseModel responseBody = ApiMethodsEmployee.getEmployeeById(responseBodyCreation.id).as(CommonEmployeeResponseModel.class);
-
-        assertThat(responseBody.id).isEqualTo(responseBodyCreation.id);
-        assertThat(responseBody.name).isEqualTo(responseBodyCreation.name);
-        assertThat(responseBody.roleId).isEqualTo(responseBodyCreation.roleId);
-        assertThat(responseBody.email).isEqualTo(responseBodyCreation.email);
-        assertThat(responseBody.role).isEqualTo(responseBodyCreation.role);
-        assertThat(responseBody.activationDate).isEqualTo(responseBodyCreation.activationDate);
-        assertThat(responseBody.createdUtc).matches(dateTimeISOPattern());
-        assertThat(responseBody.deletedUtc).isEqualTo(responseBodyCreation.deletedUtc);
-    }
-
-    @Test
-    @Epic("Сервис Admin")
-    @Feature("Пользователь")
-    @Story("Получение пользователя по id")
-    @Tag("webui")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Получение пользователя по протоколу oData по id в path param")
-    @Description("Тест проверяет возможность получения пользователя по протоколу oData по id в path param")
-    public void testGetEmployeeByIdPath(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-
-        CommonRoleResponseModel role = RoleHelper.getRoleByName(PredefinedRoles.FULL_WRITE.name);
-
-        AddEmployeeRequestModel requestBody = AddEmployeeRequestModel.builder()
-                .name(getRandomName())
-                .roleId(role.id)
-                .email(faker.internet().emailAddress())
-                .build();
-
-        CommonEmployeeResponseModel responseBodyCreation = ApiMethodsEmployee.addEmployee(requestBody).as(CommonEmployeeResponseModel.class);
-
-        CommonEmployeeResponseModel responseBody = ApiMethodsEmployee.getEmployeeByIdPath(responseBodyCreation.id).as(CommonEmployeeResponseModel.class);
-
-        assertThat(responseBody.id).isEqualTo(responseBodyCreation.id);
-        assertThat(responseBody.name).isEqualTo(responseBodyCreation.name);
-        assertThat(responseBody.roleId).isEqualTo(responseBodyCreation.roleId);
-        assertThat(responseBody.email).isEqualTo(responseBodyCreation.email);
-        assertThat(responseBody.role).isEqualTo(responseBodyCreation.role);
-        assertThat(responseBody.activationDate).isEqualTo(responseBodyCreation.activationDate);
-        assertThat(responseBody.createdUtc).matches(dateTimeISOPattern());
-        assertThat(responseBody.deletedUtc).isEqualTo(responseBodyCreation.deletedUtc);
     }
 
 }
