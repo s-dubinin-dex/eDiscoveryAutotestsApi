@@ -5,9 +5,9 @@ import lombok.Builder;
 
 @Builder
 public class AddEmployeeRequestModel {
-    @JsonInclude()
+    @JsonInclude
     public String name;
-    @JsonInclude()
+    @JsonInclude
     public String roleId;
     @JsonInclude
     public String email;
