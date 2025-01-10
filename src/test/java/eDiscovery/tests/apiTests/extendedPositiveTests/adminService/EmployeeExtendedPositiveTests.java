@@ -202,7 +202,7 @@ public class EmployeeExtendedPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonEmployeeResponseModel employeeForDeletion = DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters().as(CommonEmployeeResponseModel.class);
+            CommonEmployeeResponseModel employeeForDeletion = DataGeneratorEmployee.createEmployeeWithOnlyRequiredParameters();
 
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
             ApiMethodsEmployee.deleteEmployee(employeeForDeletion.id);
@@ -238,7 +238,7 @@ public class EmployeeExtendedPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonEmployeeResponseModel employeeForDeletion = DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters().as(CommonEmployeeResponseModel.class);
+            CommonEmployeeResponseModel employeeForDeletion = DataGeneratorEmployee.createEmployeeWithOnlyRequiredParameters();
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
             ApiMethodsEmployee.deleteEmployee(employeeForDeletion.id);
 

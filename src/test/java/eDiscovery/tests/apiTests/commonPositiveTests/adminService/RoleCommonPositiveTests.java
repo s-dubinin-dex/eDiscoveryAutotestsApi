@@ -57,7 +57,7 @@ public class RoleCommonPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonRoleResponseModel responseBodyRoleCreation = DataGeneratorRole.createRoleWithOnlyRequiredParameters().as(CommonRoleResponseModel.class);
+            CommonRoleResponseModel responseBodyRoleCreation = DataGeneratorRole.createRoleWithOnlyRequiredParameters();
 
             UpdateRoleRequestModel requestBodyRoleUpdate = new UpdateRoleRequestModel(responseBodyRoleCreation);
 
@@ -75,7 +75,7 @@ public class RoleCommonPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonRoleResponseModel responseBodyRoleCreation = DataGeneratorRole.createRoleWithOnlyRequiredParameters().as(CommonRoleResponseModel.class);
+            CommonRoleResponseModel responseBodyRoleCreation = DataGeneratorRole.createRoleWithOnlyRequiredParameters();
 
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
             ApiMethodsRole.deleteRole(responseBodyRoleCreation.id);
@@ -134,7 +134,7 @@ public class RoleCommonPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonRoleResponseModel responseBodyCreation = DataGeneratorRole.createRoleWithOnlyRequiredParameters().as(CommonRoleResponseModel.class);
+            CommonRoleResponseModel responseBodyCreation = DataGeneratorRole.createRoleWithOnlyRequiredParameters();
 
             ApiMethodsRole.getRoleODataById(responseBodyCreation.id);
         }
@@ -150,7 +150,7 @@ public class RoleCommonPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonRoleResponseModel responseBodyCreation = DataGeneratorRole.createRoleWithOnlyRequiredParameters().as(CommonRoleResponseModel.class);
+            CommonRoleResponseModel responseBodyCreation = DataGeneratorRole.createRoleWithOnlyRequiredParameters();
 
             ApiMethodsRole.getRoleODataByIdPath(responseBodyCreation.id);
         }
@@ -203,7 +203,7 @@ public class RoleCommonPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonRoleResponseModel responseBodyRoleCreation = DataGeneratorRole.createRoleWithOnlyRequiredParameters().as(CommonRoleResponseModel.class);
+            CommonRoleResponseModel responseBodyRoleCreation = DataGeneratorRole.createRoleWithOnlyRequiredParameters();
             UpdateRoleRequestModel requestBody = new UpdateRoleRequestModel(responseBodyRoleCreation);
 
             requestBody.name = getRandomName();
@@ -239,7 +239,7 @@ public class RoleCommonPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonRoleResponseModel roleCreationResponseBody = DataGeneratorRole.createRoleWithOnlyRequiredParameters().as(CommonRoleResponseModel.class);
+            CommonRoleResponseModel roleCreationResponseBody = DataGeneratorRole.createRoleWithOnlyRequiredParameters();
 
             CommonRoleResponseModel roleFromOdataList = ApiMethodsRole.getRolesListOData().jsonPath().getList("value", CommonRoleResponseModel.class).stream()
                     .filter(element -> element.id.equals(roleCreationResponseBody.id))
@@ -275,7 +275,7 @@ public class RoleCommonPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonRoleResponseModel roleCreationResponseBody = DataGeneratorRole.createRoleWithOnlyRequiredParameters().as(CommonRoleResponseModel.class);
+            CommonRoleResponseModel roleCreationResponseBody = DataGeneratorRole.createRoleWithOnlyRequiredParameters();
 
             CommonRoleResponseModel responseBody = ApiMethodsRole.getRoleODataByIdPath(roleCreationResponseBody.id).as(CommonRoleResponseModel.class);
 

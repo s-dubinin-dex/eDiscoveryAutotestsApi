@@ -2,12 +2,12 @@ package eDiscovery.data.adminService;
 
 import eDiscovery.apiMethods.admin.ApiMethodsRole;
 import eDiscovery.models.admin.role.AddRoleRequestModel;
+import eDiscovery.models.admin.role.CommonRoleResponseModel;
 import eDiscovery.models.admin.role.PolicyResponseModel;
 
 import java.util.Collections;
 import java.util.List;
 import eDiscovery.data.DataGeneratorCommon;
-import io.restassured.response.Response;
 
 public class DataGeneratorRole {
 
@@ -26,8 +26,8 @@ public class DataGeneratorRole {
      * Role Generators
      * */
 
-    public static Response createRoleWithOnlyRequiredParameters(){
-        return ApiMethodsRole.addRole(getRoleModelWithOnlyRequiredParameters());
+    public static CommonRoleResponseModel createRoleWithOnlyRequiredParameters(){
+        return ApiMethodsRole.addRole(getRoleModelWithOnlyRequiredParameters()).as(CommonRoleResponseModel.class);
     }
 
     /**

@@ -38,7 +38,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters();
+            DataGeneratorEmployee.createEmployeeWithOnlyRequiredParameters();
         }
 
         @Test
@@ -52,7 +52,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonEmployeeResponseModel responseBodyEmployeeCreation = DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters().as(CommonEmployeeResponseModel.class);
+            CommonEmployeeResponseModel responseBodyEmployeeCreation = DataGeneratorEmployee.createEmployeeWithOnlyRequiredParameters();
 
             UpdateEmployeeRequestModel requestBodyForUpdate = new UpdateEmployeeRequestModel(responseBodyEmployeeCreation);
 
@@ -70,7 +70,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonEmployeeResponseModel responseBodyEmployeeCreation = DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters().as(CommonEmployeeResponseModel.class);
+            CommonEmployeeResponseModel responseBodyEmployeeCreation = DataGeneratorEmployee.createEmployeeWithOnlyRequiredParameters();
 
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
             ApiMethodsEmployee.deleteEmployee(responseBodyEmployeeCreation.id);
@@ -87,7 +87,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonEmployeeResponseModel responseBodyEmployeeCreation = DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters().as(CommonEmployeeResponseModel.class);
+            CommonEmployeeResponseModel responseBodyEmployeeCreation = DataGeneratorEmployee.createEmployeeWithOnlyRequiredParameters();
 
             ApiMethodsEmployee.updateInvitation(responseBodyEmployeeCreation.id);
         }
@@ -131,7 +131,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonEmployeeResponseModel responseBodyEmployeeCreation = DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters().as(CommonEmployeeResponseModel.class);
+            CommonEmployeeResponseModel responseBodyEmployeeCreation = DataGeneratorEmployee.createEmployeeWithOnlyRequiredParameters();
 
             ApiMethodsEmployee.getEmployeeById(responseBodyEmployeeCreation.id);
         }
@@ -148,7 +148,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonEmployeeResponseModel responseBodyEmployeeCreation = DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters().as(CommonEmployeeResponseModel.class);
+            CommonEmployeeResponseModel responseBodyEmployeeCreation = DataGeneratorEmployee.createEmployeeWithOnlyRequiredParameters();
 
             ApiMethodsEmployee.getEmployeeByIdPath(responseBodyEmployeeCreation.id);
         }
@@ -201,7 +201,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonEmployeeResponseModel employeeCreationForUpdateResponseBody = DataGeneratorEmployee.createEmployeeModelWithOnlyRequiredParameters().as(CommonEmployeeResponseModel.class);
+            CommonEmployeeResponseModel employeeCreationForUpdateResponseBody = DataGeneratorEmployee.createEmployeeWithOnlyRequiredParameters();
             UpdateEmployeeRequestModel updateEmployeeRequestBody = new UpdateEmployeeRequestModel(employeeCreationForUpdateResponseBody);
 
             updateEmployeeRequestBody.name = DataGeneratorCommon.getRandomName();
@@ -223,7 +223,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
     }
 
     @Nested
-    @DisplayName("Admin - Employee: Проверка тела ответа при получении пользователя с обязательными параметрами из списка пользователя")
+    @DisplayName("Admin - Employee: Проверка тела ответа при получении пользователя с обязательными параметрами из списка пользователей")
     class CheckGetEmployeeWithOnlyRequiredParametersFromListOdataResponseBody{
 
         @Test
@@ -237,8 +237,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            AddEmployeeRequestModel employeeCreationRequestBody = DataGeneratorEmployee.getAddEmployeeModelWithOnlyRequiredParameters();
-            CommonEmployeeResponseModel employeeCreationResponseBody = ApiMethodsEmployee.addEmployee(employeeCreationRequestBody).as(CommonEmployeeResponseModel.class);
+            CommonEmployeeResponseModel employeeCreationResponseBody = DataGeneratorEmployee.createEmployeeWithOnlyRequiredParameters();
             CommonEmployeeResponseModel employeeFromOdataList = ApiMethodsEmployee.getEmployeeListOData().jsonPath().getList("value", CommonEmployeeResponseModel.class).stream()
                     .filter(element -> element.id.equals(employeeCreationResponseBody.id))
                     .findFirst().orElse(null);

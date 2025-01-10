@@ -80,7 +80,7 @@ public class RoleExtendedPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonRoleResponseModel responseBodyRoleCreation = DataGeneratorRole.createRoleWithOnlyRequiredParameters().as(CommonRoleResponseModel.class);
+            CommonRoleResponseModel responseBodyRoleCreation = DataGeneratorRole.createRoleWithOnlyRequiredParameters();
             UpdateRoleRequestModel requestBody = new UpdateRoleRequestModel(responseBodyRoleCreation);
 
             requestBody.name = getRandomName();
@@ -199,7 +199,7 @@ public class RoleExtendedPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonRoleResponseModel roleForDeletion = DataGeneratorRole.createRoleWithOnlyRequiredParameters().as(CommonRoleResponseModel.class);
+            CommonRoleResponseModel roleForDeletion = DataGeneratorRole.createRoleWithOnlyRequiredParameters();
 
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
             ApiMethodsRole.deleteRole(roleForDeletion.id);
@@ -233,7 +233,7 @@ public class RoleExtendedPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            CommonRoleResponseModel roleForDeletion = DataGeneratorRole.createRoleWithOnlyRequiredParameters().as(CommonRoleResponseModel.class);
+            CommonRoleResponseModel roleForDeletion = DataGeneratorRole.createRoleWithOnlyRequiredParameters();
 
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
             ApiMethodsRole.deleteRole(roleForDeletion.id);

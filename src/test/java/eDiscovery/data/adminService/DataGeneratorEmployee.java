@@ -5,7 +5,7 @@ import eDiscovery.apiMethods.admin.ApiMethodsEmployee;
 import eDiscovery.helpers.admin.PredefinedRoles;
 import eDiscovery.helpers.admin.RoleHelper;
 import eDiscovery.models.admin.emplyee.AddEmployeeRequestModel;
-import io.restassured.response.Response;
+import eDiscovery.models.admin.emplyee.CommonEmployeeResponseModel;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 
@@ -22,7 +22,7 @@ public class DataGeneratorEmployee {
 
     }
 
-    public static Response createEmployeeModelWithOnlyRequiredParameters(){
-        return ApiMethodsEmployee.addEmployee(getAddEmployeeModelWithOnlyRequiredParameters());
+    public static CommonEmployeeResponseModel createEmployeeWithOnlyRequiredParameters(){
+        return ApiMethodsEmployee.addEmployee(getAddEmployeeModelWithOnlyRequiredParameters()).as(CommonEmployeeResponseModel.class);
     }
 }
