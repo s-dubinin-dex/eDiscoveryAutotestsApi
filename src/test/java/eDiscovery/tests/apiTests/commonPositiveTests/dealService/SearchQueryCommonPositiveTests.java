@@ -3,195 +3,277 @@ package eDiscovery.tests.apiTests.commonPositiveTests.dealService;
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsSearchQuery;
 import eDiscovery.data.dealService.DataGeneratorSearchQuery;
+import eDiscovery.helpers.enums.SearchQueryType;
 import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModel;
 import eDiscovery.models.deal.searchQuery.CommonSearchQueryResponseModel;
 import eDiscovery.models.deal.searchQuery.UpdateSearchQueryRequestModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
-import eDiscovery.helpers.enums.SearchQueryType;
 import io.qameta.allure.*;
-import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
-import java.util.HashMap;
-import java.util.List;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-@DisplayName("Common positive tests: Deal - SearchQuery")
+@DisplayName("Deal - SearchQuery: Основные позитивные тесты")
 public class SearchQueryCommonPositiveTests extends TestBase {
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
-    @Story("Создание поискового запроса")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Создание поискового запроса")
-    @Description("Тест проверяет возможность создания поискового запроса")
-    public void testAddSearchQuery(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+    @Nested
+    @DisplayName("Deal - SearchQuery: Базовая проверка CRUD")
+    class CheckBaseCRUDDealSearchQuery{
 
-        DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
-    }
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Создание поискового запроса")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Создание поискового запроса")
+        @Description("Тест проверяет возможность создания поискового запроса")
+        public void testAddSearchQuery(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
-    @Story("Изменение поискового запроса")
-    @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Изменение поискового запроса")
-    @Description("Тест проверяет возможность изменения поискового запроса")
-    public void testUpdateSearchQuery(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+            DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
+        }
 
-        CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Изменение поискового запроса")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Изменение поискового запроса")
+        @Description("Тест проверяет возможность изменения поискового запроса")
+        public void testUpdateSearchQuery(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        UpdateSearchQueryRequestModel requestModelSearchQueryUpdate = new UpdateSearchQueryRequestModel(responseBodySearchQueryCreation);
+            CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        Response responseSearchQueryUpdate = ApiMethodsSearchQuery.updateSearchQuery(requestModelSearchQueryUpdate);
+            UpdateSearchQueryRequestModel requestModelSearchQueryUpdate = new UpdateSearchQueryRequestModel(responseBodySearchQueryCreation);
 
-        CommonSearchQueryResponseModel responseBodySearchQueryUpdate = responseSearchQueryUpdate.as(CommonSearchQueryResponseModel.class);
+            ApiMethodsSearchQuery.updateSearchQuery(requestModelSearchQueryUpdate);
+        }
 
-        assertThat(responseBodySearchQueryUpdate.name).isEqualTo(requestModelSearchQueryUpdate.name);
-        assertThat(responseBodySearchQueryUpdate.type).isEqualTo(requestModelSearchQueryUpdate.type);
-        assertThat(responseBodySearchQueryUpdate.value).isEqualTo(requestModelSearchQueryUpdate.value);
-        assertThat(isValidUUID(responseBodySearchQueryUpdate.id)).isTrue();
-        assertThat(responseBodySearchQueryUpdate.createdUtc).matches(dateTimeCommonPattern());
-        assertThat(responseBodySearchQueryUpdate.deletedUtc).isNull();
-    }
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Удаление поискового запроса")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Удаление поискового запроса")
+        @Description("Тест проверяет возможность удаления поискового запроса")
+        public void testDeleteSearchQuery(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
-    @Story("Удаление поискового запроса")
-    @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Удаление поискового запроса")
-    @Description("Тест проверяет возможность удаления поискового запроса")
-    public void testDeleteSearchQuery(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
+            ApiMethodsSearchQuery.deleteSearchQuery(responseBodySearchQueryCreation.id);
+        }
 
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
-        ApiMethodsSearchQuery.deleteSearchQuery(responseBodySearchQueryCreation.id);
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Получение списка поисковых запросов")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка поисковых запросов")
+        @Description("Тест проверяет возможность получения списка поисковых запросов")
+        public void testGetSearchQueryList(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-        CommonSearchQueryResponseModel responseBody = ApiMethodsSearchQuery.getSearchQueryODataByIdPath(responseBodySearchQueryCreation.id).as(CommonSearchQueryResponseModel.class);
+            ApiMethodsSearchQuery.getSearchQueryList();
+        }
 
-        assertThat(responseBody.name).isEqualTo(responseBodySearchQueryCreation.name);
-        assertThat(responseBody.type).isEqualTo(SearchQueryType.Regex.name());
-        assertThat(responseBody.value).isEqualTo(responseBodySearchQueryCreation.value);
-        assertThat(isValidUUID(responseBody.id)).isTrue();
-        assertThat(responseBody.createdUtc).matches(dateTimeISOPattern());
-        assertThat(responseBody.deletedUtc).matches(dateTimeISOPattern());
-    }
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Получение списка поисковых запросов")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка поисковых запросов по протоколу oData")
+        @Description("Тест проверяет возможность получения списка поисковых запросов по протоколу oData")
+        public void testGetSearchQueryListOData(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
-    @Story("Получение списка поисковых запросов")
-    @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Получение списка поисковых запросов")
-    @Description("Тест проверяет возможность получения списка поисковых запросов")
-    public void testGetSearchQueryList(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+            ApiMethodsSearchQuery.getSearchQueryListOData();
+        }
 
-        DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
-        Response response = ApiMethodsSearchQuery.getSearchQueryList();
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Получение поискового запроса по протоколу oData по id")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение поискового запроса по протоколу oData по id")
+        @Description("Тест проверяет возможность получения поискового запроса по протоколу oData по id в скобках")
+        public void testGetSearchQueryODataById(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        List<CommonSearchQueryResponseModel> responseBody = response.jsonPath().getList("", CommonSearchQueryResponseModel.class);
-        assertThat(responseBody).isNotEmpty();
-        assertThat(responseBody.get(0)).isNotNull();
-        //TODO: Здесь и везде дальше проверять, что в ответе валидные данные с непустыми полями
-    }
+            CommonSearchQueryResponseModel responseBody = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
-    @Story("Получение списка поисковых запросов")
-    @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Получение списка поисковых запросов по протоколу oData")
-    @Description("Тест проверяет возможность получения списка поисковых запросов по протоколу oData")
-    public void testGetSearchQueryListOData(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+            ApiMethodsSearchQuery.getSearchQueryODataById(responseBody.id);
+        }
 
-        DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
-        Response response = ApiMethodsSearchQuery.getSearchQueryListOData(new HashMap<>());
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Tag("webui")
+        @Story("Получение поискового запроса по протоколу oData по id")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение поискового запроса по протоколу oData по id")
+        @Description("Тест проверяет возможность получения поискового запроса по протоколу oData по id в path param")
+        public void testGetSearchQueryODataByIdInPath(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        List<CommonSearchQueryResponseModel> responseBody = response.jsonPath().getList("value", CommonSearchQueryResponseModel.class);
-        assertThat(responseBody).isNotEmpty();
-        assertThat(responseBody.get(0)).isNotNull();
-    }
+            CommonSearchQueryResponseModel responseBody = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
-    @Story("Получение поискового запроса по протоколу oData по id")
-    @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Получение поискового запроса по протоколу oData по id")
-    @Description("Тест проверяет возможность получения поискового запроса по протоколу oData по id в скобках")
-    public void testGetSearchQueryODataById(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-
-        String searchQueryNameForFilter = "testSearchQueryODataByIdInRoundBrackets" + getRandomName();
-
-        AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
-                .name(searchQueryNameForFilter)
-                .type(SearchQueryType.Regex.name())
-                .value("\\d{10}")
-                .build();
-        CommonSearchQueryResponseModel responseBody = ApiMethodsSearchQuery.addSearchQuery(requestBody).as(CommonSearchQueryResponseModel.class);
-
-        CommonSearchQueryResponseModel responseBodyODataById = ApiMethodsSearchQuery.getSearchQueryODataById(responseBody.id).as(CommonSearchQueryResponseModel.class);
-
-        assertThat(responseBodyODataById.id).isEqualTo(responseBody.id);
-        assertThat(responseBodyODataById.name).isEqualTo(responseBody.name);
-        assertThat(responseBodyODataById.type).isEqualTo(responseBody.type);
-        assertThat(responseBodyODataById.value).isEqualTo(responseBody.value);
-        assertThat(responseBodyODataById.createdUtc).matches(dateTimeISOPattern());
-        assertThat(responseBodyODataById.deletedUtc).isNull();
+            ApiMethodsSearchQuery.getSearchQueryODataByIdPath(responseBody.id);
+        }
 
     }
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
-    @Tag("webui")
-    @Story("Получение поискового запроса по протоколу oData по id")
-    @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Получение поискового запроса по протоколу oData по id")
-    @Description("Тест проверяет возможность получения поискового запроса по протоколу oData по id в path param")
-    public void testGetSearchQueryODataByIdInPath(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+    @Nested
+    @DisplayName("Deal - SearchQuery: Проверка тела ответа при создании поискового запроса с обязательными параметрами")
+    class CheckSearchQueryCreationWithOnlyRequiredParametersResponseBody{
 
-        String searchQueryNameForFilter = "testSearchQueryODataByIdInPathParam" + getRandomName();
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Создание поискового запроса")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при создании поискового запроса с обязательными полями")
+        @Description("Тест проверяет поля в теле ответа прии создании поискового запроса с обязательными полями")
+        public void testAddSearchQueryWithOnlyRequiredParametersCheckResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
-                .name(searchQueryNameForFilter)
-                .type(SearchQueryType.Regex.name())
-                .value("\\d{10}")
-                .build();
-        CommonSearchQueryResponseModel responseBody = ApiMethodsSearchQuery.addSearchQuery(requestBody).as(CommonSearchQueryResponseModel.class);
+            AddSearchQueryRequestModel requestBody = DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
 
-        CommonSearchQueryResponseModel responseBodyODataById = ApiMethodsSearchQuery.getSearchQueryODataByIdPath(responseBody.id).as(CommonSearchQueryResponseModel.class);
+            CommonSearchQueryResponseModel responseBody = ApiMethodsSearchQuery.addSearchQuery(requestBody).as(CommonSearchQueryResponseModel.class);
 
-        assertThat(responseBodyODataById.id).isEqualTo(responseBody.id);
-        assertThat(responseBodyODataById.name).isEqualTo(responseBody.name);
-        assertThat(responseBodyODataById.type).isEqualTo(responseBody.type);
-        assertThat(responseBodyODataById.value).isEqualTo(responseBody.value);
-        assertThat(responseBodyODataById.createdUtc).matches(dateTimeISOPattern());
-        assertThat(responseBodyODataById.deletedUtc).isNull();
+            assertAll(
+                    () -> assertThat(isValidUUID(responseBody.id)).isTrue(),
+                    () -> assertThat(responseBody.name).isEqualTo(requestBody.name),
+                    () -> assertThat(responseBody.type).isEqualTo(requestBody.type),
+                    () -> assertThat(responseBody.value).isEqualTo(requestBody.value),
+                    () -> assertThat(responseBody.createdUtc).matches(dateTimeCommonPattern()),
+                    () -> assertThat(responseBody.deletedUtc).isNull()
+            );
+
+        }
+
+    }
+
+    @Nested
+    @DisplayName("Deal - SearchQuery: Проверка тела ответа при изменении поискового запроса с обязательными параметрами")
+    class CheckSearchQueryUpdateWithOnlyRequiredParametersResponseBody{
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Изменение поискового запроса")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при изменении поискового запроса с обязательными полями")
+        @Description("Тест проверяет поля в теле ответа прии изменении поискового запроса с обязательными полями")
+        public void testUpdateSearchQueryWithOnlyRequiredParametersCheckResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonSearchQueryResponseModel responseBodySearchQueryCreation = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
+
+            UpdateSearchQueryRequestModel requestBodySearchQueryUpdate = new UpdateSearchQueryRequestModel(responseBodySearchQueryCreation);
+            requestBodySearchQueryUpdate.name = getRandomName();
+            requestBodySearchQueryUpdate.type = SearchQueryType.Text.name();
+            requestBodySearchQueryUpdate.value = "abc";
+
+            CommonSearchQueryResponseModel responseBodySearchQueryUpdate  = ApiMethodsSearchQuery.updateSearchQuery(requestBodySearchQueryUpdate).as(CommonSearchQueryResponseModel.class);
+
+            assertAll(
+                    () -> assertThat(responseBodySearchQueryUpdate.id).isEqualTo(requestBodySearchQueryUpdate.id),
+                    () -> assertThat(responseBodySearchQueryUpdate.name).isEqualTo(requestBodySearchQueryUpdate.name),
+                    () -> assertThat(responseBodySearchQueryUpdate.type).isEqualTo(requestBodySearchQueryUpdate.type),
+                    () -> assertThat(responseBodySearchQueryUpdate.value).isEqualTo(requestBodySearchQueryUpdate.value),
+                    () -> assertThat(responseBodySearchQueryUpdate.createdUtc).matches(dateTimeCommonPattern()),
+                    () -> assertThat(responseBodySearchQueryUpdate.deletedUtc).isNull()
+            );
+
+        }
+
+    }
+
+    @Nested
+    @DisplayName("Deal - SearchQuery: Проверка тела ответа при получении поискового запроса с обязательными параметрами из списка поисковых запросов")
+    class CheckGetESearchQueryWithOnlyRequiredParametersFromListOdataResponseBody{
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Получение списка поисковых запросов")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при получении списка поисковых запросов")
+        @Description("Тест проверяет поля в теле ответа при получении списка поисковых запросов")
+        public void testGetSearchQueryWithOnlyRequiredParametersFromListOdataCheckResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonSearchQueryResponseModel searchQueryCreationResponseBody = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
+
+            CommonSearchQueryResponseModel searchQueryBodyFromODataListResponseBody = ApiMethodsSearchQuery.getSearchQueryListOData().jsonPath().getList("value", CommonSearchQueryResponseModel.class).stream()
+                    .filter(searchQuery -> searchQuery.id.equals(searchQueryCreationResponseBody.id))
+                    .findFirst().orElse(null);
+
+            assertThat(searchQueryBodyFromODataListResponseBody).isNotNull();
+
+            assertAll(
+                    () -> assertThat(searchQueryBodyFromODataListResponseBody.id).isEqualTo(searchQueryCreationResponseBody.id),
+                    () -> assertThat(searchQueryBodyFromODataListResponseBody.name).isEqualTo(searchQueryCreationResponseBody.name),
+                    () -> assertThat(searchQueryBodyFromODataListResponseBody.type).isEqualTo(searchQueryCreationResponseBody.type),
+                    () -> assertThat(searchQueryBodyFromODataListResponseBody.value).isEqualTo(searchQueryCreationResponseBody.value),
+                    () -> assertThat(searchQueryBodyFromODataListResponseBody.createdUtc).matches(dateTimeCommonPattern()),
+                    () -> assertThat(searchQueryBodyFromODataListResponseBody.deletedUtc).isEqualTo(searchQueryCreationResponseBody.deletedUtc)
+            );
+
+        }
+
+    }
+
+    @Nested
+    @DisplayName("Deal - SearchQuery: Проверка тела ответа при получении поискового запроса с обязательными параметрами по id")
+    class CheckGetESearchQueryWithOnlyRequiredParametersByIdPathResponseBody{
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Получение списка поисковых запросов")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при получении списка поисковых запросов")
+        @Description("Тест проверяет поля в теле ответа при получении списка поисковых запросов")
+        public void testGetSearchQueryWithOnlyRequiredParametersByIdCheckResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonSearchQueryResponseModel searchQueryCreationResponseBody = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
+
+            CommonSearchQueryResponseModel searchQueryBodyByIdResponseBody = ApiMethodsSearchQuery.getSearchQueryODataByIdPath(searchQueryCreationResponseBody.id).as(CommonSearchQueryResponseModel.class);
+
+            assertAll(
+                    () -> assertThat(searchQueryBodyByIdResponseBody.id).isEqualTo(searchQueryCreationResponseBody.id),
+                    () -> assertThat(searchQueryBodyByIdResponseBody.name).isEqualTo(searchQueryCreationResponseBody.name),
+                    () -> assertThat(searchQueryBodyByIdResponseBody.type).isEqualTo(searchQueryCreationResponseBody.type),
+                    () -> assertThat(searchQueryBodyByIdResponseBody.value).isEqualTo(searchQueryCreationResponseBody.value),
+                    () -> assertThat(searchQueryBodyByIdResponseBody.createdUtc).matches(dateTimeCommonPattern()),
+                    () -> assertThat(searchQueryBodyByIdResponseBody.deletedUtc).isEqualTo(searchQueryCreationResponseBody.deletedUtc)
+            );
+
+        }
 
     }
 
