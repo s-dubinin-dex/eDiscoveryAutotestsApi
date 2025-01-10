@@ -11,6 +11,7 @@ import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
@@ -150,9 +151,12 @@ public class EmployeeExtendedPositiveTests extends TestBase {
                     .withCount(true)
                     .build();
 
-            OdataListResponseModel responseBodyWithCount = ApiMethodsEmployee.getEmployeeListOData(parameters).as(OdataListResponseModel.class);
+            Response response = ApiMethodsEmployee.getEmployeeListOData(parameters);
 
-            assertThat(responseBodyWithCount).isNotNull();
+            OdataListResponseModel responseBodyWithCount = response.as(OdataListResponseModel.class);
+            List<CommonEmployeeResponseModel> responseEmployees = response.jsonPath().getList("value", CommonEmployeeResponseModel.class);
+
+            assertThat(Integer.getInteger(responseBodyWithCount.odataCount)).isEqualTo(responseEmployees.size());
         }
 
         @Test
