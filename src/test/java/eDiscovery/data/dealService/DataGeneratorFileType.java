@@ -7,7 +7,6 @@ import eDiscovery.models.deal.fileExtensions.FileExtensionResponseModel;
 import eDiscovery.models.deal.fileType.FileTypeResponseModel;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DataGeneratorFileType {
 
