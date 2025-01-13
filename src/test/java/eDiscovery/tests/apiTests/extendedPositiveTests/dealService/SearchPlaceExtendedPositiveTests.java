@@ -244,6 +244,25 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
+            Map<String, String> requestParameters  = OdataParametersBuilder.builder()
+                    .withFilter("contains(name, '')")
+                    .build();
+
+            ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters);
+
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Место поиска")
+        @Story("Получение списка мест поиска")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка фильтрации по названию места поиска при получении списка мест поиска")
+        @Description("Тест проверяет фильтрацию по названию места поиска при получении списка мест поиска")
+        public void testGetSearchPlaceListWithFilterNameCheckFiltering(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
             String searchPlaceNameForFilter = getRandomName();
 
             AddSearchPlaceRequestModel requestBody = DataGeneratorSearchPlace.getSearchPlaceModelWithOnlyRequiredParameters();
@@ -285,7 +304,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
                     .withFilter(String.format("categoryType eq '%s'", SearchPlaceCategoryType.FileShare.name()))
                     .build();
 
-            ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters );
+            ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters);
         }
 
         @Test
@@ -303,7 +322,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
                     .withFilter(String.format("type eq '%s'", SearchPlaceType.SMB.name()))
                     .build();
 
-            ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters );
+            ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters);
         }
 
         @Test
@@ -321,7 +340,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
                     .withOrderBy("createdUtc desc")
                     .build();
 
-            ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters );
+            ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters);
         }
 
         @Test
@@ -339,7 +358,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
                     .withOrderBy("name asc")
                     .build();
 
-            ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters );
+            ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters);
         }
 
         @Test
@@ -392,7 +411,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
                     .withOrderBy("categoryType asc")
                     .build();
 
-            ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters );
+            ApiMethodsSearchPlace.getSearchPlaceListOData(requestParameters);
         }
 
         @Test

@@ -47,6 +47,25 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
+            Map<String, String> parameters = OdataParametersBuilder.builder()
+                    .withFilter("contains(name, '')")
+                    .build();
+
+            ApiMethodsSearchQuery.getSearchQueryListOData(parameters);
+
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Получение списка поисковых запросов")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка фильтрации по названию поискового запроса при получении списка поисковых запросов")
+        @Description("Тест проверяет фильтрацию по названию поискового запроса при получении списка поисковых запросов")
+        public void testGetSearchQueryListWithFilterNameCheckFiltering(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
             String searchQueryNameForFilter = getRandomName();
 
             AddSearchQueryRequestModel requestBody = DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
