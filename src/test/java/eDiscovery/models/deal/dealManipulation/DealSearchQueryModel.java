@@ -11,12 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DealSearchQueryModel {
     @JsonInclude()
-    @JsonProperty("isActive")
-    public boolean isActive;
-    @JsonInclude()
     public String id;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public String name;
+    @JsonInclude()
+    @JsonProperty("isActive")
+    public boolean isActive;
 
     public DealSearchQueryModel(String id, boolean isActive){
         this.id = id;

@@ -18,6 +18,8 @@ public class DealCardModel {
     public DealTaskProgressModel progressInfo;
     public String dealStatus;
     public List<String> excludes;
+    public boolean needClassify;
+    public String classifierProfileId;
     public String createdUtc;
     public String creatorUserId;
     public String creatorUserName;

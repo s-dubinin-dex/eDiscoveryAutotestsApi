@@ -18,10 +18,10 @@ public class CommonDealManipulationResponseModel extends OdataEntityResponseMode
     public DealTaskProgressModel progressInfo;
     public String dealStatus;
     public List<String> excludes;
+    public boolean needClassify;
+    public String classifierProfileId;
+    public ClassifierDealData classifierDealData;
     public String createdUtc;
     public String creatorUserId;
     public String creatorUserName;
-    public ClassifierDealData classifierDealData;
-    public String deletedUtc;
-
 }

@@ -2,413 +2,666 @@ package eDiscovery.tests.apiTests.commonPositiveTests.dealService;
 
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsDealManipulation;
-import eDiscovery.apiMethods.deal.ApiMethodsSearchPlace;
-import eDiscovery.apiMethods.deal.ApiMethodsSearchQuery;
-import eDiscovery.data.dealService.DataGeneratorDealManipulation;
-import eDiscovery.data.dealService.DataGeneratorSearchPlace;
-import eDiscovery.data.dealService.DataGeneratorSearchQuery;
+import eDiscovery.data.dealService.*;
+import eDiscovery.helpers.OdataParametersBuilder;
 import eDiscovery.helpers.enums.DealPriority;
 import eDiscovery.helpers.enums.DealStatus;
 import eDiscovery.models.deal.dealManipulation.*;
-import eDiscovery.models.deal.searchPlace.AddSearchPlaceRequestModel;
 import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
-import eDiscovery.models.deal.searchQuery.AddSearchQueryRequestModel;
 import eDiscovery.models.deal.searchQuery.CommonSearchQueryResponseModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
-import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Map;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-@DisplayName("Common positive tests: Deal - DealManipulation")
+@DisplayName("Deal - DealManipulation: Основные позитивные тесты")
 public class DealManipulationCommonPositiveTests extends TestBase {
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Дело")
-    @Story("Создание дела")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Создание дела")
-    @Description("Тест проверяет возможность создания дела")
-    public void testAddDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+    @Nested
+    @Tag("smoke")
+    @DisplayName("Deal - DealManipulation: Базовая проверка CRUD")
+    class CheckBaseCRUDDealDealManipulation {
 
-        DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Создание дела")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Создание дела")
+        @Description("Тест проверяет возможность создания дела")
+        public void testAddDeal(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-    }
+            DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+        }
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Дело")
-    @Story("Изменение дела")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Изменение дела")
-    @Description("Тест проверяет возможность изменения дела")
-    public void testUpdateDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Изменение дела")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Изменение дела")
+        @Description("Тест проверяет возможность изменения дела")
+        public void testUpdateDeal(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchPlaceRequestModel searchPlaceRequestBody = DataGeneratorSearchPlace.getSearchPlaceModelWithOnlyRequiredParameters();
-        CommonSearchPlaceResponseModel searchPlaceResponseBody = ApiMethodsSearchPlace.addSearchPlace(searchPlaceRequestBody).as(CommonSearchPlaceResponseModel.class);
+            CommonDealManipulationResponseModel responseBodyDealCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
-        AddSearchQueryRequestModel searchQueryRequestBody = DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
-        CommonSearchQueryResponseModel searchQueryResponseBody = ApiMethodsSearchQuery.addSearchQuery(searchQueryRequestBody).as(CommonSearchQueryResponseModel.class);
+            UpdateDealManipulationRequestModel requestBodyDealUpdate = new UpdateDealManipulationRequestModel(responseBodyDealCreation);
 
-        AddDealManipulationRequestModel requestBodyDealCreation = DataGeneratorDealManipulation.getDealManipulationModelWithOnlyRequiredParameters(
-                searchPlaceResponseBody.id,
-                searchQueryResponseBody.id
-        );
+            ApiMethodsDealManipulation.updateDeal(requestBodyDealUpdate);
+        }
 
-        Response responseDealCreation = ApiMethodsDealManipulation.addDeal(requestBodyDealCreation);
-        CommonDealManipulationResponseModel responseBodyDealCreation = responseDealCreation.as(CommonDealManipulationResponseModel.class);
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Удаление дела")
+        @Severity(SeverityLevel.TRIVIAL)
+        @DisplayName("Удаление дела")
+        @Description("Тест проверяет возможность удаления дела")
+        public void testDeleteDeal(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        UpdateDealManipulationRequestModel requestBodyDealUpdate = UpdateDealManipulationRequestModel.builder()
-                .id(responseBodyDealCreation.id)
-                .name(getRandomName())
-                .searchPlaces(requestBodyDealCreation.searchPlaces)
-                .dealSearchQueries(requestBodyDealCreation.dealSearchQueries)
-                .build();
+            CommonDealManipulationResponseModel responseBodyDealCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
+            ApiMethodsDealManipulation.deleteDeal(responseBodyDealCreation.id);
+        }
 
-        CommonDealManipulationResponseModel responseBodyDealUpdate = ApiMethodsDealManipulation.updateDeal(requestBodyDealUpdate).as(CommonDealManipulationResponseModel.class);
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Просмотр информации по делу")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Просмотр информации по делу")
+        @Description("Тест проверяет возможность просмотреть информацию по делу")
+        public void testGetDealCard(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        assertThat(responseBodyDealUpdate.id).isEqualTo(responseBodyDealCreation.id);
-        assertThat(responseBodyDealUpdate.name).isEqualTo(requestBodyDealUpdate.name);
-        assertThat(responseBodyDealUpdate.dealPriority).isEqualTo(DealPriority.Medium.name());
-        assertThat(responseBodyDealUpdate.quarantine).isFalse();
-        assertThat(responseBodyDealUpdate.metadataFilter).isNull();
-        assertThat(responseBodyDealUpdate.searchPlaces).usingRecursiveComparison().isEqualTo(
-                Collections.singletonList(
-                        new DealSearchPlaceModel(searchPlaceResponseBody.id, searchPlaceResponseBody.name)
-                )
-        );
-        assertThat(responseBodyDealUpdate.classifySearchPlaces).hasSize(0);
-        assertThat(responseBodyDealUpdate.searchPlaceGroups).hasSize(0);
-        assertThat(responseBodyDealUpdate.dealSearchQueries).isEqualTo(
-                Collections.singletonList(
-                        new DealSearchQueryModel(
-                                requestBodyDealCreation.dealSearchQueries.get(0).isActive,
-                                requestBodyDealCreation.dealSearchQueries.get(0).id,
-                                searchQueryRequestBody.name
-                        )
-                )
-        );
-        assertThat(responseBodyDealUpdate.progressInfo).isNull();
-        assertThat(responseBodyDealUpdate.dealStatus).isEqualTo(DealStatus.Waiting.name());
-        assertThat(responseBodyDealUpdate.excludes).hasSize(0);
-        assertThat(responseBodyDealUpdate.classifierDealData.needClassify).isEqualTo(responseBodyDealCreation.classifierDealData.needClassify);
-        assertThat(responseBodyDealUpdate.classifierDealData.classifierProfileId).isEqualTo(responseBodyDealCreation.classifierDealData.classifierProfileId);
-        assertThat(responseBodyDealUpdate.createdUtc).matches(dateTimeCommonPattern());
-        assertThat(responseBodyDealUpdate.creatorUserId).isEqualTo(responseBodyDealCreation.creatorUserId);
-        assertThat(responseBodyDealUpdate.creatorUserName).isEqualTo(responseBodyDealCreation.creatorUserName);
+            CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
-    }
+            ApiMethodsDealManipulation.getDealCard(responseDealCreationBody.id);
+        }
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Дело")
-    @Story("Удаление дела")
-    @Severity(SeverityLevel.TRIVIAL)
-    @DisplayName("Удаление дела")
-    @Description("Тест проверяет возможность удаления дела")
-    public void testDeleteDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Восстановление удалённого дела")
+        @Severity(SeverityLevel.TRIVIAL)
+        @DisplayName("Восстановление удалённого дела (Служебный метод)")
+        @Description("Тест проверяет возможность восстановить удалённое дело (Служебный метод, должен быть удалён)")
+        public void testRestoreDeal(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonDealManipulationResponseModel responseBodyDealCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+            CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+            ApiMethodsDealManipulation.restoreDeal(responseDealCreationBody.id);
+        }
 
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
-        ApiMethodsDealManipulation.deleteDeal(responseBodyDealCreation.id);
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Закрытие дела")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Закрытие дела")
+        @Description("Тест проверяет возможность закрыть (Архивировать) дело")
+        public void testCloseDeal(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-    }
+            CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Дело")
-    @Story("Просмотр информации по делу")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Просмотр информации по делу")
-    @Description("Тест проверяет возможность просмотреть информацию по делу")
-    public void testGetDealCard(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            ApiMethodsDealManipulation.closeDeal(responseDealCreationBody.id);
+        }
 
-        AddSearchPlaceRequestModel searchPlaceRequestBody = DataGeneratorSearchPlace.getBasicSearchPlaceModelArmLocal();
-        CommonSearchPlaceResponseModel searchPlaceResponseBody = ApiMethodsSearchPlace.addSearchPlace(searchPlaceRequestBody).as(CommonSearchPlaceResponseModel.class);
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Открытие закрытого дела")
+        @Severity(SeverityLevel.TRIVIAL)
+        @DisplayName("Открытие закрытого дела (Служебный метод)")
+        @Description("Тест проверяет возможность открыть закрытое дело (Служебный метод, должен быть удалён)")
+        public void testUncloseDeal(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchQueryRequestModel searchQueryRequestBody = DataGeneratorSearchQuery.getBasicSearchQueryModel();
-        CommonSearchQueryResponseModel searchQueryResponseBody = ApiMethodsSearchQuery.addSearchQuery(searchQueryRequestBody).as(CommonSearchQueryResponseModel.class);
+            CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
-        AddDealManipulationRequestModel requestDealCreationBody = DataGeneratorDealManipulation.getDealManipulationModelWithOnlyRequiredParameters(
-                searchPlaceResponseBody.id,
-                searchQueryResponseBody.id
-        );
+            ApiMethodsDealManipulation.uncloseDeal(responseDealCreationBody.id);
+        }
 
-        CommonDealManipulationResponseModel responseDealCreationBody = ApiMethodsDealManipulation.addDeal(requestDealCreationBody).as(CommonDealManipulationResponseModel.class);
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Остановка дела")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Остановка дела")
+        @Description("Тест проверяет возможность остановить дело")
+        public void testStopDeal(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-        Response responseDealCard = ApiMethodsDealManipulation.getDealCard(responseDealCreationBody.id);
+            CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
-        DealCardModel responseDealCardBody = responseDealCard.as(DealCardModel.class);
+            ApiMethodsDealManipulation.stopDeal(responseDealCreationBody.id);
+        }
 
-        assertThat(responseDealCardBody.id).isEqualTo(responseDealCreationBody.id);
-        assertThat(responseDealCardBody.name).isEqualTo(responseDealCreationBody.name);
-        assertThat(responseDealCardBody.dealPriority).isEqualTo(DealPriority.Medium.name());
-        assertThat(responseDealCardBody.quarantine).isEqualTo(responseDealCreationBody.quarantine);
-        assertThat(responseDealCardBody.metadataFilter).isNull();
-        assertThat(responseDealCardBody.searchPlaces).usingRecursiveComparison().isEqualTo(
-                Collections.singletonList(
-                        new DealSearchPlaceModel(searchPlaceResponseBody.id, searchPlaceResponseBody.name)
-                )
-        );
-        assertThat(responseDealCardBody.classifySearchPlaces).hasSize(0);
-        assertThat(responseDealCardBody.searchPlaceGroups).hasSize(0);
-        assertThat(responseDealCardBody.dealSearchQueries).isEqualTo(
-                Collections.singletonList(
-                        new DealSearchQueryModel(
-                                responseDealCreationBody.dealSearchQueries.get(0).isActive,
-                                responseDealCreationBody.dealSearchQueries.get(0).id,
-                                searchQueryRequestBody.name
-                        )
-                )
-        );
-        assertThat(responseDealCardBody.progressInfo).isNull();
-        assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Waiting.name());
-        assertThat(responseDealCardBody.excludes).hasSize(0);
-        assertThat(responseDealCardBody.classifierDealData.needClassify).isEqualTo(responseDealCreationBody.classifierDealData.needClassify);
-        assertThat(responseDealCardBody.classifierDealData.classifierProfileId).isEqualTo(responseDealCreationBody.classifierDealData.classifierProfileId);
-        assertThat(responseDealCardBody.createdUtc).matches(dateTimeCommonPattern());
-        assertThat(responseDealCardBody.creatorUserId).isEqualTo(responseDealCreationBody.creatorUserId);
-        assertThat(responseDealCardBody.creatorUserName).isEqualTo(responseDealCreationBody.creatorUserName);
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Запуск дела")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Запуск дела")
+        @Description("Тест проверяет возможность запустить дело")
+        public void testStartDeal(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-    }
+            CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Дело")
-    @Story("Восстановление удалённого дела")
-    @Severity(SeverityLevel.TRIVIAL)
-    @DisplayName("Восстановление удалённого дела (Служебный метод)")
-    @Description("Тест проверяет возможность восстановить удалённое дело (Служебный метод, должен быть удалён)")
-    public void testRestoreDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            ApiMethodsDealManipulation.startDeal(responseDealCreationBody.id);
+        }
 
-        CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Получение списка дел")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Получение списка дел")
+        @Description("Тест проверяет возможность получения списка дел")
+        public void testGetDealList(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody(5));
 
-        ApiMethodsDealManipulation.deleteDeal(responseDealCreationBody.id);
+            ApiMethodsDealManipulation.getDealManipulationList();
+        }
 
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec404NotFound());
-        ApiMethodsDealManipulation.getDealCard(responseDealCreationBody.id);
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Получение списка дел")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Получение списка мест поиска по протоколу oData")
+        @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData")
+        public void testGetDealListOData(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-        ApiMethodsDealManipulation.restoreDeal(responseDealCreationBody.id);
-        ApiMethodsDealManipulation.getDealCard(responseDealCreationBody.id);
+            ApiMethodsDealManipulation.getDealManipulationListOData();
+        }
 
-    }
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Получение дела по ID")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Получение дела по id")
+        @Description("Тест проверяет возможность получить дело по id в скобках")
+        public void testGetDealManipulationById(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Дело")
-    @Story("Закрытие дела")
-    @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Закрытие дела")
-    @Description("Тест проверяет возможность закрыть (Архивировать) дело")
-    public void testCloseDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            CommonDealManipulationResponseModel responseBodyCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
-        CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+            ApiMethodsDealManipulation.getDealManipulationById(responseBodyCreation.id);
+        }
 
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-        Response responseCloseDeal = ApiMethodsDealManipulation.closeDeal(responseDealCreationBody.id);
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Получение дела по ID")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Получение дела по id")
+        @Description("Тест проверяет возможность получить дело по id в path param")
+        public void testGetDealManipulationByIdPath(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonDealManipulationResponseModel responseCloseDealBody = responseCloseDeal.as(CommonDealManipulationResponseModel.class);
-        assertThat(responseCloseDealBody.dealStatus).isEqualTo(DealStatus.Closed.name());
+            CommonDealManipulationResponseModel responseBodyCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
-        Response responseDealCard = ApiMethodsDealManipulation.getDealCard(responseDealCreationBody.id);
-        DealCardModel responseDealCardBody = responseDealCard.as(DealCardModel.class);
-        assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Closed.name());
-
-    }
-
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Дело")
-    @Story("Открытие закрытого дела")
-    @Severity(SeverityLevel.TRIVIAL)
-    @DisplayName("Открытие закрытого дела (Служебный метод)")
-    @Description("Тест проверяет возможность открыть закрытое дело (Служебный метод, должен быть удалён)")
-    public void testUncloseDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-
-        CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
-
-        ApiMethodsDealManipulation.closeDeal(responseDealCreationBody.id);
-
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-
-        Response responseUncloseDeal = ApiMethodsDealManipulation.uncloseDeal(responseDealCreationBody.id);
-        CommonDealManipulationResponseModel responseUncloseDealBody = responseUncloseDeal.as(CommonDealManipulationResponseModel.class);
-        assertThat(responseUncloseDealBody.dealStatus).isEqualTo(DealStatus.Stopped.name());
-
-        Response responseDealCard = ApiMethodsDealManipulation.getDealCard(responseDealCreationBody.id);
-        DealCardModel responseDealCardBody = responseDealCard.as(DealCardModel.class);
-        assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Stopped.name());
+            ApiMethodsDealManipulation.getDealManipulationByIdPath(responseBodyCreation.id);
+        }
 
     }
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Дело")
-    @Story("Остановка дела")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Остановка дела")
-    @Description("Тест проверяет возможность остановить дело")
-    public void testStopDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+    @Nested
+    @DisplayName("Deal - DealManipulation: Проверка тела ответа при создании дела с обязательными параметрами")
+    class CheckDealManipulationCreationWithOnlyRequiredParametersResponseBody {
 
-        CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Создание дела")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при создании дела с обязательными полями")
+        @Description("Тест проверяет поля в теле ответа при создании дела с обязательными полями")
+        public void testAddDealManipulationWithOnlyRequiredParametersCheckResponseBody() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+            CommonSearchPlaceResponseModel searchPlaceModel = DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
+            CommonSearchQueryResponseModel searchQueryModel = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-        Response responseStopDeal = ApiMethodsDealManipulation.stopDeal(responseDealCreationBody.id);
-        CommonDealManipulationResponseModel responseStopDealBody = responseStopDeal.as(CommonDealManipulationResponseModel.class);
-        assertThat(responseStopDealBody.dealStatus).isEqualTo(DealStatus.Stopped.name());
+            AddDealManipulationRequestModel requestBody = DataGeneratorDealManipulation.getDealManipulationModelWithOnlyRequiredParameters(searchPlaceModel.id, searchQueryModel.id);
+            CommonDealManipulationResponseModel responseBody = ApiMethodsDealManipulation.addDeal(requestBody).as(CommonDealManipulationResponseModel.class);
 
-        Response responseDealCard = ApiMethodsDealManipulation.getDealCard(responseDealCreationBody.id);
-        DealCardModel responseDealCardBody = responseDealCard.as(DealCardModel.class);
-        assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Stopped.name());
-
-    }
-
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Дело")
-    @Story("Запуск дела")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Запуск дела")
-    @Description("Тест проверяет возможность запустить дело")
-    public void testStartDeal(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-
-        CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
-
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-        CommonDealManipulationResponseModel responseStopDealBody = ApiMethodsDealManipulation.startDeal(responseDealCreationBody.id).as(CommonDealManipulationResponseModel.class);
-
-        assertThat(responseStopDealBody.dealStatus).isEqualTo(DealStatus.Running.name());
-
-        Response responseDealCard = ApiMethodsDealManipulation.getDealCard(responseDealCreationBody.id);
-        DealCardModel responseDealCardBody = responseDealCard.as(DealCardModel.class);
-        assertThat(responseDealCardBody.dealStatus).isEqualTo(DealStatus.Running.name());
+            assertAll(
+                    () -> assertThat(isValidUUID(responseBody.id)).isTrue(),
+                    () -> assertThat(responseBody.name).isEqualTo(requestBody.name),
+                    () -> assertThat(responseBody.dealPriority).isEqualTo(DealPriority.Medium.name()),
+                    () -> assertThat(responseBody.quarantine).isFalse(),
+                    () -> assertThat(responseBody.metadataFilter).isNull(),
+                    () -> assertThat(responseBody.searchPlaces).usingRecursiveComparison().isEqualTo(Collections.singletonList(new DealSearchPlaceModel(searchPlaceModel.id, searchPlaceModel.name))),
+                    () -> assertThat(responseBody.classifySearchPlaces).isEmpty(),
+                    () -> assertThat(responseBody.searchPlaceGroups).isEmpty(),
+                    () -> assertThat(responseBody.dealSearchQueries).usingRecursiveComparison().isEqualTo(Collections.singletonList(new DealSearchQueryModel(searchQueryModel.id, searchQueryModel.name, true))),
+                    () -> assertThat(responseBody.progressInfo).isNull(),
+                    () -> assertThat(responseBody.dealStatus).isEqualTo(DealStatus.Waiting.name()),
+                    () -> assertThat(responseBody.excludes).isEmpty(),
+                    () -> assertThat(responseBody.needClassify).isFalse(),
+                    () -> assertThat(responseBody.classifierProfileId).isNull(),
+                    () -> assertThat(responseBody.createdUtc).matches(dateTimeCommonPattern()),
+                    () -> assertThat(isValidUUID(responseBody.creatorUserId)).isTrue(),
+                    () -> assertThat(responseBody.creatorUserName).isEqualTo("Администратор")
+            );
+        }
 
     }
 
+    @Nested
+    @DisplayName("Deal - DealManipulation: Проверка тела ответа при изменении дела с обязательными параметрами")
+    class CheckDealManipulationUpdateWithOnlyRequiredParametersResponseBody {
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Дело")
-    @Story("Получение списка дел")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Получение списка дел")
-    @Description("Тест проверяет возможность получения списка дел")
-    public void testGetDealList(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody(5));
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Изменение дела")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при изменении дела с обязательными полями")
+        @Description("Тест проверяет поля в теле ответа при изменении дела с обязательными полями")
+        public void testUpdateDealManipulationWithOnlyRequiredParametersCheckResponseBody() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
-        Response response = ApiMethodsDealManipulation.getDealManipulationList();
+            CommonDealManipulationResponseModel responseBodyDealCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
-        List<CommonDealManipulationResponseModel> responseBody = response.jsonPath().getList("", CommonDealManipulationResponseModel.class);
-        assertThat(responseBody).isNotEmpty();
-        assertThat(responseBody.get(0)).isNotNull();
-    }
+            CommonSearchPlaceResponseModel searchPlaceModel = DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
+            CommonSearchQueryResponseModel searchQueryModel = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Место поиска")
-    @Story("Получение списка дел")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Получение списка мест поиска по протоколу oData")
-    @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData")
-    public void testGetDealListOData(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+            UpdateDealManipulationRequestModel requestBody = new UpdateDealManipulationRequestModel(responseBodyDealCreation);
+            requestBody.name = getRandomName();
+            requestBody.searchPlaces = Collections.singletonList(searchPlaceModel.id);
+            requestBody.dealSearchQueries = Collections.singletonList(new DealSearchQueryModel(searchQueryModel.id, true));
 
-        DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
-        Response response = ApiMethodsDealManipulation.getDealManipulationListOData();
+            CommonDealManipulationResponseModel responseBody = ApiMethodsDealManipulation.updateDeal(requestBody).as(CommonDealManipulationResponseModel.class);
 
-        List<CommonDealManipulationResponseModel> responseBody = response.jsonPath().getList("value", CommonDealManipulationResponseModel.class);
-        assertThat(responseBody).isNotEmpty();
-        assertThat(responseBody.get(0)).isNotNull();
-    }
-
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Дело")
-    @Story("Получение дела по ID")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Получение дела по id")
-    @Description("Тест проверяет возможность получить дело по id в скобках")
-    public void testGetDealManipulationById(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-
-        CommonDealManipulationResponseModel responseBodyCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
-
-        CommonDealManipulationResponseModel responseBody = ApiMethodsDealManipulation.getDealManipulationById(responseBodyCreation.id).as(CommonDealManipulationResponseModel.class);
-
-        assertThat(responseBody.id).isEqualTo(responseBodyCreation.id);
-        assertThat(responseBody.name).isEqualTo(responseBodyCreation.name);
-        assertThat(responseBody.dealPriority).isEqualTo(responseBodyCreation.dealPriority);
-        assertThat(responseBody.quarantine).isEqualTo(responseBodyCreation.quarantine);
-        assertThat(responseBody.metadataFilter).isEqualTo(responseBodyCreation.metadataFilter);
-        assertThat(responseBody.progressInfo).isEqualTo(responseBodyCreation.progressInfo);
-        assertThat(responseBody.dealStatus).isEqualTo(responseBodyCreation.dealStatus);
-        assertThat(responseBody.excludes).isEqualTo(responseBodyCreation.excludes);
-//        assertThat(responseBody.classifierDealData.needClassify).isEqualTo(responseBodyCreation.classifierDealData.needClassify);
-//        assertThat(responseBody.classifierDealData.classifierProfileId).isEqualTo(responseBodyCreation.classifierDealData.classifierProfileId);
-        assertThat(responseBody.createdUtc).matches(dateTimeISOPattern());
-        assertThat(responseBody.creatorUserId).isEqualTo(responseBodyCreation.creatorUserId);
-        assertThat(responseBody.creatorUserName).isEqualTo(responseBodyCreation.creatorUserName);
+            assertAll(
+                    () -> assertThat(isValidUUID(responseBody.id)).isTrue(),
+                    () -> assertThat(responseBody.name).isEqualTo(requestBody.name),
+                    () -> assertThat(responseBody.dealPriority).isEqualTo(DealPriority.Medium.name()),
+                    () -> assertThat(responseBody.quarantine).isFalse(),
+                    () -> assertThat(responseBody.metadataFilter).isNull(),
+                    () -> assertThat(responseBody.searchPlaces).usingRecursiveComparison().isEqualTo(Collections.singletonList(new DealSearchPlaceModel(searchPlaceModel.id, searchPlaceModel.name))),
+                    () -> assertThat(responseBody.classifySearchPlaces).isEmpty(),
+                    () -> assertThat(responseBody.searchPlaceGroups).isEmpty(),
+                    () -> assertThat(responseBody.dealSearchQueries).usingRecursiveComparison().isEqualTo(Collections.singletonList(new DealSearchQueryModel(searchQueryModel.id, searchQueryModel.name, true))),
+                    () -> assertThat(responseBody.progressInfo).isNull(),
+                    () -> assertThat(responseBody.dealStatus).isEqualTo(DealStatus.Waiting.name()),
+                    () -> assertThat(responseBody.excludes).isEmpty(),
+                    () -> assertThat(responseBody.needClassify).isFalse(),
+                    () -> assertThat(responseBody.classifierProfileId).isNull(),
+                    () -> assertThat(responseBody.createdUtc).matches(dateTimeCommonPattern()),
+                    () -> assertThat(isValidUUID(responseBody.creatorUserId)).isTrue(),
+                    () -> assertThat(responseBody.creatorUserName).isEqualTo("Администратор")
+            );
+        }
 
     }
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Дело")
-    @Story("Получение дела по ID")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Получение дела по id")
-    @Description("Тест проверяет возможность получить дело по id в path param")
-    public void testGetDealManipulationByIdPath(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+    @Nested
+    @DisplayName("Deal - DealManipulation: Проверка тела ответа при получении дела с обязательными параметрами из списка дел")
+    class CheckGetDealManipulationWithOnlyRequiredParametersFromListOdataResponseBody {
 
-        CommonDealManipulationResponseModel responseBodyCreation = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Получение списка дел")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при получении списка дел")
+        @Description("Тест проверяет поля в теле ответа при получении списка дел")
+        public void testGetDealManipulationWithOnlyRequiredParametersFromListOdataCheckResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonDealManipulationResponseModel responseBody = ApiMethodsDealManipulation.getDealManipulationByIdPath(responseBodyCreation.id).as(CommonDealManipulationResponseModel.class);
+            CommonDealManipulationResponseModel dealManipulationCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
 
-        assertThat(responseBody.id).isEqualTo(responseBodyCreation.id);
-        assertThat(responseBody.name).isEqualTo(responseBodyCreation.name);
-        assertThat(responseBody.dealPriority).isEqualTo(responseBodyCreation.dealPriority);
-        assertThat(responseBody.quarantine).isEqualTo(responseBodyCreation.quarantine);
-        assertThat(responseBody.progressInfo).isEqualTo(responseBodyCreation.progressInfo);
-        assertThat(responseBody.dealStatus).isEqualTo(responseBodyCreation.dealStatus);
-        assertThat(responseBody.excludes).isEqualTo(responseBodyCreation.excludes);
-        assertThat(responseBody.metadataFilter).isEqualTo(responseBodyCreation.metadataFilter);
-//        assertThat(responseBody.classifierDealData.needClassify).isEqualTo(responseBodyCreation.classifierDealData.needClassify);
-//        assertThat(responseBody.classifierDealData.classifierProfileId).isEqualTo(responseBodyCreation.classifierDealData.classifierProfileId);
-        assertThat(responseBody.createdUtc).matches(dateTimeISOPattern());
-        assertThat(responseBody.creatorUserId).isEqualTo(responseBodyCreation.creatorUserId);
-        assertThat(responseBody.creatorUserName).isEqualTo(responseBodyCreation.creatorUserName);
+            CommonDealManipulationResponseModel dealManipulationBodyFromODataList = ApiMethodsDealManipulation.getDealManipulationListOData().jsonPath().getList("value", CommonDealManipulationResponseModel.class)
+                            .stream().filter(dealManipulation -> dealManipulation.id.equals(dealManipulationCreationBody.id))
+                            .findFirst().orElse(null);
+
+            assertThat(dealManipulationBodyFromODataList).isNotNull();
+
+            assertAll(
+                    () -> assertThat(dealManipulationBodyFromODataList.id).isEqualTo(dealManipulationCreationBody.id),
+                    () -> assertThat(dealManipulationBodyFromODataList.name).isEqualTo(dealManipulationCreationBody.name),
+                    () -> assertThat(dealManipulationBodyFromODataList.dealPriority).isEqualTo(dealManipulationCreationBody.dealPriority),
+                    () -> assertThat(dealManipulationBodyFromODataList.quarantine).isEqualTo(dealManipulationCreationBody.quarantine),
+                    () -> assertThat(dealManipulationBodyFromODataList.dealStatus).isEqualTo(dealManipulationCreationBody.dealStatus),
+                    () -> assertThat(dealManipulationBodyFromODataList.excludes).isEqualTo(dealManipulationCreationBody.excludes),
+                    () -> assertThat(dealManipulationBodyFromODataList.needClassify).isEqualTo(dealManipulationCreationBody.needClassify),
+                    () -> assertThat(dealManipulationBodyFromODataList.classifierProfileId).isEqualTo(dealManipulationCreationBody.classifierProfileId),
+                    () -> assertThat(dealManipulationBodyFromODataList.createdUtc).matches(dateTimeCommonPattern()),
+                    () -> assertThat(dealManipulationBodyFromODataList.creatorUserId).isEqualTo(dealManipulationCreationBody.creatorUserId),
+                    () -> assertThat(dealManipulationBodyFromODataList.creatorUserName).isEqualTo(dealManipulationCreationBody.creatorUserName)
+            );
+
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Получение списка дел")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при получении списка дел")
+        @Description("Тест проверяет поля в теле ответа при получении списка дел")
+        public void testGetDealManipulationWithOnlyRequiredParametersFromListOdataCheckResponseBodyWithExpand(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonDealManipulationResponseModel dealManipulationCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+
+            Map<String, String> parameters = OdataParametersBuilder.builder()
+                    .withExpand("metadataFilter, searchPlaces, classifySearchPlaces, searchPlaceGroups, dealSearchQueries, progressInfo")
+                    .build();
+
+            CommonDealManipulationResponseModel dealManipulationBodyFromODataList = ApiMethodsDealManipulation.getDealManipulationListOData(parameters).jsonPath().getList("value", CommonDealManipulationResponseModel.class)
+                    .stream().filter(dealManipulation -> dealManipulation.id.equals(dealManipulationCreationBody.id))
+                    .findFirst().orElse(null);
+
+            assertThat(dealManipulationBodyFromODataList).isNotNull();
+
+            assertAll(
+                    () -> assertThat(dealManipulationBodyFromODataList.metadataFilter).isEqualTo(dealManipulationCreationBody.metadataFilter),
+                    () -> assertThat(dealManipulationBodyFromODataList.searchPlaces).usingRecursiveComparison().isEqualTo(dealManipulationCreationBody.searchPlaces),
+                    () -> assertThat(dealManipulationBodyFromODataList.classifySearchPlaces).isEqualTo(dealManipulationCreationBody.classifySearchPlaces),
+                    () -> assertThat(dealManipulationBodyFromODataList.searchPlaceGroups).isEqualTo(dealManipulationCreationBody.searchPlaceGroups),
+                    () -> assertThat(dealManipulationBodyFromODataList.dealSearchQueries).isEqualTo(dealManipulationCreationBody.dealSearchQueries),
+                    () -> assertThat(dealManipulationBodyFromODataList.progressInfo).isEqualTo(dealManipulationCreationBody.progressInfo)
+            );
+
+        }
+
+    }
+
+    @Nested
+    @DisplayName("Deal - DealManipulation: Проверка тела ответа при получении дела с обязательными параметрами по id")
+    class CheckGetDealManipulationWithOnlyRequiredParametersByIdResponseBody {
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Получение дела по id")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при получении дела по id")
+        @Description("Тест проверяет поля в теле ответа при получении дела по id")
+        public void testGetDealManipulationWithOnlyRequiredParametersByIdCheckResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonDealManipulationResponseModel dealManipulationCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+
+            CommonDealManipulationResponseModel dealManipulationBodyFromODataList = ApiMethodsDealManipulation.getDealManipulationByIdPath(dealManipulationCreationBody.id).as(CommonDealManipulationResponseModel.class);
+
+            assertThat(dealManipulationBodyFromODataList).isNotNull();
+
+            assertAll(
+                    () -> assertThat(dealManipulationBodyFromODataList.id).isEqualTo(dealManipulationCreationBody.id),
+                    () -> assertThat(dealManipulationBodyFromODataList.name).isEqualTo(dealManipulationCreationBody.name),
+                    () -> assertThat(dealManipulationBodyFromODataList.dealPriority).isEqualTo(dealManipulationCreationBody.dealPriority),
+                    () -> assertThat(dealManipulationBodyFromODataList.quarantine).isEqualTo(dealManipulationCreationBody.quarantine),
+                    () -> assertThat(dealManipulationBodyFromODataList.dealStatus).isEqualTo(dealManipulationCreationBody.dealStatus),
+                    () -> assertThat(dealManipulationBodyFromODataList.excludes).isEqualTo(dealManipulationCreationBody.excludes),
+                    () -> assertThat(dealManipulationBodyFromODataList.needClassify).isEqualTo(dealManipulationCreationBody.needClassify),
+                    () -> assertThat(dealManipulationBodyFromODataList.classifierProfileId).isEqualTo(dealManipulationCreationBody.classifierProfileId),
+                    () -> assertThat(dealManipulationBodyFromODataList.createdUtc).matches(dateTimeCommonPattern()),
+                    () -> assertThat(dealManipulationBodyFromODataList.creatorUserId).isEqualTo(dealManipulationCreationBody.creatorUserId),
+                    () -> assertThat(dealManipulationBodyFromODataList.creatorUserName).isEqualTo(dealManipulationCreationBody.creatorUserName)
+            );
+
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Получение дела по id")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при получении дела по id")
+        @Description("Тест проверяет поля в теле ответа при получении дела по id")
+        public void testGetDealManipulationWithOnlyRequiredParametersByIdCheckResponseBodyWithExpand(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonDealManipulationResponseModel dealManipulationCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+
+            Map<String, String> parameters = OdataParametersBuilder.builder()
+                    .withExpand("metadataFilter, searchPlaces, classifySearchPlaces, searchPlaceGroups, dealSearchQueries, progressInfo")
+                    .build();
+
+            CommonDealManipulationResponseModel dealManipulationBodyFromODataList = ApiMethodsDealManipulation.getDealManipulationByIdPath(dealManipulationCreationBody.id, parameters).as(CommonDealManipulationResponseModel.class);
+
+            assertThat(dealManipulationBodyFromODataList).isNotNull();
+
+            assertAll(
+                    () -> assertThat(dealManipulationBodyFromODataList.metadataFilter).isEqualTo(dealManipulationCreationBody.metadataFilter),
+                    () -> assertThat(dealManipulationBodyFromODataList.searchPlaces).usingRecursiveComparison().isEqualTo(dealManipulationCreationBody.searchPlaces),
+                    () -> assertThat(dealManipulationBodyFromODataList.classifySearchPlaces).isEqualTo(dealManipulationCreationBody.classifySearchPlaces),
+                    () -> assertThat(dealManipulationBodyFromODataList.searchPlaceGroups).isEqualTo(dealManipulationCreationBody.searchPlaceGroups),
+                    () -> assertThat(dealManipulationBodyFromODataList.dealSearchQueries).isEqualTo(dealManipulationCreationBody.dealSearchQueries),
+                    () -> assertThat(dealManipulationBodyFromODataList.progressInfo).isEqualTo(dealManipulationCreationBody.progressInfo)
+            );
+
+        }
+
+    }
+
+    @Nested
+    @DisplayName("Deal - DealManipulation: Проверка полей ответа при получении карточки дела")
+    class CheckGetDealManipulationCardWithOnlyRequiredParametersInDealManipulationCheckResponseBody{
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Просмотр карточки дела")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Просмотр карточки дела через метод /card")
+        @Description("Тест проверяет возможность просмотреть карточку по делу")
+        public void testGetDealCardResponseBodyWithOnlyRequiredParameters(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonSearchPlaceResponseModel searchPlaceModel = DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
+            CommonSearchQueryResponseModel searchQueryModel = DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
+
+            AddDealManipulationRequestModel requestBodyDealCreation = DataGeneratorDealManipulation.getDealManipulationModelWithOnlyRequiredParameters(searchPlaceModel.id, searchQueryModel.id);
+            CommonDealManipulationResponseModel responseBodyDealCreation = ApiMethodsDealManipulation.addDeal(requestBodyDealCreation).as(CommonDealManipulationResponseModel.class);
+
+            DealCardModel responseDealCardBody = ApiMethodsDealManipulation.getDealCard(responseBodyDealCreation.id).as(DealCardModel.class);
+
+            assertAll(
+                    () -> assertThat(responseDealCardBody.id).isEqualTo(responseBodyDealCreation.id),
+                    () -> assertThat(responseDealCardBody.name).isEqualTo(responseBodyDealCreation.name),
+                    () -> assertThat(responseDealCardBody.dealPriority).isEqualTo(responseBodyDealCreation.dealPriority),
+                    () -> assertThat(responseDealCardBody.quarantine).isEqualTo(responseBodyDealCreation.quarantine),
+                    () -> assertThat(responseDealCardBody.metadataFilter).isEqualTo(responseBodyDealCreation.metadataFilter),
+                    () -> assertThat(responseDealCardBody.searchPlaces).usingRecursiveComparison().isEqualTo(responseBodyDealCreation.searchPlaces),
+                    () -> assertThat(responseDealCardBody.classifySearchPlaces).isEqualTo(responseBodyDealCreation.classifySearchPlaces),
+                    () -> assertThat(responseDealCardBody.searchPlaceGroups).isEqualTo(responseBodyDealCreation.searchPlaceGroups),
+                    () -> assertThat(responseDealCardBody.dealSearchQueries).usingRecursiveComparison().isEqualTo(responseBodyDealCreation.dealSearchQueries),
+                    () -> assertThat(responseDealCardBody.progressInfo).isEqualTo(responseBodyDealCreation.progressInfo),
+                    () -> assertThat(responseDealCardBody.dealStatus).isEqualTo(responseBodyDealCreation.dealStatus),
+                    () -> assertThat(responseDealCardBody.excludes).isEqualTo(responseBodyDealCreation.excludes),
+                    () -> assertThat(responseDealCardBody.needClassify).isEqualTo(responseBodyDealCreation.needClassify),
+                    () -> assertThat(responseDealCardBody.classifierProfileId).isEqualTo(responseBodyDealCreation.classifierProfileId),
+                    () -> assertThat(responseDealCardBody.createdUtc).matches(dateTimeCommonPattern()),
+                    () -> assertThat(responseDealCardBody.creatorUserId).isEqualTo(responseBodyDealCreation.creatorUserId),
+                    () -> assertThat(responseDealCardBody.creatorUserName).isEqualTo(responseBodyDealCreation.creatorUserName)
+            );
+
+        }
+
+    }
+
+    @Nested
+    @DisplayName("Deal - DealManipulation: Проверка восстановления удалённого дела")
+    class CheckRestoreDeletedDealManipulation{
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Восстановление удалённого дела")
+        @Severity(SeverityLevel.TRIVIAL)
+        @DisplayName("Восстановление удалённого дела (Служебный метод)")
+        @Description("Тест проверяет восстановление удалённого дела (Служебный метод, должен быть удалён)")
+        public void testRestoreDealResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
+            ApiMethodsDealManipulation.deleteDeal(responseDealCreationBody.id);
+
+
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpec404NotFound());
+            ApiMethodsDealManipulation.getDealManipulationByIdPath(responseDealCreationBody.id);
+
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+            ApiMethodsDealManipulation.restoreDeal(responseDealCreationBody.id);
+
+            ApiMethodsDealManipulation.getDealManipulationByIdPath(responseDealCreationBody.id);
+        }
+
+    }
+
+    @Nested
+    @DisplayName("Deal - DealManipulation: Проверка закрытия дела")
+    class CheckCloseDealManipulation{
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Закрытие дела")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Закрытие дела")
+        @Description("Тест проверяет возможность закрыть (Архивировать) дело")
+        public void testCloseDealResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+
+            CommonDealManipulationResponseModel responseCloseDealBody = ApiMethodsDealManipulation.closeDeal(responseDealCreationBody.id).as(CommonDealManipulationResponseModel.class);
+            CommonDealManipulationResponseModel responseDealBody = ApiMethodsDealManipulation.getDealManipulationByIdPath(responseDealCreationBody.id).as(CommonDealManipulationResponseModel.class);
+
+            assertThat(responseCloseDealBody.dealStatus).isEqualTo(DealStatus.Closed.name());
+            assertThat(responseDealBody.dealStatus).isEqualTo(DealStatus.Closed.name());
+        }
+
+    }
+
+    @Nested
+    @DisplayName("Deal - DealManipulation: Проверка открытия закрытого дела")
+    class CheckUncloseDealManipulation{
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Открытие закрытого дела")
+        @Severity(SeverityLevel.TRIVIAL)
+        @DisplayName("Открытие закрытого дела (Служебный метод)")
+        @Description("Тест проверяет возможность открыть закрытое дело (Служебный метод, должен быть удалён)")
+        public void testUncloseDealResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+
+            ApiMethodsDealManipulation.closeDeal(responseDealCreationBody.id);
+
+            CommonDealManipulationResponseModel responseUncloseDealBody = ApiMethodsDealManipulation.uncloseDeal(responseDealCreationBody.id).as(CommonDealManipulationResponseModel.class);
+            CommonDealManipulationResponseModel responseDealBody = ApiMethodsDealManipulation.getDealManipulationByIdPath(responseDealCreationBody.id).as(CommonDealManipulationResponseModel.class);
+
+            assertThat(responseUncloseDealBody.dealStatus).isEqualTo(DealStatus.Stopped.name());
+            assertThat(responseDealBody.dealStatus).isEqualTo(DealStatus.Stopped.name());
+        }
+
+    }
+
+    @Nested
+    @DisplayName("Deal - DealManipulation: Проверка остановки дела")
+    class CheckStopDealManipulation{
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Остановка дела")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Остановка дела")
+        @Description("Тест проверяет возможность остановить дело")
+        public void testStopDealResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+
+            CommonDealManipulationResponseModel responseStopDealBody = ApiMethodsDealManipulation.stopDeal(responseDealCreationBody.id).as(CommonDealManipulationResponseModel.class);
+            CommonDealManipulationResponseModel responseDealBody = ApiMethodsDealManipulation.getDealManipulationByIdPath(responseDealCreationBody.id).as(CommonDealManipulationResponseModel.class);
+
+            assertThat(responseStopDealBody.dealStatus).isEqualTo(DealStatus.Stopped.name());
+            assertThat(responseDealBody.dealStatus).isEqualTo(DealStatus.Stopped.name());
+        }
+
+    }
+
+    @Nested
+    @DisplayName("Deal - DealManipulation: Проверка запуска дела")
+    class CheckStartDealManipulation{
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Дело")
+        @Story("Запуск дела")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Запуск дела")
+        @Description("Тест проверяет возможность запустить дело")
+        public void testStartDealResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonDealManipulationResponseModel responseDealCreationBody = DataGeneratorDealManipulation.createDealManipulationWithOnlyRequiredParameters();
+
+            CommonDealManipulationResponseModel responseStopDealBody = ApiMethodsDealManipulation.startDeal(responseDealCreationBody.id).as(CommonDealManipulationResponseModel.class);
+            CommonDealManipulationResponseModel responseDealBody = ApiMethodsDealManipulation.getDealManipulationByIdPath(responseDealCreationBody.id).as(CommonDealManipulationResponseModel.class);
+
+            assertThat(responseStopDealBody.dealStatus).isEqualTo(DealStatus.Running.name());
+            assertThat(responseDealBody.dealStatus).isEqualTo(DealStatus.Running.name());
+        }
 
     }
 
