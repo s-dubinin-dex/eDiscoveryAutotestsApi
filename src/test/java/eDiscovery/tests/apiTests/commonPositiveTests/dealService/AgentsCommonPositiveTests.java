@@ -69,7 +69,7 @@ public class AgentsCommonPositiveTests extends TestBase {
     @Test
     @Epic("Сервис Deal")
     @Feature("Агенты")
-    @Story("Получение списка агентов")
+    @Story("Получение агента по id")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение агента по id")
     @Description("Тест проверяет возможность получения агента по id")
@@ -83,7 +83,7 @@ public class AgentsCommonPositiveTests extends TestBase {
     @Test
     @Epic("Сервис Deal")
     @Feature("Агенты")
-    @Story("Получение списка агентов")
+    @Story("Получение агента по id")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение агента по id")
     @Description("Тест проверяет возможность получения агента по id в pathParam")

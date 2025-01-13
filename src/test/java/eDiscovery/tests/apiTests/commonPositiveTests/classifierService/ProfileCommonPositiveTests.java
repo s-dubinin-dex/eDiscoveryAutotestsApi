@@ -161,7 +161,7 @@ public class ProfileCommonPositiveTests extends TestBase {
     @Test
     @Epic("Сервис Classifier")
     @Feature("Профиль категоризации")
-    @Story("Получение профилей категоризации")
+    @Story("Получение профиля категоризации по id")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение профиля категоризации по id")
     @Description("Тест проверяет возможность получения профиля категоризации по id")

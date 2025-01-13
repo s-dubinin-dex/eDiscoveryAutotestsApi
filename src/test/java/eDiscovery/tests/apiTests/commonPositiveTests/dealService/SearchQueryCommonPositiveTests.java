@@ -109,7 +109,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         @Test
         @Epic("Сервис Deal")
         @Feature("Поисковый запрос")
-        @Story("Получение поискового запроса по протоколу oData по id")
+        @Story("Получение поискового запроса по id")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение поискового запроса по протоколу oData по id")
         @Description("Тест проверяет возможность получения поискового запроса по протоколу oData по id в скобках")
@@ -126,7 +126,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         @Epic("Сервис Deal")
         @Feature("Поисковый запрос")
         @Tag("webui")
-        @Story("Получение поискового запроса по протоколу oData по id")
+        @Story("Получение поискового запроса по id")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение поискового запроса по протоколу oData по id")
         @Description("Тест проверяет возможность получения поискового запроса по протоколу oData по id в path param")
@@ -253,7 +253,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         @Test
         @Epic("Сервис Deal")
         @Feature("Поисковый запрос")
-        @Story("Получение списка поисковых запросов")
+        @Story("Получение поискового запроса по id")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении поискового запроса по id")
         @Description("Тест проверяет поля в теле ответа при получении поискового запроса по id")

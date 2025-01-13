@@ -109,7 +109,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         @Test
         @Epic("Сервис Deal")
         @Feature("Место поиска")
-        @Story("Получение места поиска по протоколу oData по id")
+        @Story("Получение места поиска по id")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Получение места поиска по протоколу oData по id")
         @Description("Тест проверяет возможность получения места поиска по протоколу oData по id в скобках")
@@ -125,7 +125,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         @Test
         @Epic("Сервис Deal")
         @Feature("Место поиска")
-        @Story("Получение места поиска по протоколу oData по id")
+        @Story("Получение места поиска по id")
         @Tag("webui")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Получение места поиска по протоколу oData по id")

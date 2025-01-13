@@ -31,7 +31,7 @@ import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-@DisplayName("Extended positive tests: Deal - SearchPlace")
+@DisplayName("Deal - SearchPlace: Расширенные позитивные тесты")
 public class SearchPlaceExtendedPositiveTests extends TestBase {
 
     @Nested
@@ -186,7 +186,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         @Test
         @Epic("Сервис Deal")
         @Feature("Место поиска")
-        @Story("Получение списка мест поиска")
+        @Story("Получение места поиска по id")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении места поиска по id")
         @Description("Тест проверяет поля в теле ответа при получении места поиска по id")
