@@ -47,13 +47,11 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-            String searchQueryNameForFilter = "testSearchQueryListODataWithFilter" + getRandomName();
+            String searchQueryNameForFilter = getRandomName();
 
-            AddSearchQueryRequestModel requestBody = AddSearchQueryRequestModel.builder()
-                    .name(searchQueryNameForFilter)
-                    .type(SearchQueryType.Regex.name())
-                    .value("\\d{10}")
-                    .build();
+            AddSearchQueryRequestModel requestBody = DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
+            requestBody.name = searchQueryNameForFilter;
+
             CommonSearchQueryResponseModel responseBodySearchQueryCreation = ApiMethodsSearchQuery.addSearchQuery(requestBody).as(CommonSearchQueryResponseModel.class);
 
             Map<String, String> parameters = OdataParametersBuilder.builder()
@@ -132,6 +130,40 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         @Feature("Поисковый запрос")
         @Story("Получение списка поисковых запросов")
         @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка сортировки по названию при получении списка поисковых запросов")
+        @Description("Тест проверяет сортировку по названию при получении списка поисковых запросов")
+        @Test
+        public void testGetSearchQueryListWithSortingNameCheckSorting(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            String searchQueryNameForFilter = getRandomName(10);
+
+            for (int i = 0; i < 3; i++){
+                AddSearchQueryRequestModel requestBody = DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
+                requestBody.name = searchQueryNameForFilter + i;
+                ApiMethodsSearchQuery.addSearchQuery(requestBody);
+            }
+
+            Map<String, String> requestParameters = OdataParametersBuilder.builder()
+                    .withFilter(String.format("contains(name, '%s')", searchQueryNameForFilter))
+                    .withOrderBy("name asc")
+                    .build();
+
+            List<CommonSearchQueryResponseModel> responseBodyWithSorting =
+                    ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
+                            .jsonPath().getList("value", CommonSearchQueryResponseModel.class);
+
+            assertThat(responseBodyWithSorting.size()).isEqualTo(3);
+            assertThat(responseBodyWithSorting.get(0).name).isEqualTo(searchQueryNameForFilter + 0);
+            assertThat(responseBodyWithSorting.get(1).name).isEqualTo(searchQueryNameForFilter + 1);
+            assertThat(responseBodyWithSorting.get(2).name).isEqualTo(searchQueryNameForFilter + 2);
+        }
+
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Получение списка поисковых запросов")
+        @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка поисковых запросов с сортировкой по типу поискового запроса")
         @Description("Тест проверяет возможность получения списка поисковых запросов с сортировкой по типу поискового запроса")
         @Test
@@ -191,6 +223,38 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         @Feature("Поисковый запрос")
         @Story("Получение списка поисковых запросов")
         @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка поисковых запросов по протоколу oData с лимитированием количества объектов в результате")
+        @Description("Тест проверяет возможность получения списка поисковых запросов по протоколу oData с лимитированием количества объектов в результате")
+        @Test
+        public void testGetSearchQueryListODataWithLimit(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            String searchQueryNameForFilter = getRandomName(10);
+
+            for (int i = 0; i < 3; i++){
+                AddSearchQueryRequestModel requestBody = DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
+                requestBody.name = searchQueryNameForFilter + i;
+
+                ApiMethodsSearchQuery.addSearchQuery(requestBody);
+            }
+
+            Map<String, String> requestParameters = OdataParametersBuilder.builder()
+                    .withFilter(String.format("contains(name, '%s')", searchQueryNameForFilter))
+                    .withTop(2)
+                    .build();
+
+            List<CommonSearchQueryResponseModel> responseBodyWithLimiting =
+                    ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
+                            .jsonPath().getList("value", CommonSearchQueryResponseModel.class);
+
+            assertThat(responseBodyWithLimiting.size()).isEqualTo(2);
+        }
+
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Получение списка поисковых запросов")
+        @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка поисковых запросов с пропуском первых 10 результатов")
         @Description("Тест проверяет возможность получения списка поисковых запросов с пропуском первых 10 результатов")
         @Test
@@ -203,6 +267,52 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
                     .build();
 
             ApiMethodsSearchQuery.getSearchQueryListOData(parameters);
+        }
+
+        @Epic("Сервис Deal")
+        @Feature("Поисковый запрос")
+        @Story("Получение списка поисковых запросов")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Получение списка поисковых запросов по протоколу oData с пагинацией результата")
+        @Description("Тест проверяет возможность получения списка поисковых запросов по протоколу oData с пагинацией результата")
+        @Test
+        public void testGetSearchQueryListODataWithPagination(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            DataGeneratorSearchQuery.createSearchQueryWithOnlyRequiredParameters();
+
+            String searchQueryNameForFilter = getRandomName(10);
+
+            for (int i = 0; i < 3; i++){
+                AddSearchQueryRequestModel requestBody = DataGeneratorSearchQuery.getSearchQueryModelWithOnlyRequiredParameters();
+                requestBody.name = searchQueryNameForFilter + i;
+
+                ApiMethodsSearchQuery.addSearchQuery(requestBody);
+            }
+
+            Map<String, String> requestParameters = OdataParametersBuilder.builder()
+                    .withFilter("contains(name, '" + searchQueryNameForFilter + "')")
+                    .withOrderBy("name")
+                    .withSkip(0)
+                    .build();
+
+            List<CommonSearchQueryResponseModel> responseBodyWithPagination =
+                    ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
+                            .jsonPath().getList("value", CommonSearchQueryResponseModel.class);
+
+            assertThat(responseBodyWithPagination.get(0).name).isEqualTo(searchQueryNameForFilter + 0);
+            assertThat(responseBodyWithPagination.get(1).name).isEqualTo(searchQueryNameForFilter + 1);
+            assertThat(responseBodyWithPagination.get(2).name).isEqualTo(searchQueryNameForFilter + 2);
+
+            requestParameters.put("$skip", "1");
+
+            responseBodyWithPagination =
+                    ApiMethodsSearchQuery.getSearchQueryListOData(requestParameters)
+                            .jsonPath().getList("value", CommonSearchQueryResponseModel.class);
+
+            assertThat(responseBodyWithPagination.get(0).name).isEqualTo(searchQueryNameForFilter + 1);
+            assertThat(responseBodyWithPagination.get(1).name).isEqualTo(searchQueryNameForFilter + 2);
         }
 
     }
