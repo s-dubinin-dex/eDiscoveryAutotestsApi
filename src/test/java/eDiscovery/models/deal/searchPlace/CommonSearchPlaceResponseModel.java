@@ -7,12 +7,12 @@ import java.util.List;
 
 @Getter
 public class CommonSearchPlaceResponseModel extends OdataEntityResponseModel {
+    public String id;
     public String name;
     public String categoryType;
     public String type;
     public SearchPlaceParametersModel parameters;
     public List<String> excludes;
-    public String id;
     public String createdUtc;
     public String deletedUtc;
 }

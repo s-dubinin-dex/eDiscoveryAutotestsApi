@@ -5,229 +5,283 @@ import eDiscovery.apiMethods.deal.ApiMethodsSearchPlace;
 import eDiscovery.data.dealService.DataGeneratorSearchPlace;
 import eDiscovery.models.deal.searchPlace.AddSearchPlaceRequestModel;
 import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
-import eDiscovery.models.deal.searchPlace.SearchPlaceParametersModel;
 import eDiscovery.models.deal.searchPlace.UpdateSearchPlaceRequestModel;
 import eDiscovery.spec.RequestSpecifications;
 import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
-import eDiscovery.helpers.enums.SearchPlaceCategoryType;
 import eDiscovery.helpers.enums.SearchPlaceType;
 import io.qameta.allure.*;
-import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static eDiscovery.helpers.DataChecker.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-@DisplayName("Common positive tests: Deal - SearchPlace")
+@DisplayName("Deal - SearchPlace: Основные позитивные тесты")
 public class SearchPlaceCommonPositiveTests extends TestBase {
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Место поиска")
-    @Story("Создание места поиска")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Создание места поиска")
-    @Description("Тест проверяет возможность создания места поиска")
-    public void testAddSearchPlace(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+    @Nested
+    @Tag("smoke")
+    @DisplayName("Deal - SearchPlace: Базовая проверка CRUD")
+    class CheckBaseCRUDDealSearchPlace {
 
-        DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
-    }
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Место поиска")
+        @Story("Создание места поиска")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Создание места поиска")
+        @Description("Тест проверяет возможность создания места поиска")
+        public void testAddSearchPlace() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Место поиска")
-    @Story("Изменение места поиска")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Изменение места поиска")
-    @Description("Тест проверяет возможность изменения места поиска")
-    public void testUpdateSearchPlace(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+            DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
+        }
 
-        AddSearchPlaceRequestModel requestBodySearchPlaceCreation = DataGeneratorSearchPlace.getBasicSearchPlaceModelFileShareSMB();
-        Response response = ApiMethodsSearchPlace.addSearchPlace(requestBodySearchPlaceCreation);
-        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = response.as(CommonSearchPlaceResponseModel.class);
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Место поиска")
+        @Story("Изменение места поиска")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Изменение места поиска")
+        @Description("Тест проверяет возможность изменения места поиска")
+        public void testUpdateSearchPlace() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        UpdateSearchPlaceRequestModel requestBodySearchPlaceUpdate = UpdateSearchPlaceRequestModel.builder()
-                .id(responseBodySearchPlaceCreation.id)
-                .name(getRandomName())
-                .categoryType(SearchPlaceCategoryType.Workspace.name())
-                .type(SearchPlaceType.LOCAL.name())
-                .build();
+            CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
 
-        Response responseSearchPlaceUpdate = ApiMethodsSearchPlace.updateSearchPlace(requestBodySearchPlaceUpdate);
-        CommonSearchPlaceResponseModel responseBodySearchPlaceUpdate = responseSearchPlaceUpdate.as(CommonSearchPlaceResponseModel.class);
+            UpdateSearchPlaceRequestModel requestBodySearchPlaceUpdate = new UpdateSearchPlaceRequestModel(responseBodySearchPlaceCreation);
 
-        assertThat(responseBodySearchPlaceUpdate.categoryType).isEqualTo(SearchPlaceCategoryType.Workspace.name());
-        assertThat(responseBodySearchPlaceUpdate.type).isEqualTo(SearchPlaceType.LOCAL.name());
-        assertThat(responseBodySearchPlaceUpdate.parameters).isEqualTo(null);
-        assertThat(responseBodySearchPlaceUpdate.excludes).isEmpty();
-        assertThat(responseBodySearchPlaceUpdate.excludes).isInstanceOf(ArrayList.class);
-        assertThat(isValidUUID(responseBodySearchPlaceUpdate.id)).isTrue();
-        assertThat(responseBodySearchPlaceUpdate.name).isEqualTo(requestBodySearchPlaceUpdate.name);
-        assertThat(responseBodySearchPlaceUpdate.createdUtc).matches(dateTimeCommonPattern());
-        assertThat(responseBodySearchPlaceUpdate.deletedUtc).isNull();
-    }
+            ApiMethodsSearchPlace.updateSearchPlace(requestBodySearchPlaceUpdate);
+        }
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Место поиска")
-    @Story("Удаление места поиска")
-    @Severity(SeverityLevel.MINOR)
-    @DisplayName("Удаление места поиска")
-    @Description("Тест проверяет возможность удаления места поиска")
-    public void testDeleteSearchPlace(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Место поиска")
+        @Story("Удаление места поиска")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Удаление места поиска")
+        @Description("Тест проверяет возможность удаления места поиска")
+        public void testDeleteSearchPlace() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
+            CommonSearchPlaceResponseModel responseBodySearchPlaceCreation = DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
 
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
-        ApiMethodsSearchPlace.deleteSearchPlace(responseBodySearchPlaceCreation.id);
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
+            ApiMethodsSearchPlace.deleteSearchPlace(responseBodySearchPlaceCreation.id);
+        }
 
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-        CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.getSearchPlaceODataByIdPath(responseBodySearchPlaceCreation.id).as(CommonSearchPlaceResponseModel.class);
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Место поиска")
+        @Story("Получение списка мест поиска")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Получение списка мест поиска")
+        @Description("Тест проверяет возможность получения списка мест поиска")
+        public void testGetSearchPlaceList() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        assertThat(responseBody.categoryType).isEqualTo(SearchPlaceCategoryType.FileShare.name());
-        assertThat(responseBody.type).isEqualTo(SearchPlaceType.SMB.name());
-        assertThat(responseBody.parameters).isEqualTo(null);
-        assertThat(responseBody.excludes).isEmpty();
-        assertThat(responseBody.excludes).isInstanceOf(ArrayList.class);
-        assertThat(isValidUUID(responseBody.id)).isTrue();
-        assertThat(responseBody.name).isEqualTo(responseBodySearchPlaceCreation.name);
-        assertThat(responseBody.createdUtc).matches(dateTimeISOPattern());
-        assertThat(responseBody.deletedUtc).matches(dateTimeISOPattern());
-    }
+            ApiMethodsSearchPlace.getSearchPlaceList();
+        }
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Место поиска")
-    @Story("Получение списка мест поиска")
-    @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Получение списка мест поиска")
-    @Description("Тест проверяет возможность получения списка мест поиска")
-    public void testGetSearchPlaceList(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Место поиска")
+        @Story("Получение списка мест поиска")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Получение списка мест поиска по протоколу oData")
+        @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData")
+        public void testGetSearchPlaceListOData() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
-        Response response = ApiMethodsSearchPlace.getSearchPlaceList();
+            ApiMethodsSearchPlace.getSearchPlaceListOData();
+        }
 
-        List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("", CommonSearchPlaceResponseModel.class);
-        assertThat(responseBody).isNotEmpty();
-        assertThat(responseBody.get(0)).isNotNull();
-    }
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Место поиска")
+        @Story("Получение места поиска по протоколу oData по id")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Получение места поиска по протоколу oData по id")
+        @Description("Тест проверяет возможность получения места поиска по протоколу oData по id в скобках")
+        public void testGetSearchPlaceODataById() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Место поиска")
-    @Story("Получение списка мест поиска")
-    @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Получение списка мест поиска по протоколу oData")
-    @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData")
-    public void testGetSearchPlaceListOData(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+            CommonSearchPlaceResponseModel responseBody = DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
 
-        DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
-        Response response = ApiMethodsSearchPlace.getSearchPlaceListOData(new HashMap<>());
+            ApiMethodsSearchPlace.getSearchPlaceODataById(responseBody.id);
+        }
 
-        List<CommonSearchPlaceResponseModel> responseBody = response.jsonPath().getList("value", CommonSearchPlaceResponseModel.class);
-        assertThat(responseBody).isNotEmpty();
-        assertThat(responseBody.get(0)).isNotNull();
-    }
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Место поиска")
+        @Story("Получение места поиска по протоколу oData по id")
+        @Tag("webui")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Получение места поиска по протоколу oData по id")
+        @Description("Тест проверяет возможность получения места поиска по протоколу oData по id в path param")
+        public void testGetSearchPlaceODataByIdInPath() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
-    @Story("Получение места поиска по протоколу oData по id")
-    @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Получение места поиска по протоколу oData по id")
-    @Description("Тест проверяет возможность получения места поиска по протоколу oData по id в скобках")
-    public void testGetSearchPlaceODataById(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+            CommonSearchPlaceResponseModel responseBody = DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
 
-        String searchPlaceNameForFilter = "testSearchPlaceODataByIdInRoundBrackets" + getRandomName();
-
-        SearchPlaceParametersModel parameters = SearchPlaceParametersModel.builder()
-                .uri(faker.internet().url())
-                .username(faker.name().username())
-                .password(faker.internet().password())
-                .build();
-
-        AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
-                .name(searchPlaceNameForFilter)
-                .categoryType(SearchPlaceCategoryType.FileShare.name())
-                .type(SearchPlaceType.SMB.name())
-                .excludes(List.of("C:\\", "D:\\"))
-                .parameters(parameters)
-                .build();
-
-        CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
-
-        CommonSearchPlaceResponseModel responseBodyODataById = ApiMethodsSearchPlace.getSearchPlaceODataById(responseBody.id).as(CommonSearchPlaceResponseModel.class);
-
-        assertThat(responseBodyODataById.id).isEqualTo(responseBody.id);
-        assertThat(responseBodyODataById.name).isEqualTo(responseBody.name);
-        assertThat(responseBodyODataById.type).isEqualTo(responseBody.type);
-        assertThat(responseBodyODataById.categoryType).isEqualTo(responseBody.categoryType);
-        assertThat(responseBodyODataById.parameters).usingRecursiveComparison().isEqualTo(responseBody.parameters);
-        assertThat(responseBodyODataById.excludes).isEqualTo(responseBody.excludes);
-        assertThat(responseBodyODataById.createdUtc).matches(dateTimeISOPattern());
-        assertThat(responseBodyODataById.deletedUtc).isNull();
+            ApiMethodsSearchPlace.getSearchPlaceODataByIdPath(responseBody.id);
+        }
 
     }
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
-    @Story("Получение места поиска по протоколу oData по id")
-    @Tag("webui")
-    @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Получение места поиска по протоколу oData по id")
-    @Description("Тест проверяет возможность получения места поиска по протоколу oData по id в path param")
-    public void testGetSearchPlaceODataByIdInPath(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+    @Nested
+    @DisplayName("Deal - SearchPlace: Проверка тела ответа при создании поискового запроса с обязательными параметрами")
+    class CheckSearchPlaceCreationWithOnlyRequiredParametersResponseBody {
 
-        String searchPlaceNameForFilter = "testSearchPlaceODataByIdInRoundBrackets" + getRandomName();
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Место поиска")
+        @Story("Создание места поиска")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при создании места поиска с обязательными полями")
+        @Description("Тест проверяет поля в теле ответа при создании места поиска с обязательными полями")
+        public void testAddSearchPlaceWithOnlyRequiredParametersCheckResponseBody() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        SearchPlaceParametersModel parameters = SearchPlaceParametersModel.builder()
-                .uri(faker.internet().url())
-                .username(faker.name().username())
-                .password(faker.internet().password())
-                .build();
+            AddSearchPlaceRequestModel requestBody = DataGeneratorSearchPlace.getSearchPlaceModelWithOnlyRequiredParameters();
 
-        AddSearchPlaceRequestModel requestBody = AddSearchPlaceRequestModel.builder()
-                .name(searchPlaceNameForFilter)
-                .categoryType(SearchPlaceCategoryType.FileShare.name())
-                .type(SearchPlaceType.SMB.name())
-                .excludes(List.of("C:\\", "D:\\"))
-                .parameters(parameters)
-                .build();
+            CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
 
-        CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.addSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
+            assertAll(
+                    () -> assertThat(isValidUUID(responseBody.id)).isTrue(),
+                    () -> assertThat(responseBody.name).isEqualTo(requestBody.name),
+                    () -> assertThat(responseBody.categoryType).isEqualTo(requestBody.categoryType),
+                    () -> assertThat(responseBody.type).isEqualTo(requestBody.type),
+                    () -> assertThat(responseBody.parameters).isNull(),
+                    () -> assertThat(responseBody.excludes).isEmpty(),
+                    () -> assertThat(responseBody.createdUtc).matches(dateTimeCommonPattern()),
+                    () -> assertThat(responseBody.deletedUtc).isNull()
+            );
 
-        CommonSearchPlaceResponseModel responseBodyODataById = ApiMethodsSearchPlace.getSearchPlaceODataByIdPath(responseBody.id).as(CommonSearchPlaceResponseModel.class);
+        }
 
-        assertThat(responseBodyODataById.id).isEqualTo(responseBody.id);
-        assertThat(responseBodyODataById.name).isEqualTo(responseBody.name);
-        assertThat(responseBodyODataById.type).isEqualTo(responseBody.type);
-        assertThat(responseBodyODataById.categoryType).isEqualTo(responseBody.categoryType);
-        assertThat(responseBodyODataById.parameters).usingRecursiveComparison().isEqualTo(responseBody.parameters);
-        assertThat(responseBodyODataById.excludes).isEqualTo(responseBody.excludes);
-        assertThat(responseBodyODataById.createdUtc).matches(dateTimeISOPattern());
-        assertThat(responseBodyODataById.deletedUtc).isNull();
+    }
+
+    @Nested
+    @DisplayName("Deal - SearchPlace: Проверка тела ответа при изменении поискового запроса с обязательными параметрами")
+    class CheckSearchPlaceUpdateWithOnlyRequiredParametersResponseBody {
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Место поиска")
+        @Story("Изменение места поиска")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при изменении места поиска с обязательными полями")
+        @Description("Тест проверяет поля в теле ответа при изменении места поиска с обязательными полями")
+        public void testUpdateSearchPlaceWithOnlyRequiredParametersCheckResponseBody() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonSearchPlaceResponseModel responseSearchPlaceCreation = DataGeneratorSearchPlace.createBasicSearchPlaceFileShareSMB();
+
+            UpdateSearchPlaceRequestModel requestBody = new UpdateSearchPlaceRequestModel(responseSearchPlaceCreation);
+            requestBody.name = getRandomName();
+            requestBody.type = SearchPlaceType.FTP.name();
+
+            CommonSearchPlaceResponseModel responseBody = ApiMethodsSearchPlace.updateSearchPlace(requestBody).as(CommonSearchPlaceResponseModel.class);
+
+            assertAll(
+                    () -> assertThat(responseBody.id).isEqualTo(requestBody.id),
+                    () -> assertThat(responseBody.name).isEqualTo(requestBody.name),
+                    () -> assertThat(responseBody.categoryType).isEqualTo(requestBody.categoryType),
+                    () -> assertThat(responseBody.type).isEqualTo(requestBody.type),
+                    () -> assertThat(responseBody.parameters).isEqualTo(requestBody.parameters),
+                    () -> assertThat(responseBody.excludes).isEmpty(),
+                    () -> assertThat(responseBody.createdUtc).matches(dateTimeCommonPattern()),
+                    () -> assertThat(responseBody.deletedUtc).isNull()
+            );
+
+        }
+
+    }
+
+    @Nested
+    @DisplayName("Deal - SearchPlace: Проверка тела ответа при получении места поиска с обязательными параметрами из списка мест поиска")
+    class CheckGetSearchPlaceWithOnlyRequiredParametersFromListOdataResponseBody {
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Место поиска")
+        @Story("Получение списка мест поиска")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при получении списка поисковых запросов")
+        @Description("Тест проверяет поля в теле ответа при получении списка поисковых запросов")
+        public void testGetSearchPlaceWithOnlyRequiredParametersFromListOdataCheckResponseBody() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonSearchPlaceResponseModel searchPlaceCreationResponseBody = DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
+
+            CommonSearchPlaceResponseModel searchPlaceBodyFromODataListResponseBody = ApiMethodsSearchPlace.getSearchPlaceListOData().jsonPath().getList("value", CommonSearchPlaceResponseModel.class)
+                    .stream().filter(searchPlace -> searchPlace.id.equals(searchPlaceCreationResponseBody.id))
+                    .findFirst().orElse(null);
+
+            assertThat(searchPlaceBodyFromODataListResponseBody).isNotNull();
+
+            assertAll(
+                    () -> assertThat(searchPlaceBodyFromODataListResponseBody.id).isEqualTo(searchPlaceCreationResponseBody.id),
+                    () -> assertThat(searchPlaceBodyFromODataListResponseBody.name).isEqualTo(searchPlaceCreationResponseBody.name),
+                    () -> assertThat(searchPlaceBodyFromODataListResponseBody.categoryType).isEqualTo(searchPlaceCreationResponseBody.categoryType),
+                    () -> assertThat(searchPlaceBodyFromODataListResponseBody.type).isEqualTo(searchPlaceCreationResponseBody.type),
+                    () -> assertThat(searchPlaceBodyFromODataListResponseBody.parameters).isEqualTo(searchPlaceCreationResponseBody.parameters),
+                    () -> assertThat(searchPlaceBodyFromODataListResponseBody.excludes).isEqualTo(searchPlaceCreationResponseBody.excludes),
+                    () -> assertThat(searchPlaceBodyFromODataListResponseBody.createdUtc).matches(dateTimeCommonPattern()),
+                    () -> assertThat(searchPlaceBodyFromODataListResponseBody.deletedUtc).isEqualTo(searchPlaceCreationResponseBody.deletedUtc)
+            );
+
+        }
+
+    }
+
+    @Nested
+    @DisplayName("Deal - SearchPlace: Проверка тела ответа при получении места поиска с обязательными параметрами по id")
+    class CheckGetSearchPlaceWithOnlyRequiredParametersByIdResponseBody {
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Место поиска")
+        @Story("Получение списка мест поиска")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при получении поискового запроса по id")
+        @Description("Тест проверяет поля в теле ответа при получении поискового запроса по id")
+        public void testGetSearchQPlaceWithOnlyRequiredParametersByIdCheckResponseBody() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonSearchPlaceResponseModel searchPlaceCreationResponseBody = DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
+
+            CommonSearchPlaceResponseModel searchPlaceBodyByIdResponseBody = ApiMethodsSearchPlace.getSearchPlaceODataByIdPath(searchPlaceCreationResponseBody.id).as(CommonSearchPlaceResponseModel.class);
+
+            assertAll(
+                    () -> assertThat(searchPlaceBodyByIdResponseBody.id).isEqualTo(searchPlaceCreationResponseBody.id),
+                    () -> assertThat(searchPlaceBodyByIdResponseBody.name).isEqualTo(searchPlaceCreationResponseBody.name),
+                    () -> assertThat(searchPlaceBodyByIdResponseBody.categoryType).isEqualTo(searchPlaceCreationResponseBody.categoryType),
+                    () -> assertThat(searchPlaceBodyByIdResponseBody.type).isEqualTo(searchPlaceCreationResponseBody.type),
+                    () -> assertThat(searchPlaceBodyByIdResponseBody.parameters).isEqualTo(searchPlaceCreationResponseBody.parameters),
+                    () -> assertThat(searchPlaceBodyByIdResponseBody.excludes).isEqualTo(searchPlaceCreationResponseBody.excludes),
+                    () -> assertThat(searchPlaceBodyByIdResponseBody.createdUtc).matches(dateTimeCommonPattern()),
+                    () -> assertThat(searchPlaceBodyByIdResponseBody.deletedUtc).isEqualTo(searchPlaceCreationResponseBody.deletedUtc)
+            );
+
+        }
 
     }
 

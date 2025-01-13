@@ -8,8 +8,8 @@ import eDiscovery.models.deal.searchPlace.UpdateSearchPlaceRequestModelNotNull;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -148,13 +148,8 @@ public class ApiMethodsSearchPlace extends UrlBase {
     public static Response getSearchPlaceListOData(Map<String, String> parameters){
         SpecificationsServer.setBaseUrl(DEAL_URL);
 
-        RequestSpecification request = given();
-
-        for (String parameterName: parameters.keySet()){
-            request.param(parameterName, parameters.get(parameterName));
-        }
-
-        return request
+        return given()
+                .params(parameters)
                 .when()
                 .get(ODATA_SEARCH_PLACE)
                 .then()
@@ -163,10 +158,8 @@ public class ApiMethodsSearchPlace extends UrlBase {
     }
 
     @Step("Получение списка мест поиска по протоколу oData")
-    public static Response getSearchPlaceListOData(Boolean includeDeleted){
-
-        return getSearchPlaceListOData(Map.of("includeDeleted", String.valueOf(includeDeleted)));
-
+    public static Response getSearchPlaceListOData(){
+        return getSearchPlaceListOData(new HashMap<>());
     }
 
     @Step("Получение места поиска по id")
