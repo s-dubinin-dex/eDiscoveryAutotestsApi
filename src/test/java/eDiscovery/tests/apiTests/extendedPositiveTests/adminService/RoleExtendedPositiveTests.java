@@ -39,7 +39,7 @@ public class RoleExtendedPositiveTests extends TestBase {
         @Story("Создание роли")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при создании роли с обязательными полями")
-        @Description("Тест проверяет поля в теле ответа прии создании роли с обязательными полями")
+        @Description("Тест проверяет поля в теле ответа при создании роли с обязательными полями")
         public void testAddRoleWithAllParametersCheckResponseBody(){
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -75,7 +75,7 @@ public class RoleExtendedPositiveTests extends TestBase {
         @Story("Изменение роли")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при изменении роли с необязательными полями")
-        @Description("Тест проверяет поля в теле ответа прии изменении роли с необязательными полями")
+        @Description("Тест проверяет поля в теле ответа при изменении роли с необязательными полями")
         public void testUpdateRoleWithAllParametersCheckResponseBody(){
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());

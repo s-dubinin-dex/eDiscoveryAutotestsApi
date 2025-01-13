@@ -164,9 +164,9 @@ public class EmployeeCommonPositiveTests extends TestBase {
         @Epic("Сервис Admin")
         @Feature("Пользователь")
         @Story("Создание пользователя")
-        @Severity(SeverityLevel.CRITICAL)
+        @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при создании пользователя с обязательными полями")
-        @Description("Тест проверяет поля в теле ответа прии создании пользователя с обязательными полями")
+        @Description("Тест проверяет поля в теле ответа при создании пользователя с обязательными полями")
         public void testAddEmployeeWithOnlyRequiredParametersCheckResponseBody(){
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -195,7 +195,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
         @Epic("Сервис Admin")
         @Feature("Пользователь")
         @Story("Изменение пользователя")
-        @Severity(SeverityLevel.CRITICAL)
+        @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при изменении пользователя с обязательными полями")
         @Description("Тест проверяет поля в теле ответа при изменении пользователя с обязательными полями")
         public void testUpdateEmployeeWithOnlyRequiredParametersCheckResponseBody(){
@@ -215,7 +215,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
                     () -> assertThat(employeeUpdateResponseBody.name).isEqualTo(updateEmployeeRequestBody.name),
                     () -> assertThat(employeeUpdateResponseBody.roleId).isEqualTo(updateEmployeeRequestBody.roleId),
                     () -> assertThat(employeeUpdateResponseBody.email).isEqualTo(employeeCreationForUpdateResponseBody.email),
-                    () -> assertThat(employeeUpdateResponseBody.role).isEqualTo(PredefinedRoles.FULL_WRITE.name),
+                    () -> assertThat(employeeUpdateResponseBody.role).isEqualTo(PredefinedRoles.FULL_READ.name),
                     () -> assertThat(employeeUpdateResponseBody.activationDate).isNull(),
                     () -> assertThat(employeeUpdateResponseBody.createdUtc).matches(dateTimeYYYYMMDDHHmmssPattern()),
                     () -> assertThat(employeeUpdateResponseBody.deletedUtc).isNull()
@@ -231,7 +231,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
         @Epic("Сервис Admin")
         @Feature("Пользователь")
         @Story("Получение списка пользователей")
-        @Severity(SeverityLevel.CRITICAL)
+        @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении списка пользователей")
         @Description("Тест проверяет поля в теле ответа при получении списка пользователей")
         public void testGetEmployeeWithOnlyRequiredParametersFromListOdataCheckResponseBody(){
@@ -266,7 +266,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
         @Epic("Сервис Admin")
         @Feature("Пользователь")
         @Story("Получение пользователя по id")
-        @Severity(SeverityLevel.CRITICAL)
+        @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении пользователя по id")
         @Description("Тест проверяет поля в теле ответа при получении пользователя по id")
         public void testGetEmployeeWithOnlyRequiredParametersByIdPathCheckResponseBody(){

@@ -156,7 +156,7 @@ public class EmployeeExtendedPositiveTests extends TestBase {
             OdataListResponseModel responseBodyWithCount = response.as(OdataListResponseModel.class);
             List<CommonEmployeeResponseModel> responseEmployees = response.jsonPath().getList("value", CommonEmployeeResponseModel.class);
 
-            assertThat(Integer.getInteger(responseBodyWithCount.odataCount)).isEqualTo(responseEmployees.size());
+            assertThat(Integer.parseInt(responseBodyWithCount.odataCount)).isEqualTo(responseEmployees.size());
         }
 
         @Test

@@ -151,7 +151,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         @Story("Создание поискового запроса")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при создании поискового запроса с обязательными полями")
-        @Description("Тест проверяет поля в теле ответа прии создании поискового запроса с обязательными полями")
+        @Description("Тест проверяет поля в теле ответа при создании поискового запроса с обязательными полями")
         public void testAddSearchQueryWithOnlyRequiredParametersCheckResponseBody(){
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -183,7 +183,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
         @Story("Изменение поискового запроса")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при изменении поискового запроса с обязательными полями")
-        @Description("Тест проверяет поля в теле ответа прии изменении поискового запроса с обязательными полями")
+        @Description("Тест проверяет поля в теле ответа при изменении поискового запроса с обязательными полями")
         public void testUpdateSearchQueryWithOnlyRequiredParametersCheckResponseBody(){
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -212,7 +212,7 @@ public class SearchQueryCommonPositiveTests extends TestBase {
 
     @Nested
     @DisplayName("Deal - SearchQuery: Проверка тела ответа при получении поискового запроса с обязательными параметрами из списка поисковых запросов")
-    class CheckGetESearchQueryWithOnlyRequiredParametersFromListOdataResponseBody{
+    class CheckGetSearchQueryWithOnlyRequiredParametersFromListOdataResponseBody{
 
         @Test
         @Epic("Сервис Deal")
@@ -248,15 +248,15 @@ public class SearchQueryCommonPositiveTests extends TestBase {
 
     @Nested
     @DisplayName("Deal - SearchQuery: Проверка тела ответа при получении поискового запроса с обязательными параметрами по id")
-    class CheckGetESearchQueryWithOnlyRequiredParametersByIdPathResponseBody{
+    class CheckGetSearchQueryWithOnlyRequiredParametersByIdPathResponseBody{
 
         @Test
         @Epic("Сервис Deal")
         @Feature("Поисковый запрос")
         @Story("Получение списка поисковых запросов")
         @Severity(SeverityLevel.NORMAL)
-        @DisplayName("Проверка полей тела ответа при получении списка поисковых запросов")
-        @Description("Тест проверяет поля в теле ответа при получении списка поисковых запросов")
+        @DisplayName("Проверка полей тела ответа при получении поискового запроса по id")
+        @Description("Тест проверяет поля в теле ответа при получении поискового запроса по id")
         public void testGetSearchQueryWithOnlyRequiredParametersByIdCheckResponseBody(){
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
