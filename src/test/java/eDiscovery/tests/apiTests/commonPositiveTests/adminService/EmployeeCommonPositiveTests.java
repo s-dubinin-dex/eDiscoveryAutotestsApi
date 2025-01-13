@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class EmployeeCommonPositiveTests extends TestBase {
 
     @Nested
+    @Tag("smoke")
     @DisplayName("Admin - Employee: Базовая проверка CRUD")
     class CheckBaseCRUDAdminEmployee{
 

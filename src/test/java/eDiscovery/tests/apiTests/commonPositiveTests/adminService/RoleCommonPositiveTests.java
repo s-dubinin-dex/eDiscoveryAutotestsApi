@@ -14,6 +14,7 @@ import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
@@ -29,6 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class RoleCommonPositiveTests extends TestBase {
 
     @Nested
+    @Tag("smoke")
     @DisplayName("Admin - Role: Базовая проверка CRUD")
     class CheckBaseCRUDAdminRole{
 

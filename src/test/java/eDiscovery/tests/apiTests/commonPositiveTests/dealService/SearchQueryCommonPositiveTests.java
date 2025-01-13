@@ -25,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 public class SearchQueryCommonPositiveTests extends TestBase {
 
     @Nested
+    @Tag("smoke")
     @DisplayName("Deal - SearchQuery: Базовая проверка CRUD")
     class CheckBaseCRUDDealSearchQuery{
 
