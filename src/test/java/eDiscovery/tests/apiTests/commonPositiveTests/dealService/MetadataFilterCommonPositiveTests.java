@@ -30,7 +30,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Создание фильтра по метаданным (Размер файла)")
@@ -62,7 +62,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Создание фильтра по метаданным (Тип файла)")
@@ -96,7 +96,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Создание фильтра по метаданным (Название файла)")
@@ -125,7 +125,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Создание фильтра по метаданным (Расположение файла)")
@@ -157,7 +157,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Создание фильтра по метаданным (Дата создания файла)")
@@ -189,7 +189,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Создание фильтра по метаданным (Дата последнего редактирования файла)")
@@ -220,7 +220,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Изменение фильтра по метаданным")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Изменение фильтра по метаданным (Добавление фильтра)")
@@ -266,7 +266,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Удаление фильтра по метаданным")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Удаление фильтра по метаданным")
@@ -283,7 +283,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Получение списка фильтров по метаданным")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка фильтров по метаданным")
@@ -315,7 +315,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Получение списка фильтров по метаданным")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка фильтров по метаданным по протоколу odata")
@@ -340,7 +340,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Получение фильтра по метаданным по id")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение фильтра по метаданным по id")
@@ -361,7 +361,7 @@ public class MetadataFilterCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Получение фильтра по метаданным по id")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение фильтра по метаданным по id в path param")

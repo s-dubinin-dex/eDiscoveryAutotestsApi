@@ -30,7 +30,7 @@ public class EmployeeExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение списка пользователей")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка пользователей с фильтрацией по полю name")
@@ -48,7 +48,7 @@ public class EmployeeExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение списка пользователей")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка пользователей с фильтрацией по роли пользователя")
@@ -66,7 +66,7 @@ public class EmployeeExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение списка пользователей")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка пользователей с сортировкой по дате создания")
@@ -84,7 +84,7 @@ public class EmployeeExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение списка пользователей")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка пользователей с сортировкой по ФИО")
@@ -102,7 +102,7 @@ public class EmployeeExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение списка пользователей")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка пользователей с сортировкой по роли пользователя")
@@ -120,7 +120,7 @@ public class EmployeeExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение списка пользователей")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка пользователей с сортировкой по email")
@@ -138,7 +138,7 @@ public class EmployeeExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение списка пользователей")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка пользователей с подсчётом количества результатов")
@@ -161,7 +161,7 @@ public class EmployeeExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение списка пользователей")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка пользователей с ограничением количества результатов = 100")
@@ -179,7 +179,7 @@ public class EmployeeExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение списка пользователей")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка пользователей с пропуском первых 10 результатов")
@@ -197,7 +197,7 @@ public class EmployeeExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение списка пользователей")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка пользователей включая удалённых пользователей")
@@ -233,7 +233,7 @@ public class EmployeeExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение списка пользователей")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей в теле ответа при получении списка пользователей по удалённому пользователю")
@@ -278,7 +278,7 @@ public class EmployeeExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение списка пользователей")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)

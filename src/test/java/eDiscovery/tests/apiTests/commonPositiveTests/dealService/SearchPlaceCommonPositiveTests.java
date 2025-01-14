@@ -31,7 +31,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Создание места поиска")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Создание места поиска")
@@ -45,7 +45,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Изменение места поиска")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Изменение места поиска")
@@ -63,7 +63,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Удаление места поиска")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Удаление места поиска")
@@ -80,7 +80,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Получение списка мест поиска")
@@ -94,7 +94,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Получение списка мест поиска по протоколу oData")
@@ -108,7 +108,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение места поиска по id")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Получение места поиска по протоколу oData по id")
@@ -124,7 +124,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение места поиска по id")
         @Tag("webui")
         @Severity(SeverityLevel.CRITICAL)
@@ -147,7 +147,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Создание места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при создании места поиска с обязательными полями")
@@ -181,7 +181,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Изменение места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при изменении места поиска с обязательными полями")
@@ -219,7 +219,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении списка поисковых запросов")
@@ -257,7 +257,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении поискового запроса по id")

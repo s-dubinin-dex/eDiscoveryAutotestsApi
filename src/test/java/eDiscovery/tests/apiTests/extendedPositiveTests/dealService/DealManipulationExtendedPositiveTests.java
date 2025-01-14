@@ -40,7 +40,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Создание дела")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при создании дела с необязательными полями")
@@ -95,7 +95,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Изменение дела")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при изменении дела с необязательными полями")
@@ -156,7 +156,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении списка дел")
@@ -206,7 +206,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении списка дел")
@@ -261,7 +261,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение дела по id")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении дела по id")
@@ -309,7 +309,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение дела по id")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении дела по id")
@@ -362,7 +362,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Просмотр карточки дела")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Просмотр карточки дела через метод /card")
@@ -420,7 +420,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с фильтрацией по названию дела")
@@ -438,7 +438,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с фильтрацией по дате создания дела")
@@ -456,7 +456,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с фильтрацией по месту поиска")
@@ -476,7 +476,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с фильтрацией по группе мест поиска")
@@ -496,7 +496,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с фильтрацией по поисковому запросу")
@@ -516,7 +516,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с фильтрацией по статусу категоризации")
@@ -534,7 +534,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с фильтрацией по статусу автокарантина")
@@ -552,7 +552,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с фильтрацией по автору дела")
@@ -570,7 +570,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с фильтрацией по статусу дела")
@@ -588,7 +588,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с сортировкой по дате создания")
@@ -606,7 +606,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с сортировкой по названию дела")
@@ -624,7 +624,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с сортировкой по статусу категоризации дела")
@@ -642,7 +642,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с сортировкой по статусу автокарантина")
@@ -661,7 +661,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
         @Issue("ED-885")
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с сортировкой по автору дела")
@@ -680,7 +680,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
         @Issue("ED-885")
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с сортировкой по статусу дела")
@@ -697,7 +697,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с подсчётом количества результатов")
@@ -720,7 +720,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с ограничением количества результатов = 100")
@@ -738,7 +738,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с пропуском первых 10 результатов")
@@ -756,7 +756,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с экспандом поля metadataFilter")
@@ -774,7 +774,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с экспандом поля searchPlaces")
@@ -792,7 +792,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с экспандом поля classifySearchPlaces")
@@ -810,7 +810,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с экспандом поля searchPlaceGroups")
@@ -828,7 +828,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с экспандом поля dealSearchQueries")
@@ -846,7 +846,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка дел с экспандом поля progressInfo")
@@ -870,7 +870,8 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
     class CheckDealManipulationUIMethods{
 
         @Test
-        @Feature("Место поиска")
+        @Epic("Сервис Deal")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.CRITICAL)
@@ -899,7 +900,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -925,7 +926,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -951,7 +952,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -977,7 +978,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -1003,7 +1004,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -1029,7 +1030,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -1055,7 +1056,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -1081,7 +1082,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -1107,7 +1108,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -1133,7 +1134,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -1159,7 +1160,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @ParameterizedTest
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -1186,7 +1187,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -1212,7 +1213,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -1238,7 +1239,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -1265,7 +1266,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
         @Issue("ED-885")
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -1291,7 +1292,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -1317,7 +1318,7 @@ public class DealManipulationExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)

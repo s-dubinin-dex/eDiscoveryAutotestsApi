@@ -29,7 +29,7 @@ public class SearchQueryClassifierCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Создание поискового запроса")
@@ -53,7 +53,7 @@ public class SearchQueryClassifierCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Изменение поискового запроса")
@@ -85,7 +85,7 @@ public class SearchQueryClassifierCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Удаление поискового запроса")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Удаление поискового запроса")
@@ -111,7 +111,7 @@ public class SearchQueryClassifierCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение списка поисковых запросов")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка поисковых запросов")
@@ -131,7 +131,7 @@ public class SearchQueryClassifierCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение списка поисковых запросов")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
@@ -151,7 +151,7 @@ public class SearchQueryClassifierCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение поискового запроса по протоколу oData по id")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение поискового запроса по протоколу oData по id")
@@ -182,7 +182,7 @@ public class SearchQueryClassifierCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение поискового запроса по протоколу oData по id")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)

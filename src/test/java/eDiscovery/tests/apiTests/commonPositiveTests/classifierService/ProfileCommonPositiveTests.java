@@ -29,7 +29,7 @@ public class ProfileCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Профиль категоризации")
+    @Feature("Профили категоризации")
     @Story("Создание профиля категоризации")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Создание профиля категоризации")
@@ -50,7 +50,7 @@ public class ProfileCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Профиль категоризации")
+    @Feature("Профили категоризации")
     @Story("Создание профиля категоризации")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Создание профиля категоризации")
@@ -71,7 +71,7 @@ public class ProfileCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Профиль категоризации")
+    @Feature("Профили категоризации")
     @Story("Изменение профиля категоризации")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Изменение профиля категоризации")
@@ -124,7 +124,7 @@ public class ProfileCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Профиль категоризации")
+    @Feature("Профили категоризации")
     @Story("Получение профилей категоризации")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка профилей категоризации")
@@ -142,7 +142,7 @@ public class ProfileCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Профиль категоризации")
+    @Feature("Профили категоризации")
     @Story("Получение профилей категоризации")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка профилей категоризации")
@@ -160,7 +160,7 @@ public class ProfileCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Профиль категоризации")
+    @Feature("Профили категоризации")
     @Story("Получение профиля категоризации по id")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение профиля категоризации по id")
@@ -184,7 +184,7 @@ public class ProfileCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Профиль категоризации")
+    @Feature("Профили категоризации")
     @Story("Получение профилей категоризации")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение профиля категоризации по id")

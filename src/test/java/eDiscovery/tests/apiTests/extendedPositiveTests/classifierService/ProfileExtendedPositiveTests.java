@@ -38,7 +38,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает валидный id")
@@ -53,7 +53,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает name, переданный при создании")
@@ -70,7 +70,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает canClassifyDocumentsWithMarker = false по умолчанию")
@@ -87,7 +87,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @ParameterizedTest
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает canClassifyDocumentsWithMarker, переданный при создании")
@@ -106,7 +106,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает considerTagsCriticality = false по умолчанию")
@@ -123,7 +123,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @ParameterizedTest
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает considerTagsCriticality, переданный при создании")
@@ -142,7 +142,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает rules")
@@ -165,7 +165,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает baseMarker")
@@ -186,7 +186,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает basePolicy")
@@ -207,7 +207,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает isDefault")
@@ -222,7 +222,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает isActive = false по умолчанию")
@@ -239,7 +239,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @ParameterizedTest
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает isActive, переданный при создании")
@@ -258,7 +258,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает markerInfos = null")
@@ -273,7 +273,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает createdUtc в корректном формате")
@@ -288,7 +288,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает creatorUserId")
@@ -303,7 +303,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает creatorUserName")
@@ -318,7 +318,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает updatedUtc в корректном формате")
@@ -333,7 +333,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает editorUserId")
@@ -348,7 +348,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает editorUserName")
@@ -363,7 +363,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Профиль категоризации")
+        @Feature("Профили категоризации")
         @Story("Создание профиля категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание профиля категоризации возвращает encryptionPermissionInfos = null")
@@ -380,7 +380,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Профиль категоризации")
+    @Feature("Профили категоризации")
     @Story("Получение профилей категоризации")
     @Tag("webui")
     @Severity(SeverityLevel.CRITICAL)
@@ -409,7 +409,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Профиль категоризации")
+    @Feature("Профили категоризации")
     @Story("Получение профилей категоризации")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка профилей категоризации для отображения в списке")
@@ -433,7 +433,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Профиль категоризации")
+    @Feature("Профили категоризации")
     @Story("Получение профилей категоризации")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка профилей категоризации для отображения в списке с фильтром по статусу профиля")
@@ -457,7 +457,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Профиль категоризации")
+    @Feature("Профили категоризации")
     @Story("Получение профилей категоризации")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка профилей категоризации для отображения в списке с сортировкой по Названию")
@@ -481,7 +481,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Профиль категоризации")
+    @Feature("Профили категоризации")
     @Story("Получение профилей категоризации")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка профилей категоризации для отображения в списке с сортировкой по Статусу")
@@ -505,7 +505,7 @@ public class ProfileExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Профиль категоризации")
+    @Feature("Профили категоризации")
     @Story("Получение профилей категоризации")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка профилей категоризации для отображения в списке с сортировкой по Дефолтности профиля")

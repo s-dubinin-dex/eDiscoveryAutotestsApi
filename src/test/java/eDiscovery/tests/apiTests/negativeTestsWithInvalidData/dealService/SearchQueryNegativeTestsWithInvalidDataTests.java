@@ -28,7 +28,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса без указания тела")
@@ -52,7 +52,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с пустым телом")
@@ -78,7 +78,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с передачей только name")
@@ -102,7 +102,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса без передачи name")
@@ -127,7 +127,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с name = null")
@@ -151,7 +151,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
     }
 
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с пустым name")
@@ -177,7 +177,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с длиной name, превышающим допустимую длину")
@@ -204,7 +204,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с передачей только type")
@@ -231,7 +231,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса без передачи type")
@@ -254,7 +254,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с type = null")
@@ -286,7 +286,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового с несуществующим type")
@@ -317,7 +317,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса c type = Undefined")
@@ -341,7 +341,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с передачей только value")
@@ -365,7 +365,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса без передачи value")
@@ -390,7 +390,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с value = null")
@@ -415,7 +415,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания поискового запроса с длиной value, превышающим допустимую длину")
@@ -442,7 +442,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса без указания тела")
@@ -466,7 +466,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса с пустым телом")
@@ -491,7 +491,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса с передачей только id")
@@ -517,7 +517,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса без передачи id")
@@ -544,7 +544,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса c id = null")
@@ -575,7 +575,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса с передачей только name")
@@ -600,7 +600,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса без передачи name")
@@ -629,7 +629,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса с передачей только type")
@@ -655,7 +655,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса без передачи type")
@@ -679,7 +679,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса с несуществующим type")
@@ -711,7 +711,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса с type = Undefined")
@@ -736,7 +736,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса с передачей только value")
@@ -761,7 +761,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения поискового запроса без передачи value")
@@ -789,7 +789,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Удаление поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность удаления поискового запроса без передачи id")
@@ -808,7 +808,7 @@ public class SearchQueryNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Удаление поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность удаления поискового запроса с передачей id, не соответствующем маске uuid")

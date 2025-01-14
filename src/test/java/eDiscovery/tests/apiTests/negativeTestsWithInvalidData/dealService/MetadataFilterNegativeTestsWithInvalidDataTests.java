@@ -25,7 +25,7 @@ public class MetadataFilterNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания фильтра по метаданным (Размер файла) без указания отрибутов From и To")
@@ -53,7 +53,7 @@ public class MetadataFilterNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания фильтра по метаданным (Тип файла) при передаче Null значения")
@@ -80,7 +80,7 @@ public class MetadataFilterNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания фильтра по метаданным (Тип файла) при передаче пустого списка типов документов")
@@ -106,7 +106,7 @@ public class MetadataFilterNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания фильтра по метаданным (Название файла) с null name")
@@ -132,7 +132,7 @@ public class MetadataFilterNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания фильтра по метаданным (Расположение файла) с указанием пустого массива путей")
@@ -161,7 +161,7 @@ public class MetadataFilterNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания фильтра по метаданным (Расположение файла) с указанием null value")
@@ -189,7 +189,7 @@ public class MetadataFilterNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания фильтра по метаданным (Дата создания файла) без указания From или To")
@@ -218,7 +218,7 @@ public class MetadataFilterNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Невозможность создания фильтра по метаданным (Дата изменения файла) без указания From или To")

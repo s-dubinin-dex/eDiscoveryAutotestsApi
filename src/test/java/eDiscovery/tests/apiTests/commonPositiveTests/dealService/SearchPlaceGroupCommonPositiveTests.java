@@ -28,7 +28,7 @@ public class SearchPlaceGroupCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Группа мест поиска")
+    @Feature("Группы мест поиска")
     @Story("Создание группы мест поиска")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Создание группы мест поиска")
@@ -57,7 +57,7 @@ public class SearchPlaceGroupCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Группа мест поиска")
+    @Feature("Группы мест поиска")
     @Story("Изменение группы мест поиска")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Изменение группы мест поиска")
@@ -102,7 +102,7 @@ public class SearchPlaceGroupCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Группа мест поиска")
+    @Feature("Группы мест поиска")
     @Story("Удаление группы мест поиска")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Удаление группы мест поиска")
@@ -135,7 +135,7 @@ public class SearchPlaceGroupCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Группа мест поиска")
+    @Feature("Группы мест поиска")
     @Story("Получение списка групп мест поиска")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка групп мест поиска")
@@ -166,7 +166,7 @@ public class SearchPlaceGroupCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Группа мест поиска")
+    @Feature("Группы мест поиска")
     @Story("Получение списка групп мест поиска")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение списка групп мест поиска по протоколу odata")
@@ -197,7 +197,7 @@ public class SearchPlaceGroupCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Группа мест поиска")
+    @Feature("Группы мест поиска")
     @Story("Получение группы мест поиска по id")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("УПолучение группы мест поиска по id")
@@ -227,7 +227,7 @@ public class SearchPlaceGroupCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Группа мест поиска")
+    @Feature("Группы мест поиска")
     @Story("Получение группы мест поиска по id")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("УПолучение группы мест поиска по id")

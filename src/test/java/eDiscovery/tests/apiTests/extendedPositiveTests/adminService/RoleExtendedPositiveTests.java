@@ -35,7 +35,7 @@ public class RoleExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Создание роли")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при создании роли с обязательными полями")
@@ -71,7 +71,7 @@ public class RoleExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Изменение роли")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при изменении роли с необязательными полями")
@@ -108,7 +108,7 @@ public class RoleExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Получение списка ролей")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении списка ролей")
@@ -150,7 +150,7 @@ public class RoleExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Получение роли по id")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении роли по id")
@@ -190,7 +190,7 @@ public class RoleExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Получение списка ролей")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка ролей включая удалённые роли")
@@ -224,7 +224,7 @@ public class RoleExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Получение списка ролей")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей в теле ответа при получении списка ролей по удалённой роли")
@@ -268,7 +268,7 @@ public class RoleExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Role")
+        @Feature("Роли")
         @Story("Получение списка ролей")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)

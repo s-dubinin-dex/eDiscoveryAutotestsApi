@@ -25,7 +25,7 @@ public class MetadataFilterNegativeTestsWithValidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным фильтра по метаданным (Размер файла), в котором From больше чем To")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания")
@@ -53,7 +53,7 @@ public class MetadataFilterNegativeTestsWithValidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания фильтра по метаданным (Дата создания файла), в котором From больше чем To")
@@ -82,7 +82,7 @@ public class MetadataFilterNegativeTestsWithValidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания фильтра по метаданным (Дата последнего редактирования файла), в котором From больше чем To")

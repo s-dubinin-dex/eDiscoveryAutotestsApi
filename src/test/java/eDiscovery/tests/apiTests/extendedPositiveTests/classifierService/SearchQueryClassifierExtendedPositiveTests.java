@@ -32,7 +32,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
 
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Создание поискового запроса c различными наименованиями")
@@ -55,7 +55,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Создание поискового запроса c различными type")
@@ -78,7 +78,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Создание поискового запроса c различными values")
@@ -101,7 +101,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Изменение наименования в поисковом запросе")
@@ -127,7 +127,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Изменение type в поисковом запросе")
@@ -153,7 +153,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Изменение value в поисковом запросе")
@@ -178,7 +178,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение списка поисковых запросов")
     @Severity(SeverityLevel.MINOR)
     @Link("http://jira.lan:8080/browse/ED-203")
@@ -199,7 +199,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение списка поисковых запросов")
     @Severity(SeverityLevel.MINOR)
     @Link("http://jira.lan:8080/browse/ED-203")
@@ -220,7 +220,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение списка поисковых запросов")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка поисковых запросов по протоколу oData с фильтрацией результата")
@@ -260,7 +260,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение списка поисковых запросов")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка поисковых запросов по протоколу oData с подсчётом количества результатов")
@@ -291,7 +291,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение списка поисковых запросов")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка поисковых запросов по протоколу oData с дефолтной сортировкой результата (по возрастанию)")
@@ -335,7 +335,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение списка поисковых запросов")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка поисковых запросов по протоколу oData с явной сортировкой результата (по возрастанию)")
@@ -378,7 +378,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение списка поисковых запросов")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка поисковых запросов по протоколу oData с явной сортировкой результата (по убыванию)")
@@ -422,7 +422,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение списка поисковых запросов")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка поисковых запросов по протоколу oData с пагинацией результата")
@@ -481,7 +481,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение списка поисковых запросов")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка поисковых запросов по протоколу oData с лимитированием количества объектов в результате")
@@ -519,7 +519,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение списка поисковых запросов")
     @Tag("webui")
     @Severity(SeverityLevel.CRITICAL)
@@ -541,7 +541,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение списка поисковых запросов")
     @Tag("webui")
     @Severity(SeverityLevel.CRITICAL)
@@ -565,7 +565,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
 
     @ParameterizedTest
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение списка поисковых запросов")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
@@ -588,7 +588,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение списка поисковых запросов")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
@@ -611,7 +611,7 @@ public class SearchQueryClassifierExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Получение списка поисковых запросов")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)

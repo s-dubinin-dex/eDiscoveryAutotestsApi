@@ -24,7 +24,7 @@ import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 public class SearchPlaceGroupExtendedPositiveTests extends TestBase {
 
     @Epic("Сервис Deal")
-    @Feature("Группа мест поиска")
+    @Feature("Группы мест поиска")
     @Story("Получение списка групп мест поиска")
     @Tag("webui")
     @Severity(SeverityLevel.CRITICAL)
@@ -49,7 +49,7 @@ public class SearchPlaceGroupExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Deal")
-    @Feature("Группа мест поиска")
+    @Feature("Группы мест поиска")
     @Story("Получение списка групп мест поиска")
     @Tag("webui")
     @Severity(SeverityLevel.CRITICAL)
@@ -72,7 +72,7 @@ public class SearchPlaceGroupExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Deal")
-    @Feature("Группа мест поиска")
+    @Feature("Группы мест поиска")
     @Story("Получение списка групп мест поиска")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
@@ -97,7 +97,7 @@ public class SearchPlaceGroupExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Deal")
-    @Feature("Группа мест поиска")
+    @Feature("Группы мест поиска")
     @Story("Получение списка групп мест поиска")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
@@ -122,7 +122,7 @@ public class SearchPlaceGroupExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Deal")
-    @Feature("Группа мест поиска")
+    @Feature("Группы мест поиска")
     @Story("Получение списка групп мест поиска")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
@@ -148,7 +148,7 @@ public class SearchPlaceGroupExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Deal")
-    @Feature("Группа мест поиска")
+    @Feature("Группы мест поиска")
     @Story("Получение списка групп мест поиска")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
@@ -174,7 +174,7 @@ public class SearchPlaceGroupExtendedPositiveTests extends TestBase {
     }
 
     @Epic("Сервис Deal")
-    @Feature("Группа мест поиска")
+    @Feature("Группы мест поиска")
     @Story("Получение группы мест поиска по id")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)

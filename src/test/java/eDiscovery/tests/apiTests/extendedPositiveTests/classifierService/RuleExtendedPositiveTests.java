@@ -37,7 +37,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Правило категоризации")
+        @Feature("Правила категоризации")
         @Story("Создание правила категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание правила категоризации возвращает id")
@@ -55,7 +55,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Правило категоризации")
+        @Feature("Правила категоризации")
         @Story("Создание правила категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание правила категоризации возвращает name")
@@ -73,7 +73,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Правило категоризации")
+        @Feature("Правила категоризации")
         @Story("Создание правила категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание правила категоризации возвращает marker")
@@ -98,7 +98,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Правило категоризации")
+        @Feature("Правила категоризации")
         @Story("Создание правила категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание правила категоризации возвращает policy")
@@ -118,7 +118,7 @@ public class RuleExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Classifier")
-        @Feature("Правило категоризации")
+        @Feature("Правила категоризации")
         @Story("Создание правила категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание правила категоризации возвращает isActive = false по умолчанию")
@@ -136,7 +136,7 @@ public class RuleExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Classifier")
-        @Feature("Правило категоризации")
+        @Feature("Правила категоризации")
         @Story("Создание правила категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание правила категоризации возвращает isActive, переданный при создании")
@@ -157,7 +157,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Правило категоризации")
+        @Feature("Правила категоризации")
         @Story("Создание правила категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание правила категоризации возвращает searchQueries")
@@ -182,7 +182,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Правило категоризации")
+        @Feature("Правила категоризации")
         @Story("Создание правила категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание правила категоризации возвращает пустой profiles для неиспользуемого правила")
@@ -198,7 +198,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Правило категоризации")
+        @Feature("Правила категоризации")
         @Story("Создание правила категоризации")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание правила категоризации возвращает валидный creatorUserId")
@@ -215,7 +215,7 @@ public class RuleExtendedPositiveTests extends TestBase {
         @Issue("ED-915")
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Правило категоризации")
+        @Feature("Правила категоризации")
         @Story("Создание правила категоризации")
         @Severity(SeverityLevel.MINOR)
         @DisplayName("Создание правила категоризации возвращает creatorUserName")
@@ -231,7 +231,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Правило категоризации")
+        @Feature("Правила категоризации")
         @Story("Создание правила категоризации")
         @Severity(SeverityLevel.MINOR)
         @DisplayName("Создание правила категоризации возвращает createdUtc в корректном формате")
@@ -247,7 +247,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Classifier")
-        @Feature("Правило категоризации")
+        @Feature("Правила категоризации")
         @Story("Создание правила категоризации")
         @Severity(SeverityLevel.MINOR)
         @DisplayName("Создание правила категоризации возвращает deletedUtc = null")
@@ -265,7 +265,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Правило категоризации")
+    @Feature("Правила категоризации")
     @Story("Получение правила категоризации по id")
     @Tag("webui")
     @Severity(SeverityLevel.CRITICAL)
@@ -295,7 +295,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Правило категоризации")
+    @Feature("Правила категоризации")
     @Story("Получение списка правил категоризации")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
@@ -323,7 +323,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Правило категоризации")
+    @Feature("Правила категоризации")
     @Story("Получение списка правил категоризации")
     @Tag("webui")
     @Severity(SeverityLevel.CRITICAL)
@@ -351,7 +351,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Правило категоризации")
+    @Feature("Правила категоризации")
     @Story("Получение списка правил категоризации")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
@@ -375,7 +375,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Правило категоризации")
+    @Feature("Правила категоризации")
     @Story("Получение списка правил категоризации")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
@@ -399,7 +399,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Правило категоризации")
+    @Feature("Правила категоризации")
     @Story("Получение списка правил категоризации")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
@@ -423,7 +423,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Правило категоризации")
+    @Feature("Правила категоризации")
     @Story("Получение списка правил категоризации")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
@@ -447,7 +447,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Правило категоризации")
+    @Feature("Правила категоризации")
     @Story("Получение списка правил категоризации")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
@@ -471,7 +471,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Правило категоризации")
+    @Feature("Правила категоризации")
     @Story("Получение списка правил категоризации")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)
@@ -495,7 +495,7 @@ public class RuleExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Правило категоризации")
+    @Feature("Правила категоризации")
     @Story("Получение списка правил категоризации")
     @Tag("webui")
     @Severity(SeverityLevel.NORMAL)

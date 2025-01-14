@@ -29,7 +29,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Создание места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания места поиска без указания тела")
@@ -53,7 +53,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Создание места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания места поиска с пустым телом")
@@ -76,7 +76,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Создание места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания места поиска с передачей только categoryType")
@@ -100,7 +100,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Создание места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания места поиска с передачей только type")
@@ -124,7 +124,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Создание места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания места поиска с передачей только parameters")
@@ -154,7 +154,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Создание места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания места поиска с неполной передачей parameters, не передан uri")
@@ -187,7 +187,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Создание места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания места поиска с неполной передачей parameters, не передан username")
@@ -220,7 +220,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Создание места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания места поиска с неполной передачей parameters, не передан password")
@@ -253,7 +253,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Создание места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания места поиска с передачей пустого объекта parameters, не передан ни один из параметров")
@@ -288,7 +288,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Создание места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создания места поиска с передачей только excludes")
@@ -312,7 +312,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения места поиска без передачи тела запроса")
@@ -337,7 +337,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения места поиска c телом запроса без параметров")
@@ -361,7 +361,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения места поиска c телом запроса с передачей только параметра id")
@@ -388,7 +388,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения места поиска без передачи параметра id")
@@ -414,7 +414,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения места поиска c телом запроса c id, не соответствующим маске UUID")
@@ -444,7 +444,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения места поиска c телом запроса с передачей только параметра categoryType")
@@ -469,7 +469,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения места поиска c телом запроса с передачей только параметра type")
@@ -494,7 +494,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения места поиска c телом запроса с передачей только параметра parameters")
@@ -525,7 +525,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения места поиска с неполной передачей parameters, не передан uri")
@@ -561,7 +561,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения места поиска с неполной передачей parameters, не передан username")
@@ -597,7 +597,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения места поиска с неполной передачей parameters, не передан password")
@@ -633,7 +633,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения места поиска с передачей пустого объекта parameters, не передан ни один из параметров")
@@ -671,7 +671,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменения места поиска c телом запроса с передачей только параметра exclude")
@@ -696,7 +696,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Удаление места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность удаления места поиска без передачи id")
@@ -714,7 +714,7 @@ public class SearchPlaceNegativeTestsWithInvalidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Удаление места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность удаления места поиска с id, не соответствующим маске uuid")

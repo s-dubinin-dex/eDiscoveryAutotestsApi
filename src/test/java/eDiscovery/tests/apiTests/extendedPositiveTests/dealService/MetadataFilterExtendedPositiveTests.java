@@ -29,7 +29,7 @@ public class MetadataFilterExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Создание фильтра по метаданным (Размер файла) c указанием только параметра To")
@@ -61,7 +61,7 @@ public class MetadataFilterExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Создание фильтра по метаданным (Размер файла) c указанием только параметра From")
@@ -93,7 +93,7 @@ public class MetadataFilterExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Создание фильтра по метаданным (Тип файла) c указанием нескольких нескольких типов файла")
@@ -126,7 +126,7 @@ public class MetadataFilterExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Создание фильтра по метаданным (Название файла) с пустой строкой в качестве значения")
@@ -155,7 +155,7 @@ public class MetadataFilterExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Создание фильтра по метаданным (Расположение файла) с указанием пустой строки в качестве пути")
@@ -187,7 +187,7 @@ public class MetadataFilterExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Создание фильтра по метаданным (Расположение файла) с указанием нескольких расположений")
@@ -220,7 +220,7 @@ public class MetadataFilterExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Создание фильтра по метаданным (Дата создания файла) с указанием только From")
@@ -252,7 +252,7 @@ public class MetadataFilterExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Создание фильтра по метаданным (Дата создания файла) с указанием только To")
@@ -284,7 +284,7 @@ public class MetadataFilterExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Создание фильтра по метаданным (Дата последнего редактирования файла) с указанием только From")
@@ -316,7 +316,7 @@ public class MetadataFilterExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Создание фильтра по метаданным (Дата последнего редактирования файла) с указанием только To")
@@ -348,7 +348,7 @@ public class MetadataFilterExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Создание фильтра по метаданным")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Создание фильтра по метаданным по 2 видам метаданным (Тип файла и Дата последнего редактирования файла)")
@@ -385,7 +385,7 @@ public class MetadataFilterExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Удаление фильтра по метаданным")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("В удалёном фильтре по метаданным возвращается deletedUtc")
@@ -404,7 +404,7 @@ public class MetadataFilterExtendedPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Фильтр по метаданным")
+    @Feature("Фильтры по метаданным")
     @Story("Удаление фильтра по метаданным")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("В удалёном фильтре по метаданным возвращается deletedUtc в списке фильтров метаданных")

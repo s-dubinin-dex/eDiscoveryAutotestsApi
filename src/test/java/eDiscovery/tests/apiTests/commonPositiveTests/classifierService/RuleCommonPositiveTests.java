@@ -29,7 +29,7 @@ public class RuleCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Правило категоризации")
+    @Feature("Правила категоризации")
     @Story("Создание правила категоризации")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Создание правила категоризации")
@@ -43,7 +43,7 @@ public class RuleCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Правило категоризации")
+    @Feature("Правила категоризации")
     @Story("Изменение правила категоризации")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Изменение правила категоризации")
@@ -99,7 +99,7 @@ public class RuleCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Правило категоризации")
+    @Feature("Правила категоризации")
     @Story("Удаление правила категоризации")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Удаление правила категоризации")
@@ -138,7 +138,7 @@ public class RuleCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Правило категоризации")
+    @Feature("Правила категоризации")
     @Story("Получение списка правил категоризации")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка правил категоризации")
@@ -156,7 +156,7 @@ public class RuleCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Правило категоризации")
+    @Feature("Правила категоризации")
     @Story("Получение списка правил категоризации")
     @Severity(SeverityLevel.NORMAL)
     @DisplayName("Получение списка правил категоризации по протоколу odata")
@@ -174,7 +174,7 @@ public class RuleCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Правило категоризации")
+    @Feature("Правила категоризации")
     @Story("Получение правила категоризации по id")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение правила категоризации по id")
@@ -199,7 +199,7 @@ public class RuleCommonPositiveTests extends TestBase {
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Правило категоризации")
+    @Feature("Правила категоризации")
     @Story("Получение правила категоризации по id")
     @Severity(SeverityLevel.CRITICAL)
     @DisplayName("Получение правила категоризации по id в path param")

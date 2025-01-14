@@ -36,7 +36,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Создание дела")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Создание дела")
@@ -50,7 +50,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Изменение дела")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Изменение дела")
@@ -68,7 +68,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Удаление дела")
         @Severity(SeverityLevel.TRIVIAL)
         @DisplayName("Удаление дела")
@@ -85,7 +85,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Просмотр информации по делу")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Просмотр информации по делу")
@@ -101,7 +101,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Восстановление удалённого дела")
         @Severity(SeverityLevel.TRIVIAL)
         @DisplayName("Восстановление удалённого дела (Служебный метод)")
@@ -116,7 +116,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Закрытие дела")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Закрытие дела")
@@ -132,7 +132,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Открытие закрытого дела")
         @Severity(SeverityLevel.TRIVIAL)
         @DisplayName("Открытие закрытого дела (Служебный метод)")
@@ -148,7 +148,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Остановка дела")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Остановка дела")
@@ -164,7 +164,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Запуск дела")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Запуск дела")
@@ -180,7 +180,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Получение списка дел")
@@ -194,7 +194,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Получение списка мест поиска по протоколу oData")
@@ -208,7 +208,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение дела по ID")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Получение дела по id")
@@ -224,7 +224,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение дела по ID")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Получение дела по id")
@@ -246,7 +246,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Создание дела")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при создании дела с обязательными полями")
@@ -290,7 +290,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Изменение дела")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при изменении дела с обязательными полями")
@@ -340,7 +340,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении списка дел")
@@ -375,7 +375,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение списка дел")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении списка дел")
@@ -415,7 +415,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение дела по id")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении дела по id")
@@ -448,7 +448,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Получение дела по id")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении дела по id")
@@ -486,7 +486,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Просмотр карточки дела")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Просмотр карточки дела через метод /card")
@@ -533,7 +533,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Восстановление удалённого дела")
         @Severity(SeverityLevel.TRIVIAL)
         @DisplayName("Восстановление удалённого дела (Служебный метод)")
@@ -565,7 +565,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Закрытие дела")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Закрытие дела")
@@ -591,7 +591,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Открытие закрытого дела")
         @Severity(SeverityLevel.TRIVIAL)
         @DisplayName("Открытие закрытого дела (Служебный метод)")
@@ -619,7 +619,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Остановка дела")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Остановка дела")
@@ -645,7 +645,7 @@ public class DealManipulationCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Дело")
+        @Feature("Дела")
         @Story("Запуск дела")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Запуск дела")

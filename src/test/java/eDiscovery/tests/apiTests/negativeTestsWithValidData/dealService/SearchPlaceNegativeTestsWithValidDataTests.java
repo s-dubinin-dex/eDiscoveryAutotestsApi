@@ -50,7 +50,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Создание места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создать место поиска с существующим наименованием")
@@ -78,7 +78,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменить место поиска с несуществующим ID")
@@ -107,7 +107,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменить name у места поиска с типом ARM")
@@ -140,7 +140,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменить name у места поиска с типом FileShare - SMB на существующее")
@@ -168,7 +168,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменить categoryType у места поиска с типом ARM")
@@ -201,7 +201,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменить categoryType у места поиска с типом FileShare - SMB, если место поиска используется в деле")
@@ -240,7 +240,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменить type у места поиска с типом ARM")
@@ -273,7 +273,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменить type у места поиска с типом FileShare - SMB, если место поиска используется в деле")
@@ -312,7 +312,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Изменение места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменить parameters у места поиска с типом ARM")
@@ -353,7 +353,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Удаление места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность удалить место поиска с несуществующим ID")
@@ -375,7 +375,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Удаление места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность удалить используемое место поиска FileShare - SMB")
@@ -404,7 +404,7 @@ public class SearchPlaceNegativeTestsWithValidDataTests extends TestBase {
 
     @Test
     @Epic("Сервис Deal")
-    @Feature("Место поиска")
+    @Feature("Места поиска")
     @Story("Удаление места поиска")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность удалить место поиска ARM - Local")

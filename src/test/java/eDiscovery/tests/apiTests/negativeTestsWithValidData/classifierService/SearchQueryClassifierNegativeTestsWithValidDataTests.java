@@ -24,7 +24,7 @@ public class SearchQueryClassifierNegativeTestsWithValidDataTests extends TestBa
     
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Создание поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность создать поисковый запрос с существующим наименованием")
@@ -52,7 +52,7 @@ public class SearchQueryClassifierNegativeTestsWithValidDataTests extends TestBa
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменить поисковый запрос с несуществующим ID")
@@ -81,7 +81,7 @@ public class SearchQueryClassifierNegativeTestsWithValidDataTests extends TestBa
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Изменение поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность изменить name у поискового запроса на существующее")
@@ -109,7 +109,7 @@ public class SearchQueryClassifierNegativeTestsWithValidDataTests extends TestBa
 
     @Test
     @Epic("Сервис Classifier")
-    @Feature("Поисковый запрос")
+    @Feature("Поисковые запросы")
     @Story("Удаление поискового запроса")
     @Severity(SeverityLevel.MINOR)
     @DisplayName("Невозможность удалить поисковый запрос с несуществующим ID")

@@ -40,7 +40,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Создание места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при создании места поиска с обязательными полями")
@@ -85,7 +85,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Изменение места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при создании места поиска с обязательными полями")
@@ -133,7 +133,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении списка мест поиска")
@@ -185,7 +185,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение места поиска по id")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении места поиска по id")
@@ -235,7 +235,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка мест поиска с фильтрацией по названию места поиска")
@@ -254,7 +254,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка фильтрации по названию места поиска при получении списка мест поиска")
@@ -291,7 +291,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка мест поиска с фильтрацией по категории места поиска")
@@ -309,7 +309,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка мест поиска с фильтрацией по типу места поиска")
@@ -327,7 +327,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка мест поиска с сортировкой по дате создания")
@@ -345,7 +345,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка мест поиска с сортировкой по названию")
@@ -363,7 +363,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка сортировки по названию при получении списка мест поиска")
@@ -398,7 +398,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка мест поиска с сортировкой по категории места поиска")
@@ -416,7 +416,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка мест поиска с сортировкой по типу места поиска")
@@ -433,7 +433,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка мест поиска с подсчётом количества результатов")
@@ -456,7 +456,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка мест поиска с ограничением количества результатов = 100")
@@ -474,7 +474,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка мест поиска по протоколу oData с лимитированием количества объектов в результате")
@@ -505,7 +505,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка мест поиска с пропуском первых 10 результатов")
@@ -523,7 +523,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка мест поиска по протоколу oData с пагинацией результата")
@@ -570,8 +570,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Test
-        @Epic("Сервис Admin")
-        @Feature("Место поиска")
+        @Epic("Сервис Deal")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка мест поиска с фильтром по удалённым местам поиска")
@@ -606,7 +606,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.MINOR)
         @DisplayName("Проверка полей в теле ответа при получении списка мест поиска по удалённому месту поиска")
@@ -650,7 +650,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     class CheckAddSearchPlaceWithDifferentFieldsValues{
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Создание места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание места поиска c различными наименованиями")
@@ -670,7 +670,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Создание места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание места поиска c различными categoryType")
@@ -690,7 +690,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Создание места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание места поиска c различными type")
@@ -710,7 +710,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Создание места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание места поиска c различными uri в параметрах подключения")
@@ -736,7 +736,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Создание места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание места поиска c различными username в параметрах подключения")
@@ -762,7 +762,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Создание места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание места поиска c различными password в параметрах подключения")
@@ -788,7 +788,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Создание места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание места поиска c различными исключениями директорий из поиска")
@@ -810,7 +810,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Создание места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание места поиска c различным количеством исключений директорий из поиска")
@@ -837,7 +837,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Flaky
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Изменение места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение наименования места поиска с типом FileShare - SMB")
@@ -859,7 +859,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Изменение места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение categoryType в месте поиска с categoryType = FileShare, если место поиска не используется в деле")
@@ -881,7 +881,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Изменение места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение type в месте поиска с categoryType = FileShare, если место поиска не используется в деле")
@@ -903,7 +903,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Изменение места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение uri в параметрах места поиска с типом FileShare - SMB, если место поиска не используется в деле")
@@ -938,7 +938,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Изменение места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение username в параметрах места поиска с типом FileShare - SMB, если место поиска не используется в деле")
@@ -967,7 +967,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Изменение места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение password в параметрах места поиска с типом FileShare - SMB, если место поиска не используется в деле")
@@ -996,7 +996,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Изменение места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение excludes места поиска с типом ARM - Local, если место поиска не используется в деле")
@@ -1027,7 +1027,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Изменение места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение excludes места поиска с типом ARM - Local на разное количество исключений, если место поиска не используется в деле")
@@ -1056,7 +1056,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Изменение места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение excludes места поиска с типом FileShare - SMB, если место поиска не используется в деле")
@@ -1087,7 +1087,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Изменение места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение excludes места поиска с типом FileShare - SMB на разное количество исключений, если место поиска не используется в деле")
@@ -1123,7 +1123,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Изменение места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение наименования места поиска с типом FileShare - SMB, которое используется в созданном деле")
@@ -1150,7 +1150,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Изменение места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение параметров места поиска с типом FileShare - SMB, которое используется в созданном деле")
@@ -1184,7 +1184,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Изменение места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение excludes места поиска с типом ARM - Local, которое используется в созданном деле")
@@ -1218,7 +1218,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Изменение места поиска")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение excludes места поиска с типом FileShare - SMB, которое используется в созданном деле")
@@ -1257,7 +1257,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
     class CheckSearchPlaceUIMethods{
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Tag("webui")
         @Severity(SeverityLevel.CRITICAL)
@@ -1281,7 +1281,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Tag("webui")
         @Severity(SeverityLevel.CRITICAL)
@@ -1304,7 +1304,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -1329,7 +1329,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -1354,7 +1354,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -1378,7 +1378,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -1402,7 +1402,7 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Место поиска")
+        @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)

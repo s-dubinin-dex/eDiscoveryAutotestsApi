@@ -36,7 +36,7 @@ public class RoleCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Создание роли")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Создание роли")
@@ -50,7 +50,7 @@ public class RoleCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Изменение роли")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Изменение роли")
@@ -68,7 +68,7 @@ public class RoleCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Удаление роли")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Удаление роли")
@@ -85,7 +85,7 @@ public class RoleCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Получение списка полиси")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Получение списка политик для роли")
@@ -99,7 +99,7 @@ public class RoleCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Получение списка ролей")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Получение списка ролей")
@@ -113,7 +113,7 @@ public class RoleCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Получение списка ролей")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Получение списка ролей по протоколу oData")
@@ -127,7 +127,7 @@ public class RoleCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Получение роли по id")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Получение роли по протоколу oData по id")
@@ -143,7 +143,7 @@ public class RoleCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Получение роли по id")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Получение роли по протоколу oData по id")
@@ -165,7 +165,7 @@ public class RoleCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Создание роли")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при создании роли с обязательными полями")
@@ -196,7 +196,7 @@ public class RoleCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Изменение роли")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при изменении роли с обязательными полями")
@@ -232,7 +232,7 @@ public class RoleCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Получение списка ролей")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении списка ролей")
@@ -268,7 +268,7 @@ public class RoleCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Получение роли по id")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении роли по id")
@@ -301,7 +301,7 @@ public class RoleCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Роль")
+        @Feature("Роли")
         @Story("Получение списка полиси")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении списка полиси")

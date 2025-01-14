@@ -30,7 +30,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Создание пользователя")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Создание пользователя")
@@ -44,7 +44,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Изменение пользователя")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Изменение пользователя")
@@ -62,7 +62,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Удаление пользователя")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Удаление пользователя")
@@ -79,7 +79,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Генерация приглашения")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Генерация приглашения")
@@ -95,7 +95,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение списка пользователей")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Получение списка пользователей")
@@ -109,7 +109,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение списка пользователей")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Получение списка пользователей по протоколу odata")
@@ -123,7 +123,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение пользователя по id")
         @Severity(SeverityLevel.CRITICAL)
         @DisplayName("Получение пользователя по протоколу oData по id в скобках")
@@ -139,7 +139,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение пользователя по id")
         @Tag("webui")
         @Severity(SeverityLevel.CRITICAL)
@@ -162,7 +162,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Создание пользователя")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при создании пользователя с обязательными полями")
@@ -193,7 +193,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Изменение пользователя")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при изменении пользователя с обязательными полями")
@@ -229,7 +229,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение списка пользователей")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении списка пользователей")
@@ -264,7 +264,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Получение пользователя по id")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при получении пользователя по id")
@@ -296,7 +296,7 @@ public class EmployeeCommonPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Admin")
-        @Feature("Пользователь")
+        @Feature("Пользователи")
         @Story("Генерация приглашения")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка полей тела ответа при генерации приглашения")

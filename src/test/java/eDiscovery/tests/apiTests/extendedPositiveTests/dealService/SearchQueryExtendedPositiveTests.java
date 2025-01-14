@@ -38,7 +38,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Получение списка поисковых запросов")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка поисковых запросов с фильтрацией по названию поискового запроса")
@@ -57,7 +57,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Получение списка поисковых запросов")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка фильтрации по названию поискового запроса при получении списка поисковых запросов")
@@ -92,7 +92,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Получение списка поисковых запросов")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка поисковых запросов с фильтрацией по типу поискового запроса")
@@ -111,7 +111,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Получение списка поисковых запросов")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка поисковых запросов с сортировкой по дате создания")
@@ -128,7 +128,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Получение списка поисковых запросов")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка поисковых запросов с сортировкой по названию поискового запроса")
@@ -146,7 +146,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Получение списка поисковых запросов")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Проверка сортировки по названию при получении списка поисковых запросов")
@@ -180,7 +180,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Получение списка поисковых запросов")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка поисковых запросов с сортировкой по типу поискового запроса")
@@ -198,7 +198,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Получение списка поисковых запросов")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка поисковых запросов с подсчётом количества результатов")
@@ -221,7 +221,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Получение списка поисковых запросов")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка поисковых запросов с ограничением количества результатов = 100")
@@ -239,7 +239,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Получение списка поисковых запросов")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка поисковых запросов по протоколу oData с лимитированием количества объектов в результате")
@@ -271,7 +271,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Получение списка поисковых запросов")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка поисковых запросов с пропуском первых 10 результатов")
@@ -289,7 +289,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Получение списка поисковых запросов")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Получение списка поисковых запросов по протоколу oData с пагинацией результата")
@@ -341,7 +341,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     class CheckAddSearchQueryWithDifferentFieldsValues{
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Создание поискового запроса")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание поискового запроса c различными наименованиями")
@@ -361,7 +361,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Создание поискового запроса")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание поискового запроса c различными type")
@@ -381,7 +381,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Создание поискового запроса")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Создание поискового запроса c различными values")
@@ -407,7 +407,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     class CheckUpdateSearchQueryWithDifferentFieldsValues{
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Изменение поискового запроса")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение наименования в поисковом запросе")
@@ -428,7 +428,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Изменение поискового запроса")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение type в поисковом запросе")
@@ -449,7 +449,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Изменение поискового запроса")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение value в поисковом запросе")
@@ -476,7 +476,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
 
         @Test
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Изменение поискового запроса")
         @Severity(SeverityLevel.NORMAL)
         @DisplayName("Изменение поискового запроса, который используется в созданном деле")
@@ -515,7 +515,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
     class CheckSearchQueryUIMethods{
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Получение списка поисковых запросов")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -538,7 +538,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Получение списка поисковых запросов")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -561,7 +561,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
 
         @ParameterizedTest
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Получение списка поисковых запросов")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -584,7 +584,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Получение списка поисковых запросов")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
@@ -607,7 +607,7 @@ public class SearchQueryExtendedPositiveTests extends TestBase {
         }
 
         @Epic("Сервис Deal")
-        @Feature("Поисковый запрос")
+        @Feature("Поисковые запросы")
         @Story("Получение списка поисковых запросов")
         @Tag("webui")
         @Severity(SeverityLevel.NORMAL)
