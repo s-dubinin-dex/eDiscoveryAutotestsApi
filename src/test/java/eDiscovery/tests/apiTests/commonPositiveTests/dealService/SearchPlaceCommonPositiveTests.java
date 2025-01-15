@@ -142,7 +142,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     }
 
     @Nested
-    @DisplayName("Deal - SearchPlace: Проверка тела ответа при создании поискового запроса с обязательными параметрами")
+    @DisplayName("Deal - SearchPlace: Проверка тела ответа при создании места поиска с обязательными параметрами")
     class CheckSearchPlaceCreationWithOnlyRequiredParametersResponseBody {
 
         @Test
@@ -176,7 +176,7 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
     }
 
     @Nested
-    @DisplayName("Deal - SearchPlace: Проверка тела ответа при изменении поискового запроса с обязательными параметрами")
+    @DisplayName("Deal - SearchPlace: Проверка тела ответа при изменении места поиска с обязательными параметрами")
     class CheckSearchPlaceUpdateWithOnlyRequiredParametersResponseBody {
 
         @Test
@@ -222,8 +222,8 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
-        @DisplayName("Проверка полей тела ответа при получении списка поисковых запросов")
-        @Description("Тест проверяет поля в теле ответа при получении списка поисковых запросов")
+        @DisplayName("Проверка полей тела ответа при получении списка мест поиска")
+        @Description("Тест проверяет поля в теле ответа при получении списка мест поиска")
         public void testGetSearchPlaceWithOnlyRequiredParametersFromListOdataCheckResponseBody() {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
@@ -260,9 +260,9 @@ public class SearchPlaceCommonPositiveTests extends TestBase {
         @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
-        @DisplayName("Проверка полей тела ответа при получении поискового запроса по id")
-        @Description("Тест проверяет поля в теле ответа при получении поискового запроса по id")
-        public void testGetSearchQPlaceWithOnlyRequiredParametersByIdCheckResponseBody() {
+        @DisplayName("Проверка полей тела ответа при получении места поиска по id")
+        @Description("Тест проверяет поля в теле ответа при получении места поиска по id")
+        public void testGetSearchPlaceWithOnlyRequiredParametersByIdCheckResponseBody() {
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
             SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 

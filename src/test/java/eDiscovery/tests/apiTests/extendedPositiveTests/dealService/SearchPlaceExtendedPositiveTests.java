@@ -477,8 +477,8 @@ public class SearchPlaceExtendedPositiveTests extends TestBase {
         @Feature("Места поиска")
         @Story("Получение списка мест поиска")
         @Severity(SeverityLevel.NORMAL)
-        @DisplayName("Получение списка мест поиска по протоколу oData с лимитированием количества объектов в результате")
-        @Description("Тест проверяет возможность получения списка мест поиска по протоколу oData с лимитированием количества объектов в результате")
+        @DisplayName("Получение списка мест поиска с лимитированием количества объектов в результате")
+        @Description("Тест проверяет получение списка мест поиска с лимитированием количества объектов в результате")
         @Test
         public void testGetSearchPlaceListODataWithLimit(){
             SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
