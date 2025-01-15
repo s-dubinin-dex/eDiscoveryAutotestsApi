@@ -3,6 +3,8 @@ package eDiscovery.tests.apiTests.commonPositiveTests.dealService;
 import eDiscovery.TestBase;
 import eDiscovery.apiMethods.deal.ApiMethodsSearchPlaceGroup;
 import eDiscovery.data.dealService.DataGeneratorSearchPlace;
+import eDiscovery.data.dealService.DataGeneratorSearchPlaceGroup;
+import eDiscovery.helpers.OdataParametersBuilder;
 import eDiscovery.models.deal.searchPlace.CommonSearchPlaceResponseModel;
 import eDiscovery.models.deal.searchPlaceGroup.AddSearchPlaceGroupRequestModel;
 import eDiscovery.models.deal.searchPlaceGroup.CommonSearchPlaceGroupResponseModel;
@@ -12,246 +14,333 @@ import eDiscovery.spec.ResponseSpecifications;
 import eDiscovery.spec.SpecificationsServer;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
-import static eDiscovery.helpers.DataChecker.dateTimeISOPattern;
 import static eDiscovery.helpers.DataChecker.isValidUUID;
 import static eDiscovery.data.DataGeneratorCommon.getRandomName;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
-@DisplayName("Common positive tests: Deal - SearchPlaceGroup")
+@DisplayName("Deal - SearchPlaceGroup: Основные позитивные тесты")
 public class SearchPlaceGroupCommonPositiveTests extends TestBase {
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Группы мест поиска")
-    @Story("Создание группы мест поиска")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Создание группы мест поиска")
-    @Description("Тест проверяет возможность создания группы мест поиска")
-    public void testAddSearchPlaceGroup(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+    @Nested
+    @Tag("smoke")
+    @DisplayName("Deal - SearchPlaceGroup: Базовая проверка CRUD")
+    class CheckBaseCRUDDealSearchPlaceGroup {
 
-        CommonSearchPlaceResponseModel searchPlaceBody = DataGeneratorSearchPlace.createBasicSearchPlaceArmLocal();
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Группы мест поиска")
+        @Story("Создание группы мест поиска")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Создание группы мест поиска")
+        @Description("Тест проверяет возможность создания группы мест поиска")
+        public void testAddSearchPlaceGroup() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchPlaceGroupRequestModel requestBody = AddSearchPlaceGroupRequestModel.builder()
-                .name(getRandomName())
-                .searchPlaces(Collections.singletonList(searchPlaceBody.id))
-                .description(getRandomName())
-                .build();
+            DataGeneratorSearchPlaceGroup.createSearchPlaceGroupWithOnlyRequiredParameters();
+        }
 
-        CommonSearchPlaceGroupResponseModel responseBody = ApiMethodsSearchPlaceGroup.addSearchPlaceGroup(requestBody).as(CommonSearchPlaceGroupResponseModel.class);
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Группы мест поиска")
+        @Story("Изменение группы мест поиска")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Изменение группы мест поиска")
+        @Description("Тест проверяет возможность изменения группы мест поиска")
+        public void testUpdateSearchPlaceGroup(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        assertThat(isValidUUID(responseBody.id)).isTrue();
-        assertThat(responseBody.name).isEqualTo(requestBody.name);
-        assertThat(responseBody.searchPlaces.get(0)).usingRecursiveComparison().ignoringFields("createdUtc").isEqualTo(searchPlaceBody);
-        assertThat(responseBody.description).isEqualTo(requestBody.description);
-        assertThat(responseBody.deletedUtc).isNull();
+            CommonSearchPlaceGroupResponseModel responseBodyCreation = DataGeneratorSearchPlaceGroup.createSearchPlaceGroupWithOnlyRequiredParameters();
 
-    }
+            UpdateSearchPlaceGroupRequestModel requestBody = new UpdateSearchPlaceGroupRequestModel(responseBodyCreation);
+            ApiMethodsSearchPlaceGroup.updateSearchPlaceGroup(requestBody);
+        }
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Группы мест поиска")
-    @Story("Изменение группы мест поиска")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Изменение группы мест поиска")
-    @Description("Тест проверяет возможность изменения группы мест поиска")
-    public void testUpdateSearchPlaceGroup(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Группы мест поиска")
+        @Story("Удаление группы мест поиска")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Удаление группы мест поиска")
+        @Description("Тест проверяет возможность удаления группы мест поиска")
+        public void testDeleteSearchPlaceGroup(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        CommonSearchPlaceResponseModel searchPlaceBody1 = DataGeneratorSearchPlace.createBasicSearchPlaceArmLocal();
-        CommonSearchPlaceResponseModel searchPlaceBody2 = DataGeneratorSearchPlace.createBasicSearchPlaceArmLocal();
+            CommonSearchPlaceGroupResponseModel responseBodyCreation = DataGeneratorSearchPlaceGroup.createSearchPlaceGroupWithOnlyRequiredParameters();
 
-        AddSearchPlaceGroupRequestModel requestBodyCreation = AddSearchPlaceGroupRequestModel.builder()
-                .name(getRandomName())
-                .searchPlaces(Collections.singletonList(searchPlaceBody1.id))
-                .description(getRandomName())
-                .build();
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
+            ApiMethodsSearchPlaceGroup.deleteSearchPlaceGroup(responseBodyCreation.id);
+        }
 
-        CommonSearchPlaceGroupResponseModel responseBodyCreation = ApiMethodsSearchPlaceGroup.addSearchPlaceGroup(requestBodyCreation).as(CommonSearchPlaceGroupResponseModel.class);
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Группы мест поиска")
+        @Story("Получение списка групп мест поиска")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Получение списка групп мест поиска")
+        @Description("Тест проверяет возможность получения списка групп мест поиска")
+        public void testGetSearchPlaceGroupList(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        UpdateSearchPlaceGroupRequestModel requestBodyUpdate = UpdateSearchPlaceGroupRequestModel.builder()
-                .id(responseBodyCreation.id)
-                .name(responseBodyCreation.name)
-                .searchPlaces(
-                        List.of(
-                                searchPlaceBody1.id,
-                                searchPlaceBody2.id
-                        )
-                )
-                .description(requestBodyCreation.description)
-                .build();
+            ApiMethodsSearchPlaceGroup.getSearchPlaceGroupList();
+        }
 
-        CommonSearchPlaceGroupResponseModel responseBodyUpdate = ApiMethodsSearchPlaceGroup.updateSearchPlaceGroup(requestBodyUpdate).as(CommonSearchPlaceGroupResponseModel.class);
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Группы мест поиска")
+        @Story("Получение списка групп мест поиска")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("Получение списка групп мест поиска по протоколу odata")
+        @Description("Тест проверяет возможность получения списка групп мест поиска по протоколу odata")
+        public void testGetSearchPlaceGroupListOData(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
+            ApiMethodsSearchPlaceGroup.getSearchPlaceGroupListOData();
+        }
 
-        assertThat(responseBodyUpdate.id).isEqualTo(responseBodyCreation.id);
-        assertThat(responseBodyUpdate.name).isEqualTo(responseBodyCreation.name);
-        assertThat(responseBodyUpdate.searchPlaces.stream().map(CommonSearchPlaceResponseModel::getId).collect(Collectors.toList())).containsExactlyInAnyOrderElementsOf(requestBodyUpdate.searchPlaces);
-        assertThat(responseBodyUpdate.description).isEqualTo(responseBodyCreation.description);
-        assertThat(responseBodyUpdate.deletedUtc).isNull();
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Группы мест поиска")
+        @Story("Получение группы мест поиска по id")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("УПолучение группы мест поиска по id")
+        @Description("Получение группы мест поиска по id")
+        public void testGetSearchPlaceGroupById(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-    }
+            CommonSearchPlaceGroupResponseModel responseBodyCreation = DataGeneratorSearchPlaceGroup.createSearchPlaceGroupWithOnlyRequiredParameters();
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Группы мест поиска")
-    @Story("Удаление группы мест поиска")
-    @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Удаление группы мест поиска")
-    @Description("Тест проверяет возможность удаления группы мест поиска")
-    public void testDeleteSearchPlaceGroup(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            ApiMethodsSearchPlaceGroup.getSearchPlaceGroupById(responseBodyCreation.id);
+        }
 
-        CommonSearchPlaceResponseModel searchPlaceBody = DataGeneratorSearchPlace.createBasicSearchPlaceArmLocal();
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Группы мест поиска")
+        @Story("Получение группы мест поиска по id")
+        @Severity(SeverityLevel.CRITICAL)
+        @DisplayName("УПолучение группы мест поиска по id")
+        @Description("Получение группы мест поиска по id в path param")
+        public void testGetSearchPlaceGroupByIdPath(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchPlaceGroupRequestModel requestBodyCreation = AddSearchPlaceGroupRequestModel.builder()
-                .name(getRandomName())
-                .searchPlaces(Collections.singletonList(searchPlaceBody.id))
-                .description(getRandomName())
-                .build();
+            CommonSearchPlaceGroupResponseModel responseBodyCreation = DataGeneratorSearchPlaceGroup.createSearchPlaceGroupWithOnlyRequiredParameters();
 
-        CommonSearchPlaceGroupResponseModel responseBodyCreation = ApiMethodsSearchPlaceGroup.addSearchPlaceGroup(requestBodyCreation).as(CommonSearchPlaceGroupResponseModel.class);
-
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200WithEmptyBody());
-        ApiMethodsSearchPlaceGroup.deleteSearchPlaceGroup(responseBodyCreation.id);
-
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-        CommonSearchPlaceGroupResponseModel responseBody = ApiMethodsSearchPlaceGroup.getSearchPlaceGroupById(responseBodyCreation.id).as(CommonSearchPlaceGroupResponseModel.class);
-
-        assertThat(responseBody.id).isEqualTo(responseBodyCreation.id);
-        assertThat(responseBody.name).isEqualTo(responseBodyCreation.name);
-        assertThat(responseBody.description).isEqualTo(responseBodyCreation.description);
-        assertThat(responseBody.deletedUtc).matches(dateTimeISOPattern());
-
-    }
-
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Группы мест поиска")
-    @Story("Получение списка групп мест поиска")
-    @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Получение списка групп мест поиска")
-    @Description("Тест проверяет возможность получения списка групп мест поиска")
-    public void testGetSearchPlaceGroupList(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-
-        CommonSearchPlaceResponseModel searchPlaceBody = DataGeneratorSearchPlace.createBasicSearchPlaceArmLocal();
-
-        AddSearchPlaceGroupRequestModel requestBodyCreation = AddSearchPlaceGroupRequestModel.builder()
-                .name(getRandomName())
-                .searchPlaces(Collections.singletonList(searchPlaceBody.id))
-                .description(getRandomName())
-                .build();
-
-        ApiMethodsSearchPlaceGroup.addSearchPlaceGroup(requestBodyCreation).as(CommonSearchPlaceGroupResponseModel.class);
-
-        List<CommonSearchPlaceGroupResponseModel> responseBody = ApiMethodsSearchPlaceGroup.getSearchPlaceGroupList().jsonPath().getList("", CommonSearchPlaceGroupResponseModel.class);
-
-        assertThat(responseBody).isNotEmpty();
-        assertThat(responseBody.get(0)).isNotNull();
-        assertThat(responseBody.get(0).id).isNotEmpty();
-        assertThat(responseBody.get(0).name).isNotEmpty();
-        assertThat(responseBody.get(0).description).isNotEmpty();
+            ApiMethodsSearchPlaceGroup.getSearchPlaceGroupByIdPath(responseBodyCreation.id);
+        }
 
     }
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Группы мест поиска")
-    @Story("Получение списка групп мест поиска")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Получение списка групп мест поиска по протоколу odata")
-    @Description("Тест проверяет возможность получения списка групп мест поиска по протоколу odata")
-    public void testGetSearchPlaceGroupListOData(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+    @Nested
+    @DisplayName("Deal - SearchPlaceGroup: Проверка тела ответа при создании группы мест поиска с обязательными параметрами")
+    class CheckSearchPlaceGroupCreationWithOnlyRequiredParametersResponseBody {
 
-        CommonSearchPlaceResponseModel searchPlaceBody = DataGeneratorSearchPlace.createBasicSearchPlaceArmLocal();
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Группы мест поиска")
+        @Story("Создание группы мест поиска")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при создании группы мест поиска с обязательными полями")
+        @Description("Тест проверяет поля в теле ответа при создании группы мест поиска с обязательными полями")
+        public void testAddSearchPlaceGroupWithOnlyRequiredParametersCheckResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchPlaceGroupRequestModel requestBodyCreation = AddSearchPlaceGroupRequestModel.builder()
-                .name(getRandomName())
-                .searchPlaces(Collections.singletonList(searchPlaceBody.id))
-                .description(getRandomName())
-                .build();
+            CommonSearchPlaceResponseModel searchPlaceBody = DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
 
-        ApiMethodsSearchPlaceGroup.addSearchPlaceGroup(requestBodyCreation).as(CommonSearchPlaceGroupResponseModel.class);
+            AddSearchPlaceGroupRequestModel requestBody = AddSearchPlaceGroupRequestModel.builder()
+                    .name(getRandomName())
+                    .searchPlaces(Collections.singletonList(searchPlaceBody.id))
+                    .description(getRandomName())
+                    .build();
 
-        List<CommonSearchPlaceGroupResponseModel> responseBody = ApiMethodsSearchPlaceGroup.getSearchPlaceGroupListOData().jsonPath().getList("value", CommonSearchPlaceGroupResponseModel.class);
+            CommonSearchPlaceGroupResponseModel responseBody = ApiMethodsSearchPlaceGroup.addSearchPlaceGroup(requestBody).as(CommonSearchPlaceGroupResponseModel.class);
 
-        assertThat(responseBody).isNotEmpty();
-        assertThat(responseBody.get(0)).isNotNull();
-        assertThat(responseBody.get(0).id).isNotEmpty();
-        assertThat(responseBody.get(0).name).isNotEmpty();
-        assertThat(responseBody.get(0).description).isNotEmpty();
+            assertAll(
+                    () -> assertThat(isValidUUID(responseBody.id)).isTrue(),
+                    () -> assertThat(responseBody.name).isEqualTo(requestBody.name),
+                    () -> assertThat(responseBody.searchPlaces).usingRecursiveComparison().ignoringFields("createdUtc").isEqualTo(Collections.singletonList(searchPlaceBody)),
+                    () -> assertThat(responseBody.description).isEqualTo(requestBody.description),
+                    () -> assertThat(responseBody.deletedUtc).isNull()
+            );
 
-    }
-
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Группы мест поиска")
-    @Story("Получение группы мест поиска по id")
-    @Severity(SeverityLevel.NORMAL)
-    @DisplayName("УПолучение группы мест поиска по id")
-    @Description("Получение группы мест поиска по id")
-    public void testGetSearchPlaceGroupById(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
-
-        CommonSearchPlaceResponseModel searchPlaceBody = DataGeneratorSearchPlace.createBasicSearchPlaceArmLocal();
-
-        AddSearchPlaceGroupRequestModel requestBodyCreation = AddSearchPlaceGroupRequestModel.builder()
-                .name(getRandomName())
-                .searchPlaces(Collections.singletonList(searchPlaceBody.id))
-                .description(getRandomName())
-                .build();
-
-        CommonSearchPlaceGroupResponseModel responseBodyCreation = ApiMethodsSearchPlaceGroup.addSearchPlaceGroup(requestBodyCreation).as(CommonSearchPlaceGroupResponseModel.class);
-
-        CommonSearchPlaceGroupResponseModel responseBody = ApiMethodsSearchPlaceGroup.getSearchPlaceGroupById(responseBodyCreation.id).as(CommonSearchPlaceGroupResponseModel.class);
-
-        assertThat(responseBody.id).isEqualTo(responseBodyCreation.id);
-        assertThat(responseBody.name).isEqualTo(responseBodyCreation.name);
-        assertThat(responseBody.description).isEqualTo(responseBodyCreation.description);
-        assertThat(responseBody.deletedUtc).isNull();
+        }
 
     }
 
-    @Test
-    @Epic("Сервис Deal")
-    @Feature("Группы мест поиска")
-    @Story("Получение группы мест поиска по id")
-    @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("УПолучение группы мест поиска по id")
-    @Description("Получение группы мест поиска по id в path param")
-    public void testGetSearchPlaceGroupByIdPath(){
-        SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
-        SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+    @Nested
+    @DisplayName("Deal - SearchPlaceGroup: Проверка тела ответа при изменении группы мест поиска с обязательными параметрами")
+    class CheckSearchPlaceGroupUpdateWithOnlyRequiredParametersResponseBody {
 
-        CommonSearchPlaceResponseModel searchPlaceBody = DataGeneratorSearchPlace.createBasicSearchPlaceArmLocal();
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Группы мест поиска")
+        @Story("Изменение группы мест поиска")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при изменении группы мест поиска с обязательными полями")
+        @Description("Тест проверяет поля в теле ответа при изменении группы мест поиска с обязательными полями")
+        public void testUpdateSearchPlaceGroupWithOnlyRequiredParametersCheckResponseBody(){
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
 
-        AddSearchPlaceGroupRequestModel requestBodyCreation = AddSearchPlaceGroupRequestModel.builder()
-                .name(getRandomName())
-                .searchPlaces(Collections.singletonList(searchPlaceBody.id))
-                .description(getRandomName())
-                .build();
+            CommonSearchPlaceGroupResponseModel responseSearchPlaceGroupCreation = DataGeneratorSearchPlaceGroup.createSearchPlaceGroupWithOnlyRequiredParameters();
 
-        CommonSearchPlaceGroupResponseModel responseBodyCreation = ApiMethodsSearchPlaceGroup.addSearchPlaceGroup(requestBodyCreation).as(CommonSearchPlaceGroupResponseModel.class);
+            CommonSearchPlaceResponseModel searchPlaceBody = DataGeneratorSearchPlace.createBasicSearchPlaceArmLocal();
+            UpdateSearchPlaceGroupRequestModel requestBody = new UpdateSearchPlaceGroupRequestModel(responseSearchPlaceGroupCreation);
+            requestBody.name = getRandomName();
+            requestBody.searchPlaces = Collections.singletonList(searchPlaceBody.id);
+            requestBody.description = getRandomName();
 
-        CommonSearchPlaceGroupResponseModel responseBody = ApiMethodsSearchPlaceGroup.getSearchPlaceGroupByIdPath(responseBodyCreation.id).as(CommonSearchPlaceGroupResponseModel.class);
+            CommonSearchPlaceGroupResponseModel responseBody = ApiMethodsSearchPlaceGroup.updateSearchPlaceGroup(requestBody).as(CommonSearchPlaceGroupResponseModel.class);
 
-        assertThat(responseBody.id).isEqualTo(responseBodyCreation.id);
-        assertThat(responseBody.name).isEqualTo(responseBodyCreation.name);
-        assertThat(responseBody.description).isEqualTo(responseBodyCreation.description);
-        assertThat(responseBody.deletedUtc).isNull();
+            assertAll(
+                    () -> assertThat(responseBody.id).isEqualTo(requestBody.id),
+                    () -> assertThat(responseBody.name).isEqualTo(requestBody.name),
+                    () -> assertThat(responseBody.searchPlaces).usingRecursiveComparison().ignoringFields("createdUtc").isEqualTo(Collections.singletonList(searchPlaceBody)),
+                    () -> assertThat(responseBody.description).isEqualTo(requestBody.description),
+                    () -> assertThat(responseBody.deletedUtc).isNull()
+            );
+
+        }
+
+    }
+
+    @Nested
+    @DisplayName("Deal - SearchPlaceGroup: Проверка тела ответа при получении группы мест поиска с обязательными параметрами из списка мест поиска")
+    class CheckGetSearchPlaceGroupWithOnlyRequiredParametersFromListOdataResponseBody {
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Группы мест поиска")
+        @Story("Получение списка групп мест поиска")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при получении списка групп мест поиска")
+        @Description("Тест проверяет поля в теле ответа при получении списка групп мест поиска")
+        public void testGetSearchPlaceGroupWithOnlyRequiredParametersFromListOdataCheckResponseBody() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonSearchPlaceGroupResponseModel responseSearchPlaceGroupCreation = DataGeneratorSearchPlaceGroup.createSearchPlaceGroupWithOnlyRequiredParameters();
+
+            CommonSearchPlaceGroupResponseModel searchPlaceGroupBodyFromODataListResponseBody = ApiMethodsSearchPlaceGroup.getSearchPlaceGroupListOData().jsonPath().getList("value", CommonSearchPlaceGroupResponseModel.class)
+                    .stream().filter(searchPlaceGroup -> searchPlaceGroup.id.equals(responseSearchPlaceGroupCreation.id))
+                    .findFirst().orElse(null);
+
+            assertThat(searchPlaceGroupBodyFromODataListResponseBody).isNotNull();
+
+            assertAll(
+                    () -> assertThat(searchPlaceGroupBodyFromODataListResponseBody.id).isEqualTo(responseSearchPlaceGroupCreation.id),
+                    () -> assertThat(searchPlaceGroupBodyFromODataListResponseBody.name).isEqualTo(responseSearchPlaceGroupCreation.name),
+                    () -> assertThat(searchPlaceGroupBodyFromODataListResponseBody.description).isEqualTo(responseSearchPlaceGroupCreation.description),
+                    () -> assertThat(searchPlaceGroupBodyFromODataListResponseBody.deletedUtc).isEqualTo(responseSearchPlaceGroupCreation.deletedUtc)
+            );
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Группы мест поиска")
+        @Story("Получение списка групп мест поиска")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при получении списка групп мест поиска")
+        @Description("Тест проверяет поля в теле ответа при получении списка групп мест поиска")
+        public void testGetSearchPlaceGroupWithOnlyRequiredParametersFromListOdataCheckResponseBodyWithExpand() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonSearchPlaceResponseModel searchPlaceBody = DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
+
+            AddSearchPlaceGroupRequestModel requestBody = AddSearchPlaceGroupRequestModel.builder()
+                    .name(getRandomName())
+                    .searchPlaces(Collections.singletonList(searchPlaceBody.id))
+                    .description(getRandomName())
+                    .build();
+
+            CommonSearchPlaceGroupResponseModel responseSearchPlaceGroupCreation = ApiMethodsSearchPlaceGroup.addSearchPlaceGroup(requestBody).as(CommonSearchPlaceGroupResponseModel.class);
+
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withExpand("searchPlaces")
+                    .build();
+
+            CommonSearchPlaceGroupResponseModel searchPlaceGroupBodyFromODataListResponseBody = ApiMethodsSearchPlaceGroup.getSearchPlaceGroupListOData(params).jsonPath().getList("value", CommonSearchPlaceGroupResponseModel.class)
+                    .stream().filter(searchPlaceGroup -> searchPlaceGroup.id.equals(responseSearchPlaceGroupCreation.id))
+                    .findFirst().orElse(null);
+
+            assertThat(searchPlaceGroupBodyFromODataListResponseBody).isNotNull();
+
+            assertThat(searchPlaceGroupBodyFromODataListResponseBody.searchPlaces).usingRecursiveComparison().ignoringFields("createdUtc").isEqualTo(Collections.singletonList(searchPlaceBody));
+        }
+
+    }
+
+    @Nested
+    @DisplayName("Deal - SearchPlaceGroup: Проверка тела ответа при получении группы мест поиска с обязательными параметрами по id")
+    class CheckGetSearchPlaceGroupWithOnlyRequiredParametersByIdResponseBody {
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Группы мест поиска")
+        @Story("Получение группы мест поиска по id")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при получении группы мест поиска по id")
+        @Description("Тест проверяет поля в теле ответа при получении группы мест поиска по id")
+        public void testGetSearchPlaceGroupWithOnlyRequiredParametersByIdCheckResponseBody() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonSearchPlaceGroupResponseModel responseSearchPlaceGroupCreation = DataGeneratorSearchPlaceGroup.createSearchPlaceGroupWithOnlyRequiredParameters();
+
+            CommonSearchPlaceGroupResponseModel searchPlaceGroupBodyByIdResponseBody = ApiMethodsSearchPlaceGroup.getSearchPlaceGroupByIdPath(responseSearchPlaceGroupCreation.id).as(CommonSearchPlaceGroupResponseModel.class);
+
+            assertAll(
+                    () -> assertThat(searchPlaceGroupBodyByIdResponseBody.id).isEqualTo(responseSearchPlaceGroupCreation.id),
+                    () -> assertThat(searchPlaceGroupBodyByIdResponseBody.name).isEqualTo(responseSearchPlaceGroupCreation.name),
+                    () -> assertThat(searchPlaceGroupBodyByIdResponseBody.description).isEqualTo(responseSearchPlaceGroupCreation.description),
+                    () -> assertThat(searchPlaceGroupBodyByIdResponseBody.deletedUtc).isEqualTo(responseSearchPlaceGroupCreation.deletedUtc)
+            );
+        }
+
+        @Test
+        @Epic("Сервис Deal")
+        @Feature("Группы мест поиска")
+        @Story("Получение группы мест поиска по id")
+        @Severity(SeverityLevel.NORMAL)
+        @DisplayName("Проверка полей тела ответа при получении группы мест поиска по id")
+        @Description("Тест проверяет поля в теле ответа при получении группы мест поиска по id")
+        public void testGetSearchPlaceGroupWithOnlyRequiredParametersByIdCheckResponseBodyWithExpand() {
+            SpecificationsServer.installRequestSpecification(RequestSpecifications.basicRequestSpecificationWithAdminAuthorization());
+            SpecificationsServer.installResponseSpecification(ResponseSpecifications.responseSpecOK200JSONBody());
+
+            CommonSearchPlaceResponseModel searchPlaceBody = DataGeneratorSearchPlace.createSearchPlaceWithOnlyRequiredParameters();
+
+            AddSearchPlaceGroupRequestModel requestBody = AddSearchPlaceGroupRequestModel.builder()
+                    .name(getRandomName())
+                    .searchPlaces(Collections.singletonList(searchPlaceBody.id))
+                    .description(getRandomName())
+                    .build();
+
+            CommonSearchPlaceGroupResponseModel responseSearchPlaceGroupCreation = ApiMethodsSearchPlaceGroup.addSearchPlaceGroup(requestBody).as(CommonSearchPlaceGroupResponseModel.class);
+
+            Map<String, String> params = OdataParametersBuilder.builder()
+                    .withExpand("searchPlaces")
+                    .build();
+
+            CommonSearchPlaceGroupResponseModel searchPlaceGroupBodyByIdResponseBody = ApiMethodsSearchPlaceGroup.getSearchPlaceGroupByIdPath(responseSearchPlaceGroupCreation.id, params).as(CommonSearchPlaceGroupResponseModel.class);
+
+            assertThat(searchPlaceGroupBodyByIdResponseBody.searchPlaces).usingRecursiveComparison().ignoringFields("createdUtc").isEqualTo(Collections.singletonList(searchPlaceBody));
+        }
 
     }
 
